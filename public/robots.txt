@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /funnels
+Disallow: /formation
+Disallow: /thank-you
+
+Sitemap: https://ghaziwazir.com/sitemap.xml

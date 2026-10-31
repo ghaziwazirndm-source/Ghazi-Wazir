@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  :root,
+  [data-theme="variant_a_gold"] {
+    --bg: #0a0a0f;
+    --bg-alt: #101018;
+    --surface: #14141d;
+    --text: #f5f1e8;
+    --muted: #a8a7b3;
+    --gold: #e8c872;
+    --gold-dark: #b8893a;
+    --border: #2a2a38;
+    --theme-accent: #e8c872;
+    --theme-accent-dark: #b8893a;
+    --theme-glow: rgba(232, 200, 114, 0.2);
+    --theme-name: "Imperial Obsidian & Gold";
+  }
+
+  /* Variant B: Royal Emerald & Desert Gold (GCC Prestige / Bahrain Formation) */
+  [data-theme="variant_b_emerald"] {
+    --bg: #04120c;
+    --bg-alt: #081d14;
+    --surface: #0e2b1e;
+    --text: #f5f8f3;
+    --muted: #94b8a5;
+    --gold: #f3dc8a;
+    --gold-dark: #c49942;
+    --border: #1a4230;
+    --theme-accent: #22c55e;
+    --theme-accent-dark: #15803d;
+    --theme-glow: rgba(34, 197, 94, 0.22);
+    --theme-name: "Royal Emerald & Desert Gold";
+  }
+
+  /* Variant C: Midnight Sapphire & Electric Platinum (Global Tech & AI) */
+  [data-theme="variant_c_sapphire"] {
+    --bg: #060a17;
+    --bg-alt: #0a1226;
+    --surface: #111d38;
+    --text: #f0f4fc;
+    --muted: #94a5c9;
+    --gold: #70b8ff;
+    --gold-dark: #3b82f6;
+    --border: #1d335d;
+    --theme-accent: #38bdf8;
+    --theme-accent-dark: #0284c7;
+    --theme-glow: rgba(56, 189, 248, 0.22);
+    --theme-name: "Midnight Sapphire & Platinum";
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  }
+}
+
+/* Gold Gradient Utilities */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fceda2 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+}
+
+.border-gold-glow {
+  border-color: rgba(232, 200, 114, 0.35);
+  box-shadow: 0 0 25px var(--theme-glow);
+}
+
+.card-luxury {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-luxury:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px var(--theme-glow);
+}
+
+/* Toast Animations */
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: toast-slide-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toast-exit {
+  animation: toast-slide-out 0.25s ease-in forwards;
+}
+
+
+/* Shimmer Button Effect */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e8c872 0%, #b8893a 100%);
+  color: #0e0c07;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-gold:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 20px rgba(232, 200, 114, 0.45);
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-150%);
+  animation: shimmer 3s infinite;
+}
+
+/* Pulse animation for WhatsApp badge */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 14px rgba(74, 222, 128, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.pulse-whatsapp {
+  animation: pulse-ring 2.5s infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

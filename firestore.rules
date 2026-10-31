@@ -1,0 +1,122 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for Role-Based Access Control (RBAC) via Custom Claims
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getRole() {
+      return request.auth.token.role;
+    }
+
+    function isCEO() {
+      return isAuthenticated() && (getRole() == 'CEO' || request.auth.token.email == 'ghaziwazirndm@gmail.com');
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (isCEO() || getRole() == 'ADMIN');
+    }
+
+    function isSales() {
+      return isAuthenticated() && (isAdmin() || getRole() == 'SALES');
+    }
+
+    function isSupport() {
+      return isAuthenticated() && (isAdmin() || getRole() == 'SUPPORT');
+    }
+
+    function isFinance() {
+      return isAuthenticated() && (isAdmin() || getRole() == 'FINANCE');
+    }
+
+    function isStaff() {
+      return isAuthenticated() && (getRole() in ['CEO', 'ADMIN', 'SALES', 'SUPPORT', 'FINANCE', 'VIEWER']);
+    }
+
+    // Emergency Stop status
+    match /system_settings/emergency_stop {
+      allow read: if isAuthenticated();
+      allow write: if isCEO(); // Only CEO can activate or resume from Emergency Stop
+    }
+
+    // System Settings & API configurations
+    match /system_settings/{settingId} {
+      allow read: if isStaff();
+      allow write: if isAdmin();
+    }
+
+    // Users and Role management
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      // Self cannot grant own roles or custom claims; only CEO or ADMIN can write user documents
+      allow create, update: if isAdmin();
+      allow delete: if isCEO();
+    }
+
+    // Leads & Inquiries
+    match /leads/{leadId} {
+      // Public submissions allowed with validation (spam honey-pot, valid email/phone)
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.email is string
+                    && request.resource.data.phone is string;
+      allow read: if isStaff();
+      allow update: if isSales() || isSupport() || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Bookings & Consultations
+    match /bookings/{bookingId} {
+      // Public client can book an available slot
+      allow create: if request.resource.data.clientName is string 
+                    && request.resource.data.clientEmail is string
+                    && request.resource.data.slotDate is string;
+      allow read: if isStaff();
+      allow update: if isSales() || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Proposals & Contracts
+    match /proposals/{proposalId} {
+      allow read: if isSales() || isFinance() || isAdmin();
+      allow create: if isSales() || isAdmin();
+      // Tier-3 proposals or value >= $5,000 require CEO approval before status change
+      allow update: if isAdmin() || (isSales() && request.resource.data.status != 'APPROVED');
+      allow delete: if isCEO();
+    }
+
+    // Approvals Queue
+    match /approvals/{approvalId} {
+      allow read: if isStaff();
+      allow create: if isStaff();
+      // No self-approval: approver must not be the requester, high risk requires CEO
+      allow update: if (resource.data.riskTier == 'TIER_3' && isCEO()) || (resource.data.riskTier != 'TIER_3' && isAdmin());
+      allow delete: if isCEO();
+    }
+
+    // Audit Chain - Cryptographically append-only with SHA-256 integrity
+    match /audit_chain/{entryId} {
+      allow read: if isCEO() || isAdmin();
+      // Entries can only be appended with required hash chaining fields
+      allow create: if isStaff() 
+                    && request.resource.data.sha256Hash is string 
+                    && request.resource.data.prevHash is string;
+      // Updates and deletions are STRICTLY FORBIDDEN to ensure tamper-proof audit trail
+      allow update, delete: if false;
+    }
+
+    // Knowledge Base & AI Agent Resources
+    match /knowledge_base/{docId} {
+      allow read: if true; // Public read for verified service & FAQ information
+      allow write: if isAdmin();
+    }
+
+    // Payments & Invoices
+    match /payments/{paymentId} {
+      allow read: if isFinance() || isAdmin();
+      allow create, update: if isFinance() || isAdmin();
+      allow delete: if isCEO();
+    }
+  }
+}

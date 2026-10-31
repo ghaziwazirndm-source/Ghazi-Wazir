@@ -1,0 +1,754 @@
+{
+  "users": [
+    {
+      "id": "usr-ceo-root",
+      "name": "Ghazi Wazir",
+      "email": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "enabled": true,
+      "lastLogin": 1793460342122,
+      "failed": 0,
+      "lockUntil": 0,
+      "salt": "z9ew7Wzmj6uY9jHpN7wdAA==",
+      "hash": "sPdAHyJiAY0HrcO3kMLOYD5fOH0pRdySCiCsSavclCQ="
+    },
+    {
+      "id": "usr-admin-01",
+      "name": "Adnan Malik",
+      "email": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "enabled": true,
+      "lastLogin": 1793385180659,
+      "failed": 0,
+      "lockUntil": 0,
+      "salt": "39k3Gfi3ykxuRIaVPMfAEw==",
+      "hash": "YVLtgCHkUHBDFsMKVvJKGZogh8g03oiQaOUyW1m8zlU="
+    },
+    {
+      "id": "usr-sales-01",
+      "name": "Sara Vance",
+      "email": "sales@backforbrand.com",
+      "role": "SALES",
+      "enabled": true,
+      "lastLogin": 1793384688180,
+      "failed": 0,
+      "lockUntil": 0,
+      "salt": "6D8u65EEfd94jCJmcKId4Q==",
+      "hash": "emRuRwslUr5PiuaQYNg5P8FFNCTG0rQl7laf1XhKCC8="
+    }
+  ],
+  "leads": [
+    {
+      "id": "lead-27fb3e9d",
+      "name": "Test Investor Lead",
+      "email": "investor.test@domain.com",
+      "phone": "+973 3999 8888",
+      "svc": "business-registration",
+      "src": "Website Form",
+      "value": 0,
+      "stage": "NEW",
+      "factors": {
+        "need": 4,
+        "budget": 3,
+        "timeline": 4,
+        "fit": 4,
+        "urgency": 4,
+        "authority": 4,
+        "signals": 4
+      },
+      "score": 77,
+      "owner": "Ghazi Wazir",
+      "next": "Initial contact via WhatsApp or Email",
+      "notes": [
+        {
+          "ts": 1793460342115,
+          "by": "Website System",
+          "t": "Inquiry message: Need urgently commercial registration and investor visa in Bahrain"
+        }
+      ],
+      "created": 1793460342115,
+      "updated": 1793460342115
+    },
+    {
+      "id": "lead-e9b03b6b",
+      "name": "Hamad Al-Khalifa Group",
+      "email": "hamad@alkhalifagroup.bh",
+      "phone": "+973 3999 1234",
+      "svc": "business-registration",
+      "src": "Executive Referral",
+      "value": 1200,
+      "stage": "WON",
+      "factors": {
+        "need": 4,
+        "budget": 4,
+        "timeline": 4,
+        "fit": 4,
+        "urgency": 3,
+        "authority": 4,
+        "signals": 4
+      },
+      "score": 80,
+      "owner": "Ghazi Wazir",
+      "notes": [
+        {
+          "ts": 1793387405860,
+          "by": "Ghazi Wazir",
+          "t": "Payment verified: 1200 BHD via BenefitPay (Ref: BPAY-99281726)"
+        }
+      ],
+      "created": 1793387405856,
+      "updated": 1793387405860
+    },
+    {
+      "id": "lead-180d8ed9",
+      "name": "Tariq Mansoor",
+      "email": "tariq@mansoor-tech.com",
+      "phone": "+973 3922 4455",
+      "svc": "business-registration",
+      "src": "Booking Calendar",
+      "value": 0,
+      "stage": "BOOKED",
+      "factors": {
+        "need": 4,
+        "budget": 3,
+        "timeline": 4,
+        "fit": 4,
+        "urgency": 4,
+        "authority": 4,
+        "signals": 4
+      },
+      "score": 78,
+      "owner": "Ghazi Wazir",
+      "next": "Meeting scheduled for 2026-11-08 at 10:30 (Asia/Bahrain)",
+      "notes": [
+        {
+          "ts": 1793385518952,
+          "by": "System",
+          "t": "Booked slot: 2026-11-08 10:30"
+        }
+      ],
+      "created": 1793385518952,
+      "updated": 1793385518952
+    },
+    {
+      "id": "lead-4732b6f8",
+      "name": "Fatima Al-Sayed",
+      "email": "fatima@alsayedholdings.bh",
+      "phone": "+973 3811 2233",
+      "svc": "investor-visa",
+      "src": "Website Form",
+      "value": 0,
+      "stage": "NEW",
+      "factors": {
+        "need": 3,
+        "budget": 3,
+        "timeline": 3,
+        "fit": 4,
+        "urgency": 3,
+        "authority": 4,
+        "signals": 2
+      },
+      "score": 64,
+      "owner": "Ghazi Wazir",
+      "next": "Initial contact via WhatsApp or Email",
+      "notes": [
+        {
+          "ts": 1793385507046,
+          "by": "Website System",
+          "t": "Inquiry message: Looking for investor residency guidance for 3 partners"
+        }
+      ],
+      "created": 1793385507046,
+      "updated": 1793385507046
+    },
+    {
+      "id": "lead-001",
+      "name": "Ahmed Al-Mansoor",
+      "email": "ahmed@almansoorgroup.com",
+      "phone": "+973 3900 1122",
+      "svc": "business-registration",
+      "src": "Website Funnel",
+      "value": 1200,
+      "stage": "QUALIFIED",
+      "factors": {
+        "need": 4,
+        "budget": 4,
+        "timeline": 4,
+        "fit": 5,
+        "urgency": 4,
+        "authority": 5,
+        "signals": 4
+      },
+      "score": 88,
+      "owner": "Ghazi Wazir",
+      "next": "Schedule Bahrain Commercial Registration consultation",
+      "resourceSent": "Bahrain Company Formation Blueprint",
+      "offer": "Complete Business Setup Package",
+      "notes": [
+        {
+          "ts": 1793297742523,
+          "by": "System",
+          "t": "Inbound lead via Company Formation Blueprint opt-in"
+        },
+        {
+          "ts": 1793340942523,
+          "by": "Ghazi Wazir",
+          "t": "Client expanding logistics branch into Bahrain"
+        }
+      ],
+      "created": 1793297742523,
+      "updated": 1793340942523
+    },
+    {
+      "id": "lead-002",
+      "name": "Marcus Vance",
+      "email": "m.vance@vancetech.io",
+      "phone": "+1 415 555 8921",
+      "svc": "geo-aeo",
+      "src": "Direct Referral",
+      "value": 4500,
+      "stage": "PROPOSAL",
+      "factors": {
+        "need": 5,
+        "budget": 5,
+        "timeline": 4,
+        "fit": 5,
+        "urgency": 4,
+        "authority": 5,
+        "signals": 5
+      },
+      "score": 96,
+      "owner": "Ghazi Wazir",
+      "next": "Review custom generative search strategy proposal",
+      "resourceSent": "AEO vs GEO Whitepaper",
+      "offer": "Enterprise AEO & AI Agent Suite",
+      "notes": [
+        {
+          "ts": 1793211342523,
+          "by": "Ghazi Wazir",
+          "t": "Looking for Generative Engine Optimization for SaaS brand"
+        }
+      ],
+      "created": 1793211342523,
+      "updated": 1793297742523
+    }
+  ],
+  "bookings": [
+    {
+      "id": "book-001",
+      "leadId": "lead-001",
+      "leadName": "Ahmed Al-Mansoor",
+      "date": "2026-10-31",
+      "time": "11:00",
+      "service": "business-registration",
+      "status": "CONFIRMED",
+      "by": "Ghazi Wazir",
+      "notes": "Initial business setup scoping via Google Meet / WhatsApp",
+      "created": 1793297742523
+    },
+    {
+      "id": "book-47087d0b",
+      "leadId": "lead-180d8ed9",
+      "leadName": "Tariq Mansoor",
+      "date": "2026-11-08",
+      "time": "10:30",
+      "service": "business-registration",
+      "status": "PENDING_CALENDAR",
+      "notes": "Establishing regional tech subsidiary",
+      "created": 1793385518952
+    }
+  ],
+  "proposals": [
+    {
+      "id": "prop-001",
+      "leadId": "lead-002",
+      "title": "Back for Brand - Enterprise GEO & AEO Implementation",
+      "amount": 4500,
+      "disc": 0,
+      "status": "MARKED_SENT",
+      "by": "system",
+      "byName": "Ghazi Wazir",
+      "created": 1793297742523
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-cfae928b",
+      "leadId": "lead-e9b03b6b",
+      "desc": "Corporate Retainer / Consulting Fee",
+      "amount": 1200,
+      "cur": "BHD",
+      "status": "VERIFIED",
+      "custom": true,
+      "by": "usr-ceo-root",
+      "providerTxId": "BPAY-99281726",
+      "created": 1793387405860
+    },
+    {
+      "id": "pay-seed-01",
+      "leadId": "lead-001",
+      "desc": "Bahrain Commercial Registration Filing Deposit (Bab Al-Khaleej)",
+      "amount": 450,
+      "cur": "BHD",
+      "status": "VERIFIED",
+      "custom": false,
+      "by": "usr-ceo-root",
+      "providerTxId": "BENEFITPAY-882910",
+      "created": 1793214599853
+    },
+    {
+      "id": "pay-seed-02",
+      "leadId": "lead-002",
+      "desc": "GEO & AEO Implementation Milestone 1 (Back for Brand LLC)",
+      "amount": 2250,
+      "cur": "USD",
+      "status": "VERIFIED",
+      "custom": true,
+      "by": "usr-ceo-root",
+      "providerTxId": "WIRE-US-99120",
+      "created": 1793300999853
+    }
+  ],
+  "kb": [
+    {
+      "id": "kb-001",
+      "title": "Company Registration in Bahrain (CR)",
+      "body": "Bab Al-Khaleej assists entrepreneurs and foreign corporations in securing 100% foreign ownership Commercial Registrations (CR) through Sijilat. Required documents: passport copies of shareholders, proof of address, business activity approval, and bank verification. Timeline depends entirely on Ministry approvals.",
+      "category": "Bahrain Services",
+      "state": "APPROVED",
+      "author": "Ghazi Wazir",
+      "authorId": "system",
+      "created": 1792779342523,
+      "updated": 1792779342523
+    },
+    {
+      "id": "kb-002",
+      "title": "Investor Visa vs Worker Visa",
+      "body": "An Investor Visa is linked to company ownership/shares under Bab Al-Khaleej CR sponsorship, granting renewable residency with self-sponsorship options. A Worker Visa requires LMRA quota allocation and work permit issuance for employees. We handle document clearance and medical scheduling.",
+      "category": "Bahrain Visas",
+      "state": "APPROVED",
+      "author": "Ghazi Wazir",
+      "authorId": "system",
+      "created": 1792779342523,
+      "updated": 1792779342523
+    },
+    {
+      "id": "kb-003",
+      "title": "Back for Brand LLC - GEO and AEO Services",
+      "body": "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) structure company digital entities, semantic data, and content so that AI engines like Perplexity, ChatGPT, and Google Gemini cite and recommend the brand directly in AI answer boxes.",
+      "category": "Technology Services",
+      "state": "APPROVED",
+      "author": "Ghazi Wazir",
+      "authorId": "system",
+      "created": 1792779342523,
+      "updated": 1792779342523
+    }
+  ],
+  "resources": [
+    {
+      "id": "res-001",
+      "title": "Bahrain Company Formation Blueprint (PDF)",
+      "url": "https://wa.me/97335628353?text=Blueprint",
+      "ok": true,
+      "by": "Ghazi Wazir"
+    },
+    {
+      "id": "res-002",
+      "title": "Official Bab Al-Khaleej Checklist 2026",
+      "url": "https://wa.me/97335628353?text=Checklist",
+      "ok": true,
+      "by": "Ghazi Wazir"
+    }
+  ],
+  "followups": [
+    {
+      "id": "fu-001",
+      "leadId": "lead-001",
+      "note": "Prepare Sijilat activity documentation checklist for Ahmed",
+      "due": "2026-10-31",
+      "status": "OPEN"
+    }
+  ],
+  "approvals": [],
+  "audit": [
+    {
+      "id": 1,
+      "ts": "2026-10-30T18:18:28.060Z",
+      "actor": "unknown",
+      "role": "UNKNOWN",
+      "action": "auth.failed",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Account not found",
+      "result": "denied",
+      "prev": "GENESIS",
+      "hash": "PvufaLxe2HdzHWuDYXnjCNOv+J4ELF++tDmMWUMbjhw="
+    },
+    {
+      "id": 2,
+      "ts": "2026-10-30T18:24:50.623Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "PvufaLxe2HdzHWuDYXnjCNOv+J4ELF++tDmMWUMbjhw=",
+      "hash": "BQE3yU7D5K9Q5pNi4Pmxe+CvWOd9tqqFPgPQiEQ5tzg="
+    },
+    {
+      "id": 3,
+      "ts": "2026-10-30T18:24:55.020Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Successful session initialized",
+      "result": "ok",
+      "prev": "BQE3yU7D5K9Q5pNi4Pmxe+CvWOd9tqqFPgPQiEQ5tzg=",
+      "hash": "I0p2DkCaoftUe7M+5cd1RD8KTAyQWjrmIfAFtkVTClg="
+    },
+    {
+      "id": 4,
+      "ts": "2026-10-30T18:25:07.390Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.password_reset",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Master password updated",
+      "result": "ok",
+      "prev": "I0p2DkCaoftUe7M+5cd1RD8KTAyQWjrmIfAFtkVTClg=",
+      "hash": "qYHkP8wVbgCBmQZ1Ud7KK/IHBzWl3ZQy884kVN8KKr0="
+    },
+    {
+      "id": 5,
+      "ts": "2026-10-30T18:33:00.660Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.quick_login",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "qYHkP8wVbgCBmQZ1Ud7KK/IHBzWl3ZQy884kVN8KKr0=",
+      "hash": "nsJX9Ft/WFGBJBRjDorXMTCYwSCcfUCorpbrZNNJdrY="
+    },
+    {
+      "id": 6,
+      "ts": "2026-10-30T18:33:54.268Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.logout",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "User logged out",
+      "result": "ok",
+      "prev": "nsJX9Ft/WFGBJBRjDorXMTCYwSCcfUCorpbrZNNJdrY=",
+      "hash": "ttTTNYIX1yvoCkL6qjNaKlpKPEnit5L3wXfENGdp+ds="
+    },
+    {
+      "id": 7,
+      "ts": "2026-10-30T18:38:27.046Z",
+      "actor": "public-visitor",
+      "role": "GUEST",
+      "action": "lead.create",
+      "resource": "Fatima Al-Sayed",
+      "detail": "Service: investor-visa, Score: 64",
+      "result": "ok",
+      "prev": "ttTTNYIX1yvoCkL6qjNaKlpKPEnit5L3wXfENGdp+ds=",
+      "hash": "8fezPw5dQJS1/36SFgF8RRRJvxuS1ksJx/2sEHr94/Q="
+    },
+    {
+      "id": 8,
+      "ts": "2026-10-30T18:38:27.046Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "fatima@alsayedholdings.bh",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Your Corporate Inquiry Regarding investor-visa — Ghazi Wazir",
+      "result": "ok",
+      "prev": "8fezPw5dQJS1/36SFgF8RRRJvxuS1ksJx/2sEHr94/Q=",
+      "hash": "Yyz1+1oPQguliPj90HDU1zIVX0Otnp24DslftnghmPU="
+    },
+    {
+      "id": 9,
+      "ts": "2026-10-30T18:38:27.047Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 🚨 Inbound Lead: Fatima Al-Sayed (investor-visa) — Score: 64/100",
+      "result": "ok",
+      "prev": "Yyz1+1oPQguliPj90HDU1zIVX0Otnp24DslftnghmPU=",
+      "hash": "gjB+PFRhhaVohp32H99P/jDhcovpzSAInuc5zXPMZ+o="
+    },
+    {
+      "id": 10,
+      "ts": "2026-10-30T18:38:38.953Z",
+      "actor": "Tariq Mansoor",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2026-11-08 10:30",
+      "detail": "Service: business-registration",
+      "result": "ok",
+      "prev": "gjB+PFRhhaVohp32H99P/jDhcovpzSAInuc5zXPMZ+o=",
+      "hash": "jYDM2XING/PKVe5Xk4vp89la24l15XBSy4fiCfz4nyI="
+    },
+    {
+      "id": 11,
+      "ts": "2026-10-30T18:38:38.953Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "tariq@mansoor-tech.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2026-11-08 at 10:30 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "jYDM2XING/PKVe5Xk4vp89la24l15XBSy4fiCfz4nyI=",
+      "hash": "N/GaF1Y7G7DCjL0yjRodRM6ImDAKCEz7nl3xfK7cEfU="
+    },
+    {
+      "id": 12,
+      "ts": "2026-10-30T18:38:38.954Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: Tariq Mansoor on 2026-11-08 at 10:30 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "N/GaF1Y7G7DCjL0yjRodRM6ImDAKCEz7nl3xfK7cEfU=",
+      "hash": "UhgdCdlEU6QejFvfEKXOBWy2rB4cZfvTbTkzHLIYmIs="
+    },
+    {
+      "id": 13,
+      "ts": "2026-10-30T19:09:46.370Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "UhgdCdlEU6QejFvfEKXOBWy2rB4cZfvTbTkzHLIYmIs=",
+      "hash": "1N7c6IJzs782FzJBebFeizKy0SKzlIdWyt70nqSwUgA="
+    },
+    {
+      "id": 14,
+      "ts": "2026-10-30T19:09:53.994Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "1N7c6IJzs782FzJBebFeizKy0SKzlIdWyt70nqSwUgA=",
+      "hash": "c3AsRfjOP5JLA4N08HSVLaBtFc7QHTM+7ESJGwa4GEM="
+    },
+    {
+      "id": 15,
+      "ts": "2026-10-30T19:10:05.849Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "c3AsRfjOP5JLA4N08HSVLaBtFc7QHTM+7ESJGwa4GEM=",
+      "hash": "iGWxWzqQf7xMtepJ7byIC7hnLmnarjQJvYQ/b9YH/LU="
+    },
+    {
+      "id": 16,
+      "ts": "2026-10-30T19:10:05.857Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "lead.create_manual",
+      "resource": "Hamad Al-Khalifa Group",
+      "detail": "Service: business-registration",
+      "result": "ok",
+      "prev": "iGWxWzqQf7xMtepJ7byIC7hnLmnarjQJvYQ/b9YH/LU=",
+      "hash": "gvEoTlWb/1J3uty29AILPtcUUJslsCoSzA0hmkneTg0="
+    },
+    {
+      "id": 17,
+      "ts": "2026-10-30T19:10:05.861Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "payment.verified_manual",
+      "resource": "Corporate Retainer / Consulting Fee",
+      "detail": "1200 BHD (Ref: BPAY-99281726)",
+      "result": "ok",
+      "prev": "gvEoTlWb/1J3uty29AILPtcUUJslsCoSzA0hmkneTg0=",
+      "hash": "45FF4P85dkFMu12lJiCr2oeEPof3a2bY8Ow72qDz42s="
+    },
+    {
+      "id": 18,
+      "ts": "2026-10-30T19:10:10.738Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "45FF4P85dkFMu12lJiCr2oeEPof3a2bY8Ow72qDz42s=",
+      "hash": "msLH6DbKoCMVcBK6PaQ95+5/9jywJ3CLf1zDpPEAz6w="
+    },
+    {
+      "id": 19,
+      "ts": "2026-10-30T19:10:15.310Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "msLH6DbKoCMVcBK6PaQ95+5/9jywJ3CLf1zDpPEAz6w=",
+      "hash": "94crfpUmd313j9qZPTxGAsW6INnUC+a0hE4usY0WLZI="
+    },
+    {
+      "id": 20,
+      "ts": "2026-10-31T15:25:42.116Z",
+      "actor": "public-visitor",
+      "role": "GUEST",
+      "action": "lead.create",
+      "resource": "Test Investor Lead",
+      "detail": "Service: business-registration, Score: 77",
+      "result": "ok",
+      "prev": "94crfpUmd313j9qZPTxGAsW6INnUC+a0hE4usY0WLZI=",
+      "hash": "ZzFNJ74aWKIUmjNUaXvuEXDp10wYjlVw+kp6i8Rv5f8="
+    },
+    {
+      "id": 21,
+      "ts": "2026-10-31T15:25:42.116Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "investor.test@domain.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Your Corporate Inquiry Regarding business-registration — Ghazi Wazir",
+      "result": "ok",
+      "prev": "ZzFNJ74aWKIUmjNUaXvuEXDp10wYjlVw+kp6i8Rv5f8=",
+      "hash": "QiSdL59GwJcJa/XSVRI0nlySjG5jeT1r4lc9ASsx/5w="
+    },
+    {
+      "id": 22,
+      "ts": "2026-10-31T15:25:42.117Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 🚨 Inbound Lead: Test Investor Lead (business-registration) — Score: 77/100",
+      "result": "ok",
+      "prev": "QiSdL59GwJcJa/XSVRI0nlySjG5jeT1r4lc9ASsx/5w=",
+      "hash": "Hob0oPqBe6kminFnHJViKMXxJhCbGxfzCjWoBIlpblQ="
+    },
+    {
+      "id": 23,
+      "ts": "2026-10-31T15:25:42.122Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "Hob0oPqBe6kminFnHJViKMXxJhCbGxfzCjWoBIlpblQ=",
+      "hash": "gDvTdpf0X6iJ2bTKZuKg2ho+Akrhn6jd4OOwI+lbRjA="
+    }
+  ],
+  "warnings": [
+    {
+      "id": "warn-6f536321",
+      "sev": "LOW",
+      "type": "failed_login",
+      "detail": "Attempted login for nonexistent account: ghaziwazirndm@gmail.com",
+      "ts": 1793384308059,
+      "status": "OPEN"
+    }
+  ],
+  "inbox": [
+    {
+      "id": "msg-63deeab8",
+      "ts": 1793460342115,
+      "ch": "WhatsApp / Form",
+      "from": "Test Investor Lead <investor.test@domain.com>",
+      "text": "Need urgently commercial registration and investor visa in Bahrain",
+      "flags": [
+        "INBOUND"
+      ],
+      "lead": "lead-27fb3e9d"
+    },
+    {
+      "id": "msg-seed-01",
+      "ts": 1793380199853,
+      "ch": "WhatsApp Direct",
+      "from": "Faisal Al-Otaibi <+971 50 123 4567>",
+      "text": "Hello Ghazi, we are looking to establish a regional subsidiary in Manama with 100% foreign ownership. Need assistance with MOIC Sijilat and 3 investor visas.",
+      "flags": [
+        "HOT",
+        "INBOUND",
+        "WHATSAPP"
+      ],
+      "lead": "lead-001"
+    },
+    {
+      "id": "msg-seed-02",
+      "ts": 1793369399853,
+      "ch": "Web Contact Form",
+      "from": "Marcus Vance <m.vance@vancetech.io>",
+      "text": "Inquiring about Back for Brand LLC generative engine optimization (GEO) and custom AI sales agents for our B2B SaaS platform.",
+      "flags": [
+        "HOT",
+        "INBOUND"
+      ],
+      "lead": "lead-002"
+    },
+    {
+      "id": "msg-seed-03",
+      "ts": 1793322599853,
+      "ch": "Blueprint Opt-In",
+      "from": "David Sterling <david@sterling-capital.co>",
+      "text": "Downloaded the Bahrain Formation Blueprint. Requesting a 1-on-1 consultation to review commercial address lease options.",
+      "flags": [
+        "WARM",
+        "INBOUND"
+      ]
+    }
+  ],
+  "stop": {
+    "on": false
+  },
+  "automations": {
+    "faq": false,
+    "followups": false,
+    "reminders": false,
+    "scoring": true
+  },
+  "settings": {
+    "hot": 90,
+    "warm": 70,
+    "sessionMin": 30,
+    "discountMax": 10,
+    "highValue": 5000,
+    "financeLimit": 1000,
+    "approvalHours": 72,
+    "weights": {
+      "need": 20,
+      "budget": 15,
+      "timeline": 15,
+      "fit": 15,
+      "urgency": 10,
+      "authority": 15,
+      "signals": 10
+    },
+    "priceList": [
+      {
+        "name": "Bahrain Commercial Registration Consultation",
+        "price": 150,
+        "cur": "BHD"
+      },
+      {
+        "name": "Investor Visa Package (Bab Al-Khaleej)",
+        "price": 450,
+        "cur": "BHD"
+      },
+      {
+        "name": "Digital Foundation & Funnel Package",
+        "price": 1500,
+        "cur": "USD"
+      }
+    ]
+  }
+}
