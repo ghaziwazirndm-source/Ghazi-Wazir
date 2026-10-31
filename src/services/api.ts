@@ -65,11 +65,26 @@ export const api = {
     honeypot?: string;
     consent: boolean;
     abVariant?: string;
+    attribution?: any;
   }) {
-    return this.request<{ success: boolean; message: string; leadId: string }>('/api/leads', {
+    const attr = payload.attribution || (typeof window !== 'undefined' ? (await import('./attribution')).getStoredAttribution() : {});
+    const res = await this.request<{ success: boolean; message: string; leadId: string }>('/api/leads', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, attribution: attr }),
     });
+
+    if (res.success && typeof window !== 'undefined') {
+      const { adTracker } = await import('./adTracking');
+      adTracker.trackLead({
+        eventName: 'Lead',
+        leadId: res.leadId,
+        service: payload.service || 'Executive Consultation',
+        email: payload.email,
+        phone: payload.phone,
+      });
+    }
+
+    return res;
   },
 
   async getAvailability(month?: string) {
@@ -91,11 +106,20 @@ export const api = {
     service?: string;
     notes?: string;
     abVariant?: string;
+    attribution?: any;
   }) {
-    return this.request<{ success: boolean; booking: Booking; message: string }>('/api/bookings', {
+    const attr = payload.attribution || (typeof window !== 'undefined' ? (await import('./attribution')).getStoredAttribution() : {});
+    const res = await this.request<{ success: boolean; booking: Booking; message: string }>('/api/bookings', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, attribution: attr }),
     });
+
+    if (res.success && typeof window !== 'undefined') {
+      const { adTracker } = await import('./adTracking');
+      adTracker.trackSchedule(res.booking.id, payload.service || 'Executive Consultation', payload.date, payload.time);
+    }
+
+    return res;
   },
 
   async trackABTest(variant: string, event: 'impression' | 'lead' | 'booking') {
@@ -109,17 +133,90 @@ export const api = {
     return this.request<any>('/api/ab-test/stats');
   },
 
-  async chatWithAI(message: string, customerLanguage?: string) {
+  async chatWithAI(
+    message: string,
+    customerLanguage?: string,
+    funnelContext?: {
+      funnelSlug?: string;
+      serviceName?: string;
+      userGoal?: string;
+    },
+    leadCapture?: {
+      name?: string;
+      email?: string;
+      phone?: string;
+    }
+  ) {
+    const attr = typeof window !== 'undefined' ? (await import('./attribution')).getStoredAttribution() : {};
     return this.request<{
       reply: string;
       escalation?: boolean;
       escalationReason?: string;
       flagged?: boolean;
       configRequired?: boolean;
+      leadCaptured?: boolean;
+      capturedLeadId?: string;
+      suggestedAction?: 'BOOK_CALL' | 'WHATSAPP' | 'DOWNLOAD_BLUEPRINT';
     }>('/api/ai/sales-agent', {
       method: 'POST',
-      body: JSON.stringify({ message, customerLanguage }),
+      body: JSON.stringify({
+        message,
+        customerLanguage,
+        funnelContext,
+        leadCapture,
+        attribution: attr,
+      }),
     });
+  },
+
+  // Email Marketing & Automations
+  async getEmailSequences() {
+    return this.request<{
+      sequences: Array<{
+        id: string;
+        name: string;
+        trigger: string;
+        steps: Array<{ step: number; delayHours: number; subject: string; template: string }>;
+      }>;
+      emailServiceStatus: {
+        configured: boolean;
+        provider: string;
+        fromEmail: string;
+      };
+    }>('/api/admin/email/sequences');
+  },
+
+  async testEmailSend(to: string, subject: string, templateType: string) {
+    return this.request<{ success: boolean; mode: string; message: string }>('/api/admin/email/send-test', {
+      method: 'POST',
+      body: JSON.stringify({ to, subject, templateType }),
+    });
+  },
+
+  async triggerEmailSequence(leadId: string, sequenceId: string) {
+    return this.request<{ success: boolean; message: string }>('/api/admin/email/trigger-sequence', {
+      method: 'POST',
+      body: JSON.stringify({ leadId, sequenceId }),
+    });
+  },
+
+  async getAdAttributionStats() {
+    return this.request<{
+      attributionSummary: Record<string, { leads: number; bookings: number; revenue: number }>;
+      recentConversions: Array<{
+        id: string;
+        event: string;
+        source: string;
+        campaign?: string;
+        service?: string;
+        value: number;
+        timestamp: number;
+      }>;
+      webhooks: {
+        metaLeadGen: string;
+        googleLeadForm: string;
+      };
+    }>('/api/admin/ads/stats');
   },
 
   // Auth Endpoints

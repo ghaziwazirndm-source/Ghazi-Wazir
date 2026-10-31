@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
 import { Printer, CheckSquare, Square, ArrowRight, ShieldAlert, Sparkles } from 'lucide-react';
+import { FunnelSalesAgent } from '../../components/FunnelSalesAgent';
 
 interface StepData {
   number: number;
@@ -178,6 +179,21 @@ export function FormationBlueprintPage() {
           <p>
             General business roadmap only; not statutory legal counsel. Ministry licensing fees, municipal lease requirements, and LMRA workforce levies depend on your verified business activities. Always confirm specifics with our consultancy before financial deployment.
           </p>
+        </div>
+
+        {/* Interactive AI Blueprint Consultant */}
+        <div className="print:hidden">
+          <FunnelSalesAgent
+            funnelSlug="/formation/blueprint"
+            serviceName="Bahrain Company Formation Blueprint"
+            companyName="Bab Al-Khaleej"
+            defaultQuestions={[
+              'Which legal structure allows 100% foreign ownership in Bahrain?',
+              'What are the mandatory documents for Sijilat CR registration?',
+              'How long does an Investor Visa take after CR issuance?',
+              'Can I connect with Ghazi Wazir directly on WhatsApp?'
+            ]}
+          />
         </div>
 
         {/* Want This Done With You CTA Banner */}

@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
+import { FunnelSalesAgent } from '../../components/FunnelSalesAgent';
 
 export function VSLServicePage() {
   const { service } = useParams<{ service: string }>();
@@ -83,7 +84,7 @@ export function VSLServicePage() {
         <div className="text-center space-y-4 max-w-md mx-auto">
           <Link
             to="/book"
-            className="btn-gold block py-4 rounded-full text-xs font-bold uppercase tracking-wider text-[#16120a] shadow-2xl"
+            className="block py-4 rounded-full text-xs font-bold uppercase tracking-wider text-[#090d16] bg-[#38bdf8] hover:bg-[#0ea5e9] shadow-[0_0_20px_rgba(56,189,248,0.3)] transition-all hover:scale-[1.02]"
           >
             📅 Book Your Free Consultation Now
           </Link>
@@ -91,10 +92,19 @@ export function VSLServicePage() {
             href={`https://wa.me/97335628353?text=Hello%20Ghazi%2C%20I%20am%20interested%20in%20your%20${encodeURIComponent(svc.name)}%20service.`}
             target="_blank"
             rel="noreferrer"
-            className="block py-3.5 rounded-full border border-[#4ade80]/50 text-xs font-bold text-[#4ade80] hover:bg-[#14141d] transition-colors"
+            className="block py-3.5 rounded-full border border-[#22c55e]/50 text-xs font-bold text-[#4ade80] hover:bg-[#131d33] transition-colors"
           >
             💬 Fast WhatsApp Inquiry (+973 3562 8353)
           </a>
+        </div>
+
+        {/* Interactive Funnel Sales Agent */}
+        <div className="max-w-2xl mx-auto">
+          <FunnelSalesAgent
+            funnelSlug={`/funnels/${svc.id}`}
+            serviceName={svc.name}
+            companyName={svc.company}
+          />
         </div>
 
         {/* "What You Get" Section */}

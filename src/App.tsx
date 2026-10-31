@@ -51,11 +51,16 @@ import { ABThemeSwitcher } from './components/ABThemeSwitcher';
 import { ToastProvider } from './context/ToastContext';
 import { ABThemeProvider } from './context/ABThemeContext';
 
+import { initAttributionTracking } from './services/attribution';
+import { adTracker } from './services/adTracking';
+
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    initAttributionTracking();
+    adTracker.trackPageView(pathname);
+  }, [pathname, search]);
   return null;
 }
 
