@@ -14,8 +14,8 @@ export function ABThemeSwitcher() {
     setVariant(id);
     const target = variants.find(v => v.id === id);
     if (target) {
-      const toastTheme = id === 'variant_b_emerald' ? 'emerald' : id === 'variant_c_sapphire' ? 'sapphire' : 'gold';
-      themeToast(toastTheme, `A/B Theme Switched: ${target.name}`, `Now previewing ${target.badge}. Conversions and impressions are tracked.`);
+      const toastTheme = id === 'variant_modern_emerald' ? 'emerald' : id === 'variant_modern_titanium' ? 'sapphire' : 'sapphire';
+      themeToast(toastTheme, `Modern Theme Switched: ${target.name}`, `Now viewing ${target.badge}. Deployed across all pages.`);
     }
   };
 

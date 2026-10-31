@@ -247,7 +247,7 @@ export interface WorkspaceState {
 // -------------------------------------------------------------
 // A/B Testing & Theming System
 // -------------------------------------------------------------
-export type ABVariantId = 'variant_a_gold' | 'variant_b_emerald' | 'variant_c_sapphire';
+export type ABVariantId = 'variant_modern_azure' | 'variant_modern_emerald' | 'variant_modern_titanium';
 
 export interface ABVariant {
   id: ABVariantId;

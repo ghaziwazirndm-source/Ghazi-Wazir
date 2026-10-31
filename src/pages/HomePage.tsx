@@ -81,8 +81,8 @@ export function HomePage() {
 
       <div className="relative overflow-hidden">
         {/* Ambient Decorative Glows */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#e8c872]/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#b8893a]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-96 h-96 bg-[var(--accent-alt)]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Hero Section */}
         <section className="relative pt-12 pb-20 lg:pt-20 lg:pb-28">
@@ -90,18 +90,18 @@ export function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Hero Copy */}
               <div className="lg:col-span-7 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#e8c872]/40 bg-[#14141d] text-xs font-semibold text-[#e8c872]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#e8c872]" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--accent)]/40 bg-[#131d33] text-xs font-semibold text-[var(--accent)]">
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
                   <span>CEO &middot; Bab Al-Khaleej (Bahrain) & Back for Brand LLC (USA)</span>
                 </div>
 
-                <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-[#f5f1e8] leading-[1.15] tracking-tight">
+                <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-[#f8fafc] leading-[1.15] tracking-tight">
                   Your business in Bahrain,{' '}
                   <span className="text-gold-gradient">powered by technology.</span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-[#a8a7b3] leading-relaxed max-w-2xl">
-                  One executive vision uniting two specialized enterprises: <strong className="text-[#f5f1e8]">Bab Al-Khaleej</strong> for seamless company formation, investor visas, and government tracking in the Kingdom of Bahrain; and <strong className="text-[#f5f1e8]">Back for Brand LLC</strong> for global Generative Engine Optimization (GEO), AI automation, and high-converting funnels.
+                <p className="text-base sm:text-lg text-[#94a3b8] leading-relaxed max-w-2xl">
+                  One executive vision uniting two specialized enterprises: <strong className="text-[#f8fafc]">Bab Al-Khaleej</strong> for seamless company formation, investor visas, and government tracking in the Kingdom of Bahrain; and <strong className="text-[#f8fafc]">Back for Brand LLC</strong> for global Generative Engine Optimization (GEO), AI automation, and high-converting funnels.
                 </p>
 
                 {/* Primary Actions */}
@@ -110,7 +110,7 @@ export function HomePage() {
                     to="/book"
                     className="btn-gold px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xl"
                   >
-                    <Calendar className="w-4 h-4 text-[#16120a]" />
+                    <Calendar className="w-4 h-4 text-white" />
                     <span>Book a Free Consultation</span>
                   </Link>
 

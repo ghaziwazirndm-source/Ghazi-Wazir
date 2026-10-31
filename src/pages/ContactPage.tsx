@@ -49,7 +49,7 @@ export function ContactPage() {
       success(
         'Inquiry Dispatched to Ghazi Wazir',
         'Your commercial inquiry has been logged in the CEO Unified Inbox and emailed to advisory leadership.',
-        variantId === 'variant_b_emerald' ? 'emerald' : 'gold'
+        variantId === 'variant_modern_emerald' ? 'emerald' : 'sapphire'
       );
     } catch (err: any) {
       setErrorMsg(err.message || 'Submission failed. Please try again.');

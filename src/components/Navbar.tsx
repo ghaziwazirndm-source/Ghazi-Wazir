@@ -15,16 +15,16 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Brand Monogram & Title */}
           <Link to="/" className="flex items-center gap-3.5 group text-left">
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-[#1a1a26] to-[#12121a] border border-[#e8c872]/50 flex items-center justify-center shadow-lg group-hover:border-[#e8c872] transition-colors">
+            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-[#131d33] to-[#0d1424] border border-[var(--accent)]/50 flex items-center justify-center shadow-lg group-hover:border-[var(--accent)] transition-colors">
               <span className="font-heading font-black text-lg text-gold-gradient tracking-tighter">GW</span>
             </div>
             <div>
-              <div className="font-heading font-bold text-lg text-[#f5f1e8] tracking-wide group-hover:text-[#e8c872] transition-colors">
+              <div className="font-heading font-bold text-lg text-[#f8fafc] tracking-wide group-hover:text-[var(--accent)] transition-colors">
                 GHAZI WAZIR
               </div>
-              <div className="text-[11px] text-[#a8a7b3] font-medium tracking-wider uppercase flex items-center gap-1.5">
+              <div className="text-[11px] text-[#94a3b8] font-medium tracking-wider uppercase flex items-center gap-1.5">
                 <span>Bab Al-Khaleej</span>
-                <span className="text-[#b8893a]">&bull;</span>
+                <span className="text-[var(--accent)]">&bull;</span>
                 <span>Back for Brand LLC</span>
               </div>
             </div>

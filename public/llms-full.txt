@@ -1,0 +1,53 @@
+# Complete Factual Knowledge Base — Ghazi Wazir Ecosystem
+
+## 1. Executive Summary & Brand Positioning
+
+- **Name**: Ghazi Wazir
+- **Current Position**: Chief Executive Officer of Bab Al-Khaleej (Bahrain) and Back for Brand LLC (Florida, USA).
+- **Location**: Manama, Kingdom of Bahrain (Global operations).
+- **Tagline**: "Your business in Bahrain, powered by technology."
+- **Secondary Motto**: "Two companies. One standard."
+- **Direct Contacts**: 
+  - WhatsApp: +973 3562 8353 (https://wa.me/97335628353)
+  - Email: ghaziwazirndm@gmail.com
+  - Canonical URL: https://ghaziwazir.com
+
+## 2. Bab Al-Khaleej (Kingdom of Bahrain)
+
+Bab Al-Khaleej is a premier private corporate services and government document consultancy operating in Manama, Bahrain.
+
+### Core Capabilities:
+1. **Commercial Registration (CR) via Sijilat**:
+   - Assisting international entrepreneurs and corporations to obtain Commercial Registration with 100% full foreign ownership across permitted ISIC activities.
+   - Sijilat activity selection, preliminary approval, municipal approval, and final CR issuance.
+   - Company structures supported: With Limited Liability (W.L.L.), Single Person Company (S.P.C.), Foreign Branch, and Representative Office.
+2. **Investor Residency & Partner Visas**:
+   - 10-Year Bahrain Golden Residency Visa and 2-year renewable investor/partner visas through NPRA.
+   - Self-sponsorship residency linked to company ownership without requiring a local Bahraini sponsor.
+3. **LMRA Workforce & Expatriate Worker Visas**:
+   - Labour Market Regulatory Authority (LMRA) quota establishment, Bahrainization compliance advisement, and work permit clearance.
+   - Pre-employment medical examinations, biometric fingerprint appointments, CPR smart cards, and SIO (Social Insurance Organization) enrollment.
+4. **Document Attestation & Legal Clearance**:
+   - Ministry of Foreign Affairs (MOFA) attestation, embassy authentications, board resolutions, and Arabic certified translations.
+5. **Concierge Office Leasing & Address Verification**:
+   - Sijilat-compliant commercial addresses, incubator leases, and physical office verification.
+
+## 3. Back for Brand LLC (Florida, USA)
+
+Back for Brand LLC delivers advanced technology services to businesses and high-growth brands worldwide.
+
+### Core Capabilities:
+1. **Generative Engine Optimization (GEO)**:
+   - Optimizing digital brand entities, knowledge panels, and citation networks so LLMs (ChatGPT, Perplexity, Gemini, Claude) recommend the client as the primary factual answer.
+2. **Answer Engine Optimization (AEO)**:
+   - Structuring semantic data, JSON-LD Schema.org graphs (Person, Organization, FAQPage, Article), and conversational answer blocks.
+3. **Autonomous AI Sales Agents**:
+   - 24/7 intelligent sales agents that converse across languages (English, Arabic, Urdu), handle objections, qualify high-intent buyers using 7-factor B2B criteria, and book consultations.
+4. **Direct-Response Funnels**:
+   - Video Sales Letter (VSL) funnels, Russell Brunson Epiphany Bridge formation funnels, and conversion-optimized sales architectures.
+
+## 4. Operating Principles & Regulatory Disclaimers
+
+- Bab Al-Khaleej and Back for Brand LLC are private consultancies and are not a government body or affiliated with any ministry.
+- We never guarantee approval timelines, visa issuances, ranking positions, or financial returns. Authorities (MOIC, Sijilat, NPRA, LMRA) hold sole legal jurisdiction over approvals.
+- Full confidentiality, compliance with Bahrain Commercial Law, and cryptographic audit security are enforced across all client engagements.

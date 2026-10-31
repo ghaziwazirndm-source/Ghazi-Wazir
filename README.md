@@ -157,3 +157,34 @@ GOOGLE_CALENDAR_CLIENT_SECRET=""
 1. **Private Advisory Disclosure:** Bab Al-Khaleej and Back for Brand LLC are private commercial and technical consultancies. Neither firm is a government ministry or statutory authority. All company formation approvals, commercial registration renewals, and visa issuances are subject to sole statutory adjudication by the Ministry of Industry & Commerce (MOIC), Sijilat, and the Labour Market Regulatory Authority (LMRA) in the Kingdom of Bahrain.
 2. **AI Sales Guardrails:** The integrated AI sales agent operates under binding system instructions prohibiting the generation of speculative timelines, fee guarantees, or legal promises.
 3. **Audit Immutability:** Audit records are computed using SHA-256 hash chaining, preventing administrative manipulation of historical event logs.
+
+---
+
+## 7. SEO, GEO/AEO, LLMs.txt & Domain DNS (SPF & DMARC)
+
+### A. Meta Description & SEO Compliance
+- **Character Count:** Optimized to 143 characters (within search engine ideal threshold of 120–160 characters):
+  `"Ghazi Wazir: CEO of Bab Al-Khaleej (Bahrain business setup & visas) and Back for Brand LLC (GEO, AEO, AI agents). Two companies, one standard."`
+- **Schema.org Graph:** Rich JSON-LD `Person`, dual `Organization`, `FAQPage`, and `Article` entities embedded dynamically.
+
+### B. LLM Readability & Semantic Fallback (Solving SPA Rendering Penalty)
+- Standard Single Page Applications risk missing content during AI crawler indexing (Perplexity, ChatGPT, Claude, Gemini) when initial HTML is an empty `<div id="root"></div>`.
+- This platform embeds **semantic pre-rendered HTML** inside `<div id="root">`, delivering immediate H1 headers, entity overviews, service scopes, and contacts in the raw response. React client hydration smoothly mounts on top without layout shift.
+
+### C. `llms.txt` and `llms-full.txt` Standard
+- `/llms.txt`: Concise Markdown specification for AI answer engines.
+- `/llms-full.txt`: Full factual context corpus, entity details, service playbooks, and regulatory constraints.
+- Declared in `robots.txt` and `<link rel="llms-txt" href="/llms.txt" />`.
+
+### D. Google Analytics 4 (GA4)
+- Embedded in `index.html` with anonymized IP tracking and privacy consent mode.
+
+### E. Domain DNS, SPF & DMARC Deliverability
+Publish the following DNS records in your domain's DNS manager (Cloudflare, Namecheap, Google Domains) for `@ghaziwazir.com`:
+
+| Type | Host / Name | Value / Target | Purpose |
+| :--- | :--- | :--- | :--- |
+| **TXT** | `@` | `v=spf1 include:_spf.google.com include:resend.com ~all` | **SPF Record**: Authorizes Google Workspace & transactional servers |
+| **TXT** | `_dmarc` | `v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@ghaziwazir.com; pct=100; adkim=r; aspf=r` | **DMARC Record**: Quarantines spoofed mail and reports deliverability |
+| **CNAME**| `resend._domainkey` | `feedback-smtp.us-east-1.amazonses.com` | **DKIM Record**: Cryptographic signature validation |
+

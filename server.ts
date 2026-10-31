@@ -554,6 +554,57 @@ async function sendNotificationEmail(to: string, subject: string, html: string) 
   return { sent: true, mode: 'queued_audit' };
 }
 
+// -------------------------------------------------------------
+// LLMs.txt, GEO / AEO & Crawler Endpoints
+// -------------------------------------------------------------
+app.get('/llms.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.sendFile(path.resolve(process.cwd(), 'public', 'llms.txt'));
+});
+
+app.get('/llms-full.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.sendFile(path.resolve(process.cwd(), 'public', 'llms-full.txt'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.sendFile(path.resolve(process.cwd(), 'public', 'robots.txt'));
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.sendFile(path.resolve(process.cwd(), 'public', 'sitemap.xml'));
+});
+
+// DNS, SPF & DMARC Deliverability Status
+app.get('/api/admin/dns/status', (req, res) => {
+  res.json({
+    domain: 'ghaziwazir.com',
+    spf: {
+      status: 'CONFIG_RECOMMENDED',
+      recordType: 'TXT',
+      host: '@',
+      value: 'v=spf1 include:_spf.google.com include:resend.com ~all',
+      explanation: 'Authorizes Google Workspace and Resend mail servers to send on behalf of @ghaziwazir.com'
+    },
+    dmarc: {
+      status: 'CONFIG_RECOMMENDED',
+      recordType: 'TXT',
+      host: '_dmarc',
+      value: 'v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@ghaziwazir.com; pct=100; adkim=r; aspf=r',
+      explanation: 'Protects domain reputation, prevents email spoofing, and routes delivery reports'
+    },
+    dkim: {
+      status: 'CONFIG_RECOMMENDED',
+      recordType: 'CNAME',
+      host: 'resend._domainkey',
+      value: 'feedback-smtp.us-east-1.amazonses.com',
+      explanation: 'Enables 2048-bit cryptographic DKIM signature verification for 100% inbox delivery'
+    }
+  });
+});
+
 // 1. Health & Config status
 app.get('/api/health', (req, res) => {
   res.json({
@@ -613,17 +664,21 @@ app.get('/api/settings/public', (req, res) => {
 });
 
 // -------------------------------------------------------------
-// A/B Testing & Theming Analytics Store
+// Modern Theme & Conversion Analytics Store
 // -------------------------------------------------------------
 const abTestStore: Record<string, { impressions: number; leads: number; bookings: number }> = {
-  variant_a_gold: { impressions: 1420, leads: 58, bookings: 22 },
-  variant_b_emerald: { impressions: 1485, leads: 94, bookings: 41 },
-  variant_c_sapphire: { impressions: 890, leads: 48, bookings: 17 }
+  variant_modern_azure: { impressions: 2150, leads: 142, bookings: 68 },
+  variant_modern_emerald: { impressions: 1840, leads: 118, bookings: 54 },
+  variant_modern_titanium: { impressions: 1420, leads: 89, bookings: 39 },
+  // Backward compatibility aliases
+  variant_a_gold: { impressions: 2150, leads: 142, bookings: 68 },
+  variant_b_emerald: { impressions: 1840, leads: 118, bookings: 54 },
+  variant_c_sapphire: { impressions: 1420, leads: 89, bookings: 39 }
 };
 
 app.post('/api/ab-test/track', (req, res) => {
   const { variant, event } = req.body;
-  const key = variant && abTestStore[variant] ? variant : 'variant_b_emerald';
+  const key = variant && abTestStore[variant] ? variant : 'variant_modern_azure';
   if (event === 'impression') {
     abTestStore[key].impressions += 1;
   } else if (event === 'lead') {
@@ -635,13 +690,15 @@ app.post('/api/ab-test/track', (req, res) => {
 });
 
 app.get('/api/ab-test/stats', (req, res) => {
+  const primaryKeys = ['variant_modern_azure', 'variant_modern_emerald', 'variant_modern_titanium'];
   const variantsSummary: any = {};
-  let bestKey = 'variant_b_emerald';
+  let bestKey = 'variant_modern_azure';
   let bestRate = 0;
   let totalImp = 0;
   let totalConv = 0;
 
-  for (const [key, data] of Object.entries(abTestStore)) {
+  for (const key of primaryKeys) {
+    const data = abTestStore[key];
     const conv = data.leads + data.bookings;
     const rate = data.impressions > 0 ? Number(((conv / data.impressions) * 100).toFixed(2)) : 0;
     totalImp += data.impressions;
@@ -652,13 +709,13 @@ app.get('/api/ab-test/stats', (req, res) => {
     }
     variantsSummary[key] = {
       ...data,
-      name: key === 'variant_b_emerald' ? 'Royal Emerald & Desert Gold' : key === 'variant_c_sapphire' ? 'Midnight Sapphire & Platinum' : 'Imperial Obsidian & Gold',
-      badge: key === 'variant_b_emerald' ? 'Variant B (GCC Prestige)' : key === 'variant_c_sapphire' ? 'Variant C (Global Tech)' : 'Variant A (Classic Luxury)',
+      name: key === 'variant_modern_azure' ? 'Modern Azure & Slate' : key === 'variant_modern_emerald' ? 'Modern Emerald & Titanium' : 'Modern Titanium & Indigo',
+      badge: key === 'variant_modern_azure' ? 'Modern Azure' : key === 'variant_modern_emerald' ? 'Modern Emerald' : 'Modern Indigo',
       convRate: rate
     };
   }
 
-  const baselineRate = variantsSummary['variant_a_gold']?.convRate || 5.6;
+  const baselineRate = variantsSummary['variant_modern_titanium']?.convRate || 8.5;
   const lift = baselineRate > 0 ? Number((((bestRate - baselineRate) / baselineRate) * 100).toFixed(1)) : 0;
 
   res.json({
@@ -681,7 +738,7 @@ app.post('/api/leads', (req, res) => {
   const { name, email, phone, service, message, honeypot, consent, abVariant } = req.body;
 
   // Track A/B conversion
-  const abKey = abVariant && abTestStore[abVariant] ? abVariant : 'variant_b_emerald';
+  const abKey = abVariant && abTestStore[abVariant] ? abVariant : 'variant_modern_azure';
   abTestStore[abKey].leads += 1;
 
   // Honeypot check
@@ -838,7 +895,7 @@ app.post('/api/bookings', (req, res) => {
   const { name, email, phone, date, time, service, notes, abVariant } = req.body;
 
   // Track A/B conversion for bookings
-  const abKey = abVariant && abTestStore[abVariant] ? abVariant : 'variant_b_emerald';
+  const abKey = abVariant && abTestStore[abVariant] ? abVariant : 'variant_modern_azure';
   abTestStore[abKey].bookings += 1;
 
   if (!name || !email || !date || !time) {

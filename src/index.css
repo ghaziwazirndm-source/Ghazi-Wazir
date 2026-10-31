@@ -1,59 +1,121 @@
 @import "tailwindcss";
 
 @layer base {
+  /* =============================================================
+     Modern Theme Architecture (High-Trust, Clean Executive Slate)
+     ============================================================= */
   :root,
+  [data-theme="variant_modern_azure"] {
+    --bg: #090d16;
+    --bg-alt: #0d1424;
+    --surface: #131d33;
+    --surface-alt: #182542;
+    --border: #1e2d4d;
+    --border-hover: #38bdf8;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-dark: #0284c7;
+    --accent-alt: #818cf8;
+    --gold: #38bdf8;
+    --gold-dark: #0284c7;
+    --theme-glow: rgba(56, 189, 248, 0.28);
+    --theme-name: "Modern Azure & Slate";
+  }
+
+  /* Variant 2: Modern Emerald & Titanium (Bahrain Sijilat & Fintech) */
+  [data-theme="variant_modern_emerald"] {
+    --bg: #06100d;
+    --bg-alt: #0a1814;
+    --surface: #0f241e;
+    --surface-alt: #143028;
+    --border: #1a4034;
+    --border-hover: #10b981;
+    --text: #f8fafc;
+    --muted: #94b8a7;
+    --accent: #10b981;
+    --accent-dark: #059669;
+    --accent-alt: #34d399;
+    --gold: #10b981;
+    --gold-dark: #059669;
+    --theme-glow: rgba(16, 185, 129, 0.28);
+    --theme-name: "Modern Emerald & Titanium";
+  }
+
+  /* Variant 3: Modern Titanium & Indigo (Global Tech & AI Agents) */
+  [data-theme="variant_modern_titanium"] {
+    --bg: #0a0b14;
+    --bg-alt: #0f111e;
+    --surface: #16192c;
+    --surface-alt: #1d213b;
+    --border: #262a4a;
+    --border-hover: #818cf8;
+    --text: #f8fafc;
+    --muted: #9ba1c9;
+    --accent: #818cf8;
+    --accent-dark: #4f46e5;
+    --accent-alt: #c084fc;
+    --gold: #818cf8;
+    --gold-dark: #4f46e5;
+    --theme-glow: rgba(129, 140, 248, 0.28);
+    --theme-name: "Modern Titanium & Indigo";
+  }
+
+  /* Legacy aliases mapped directly to modern themes */
   [data-theme="variant_a_gold"] {
-    --bg: #0a0a0f;
-    --bg-alt: #101018;
-    --surface: #14141d;
-    --text: #f5f1e8;
-    --muted: #a8a7b3;
-    --gold: #e8c872;
-    --gold-dark: #b8893a;
-    --border: #2a2a38;
-    --theme-accent: #e8c872;
-    --theme-accent-dark: #b8893a;
-    --theme-glow: rgba(232, 200, 114, 0.2);
-    --theme-name: "Imperial Obsidian & Gold";
+    --bg: #090d16;
+    --bg-alt: #0d1424;
+    --surface: #131d33;
+    --surface-alt: #182542;
+    --border: #1e2d4d;
+    --border-hover: #38bdf8;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-dark: #0284c7;
+    --gold: #38bdf8;
+    --gold-dark: #0284c7;
+    --theme-glow: rgba(56, 189, 248, 0.28);
+    --theme-name: "Modern Azure & Slate";
   }
-
-  /* Variant B: Royal Emerald & Desert Gold (GCC Prestige / Bahrain Formation) */
   [data-theme="variant_b_emerald"] {
-    --bg: #04120c;
-    --bg-alt: #081d14;
-    --surface: #0e2b1e;
-    --text: #f5f8f3;
-    --muted: #94b8a5;
-    --gold: #f3dc8a;
-    --gold-dark: #c49942;
-    --border: #1a4230;
-    --theme-accent: #22c55e;
-    --theme-accent-dark: #15803d;
-    --theme-glow: rgba(34, 197, 94, 0.22);
-    --theme-name: "Royal Emerald & Desert Gold";
+    --bg: #06100d;
+    --bg-alt: #0a1814;
+    --surface: #0f241e;
+    --surface-alt: #143028;
+    --border: #1a4034;
+    --border-hover: #10b981;
+    --text: #f8fafc;
+    --muted: #94b8a7;
+    --accent: #10b981;
+    --accent-dark: #059669;
+    --gold: #10b981;
+    --gold-dark: #059669;
+    --theme-glow: rgba(16, 185, 129, 0.28);
+    --theme-name: "Modern Emerald & Titanium";
   }
-
-  /* Variant C: Midnight Sapphire & Electric Platinum (Global Tech & AI) */
   [data-theme="variant_c_sapphire"] {
-    --bg: #060a17;
-    --bg-alt: #0a1226;
-    --surface: #111d38;
-    --text: #f0f4fc;
-    --muted: #94a5c9;
-    --gold: #70b8ff;
-    --gold-dark: #3b82f6;
-    --border: #1d335d;
-    --theme-accent: #38bdf8;
-    --theme-accent-dark: #0284c7;
-    --theme-glow: rgba(56, 189, 248, 0.22);
-    --theme-name: "Midnight Sapphire & Platinum";
+    --bg: #0a0b14;
+    --bg-alt: #0f111e;
+    --surface: #16192c;
+    --surface-alt: #1d213b;
+    --border: #262a4a;
+    --border-hover: #818cf8;
+    --text: #f8fafc;
+    --muted: #9ba1c9;
+    --accent: #818cf8;
+    --accent-dark: #4f46e5;
+    --gold: #818cf8;
+    --gold-dark: #4f46e5;
+    --theme-glow: rgba(129, 140, 248, 0.28);
+    --theme-name: "Modern Titanium & Indigo";
   }
 
   body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, .font-heading {
@@ -61,33 +123,132 @@
   }
 }
 
-/* Gold Gradient Utilities */
+/* =============================================================
+   Universal Global Theme Overrides: Deploys Clean Modern Colors 
+   Across ALL Pages and Funnels Instantly
+   ============================================================= */
+.bg-\[\#0a0a0f\], [class*="bg-[#0a0a0f]"] {
+  background-color: var(--bg) !important;
+}
+.bg-\[\#14141d\], [class*="bg-[#14141d]"] {
+  background-color: var(--surface) !important;
+}
+.bg-\[\#101018\], [class*="bg-[#101018]"] {
+  background-color: var(--bg-alt) !important;
+}
+.bg-\[\#1a1a26\], [class*="bg-[#1a1a26]"] {
+  background-color: var(--surface-alt) !important;
+}
+.bg-\[\#12121a\], [class*="bg-[#12121a]"] {
+  background-color: var(--bg-alt) !important;
+}
+
+/* Global Border overrides */
+.border-\[\#2a2a38\], [class*="border-[#2a2a38]"] {
+  border-color: var(--border) !important;
+}
+.border-\[\#e8c872\], [class*="border-[#e8c872]"] {
+  border-color: var(--accent) !important;
+}
+.border-\[\#b8893a\], [class*="border-[#b8893a]"] {
+  border-color: var(--border) !important;
+}
+
+/* Global Text overrides */
+.text-\[\#f5f1e8\], [class*="text-[#f5f1e8]"] {
+  color: var(--text) !important;
+}
+.text-\[\#a8a7b3\], [class*="text-[#a8a7b3]"] {
+  color: var(--muted) !important;
+}
+.text-\[\#e8c872\], [class*="text-[#e8c872]"] {
+  color: var(--accent) !important;
+}
+.text-\[\#b8893a\], [class*="text-[#b8893a]"] {
+  color: var(--accent) !important;
+}
+
+/* Modern Gradient Text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #fceda2 0%, var(--gold) 50%, var(--gold-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .bg-gold-gradient {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%) !important;
 }
 
 .border-gold-glow {
-  border-color: rgba(232, 200, 114, 0.35);
-  box-shadow: 0 0 25px var(--theme-glow);
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.22) !important;
 }
 
+/* Modern Card Component */
 .card-luxury {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 1rem !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .card-luxury:hover {
-  border-color: var(--gold);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px var(--theme-glow);
+  border-color: var(--border-hover) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7), 0 0 25px var(--theme-glow) !important;
+}
+
+/* Modern High-Impact Primary Button */
+.btn-gold, .btn-modern {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35), 0 0 10px rgba(37, 99, 235, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-gold:hover, .btn-modern:hover {
+  filter: brightness(1.1) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.5) !important;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-150%);
+  animation: shimmer 3s infinite;
+}
+
+/* Modern Tag / Kicker */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(56, 189, 248, 0.12) !important;
+  color: var(--accent) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Shimmer Keyframe */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
 }
 
 /* Toast Animations */
@@ -119,39 +280,6 @@
 
 .toast-exit {
   animation: toast-slide-out 0.25s ease-in forwards;
-}
-
-
-/* Shimmer Button Effect */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-
-.btn-gold {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #e8c872 0%, #b8893a 100%);
-  color: #0e0c07;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.btn-gold:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 0 20px rgba(232, 200, 114, 0.45);
-}
-
-.btn-gold::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: translateX(-150%);
-  animation: shimmer 3s infinite;
 }
 
 /* Pulse animation for WhatsApp badge */

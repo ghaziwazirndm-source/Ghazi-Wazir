@@ -2284,7 +2284,7 @@ export function AdminConsole() {
                               <td className="p-3.5 text-right">
                                 <div className="flex items-center justify-end gap-2">
                                   <a
-                                    href={`/?variant=${v.id === 'variant_b_emerald' ? 'b' : v.id === 'variant_c_sapphire' ? 'c' : 'a'}`}
+                                    href={`/?variant=${v.id === 'variant_modern_emerald' ? 'emerald' : v.id === 'variant_modern_titanium' ? 'titanium' : 'azure'}`}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="px-2.5 py-1 rounded-lg bg-[#101018] border border-[#2a2a38] text-[11px] text-[#a8a7b3] hover:text-[#f5f1e8] hover:border-[#e8c872]/40 transition-colors flex items-center gap-1"
@@ -2849,6 +2849,66 @@ export function AdminConsole() {
                       </span>
                     </div>
                   ))}
+                </div>
+
+                {/* Domain DNS, SPF & DMARC Deliverability Center */}
+                <div className="card-luxury p-6 space-y-4 border-gold-glow">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-heading font-bold text-sm text-[#f5f1e8] flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
+                        <span>Domain DNS, SPF & DMARC Deliverability Suite</span>
+                      </h4>
+                      <p className="text-xs text-[#a8a7b3]">
+                        Crucial DNS records required by Google, Yahoo, and Microsoft to prevent email spoofing and guarantee 100% inbox placement.
+                      </p>
+                    </div>
+                    <span className="tag">SPF & DMARC SPECS</span>
+                  </div>
+
+                  <div className="space-y-3 text-xs">
+                    {/* SPF Record */}
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#38bdf8]">1. SPF (Sender Policy Framework) Record</span>
+                        <span className="text-[10px] text-[#94a3b8] font-mono">Type: TXT &middot; Host: @</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        v=spf1 include:_spf.google.com include:resend.com ~all
+                      </code>
+                      <p className="text-[11px] text-[#94a3b8]">
+                        Authorizes Google Workspace mail and transactional notifications to send on behalf of @ghaziwazir.com.
+                      </p>
+                    </div>
+
+                    {/* DMARC Record */}
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#38bdf8]">2. DMARC (Domain-based Message Authentication) Record</span>
+                        <span className="text-[10px] text-[#94a3b8] font-mono">Type: TXT &middot; Host: _dmarc</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@ghaziwazir.com; pct=100; adkim=r; aspf=r
+                      </code>
+                      <p className="text-[11px] text-[#94a3b8]">
+                        Mandatory compliance standard: instructs receiving mail servers to quarantine any unauthenticated spoofed emails and sends forensic delivery reports.
+                      </p>
+                    </div>
+
+                    {/* DKIM Record */}
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#38bdf8]">3. DKIM (DomainKeys Identified Mail) Record</span>
+                        <span className="text-[10px] text-[#94a3b8] font-mono">Type: CNAME &middot; Host: resend._domainkey</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        feedback-smtp.us-east-1.amazonses.com
+                      </code>
+                      <p className="text-[11px] text-[#94a3b8]">
+                        Cryptographic 2048-bit digital signature proving email authenticity.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

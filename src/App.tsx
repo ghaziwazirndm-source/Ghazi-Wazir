@@ -64,7 +64,7 @@ function AppContent() {
   const isAdmin = location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased selection:bg-[var(--gold)]/30 selection:text-[#f5f1e8] transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased selection:bg-[var(--accent)]/30 selection:text-[var(--text)] transition-colors duration-300">
       <ScrollToTop />
       {!isAdmin && <ProgressBar />}
       {!isAdmin && <Navbar />}

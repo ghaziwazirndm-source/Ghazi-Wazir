@@ -186,11 +186,11 @@ function ToastCard({ toast, onDismiss }: { toast: ToastItem; onDismiss: () => vo
   // Theming configurations
   const themeStyles = {
     gold: {
-      border: 'border-[#e8c872]/50 shadow-[0_0_20px_rgba(232,200,114,0.18)]',
-      bg: 'bg-[#14141d]/95 backdrop-blur-xl',
-      title: 'text-[#e8c872]',
-      accentBg: 'bg-gradient-to-r from-[#e8c872] to-[#b8893a]',
-      icon: <Sparkles className="w-5 h-5 text-[#e8c872] shrink-0" />
+      border: 'border-[#38bdf8]/50 shadow-[0_0_25px_rgba(56,189,248,0.25)]',
+      bg: 'bg-[#131d33]/95 backdrop-blur-xl',
+      title: 'text-[#38bdf8]',
+      accentBg: 'bg-gradient-to-r from-[#38bdf8] to-[#2563eb]',
+      icon: <Sparkles className="w-5 h-5 text-[#38bdf8] shrink-0" />
     },
     emerald: {
       border: 'border-[#22c55e]/50 shadow-[0_0_20px_rgba(34,197,94,0.18)]',

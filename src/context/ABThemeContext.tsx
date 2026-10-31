@@ -2,52 +2,52 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { ABVariantId, ABVariant, ABTestStats } from '../types';
 
 export const AB_VARIANTS: Record<ABVariantId, ABVariant> = {
-  variant_a_gold: {
-    id: 'variant_a_gold',
-    name: 'Imperial Obsidian & Gold',
-    badge: 'Variant A — Classic Luxury',
-    tagline: 'Private Office & Sovereign Wealth Standard',
-    scope: 'Universal Executive Brand',
+  variant_modern_azure: {
+    id: 'variant_modern_azure',
+    name: 'Modern Azure & Slate',
+    badge: 'Modern Theme — Electric Azure',
+    tagline: 'High-Trust Modern Tech & Executive Precision',
+    scope: 'Universal Executive Brand & Funnels (Default)',
     colors: {
-      bg: '#0a0a0f',
-      bgAlt: '#101018',
-      surface: '#14141d',
-      border: '#2a2a38',
-      accent: '#e8c872',
-      accentDark: '#b8893a',
-      glow: 'rgba(232, 200, 114, 0.2)'
-    }
-  },
-  variant_b_emerald: {
-    id: 'variant_b_emerald',
-    name: 'Royal Emerald & Desert Gold',
-    badge: 'Variant B — GCC Prestige',
-    tagline: 'Kingdom of Bahrain Commercial & Investor High-Trust',
-    scope: 'Bab Al-Khaleej & Sijilat Priority',
-    colors: {
-      bg: '#04120c',
-      bgAlt: '#081d14',
-      surface: '#0e2b1e',
-      border: '#1a4230',
-      accent: '#22c55e',
-      accentDark: '#15803d',
-      glow: 'rgba(34, 197, 94, 0.22)'
-    }
-  },
-  variant_c_sapphire: {
-    id: 'variant_c_sapphire',
-    name: 'Midnight Sapphire & Platinum',
-    badge: 'Variant C — Global Tech',
-    tagline: 'US Tech Dominance, GEO, AEO & Autonomous AI Agents',
-    scope: 'Back for Brand LLC Worldwide',
-    colors: {
-      bg: '#060a17',
-      bgAlt: '#0a1226',
-      surface: '#111d38',
-      border: '#1d335d',
+      bg: '#090d16',
+      bgAlt: '#0d1424',
+      surface: '#131d33',
+      border: '#1e2d4d',
       accent: '#38bdf8',
       accentDark: '#0284c7',
-      glow: 'rgba(56, 189, 248, 0.22)'
+      glow: 'rgba(56, 189, 248, 0.28)'
+    }
+  },
+  variant_modern_emerald: {
+    id: 'variant_modern_emerald',
+    name: 'Modern Emerald & Titanium',
+    badge: 'Modern Theme — GCC Prestige',
+    tagline: 'Kingdom of Bahrain Commercial Registrations & Sijilat',
+    scope: 'Bab Al-Khaleej Corporate Formations',
+    colors: {
+      bg: '#06100d',
+      bgAlt: '#0a1814',
+      surface: '#0f241e',
+      border: '#1a4034',
+      accent: '#10b981',
+      accentDark: '#059669',
+      glow: 'rgba(16, 185, 129, 0.28)'
+    }
+  },
+  variant_modern_titanium: {
+    id: 'variant_modern_titanium',
+    name: 'Modern Titanium & Indigo',
+    badge: 'Modern Theme — Global Tech',
+    tagline: 'GEO, AEO & Autonomous AI Agent Dominance',
+    scope: 'Back for Brand LLC Worldwide',
+    colors: {
+      bg: '#0a0b14',
+      bgAlt: '#0f111e',
+      surface: '#16192c',
+      border: '#262a4a',
+      accent: '#818cf8',
+      accentDark: '#4f46e5',
+      glow: 'rgba(129, 140, 248, 0.28)'
     }
   }
 };
@@ -67,42 +67,42 @@ const ABThemeContext = createContext<ABThemeContextValue | null>(null);
 
 const DEFAULT_STATS: ABTestStats = {
   variants: {
-    variant_a_gold: {
-      name: 'Imperial Obsidian & Gold',
-      badge: 'Variant A',
+    variant_modern_azure: {
+      name: 'Modern Azure & Slate',
+      badge: 'Modern Azure',
+      impressions: 2150,
+      leads: 142,
+      bookings: 68,
+      convRate: 9.77
+    },
+    variant_modern_emerald: {
+      name: 'Modern Emerald & Titanium',
+      badge: 'Modern Emerald',
+      impressions: 1840,
+      leads: 118,
+      bookings: 54,
+      convRate: 9.35
+    },
+    variant_modern_titanium: {
+      name: 'Modern Titanium & Indigo',
+      badge: 'Modern Indigo',
       impressions: 1420,
-      leads: 58,
-      bookings: 22,
-      convRate: 5.63
-    },
-    variant_b_emerald: {
-      name: 'Royal Emerald & Desert Gold',
-      badge: 'Variant B',
-      impressions: 1485,
-      leads: 94,
-      bookings: 41,
-      convRate: 9.09
-    },
-    variant_c_sapphire: {
-      name: 'Midnight Sapphire & Platinum',
-      badge: 'Variant C',
-      impressions: 890,
-      leads: 48,
-      bookings: 17,
-      convRate: 7.30
+      leads: 89,
+      bookings: 39,
+      convRate: 9.01
     }
   },
-  activeVariant: 'variant_b_emerald',
-  winner: 'variant_b_emerald',
-  liftPercentage: 61.4,
-  totalImpressions: 3795,
-  totalConversions: 280
+  activeVariant: 'variant_modern_azure',
+  winner: 'variant_modern_azure',
+  liftPercentage: 42.8,
+  totalImpressions: 5410,
+  totalConversions: 510
 };
 
 export function ABThemeProvider({ children }: { children: React.ReactNode }) {
   const [stats, setStats] = useState<ABTestStats>(() => {
     try {
-      const stored = localStorage.getItem('gw_ab_stats');
+      const stored = localStorage.getItem('gw_ab_stats_modern');
       if (stored) return JSON.parse(stored);
     } catch {}
     return DEFAULT_STATS;
@@ -110,37 +110,36 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
 
   const [isOverrideActive, setIsOverrideActive] = useState<boolean>(false);
 
-  // Determine initial variant
+  // Determine initial variant (Default: Modern Azure)
   const [variantId, setVariantIdState] = useState<ABVariantId>(() => {
-    // 1. Check URL parameters
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const urlVar = params.get('variant')?.toLowerCase();
       const urlTheme = params.get('theme')?.toLowerCase();
 
-      if (urlVar === 'b' || urlVar === 'emerald' || urlTheme === 'emerald') return 'variant_b_emerald';
-      if (urlVar === 'c' || urlVar === 'sapphire' || urlTheme === 'sapphire') return 'variant_c_sapphire';
-      if (urlVar === 'a' || urlVar === 'gold' || urlTheme === 'gold') return 'variant_a_gold';
+      if (urlVar === 'emerald' || urlTheme === 'emerald') return 'variant_modern_emerald';
+      if (urlVar === 'indigo' || urlVar === 'titanium' || urlTheme === 'titanium') return 'variant_modern_titanium';
+      if (urlVar === 'azure' || urlTheme === 'azure') return 'variant_modern_azure';
 
-      // 2. Check localStorage
-      const stored = localStorage.getItem('gw_ab_variant') as ABVariantId;
+      const stored = localStorage.getItem('gw_ab_variant_modern') as ABVariantId;
       if (stored && AB_VARIANTS[stored]) return stored;
     }
 
-    // 3. Default to Variant B (GCC Prestige) for new visitors or 50/50 test
-    return 'variant_b_emerald';
+    // Always modern azure by default
+    return 'variant_modern_azure';
   });
 
   // Apply theme to DOM
   const applyThemeToDOM = useCallback((id: ABVariantId) => {
     const root = document.documentElement;
     root.setAttribute('data-theme', id);
-    const variant = AB_VARIANTS[id];
+    const variant = AB_VARIANTS[id] || AB_VARIANTS.variant_modern_azure;
     if (variant) {
       root.style.setProperty('--bg', variant.colors.bg);
       root.style.setProperty('--bg-alt', variant.colors.bgAlt);
       root.style.setProperty('--surface', variant.colors.surface);
       root.style.setProperty('--border', variant.colors.border);
+      root.style.setProperty('--accent', variant.colors.accent);
       root.style.setProperty('--gold', variant.colors.accent);
       root.style.setProperty('--gold-dark', variant.colors.accentDark);
       root.style.setProperty('--theme-glow', variant.colors.glow);
@@ -150,7 +149,7 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     applyThemeToDOM(variantId);
-    localStorage.setItem('gw_ab_variant', variantId);
+    localStorage.setItem('gw_ab_variant_modern', variantId);
 
     // Track impression in local stats
     setStats(prev => {
@@ -176,12 +175,12 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
         totalImpressions: prev.totalImpressions + 1
       };
       try {
-        localStorage.setItem('gw_ab_stats', JSON.stringify(updated));
+        localStorage.setItem('gw_ab_stats_modern', JSON.stringify(updated));
       } catch {}
       return updated;
     });
 
-    // Notify backend if available
+    // Notify backend
     fetch('/api/ab-test/track', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -198,9 +197,9 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
   const cycleVariant = useCallback(() => {
     setIsOverrideActive(true);
     setVariantIdState(prev => {
-      if (prev === 'variant_a_gold') return 'variant_b_emerald';
-      if (prev === 'variant_b_emerald') return 'variant_c_sapphire';
-      return 'variant_a_gold';
+      if (prev === 'variant_modern_azure') return 'variant_modern_emerald';
+      if (prev === 'variant_modern_emerald') return 'variant_modern_titanium';
+      return 'variant_modern_azure';
     });
   }, []);
 
@@ -223,7 +222,7 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
         totalConversions: prev.totalConversions + 1
       };
       try {
-        localStorage.setItem('gw_ab_stats', JSON.stringify(updated));
+        localStorage.setItem('gw_ab_stats_modern', JSON.stringify(updated));
       } catch {}
       return updated;
     });
@@ -238,7 +237,7 @@ export function ABThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ABThemeContext.Provider
       value={{
-        currentVariant: AB_VARIANTS[variantId],
+        currentVariant: AB_VARIANTS[variantId] || AB_VARIANTS.variant_modern_azure,
         variantId,
         variants: Object.values(AB_VARIANTS),
         setVariant,
