@@ -11,7 +11,17 @@
     <meta name="author" content="Ghazi Wazir" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#090d16" />
-    <link rel="canonical" href="https://ghaziwazir.com/" />
+    <!-- Canonical Link (Dynamically Synced to Match Active Host) -->
+    <link rel="canonical" id="canonical-url" href="https://ghaziwazir.com/" />
+    <script>
+      (function(){
+        try {
+          var cur = window.location.origin + window.location.pathname;
+          var cEl = document.getElementById('canonical-url');
+          if (cEl && window.location.origin) cEl.setAttribute('href', cur);
+        } catch(e){}
+      })();
+    </script>
 
     <!-- LLMs.txt Discovery for AI Search Engines & LLMs -->
     <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs Context Discovery" />
@@ -150,6 +160,48 @@
             </ul>
           </article>
         </section>
+
+        <!-- Comprehensive Internal Navigation Mesh for Search Crawlers & Backlinks -->
+        <nav aria-label="Executive Site Directory" style="margin: 32px 0; background: #0c1322; border: 1px solid #1e2d4d; border-radius: 16px; padding: 24px;">
+          <h3 style="font-size: 16px; color: #38bdf8; margin-top: 0; text-transform: uppercase; letter-spacing: 0.05em;">
+            Executive Corporate Directory &amp; Navigation Network
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; font-size: 13px;">
+            <div>
+              <strong style="color: #f8fafc; display: block; margin-bottom: 8px;">Bahrain Company Services:</strong>
+              <ul style="padding-left: 18px; margin: 0; line-height: 1.8; color: #94a3b8;">
+                <li><a href="/services/business-registration" style="color: #38bdf8; text-decoration: none;">Commercial Registration (CR)</a></li>
+                <li><a href="/services/investor-visa" style="color: #38bdf8; text-decoration: none;">Investor &amp; Partner Visas</a></li>
+                <li><a href="/services/worker-visa" style="color: #38bdf8; text-decoration: none;">Worker Visas &amp; LMRA Quota</a></li>
+                <li><a href="/services/document-clearance" style="color: #38bdf8; text-decoration: none;">Document Clearance &amp; Notary</a></li>
+                <li><a href="/formation/blueprint" style="color: #38bdf8; text-decoration: none;">7-Step Formation Blueprint</a></li>
+                <li><a href="/formation/offer" style="color: #38bdf8; text-decoration: none;">Done-With-You Setup Offer</a></li>
+              </ul>
+            </div>
+            <div>
+              <strong style="color: #f8fafc; display: block; margin-bottom: 8px;">Technology &amp; AI Growth:</strong>
+              <ul style="padding-left: 18px; margin: 0; line-height: 1.8; color: #94a3b8;">
+                <li><a href="/services/geo" style="color: #38bdf8; text-decoration: none;">Generative Engine Optimization (GEO)</a></li>
+                <li><a href="/services/aeo" style="color: #38bdf8; text-decoration: none;">Answer Engine Optimization (AEO)</a></li>
+                <li><a href="/services/ai-agents" style="color: #38bdf8; text-decoration: none;">Autonomous AI Sales Agents</a></li>
+                <li><a href="/services/funnels" style="color: #38bdf8; text-decoration: none;">High-Converting Sales Funnels</a></li>
+                <li><a href="/funnels" style="color: #38bdf8; text-decoration: none;">12 VSL Video Sales Letters</a></li>
+                <li><a href="/packages" style="color: #38bdf8; text-decoration: none;">Packages &amp; Retainer Scopes</a></li>
+              </ul>
+            </div>
+            <div>
+              <strong style="color: #f8fafc; display: block; margin-bottom: 8px;">Corporate Portals &amp; Discovery:</strong>
+              <ul style="padding-left: 18px; margin: 0; line-height: 1.8; color: #94a3b8;">
+                <li><a href="/about" style="color: #38bdf8; text-decoration: none;">Ghazi Wazir Executive Profile</a></li>
+                <li><a href="/companies" style="color: #38bdf8; text-decoration: none;">Two Companies Standard</a></li>
+                <li><a href="/book" style="color: #38bdf8; text-decoration: none;">Book Consultation Calendar</a></li>
+                <li><a href="/contact" style="color: #38bdf8; text-decoration: none;">Contact Executive Office</a></li>
+                <li><a href="/llms.txt" style="color: #38bdf8; text-decoration: none;">LLMs Discovery File</a></li>
+                <li><a href="/sitemap.xml" style="color: #38bdf8; text-decoration: none;">XML Sitemap Directory</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
         <footer style="border-top: 1px solid #1e2d4d; padding-top: 24px; font-size: 14px; color: #94a3b8;">
           <p><strong>Executive Contacts:</strong> WhatsApp: <a href="https://wa.me/97335628353" style="color: #38bdf8; text-decoration: none;">+973 3562 8353</a> | Email: <a href="mailto:ghaziwazirndm@gmail.com" style="color: #38bdf8; text-decoration: none;">ghaziwazirndm@gmail.com</a></p>

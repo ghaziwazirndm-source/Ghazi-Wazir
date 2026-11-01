@@ -4,6 +4,7 @@ import { SEOHead } from '../components/SEOHead';
 import { BookingWidget } from '../components/BookingWidget';
 import { SocialLinks } from '../components/SocialLinks';
 import { LeadModal } from '../components/LeadModal';
+import { AnimatedHeadlines } from '../components/AnimatedHeadlines';
 import {
   Building2,
   Globe,
@@ -64,7 +65,7 @@ export function HomePage() {
         name: 'How do I book a consultation with Ghazi Wazir?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'You can book a free consultation directly through the online calendar at https://ghaziwazir.com/book or via WhatsApp at +973 3562 8353.'
+          text: 'You can book a free consultation directly through the online calendar at /book or via WhatsApp at +973 3562 8353.'
         }
       }
     ]
@@ -75,7 +76,6 @@ export function HomePage() {
       <SEOHead
         title="Ghazi Wazir — CEO, Bab Al-Khaleej & Back for Brand LLC | Bahrain Setup & Technology"
         description="CEO of Bab Al-Khaleej (Bahrain business registration, investor visas, document tracking) and Back for Brand LLC (SEO, GEO, AEO, AI agents, funnels). Two companies. One standard."
-        canonical="https://ghaziwazir.com/"
         schema={homeSchema}
       />
 
@@ -90,19 +90,8 @@ export function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Hero Copy */}
               <div className="lg:col-span-7 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--accent)]/40 bg-[#131d33] text-xs font-semibold text-[var(--accent)]">
-                  <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
-                  <span>CEO &middot; Bab Al-Khaleej (Bahrain) & Back for Brand LLC (USA)</span>
-                </div>
-
-                <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-[#f8fafc] leading-[1.15] tracking-tight">
-                  Your business in Bahrain,{' '}
-                  <span className="text-gold-gradient">powered by technology.</span>
-                </h1>
-
-                <p className="text-base sm:text-lg text-[#94a3b8] leading-relaxed max-w-2xl">
-                  One executive vision uniting two specialized enterprises: <strong className="text-[#f8fafc]">Bab Al-Khaleej</strong> for seamless company formation, investor visas, and government tracking in the Kingdom of Bahrain; and <strong className="text-[#f8fafc]">Back for Brand LLC</strong> for global Generative Engine Optimization (GEO), AI automation, and high-converting funnels.
-                </p>
+                {/* Dynamic Kinetic Animated Headlines */}
+                <AnimatedHeadlines />
 
                 {/* Primary Actions */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
@@ -712,6 +701,194 @@ export function HomePage() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Executive Semantic Linking Directory & Internal Architecture Mesh (Fixes Entry Page & Low Internal Link ratio) */}
+        <section className="py-16 bg-[#090d16] border-t border-[#1e2d4d]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#131d33] border border-[#38bdf8]/40 text-[#38bdf8] text-xs font-bold uppercase tracking-wider">
+                <Layers className="w-3.5 h-3.5" />
+                <span>Executive Semantic Index &amp; Architecture</span>
+              </div>
+              <h2 className="font-heading font-black text-2xl sm:text-3xl text-[#f8fafc]">
+                Complete Advisory Services &amp; Funnel Network
+              </h2>
+              <p className="text-xs sm:text-sm text-[#94a3b8]">
+                Direct semantic navigation to all corporate formation pathways, AI marketing services, and verified statutory frameworks.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 rounded-2xl bg-[#0c1322] border border-[#1e2d4d]">
+              {/* Column 1: Bab Al-Khaleej (Bahrain) */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
+                  <Building2 className="w-4 h-4 text-[#38bdf8]" />
+                  <span>Bab Al-Khaleej (Bahrain CR &amp; Visas)</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                  <li>
+                    <Link to="/services/business-registration" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Commercial Registration (CR) Formation</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/investor-visa" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Investor &amp; Partner Self-Sponsored Visas</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/worker-visa" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Worker Permits &amp; LMRA Workforce Quota</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/document-clearance" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Document Clearance &amp; Notary Notarization</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/application-tracking" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Sijilat Status &amp; Real-Time Tracking</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/ongoing-support" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Annual Corporate &amp; Municipal Compliance</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/formation/blueprint" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                      <span>7-Step Bahrain Formation Blueprint</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/formation/offer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                      <span>Done-With-You Corporate Execution Package</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 2: Back for Brand LLC (USA & Worldwide Tech) */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
+                  <Globe className="w-4 h-4 text-[#38bdf8]" />
+                  <span>Back for Brand LLC (GEO, AEO &amp; AI)</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                  <li>
+                    <Link to="/services/geo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Generative Engine Optimization (GEO)</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/aeo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Answer Engine Optimization (AEO Citations)</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/seo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Programmatic &amp; Technical Organic SEO</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/ai-agents" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>24/7 Autonomous AI Sales &amp; Voice Agents</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/automation" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>CRM &amp; Workflow Business Automation</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/funnels" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>High-Converting VSL Web Applications</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/funnels" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                      <span>12 Direct-Response VSL Funnels Hub</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 3: Corporate Portals, Guides & AI Crawler Corpus */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
+                  <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
+                  <span>Authority Portals &amp; Discovery</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                  <li>
+                    <Link to="/companies" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Two Companies. One Standard Portfolio</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/about" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Ghazi Wazir Executive Biography &amp; Track Record</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/packages" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Complete Advisory &amp; Tech Packages</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/book" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#38bdf8]">
+                      <span>Calendar Consultation Reservation</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/contact" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>Direct Executive Contact Channels</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="/llms.txt" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>llms.txt (AI Discovery Standard)</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/llms-full.txt" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>llms-full.txt (Knowledge Corpus)</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                      <span>XML Sitemap Index</span>
+                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>

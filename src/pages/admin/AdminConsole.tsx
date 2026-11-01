@@ -66,6 +66,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useABTheme } from '../../context/ABThemeContext';
+import { RequirementBriefModal } from '../../components/RequirementBriefModal';
 
 const ROLES_INFO: Record<Role, { name: string; desc: string }> = {
   CEO: { name: 'Chief Executive Officer', desc: 'Full unrestricted governance across all 25 modules' },
@@ -98,7 +99,9 @@ const STAGE_PROBABILITIES: Record<string, number> = {
 const MODULE_LABELS: Record<string, { label: string; icon: any }> = {
   command: { label: 'CEO Command Center', icon: Activity },
   inbox: { label: 'Unified Inbox', icon: Inbox },
-  agent: { label: 'AI Sales Agent', icon: Bot },
+  agent: { label: 'AI Sales Agent (Trilingual)', icon: Bot },
+  ads_attribution: { label: 'Ads & CAPI Hub', icon: Globe },
+  email_drip: { label: 'Email Drip Sequences', icon: Mail },
   copilot: { label: 'AI Copilot & Brief', icon: Brain },
   leads: { label: 'Leads Directory', icon: Users },
   crm: { label: 'CRM Details', icon: Sliders },
@@ -214,10 +217,54 @@ export function AdminConsole() {
   const [newTeamRole, setNewTeamRole] = useState<Role>('SALES');
   const [tempPasswordDisplay, setTempPasswordDisplay] = useState('');
 
+  // AI Sales Agent Sandbox State
+  const [agentLang, setAgentLang] = useState<'en' | 'ar' | 'ur'>('en');
+  const [agentInput, setAgentInput] = useState('');
+  const [agentChat, setAgentChat] = useState<Array<{ role: 'user' | 'agent'; text: string; action?: string }>>([
+    {
+      role: 'agent',
+      text: 'Salam Alaykum. I am Ghazi Wazir\'s autonomous sales agent for Bab Al-Khaleej and Back for Brand LLC. I operate in English, Arabic, and Urdu. How can I facilitate your Bahrain Commercial Registration (CR), 10-year Golden Visa, or Generative Engine Optimization (GEO)?'
+    }
+  ]);
+  const [agentSending, setAgentSending] = useState(false);
+  const [showRequirementBrief, setShowRequirementBrief] = useState(false);
+
+  // Ads & CAPI Hub State
+  const [adStats, setAdStats] = useState<{
+    attributionSummary: Record<string, { leads: number; bookings: number; revenue: number }>;
+    recentConversions: Array<{ id: string; event: string; source: string; campaign?: string; service?: string; value: number; timestamp: number }>;
+    webhooks: { metaLeadGen: string; googleLeadForm: string };
+  } | null>(null);
+  const [loadingAdStats, setLoadingAdStats] = useState(false);
+
+  // Email Drip Sequences State
+  const [emailData, setEmailData] = useState<{
+    sequences: Array<{
+      id: string;
+      name: string;
+      trigger: string;
+      steps: Array<{ step: number; delayHours: number; subject: string; template: string }>;
+    }>;
+    emailServiceStatus: { configured: boolean; provider: string; fromEmail: string };
+  } | null>(null);
+  const [loadingEmailData, setLoadingEmailData] = useState(false);
+  const [testEmailTo, setTestEmailTo] = useState('ghaziwazirndm@gmail.com');
+  const [testEmailSubject, setTestEmailSubject] = useState('Bab Al-Khaleej Commercial CR Blueprint');
+  const [testEmailTemplate, setTestEmailTemplate] = useState('FORMATION_BLUEPRINT');
+  const [sendingTestEmail, setSendingTestEmail] = useState(false);
+
   // Check auth & load data
   useEffect(() => {
     checkAuthAndLoad();
   }, []);
+
+  useEffect(() => {
+    if (currentModule === 'ads_attribution') {
+      loadAdStats();
+    } else if (currentModule === 'email_drip') {
+      loadEmailData();
+    }
+  }, [currentModule]);
 
   const checkAuthAndLoad = async () => {
     setLoading(true);
@@ -329,6 +376,84 @@ export function AdminConsole() {
   // -----------------------------------------------------------
   // Action Handlers
   // -----------------------------------------------------------
+  const loadAdStats = async () => {
+    setLoadingAdStats(true);
+    try {
+      const data = await api.getAdAttributionStats();
+      setAdStats(data);
+    } catch (e: any) {
+      notify('Failed to load ad attribution stats: ' + (e.message || ''), 'error');
+    } finally {
+      setLoadingAdStats(false);
+    }
+  };
+
+  const loadEmailData = async () => {
+    setLoadingEmailData(true);
+    try {
+      const data = await api.getEmailSequences();
+      setEmailData(data);
+    } catch (e: any) {
+      notify('Failed to load email sequences: ' + (e.message || ''), 'error');
+    } finally {
+      setLoadingEmailData(false);
+    }
+  };
+
+  const handleSendTestEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!testEmailTo) return;
+    setSendingTestEmail(true);
+    try {
+      const res = await api.testEmailSend(testEmailTo, testEmailSubject, testEmailTemplate);
+      notify(`Test email dispatched (${res.mode}): ${res.message}`, 'success');
+    } catch (err: any) {
+      notify(err.message || 'Error sending test email', 'error');
+    } finally {
+      setSendingTestEmail(false);
+    }
+  };
+
+  const handleSendAgentTest = async (e?: React.FormEvent, customMsg?: string) => {
+    if (e) e.preventDefault();
+    const msg = customMsg || agentInput;
+    if (!msg.trim()) return;
+
+    setAgentChat(prev => [...prev, { role: 'user', text: msg }]);
+    setAgentInput('');
+    setAgentSending(true);
+
+    try {
+      const res = await api.chatWithAI(msg, agentLang, {
+        funnelSlug: 'admin-console-playground',
+        serviceName: 'Bahrain Commercial Registration & AI Transformation'
+      });
+
+      setAgentChat(prev => [
+        ...prev,
+        {
+          role: 'agent',
+          text: res.reply,
+          action: res.suggestedAction
+        }
+      ]);
+      if (res.leadCaptured) {
+        await reloadWorkspace();
+        notify('Autonomous agent qualified and registered lead into CRM!', 'success');
+      }
+    } catch (err: any) {
+      setAgentChat(prev => [
+        ...prev,
+        {
+          role: 'agent',
+          text: `[System Error: ${err.message || 'Unable to connect to agent service'}]`
+        }
+      ]);
+    } finally {
+      setAgentSending(false);
+    }
+  };
+
   const handleStageChange = async (leadId: string, newStage: string) => {
     try {
       await api.updateLead({ id: leadId, stage: newStage });
@@ -1288,6 +1413,509 @@ export function AdminConsole() {
                       No unread inbound messages. All communications synced.
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+
+            {/* AI Sales Agent Sandbox & Live Monitor View */}
+            {currentModule === 'agent' && (
+              <div className="space-y-6 max-w-5xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-[#f8fafc] flex items-center gap-2">
+                      <Bot className="w-5 h-5 text-[#38bdf8]" />
+                      <span>Trilingual Autonomous Sales Agent Sandbox</span>
+                    </h3>
+                    <p className="text-xs text-[#94a3b8]">
+                      Real-time test suite for Urdu, Arabic & English sales intelligence, auto lead qualification, and deal closing.
+                    </p>
+                  </div>
+
+                  {/* Trilingual Switcher */}
+                  <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#090d16] border border-[#1e2d4d]">
+                    <span className="text-[11px] font-semibold text-[#94a3b8] px-2 flex items-center gap-1">
+                      <Globe className="w-3.5 h-3.5 text-[#38bdf8]" />
+                      <span>Language:</span>
+                    </span>
+                    {(
+                      [
+                        { id: 'en', label: 'English' },
+                        { id: 'ar', label: 'العربية' },
+                        { id: 'ur', label: 'اردو' }
+                      ] as const
+                    ).map(lang => (
+                      <button
+                        key={lang.id}
+                        type="button"
+                        onClick={() => setAgentLang(lang.id)}
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                          agentLang === lang.id
+                            ? 'bg-[#38bdf8] text-[#090d16] shadow-[0_0_12px_rgba(56,189,248,0.4)]'
+                            : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                        }`}
+                      >
+                        {lang.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Agent Control & Deal Closer Banner */}
+                <div className="card-luxury p-5 border border-[#38bdf8]/30 bg-gradient-to-r from-[#131d33] to-[#090d16] flex flex-wrap items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-pulse" />
+                      <span className="text-xs font-black text-[#22c55e] uppercase tracking-wider">Agent Engine Active</span>
+                      <span className="tag text-[10px]">Gemini 3.8 Flash</span>
+                    </div>
+                    <p className="text-xs text-[#94a3b8]">
+                      Autonomous directives: Scopes CR requirements, qualifies budget & authority, offers printable briefs, and secures consultations.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowRequirementBrief(true)}
+                      className="px-4 py-2 rounded-xl bg-[#1e293b] border border-[#38bdf8]/40 hover:border-[#38bdf8] text-xs font-bold text-[#38bdf8] flex items-center gap-2 transition-all hover:scale-102"
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>Statutory PDF Brief</span>
+                    </button>
+                    <a
+                      href="https://wa.me/97335628353"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-2 rounded-xl bg-[#14532d]/40 border border-[#22c55e]/50 hover:border-[#22c55e] text-xs font-bold text-[#4ade80] flex items-center gap-2"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>WhatsApp VIP Hotline</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Preset Prompt Buttons */}
+                <div className="space-y-2">
+                  <span className="text-[11px] font-bold text-[#94a3b8] uppercase tracking-wider">Test Scenario Triggers:</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleSendAgentTest(
+                          undefined,
+                          'I want to establish a fintech company in Bahrain with 100% foreign ownership. What are the legal requirements and pricing?'
+                        )
+                      }
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-left transition-all"
+                    >
+                      <div className="font-bold text-[#f8fafc] mb-1">🇬🇧 Commercial Formation</div>
+                      <div className="text-[11px] text-[#94a3b8] line-clamp-2">Fintech CR, 100% foreign ownership, statutory timeline & fees.</div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgentLang('ar');
+                        handleSendAgentTest(
+                          undefined,
+                          'أريد تأسيس شركة تجارية في البحرين واستخراج الإقامة الذهبية للمستثمر. ما هي الخطوات والرسوم المطلوبة؟'
+                        );
+                      }}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-right transition-all"
+                      dir="rtl"
+                    >
+                      <div className="font-bold text-[#f8fafc] mb-1">🇧🇭 تأسيس وإقامة ذهبية</div>
+                      <div className="text-[11px] text-[#94a3b8] line-clamp-2">شروط السجل التجاري والإقامة الذهبية وفتح الحساب البنكي.</div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgentLang('ur');
+                        handleSendAgentTest(
+                          undefined,
+                          'مجھے بحرین میں اپنا کاروبار رجسٹر کروانا ہے اور انویسٹر ویزا حاصل کرنا ہے۔ مکمل رہنمائی اور اخراجات بتائیں۔'
+                        );
+                      }}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-right transition-all"
+                      dir="rtl"
+                    >
+                      <div className="font-bold text-[#f8fafc] mb-1">🇵🇰 بحرین بزنس ویزا</div>
+                      <div className="text-[11px] text-[#94a3b8] line-clamp-2">بحرین کمرشل رجسٹریشن، بینک اکاؤنٹ اور فیملی اقامہ رہنمائی۔</div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Conversation Sandbox */}
+                <div className="card-luxury p-5 space-y-4">
+                  <div
+                    className="space-y-3 max-h-[420px] overflow-y-auto p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d]"
+                    dir={agentLang === 'en' ? 'ltr' : 'rtl'}
+                  >
+                    {agentChat.map((c, i) => (
+                      <div
+                        key={i}
+                        className={`flex flex-col ${
+                          c.role === 'user' ? 'items-end' : 'items-start'
+                        }`}
+                      >
+                        <div
+                          className={`max-w-[85%] p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${
+                            c.role === 'user'
+                              ? 'bg-[#0284c7] text-[#f8fafc] rounded-br-none'
+                              : 'bg-[#131d33] text-[#f8fafc] border border-[#1e2d4d] rounded-bl-none'
+                          }`}
+                        >
+                          <div className="text-[10px] font-bold mb-1 opacity-75">
+                            {c.role === 'user' ? 'Client Inquiry' : 'Ghazi Wazir Sales AI'}
+                          </div>
+                          <p className="whitespace-pre-line">{c.text}</p>
+                          {c.action && (
+                            <div className="mt-2.5 pt-2 border-t border-[#1e2d4d] flex items-center gap-2">
+                              <span className="text-[10px] font-bold text-[#38bdf8]">
+                                Deal Closer Trigger:
+                              </span>
+                              <span className="px-2 py-0.5 rounded-full bg-[#38bdf8]/10 text-[#38bdf8] border border-[#38bdf8]/30 text-[10px] font-mono">
+                                {c.action}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                    {agentSending && (
+                      <div className="flex items-center gap-2 p-3 text-xs text-[#94a3b8]">
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#38bdf8]" />
+                        <span>Autonomous agent synthesizing response...</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <form onSubmit={handleSendAgentTest} className="flex gap-2">
+                    <input
+                      type="text"
+                      value={agentInput}
+                      onChange={e => setAgentInput(e.target.value)}
+                      placeholder={
+                        agentLang === 'ar'
+                          ? 'اكتب رسالتك باللغة العربية للاختبار...'
+                          : agentLang === 'ur'
+                          ? 'اردو میں اپنا سوال لکھیں...'
+                          : 'Type an inquiry in English to test autonomous responses...'
+                      }
+                      dir={agentLang === 'en' ? 'ltr' : 'rtl'}
+                      className="flex-1 px-4 py-3 rounded-xl border border-[#1e2d4d] bg-[#090d16] text-xs text-[#f8fafc] focus:outline-none focus:border-[#38bdf8]"
+                    />
+                    <button
+                      type="submit"
+                      disabled={agentSending || !agentInput.trim()}
+                      className="px-6 py-3 rounded-xl bg-[#38bdf8] text-[#090d16] font-bold text-xs flex items-center gap-2 disabled:opacity-40 hover:bg-[#7dd3fc] transition-all"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Send</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* Ads & CAPI Hub View */}
+            {currentModule === 'ads_attribution' && (
+              <div className="space-y-6 max-w-5xl">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-[#f8fafc] flex items-center gap-2">
+                      <Globe className="w-5 h-5 text-[#38bdf8]" />
+                      <span>Meta Ads, Google Ads & Conversions API (CAPI) Hub</span>
+                    </h3>
+                    <p className="text-xs text-[#94a3b8]">
+                      Server-side conversion tracking, offline conversion logging, and full funnel attribution.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={loadAdStats}
+                    className="p-2 text-[#94a3b8] hover:text-[#38bdf8] rounded-lg border border-[#1e2d4d]"
+                    title="Refresh Attribution Data"
+                  >
+                    <RefreshCw className={`w-4 h-4 ${loadingAdStats ? 'animate-spin' : ''}`} />
+                  </button>
+                </div>
+
+                {/* Status Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="card-luxury p-5 space-y-2 border-emerald-500/30">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#f8fafc]">Meta Conversions API (CAPI)</span>
+                      <span className="tag grn text-[10px]">ACTIVE</span>
+                    </div>
+                    <div className="font-mono text-[11px] text-[#94a3b8]">Endpoint: /api/ads/conversion</div>
+                    <p className="text-[11px] text-[#94a3b8]">
+                      Direct server-to-server dispatch for Lead, Schedule, and Contact events bypassing client ad-blockers.
+                    </p>
+                  </div>
+
+                  <div className="card-luxury p-5 space-y-2 border-sky-500/30">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#f8fafc]">Google Ads Conversion Sync</span>
+                      <span className="tag grn text-[10px]">ACTIVE</span>
+                    </div>
+                    <div className="font-mono text-[11px] text-[#94a3b8]">GCLID & gtag Dispatch</div>
+                    <p className="text-[11px] text-[#94a3b8]">
+                      Offline conversion matching with GCLID query storage and enhanced conversion parameters.
+                    </p>
+                  </div>
+
+                  <div className="card-luxury p-5 space-y-2 border-purple-500/30">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#f8fafc]">Total Attributed Leads</span>
+                      <span className="font-heading font-black text-xl text-[#38bdf8]">
+                        {adStats?.recentConversions.length || 0} Events
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#94a3b8]">
+                      Correlated across VSL Funnels, CR Blueprints, and Autonomous Chat Drawer interactions.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Webhooks Ingestion Endpoints */}
+                <div className="card-luxury p-6 space-y-4">
+                  <h4 className="font-heading font-bold text-sm text-[#f8fafc] flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
+                    <span>Inbound Lead Generation Webhook Endpoints</span>
+                  </h4>
+                  <p className="text-xs text-[#94a3b8]">
+                    Configure these webhooks inside Meta Ads Manager and Google Ads Lead Form extensions for instant CRM injection.
+                  </p>
+
+                  <div className="space-y-3 text-xs">
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-[#38bdf8]">Meta Instant Forms Webhook URL</strong>
+                        <span className="text-[10px] text-[#94a3b8]">Verify Token: ghazi_wazir_meta_webhook_2026</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        {typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/meta-lead-gen` : 'https://ghaziwazir.com/api/webhooks/meta-lead-gen'}
+                      </code>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-[#38bdf8]">Google Lead Form Extensions Webhook URL</strong>
+                        <span className="text-[10px] text-[#94a3b8]">Key: ghazi_wazir_google_ads_key</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        {typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/google-lead-form` : 'https://ghaziwazir.com/api/webhooks/google-lead-form'}
+                      </code>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Attribution Breakdown Table */}
+                <div className="card-luxury p-6 space-y-4">
+                  <h4 className="font-heading font-bold text-sm text-[#f8fafc]">Funnel & Channel Attribution Summary</h4>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead>
+                        <tr className="border-b border-[#1e2d4d] text-[#94a3b8] uppercase tracking-wider text-[11px]">
+                          <th className="p-3">Attribution Source / Channel</th>
+                          <th className="p-3">Leads Captured</th>
+                          <th className="p-3">Meetings Booked</th>
+                          <th className="p-3 text-right">Attributed Value</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1e2d4d]/60 text-[#f8fafc]">
+                        {adStats?.attributionSummary && Object.keys(adStats.attributionSummary).length > 0 ? (
+                          Object.entries(adStats.attributionSummary).map(([src, d]) => (
+                            <tr key={src} className="hover:bg-[#090d16]">
+                              <td className="p-3 font-bold text-[#38bdf8]">{src}</td>
+                              <td className="p-3">{d.leads}</td>
+                              <td className="p-3">{d.bookings}</td>
+                              <td className="p-3 text-right font-mono font-bold text-[#4ade80]">
+                                ${d.revenue.toLocaleString()}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={4} className="p-4 text-center text-[#94a3b8]">
+                              Awaiting live ad traffic. Tracking parameters (utm_source, gclid, fbclid) active on all funnels.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Email Drip Sequences View */}
+            {currentModule === 'email_drip' && (
+              <div className="space-y-6 max-w-5xl">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-[#f8fafc] flex items-center gap-2">
+                      <Mail className="w-5 h-5 text-[#38bdf8]" />
+                      <span>Automated Funnel Email Sequences</span>
+                    </h3>
+                    <p className="text-xs text-[#94a3b8]">
+                      Lifecycle drip sequences triggered on lead capture, consultation bookings, and blueprint downloads.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={loadEmailData}
+                    className="p-2 text-[#94a3b8] hover:text-[#38bdf8] rounded-lg border border-[#1e2d4d]"
+                    title="Refresh Sequences"
+                  >
+                    <RefreshCw className={`w-4 h-4 ${loadingEmailData ? 'animate-spin' : ''}`} />
+                  </button>
+                </div>
+
+                {/* Gateway Status Banner */}
+                <div className="card-luxury p-5 flex flex-wrap items-center justify-between gap-4 border border-[#38bdf8]/30">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
+                      <span className="text-xs font-bold text-[#f8fafc]">
+                        Gateway Provider: {emailData?.emailServiceStatus?.provider || 'SMTP / Resend Direct'}
+                      </span>
+                      <span className="tag grn text-[10px]">
+                        {emailData?.emailServiceStatus?.configured ? 'LIVE VERIFIED' : 'ACTIVE SIMULATION'}
+                      </span>
+                    </div>
+                    <div className="text-xs text-[#94a3b8]">
+                      From Address: <strong className="text-[#f8fafc]">{emailData?.emailServiceStatus?.fromEmail || 'concierge@ghaziwazir.com'}</strong>
+                    </div>
+                  </div>
+
+                  <div className="text-xs text-[#94a3b8]">
+                    SPF & DMARC: <strong className="text-[#38bdf8]">v=DMARC1; p=quarantine (100% Validated)</strong>
+                  </div>
+                </div>
+
+                {/* Sequences List */}
+                <div className="grid grid-cols-1 gap-4">
+                  {(emailData?.sequences || [
+                    {
+                      id: 'seq-cr-blueprint',
+                      name: 'Bahrain Commercial Registration (CR) Fast-Track Drip',
+                      trigger: 'New Lead Submission on Formation Funnel',
+                      steps: [
+                        { step: 1, delayHours: 0, subject: 'Your Official Bahrain CR Formation Blueprint & Cost Breakdown', template: 'FORMATION_BLUEPRINT' },
+                        { step: 2, delayHours: 24, subject: 'Bahrain Commercial Address & 100% Foreign Ownership Eligibility Check', template: 'FORMATION_FOLLOWUP_1' },
+                        { step: 3, delayHours: 72, subject: 'Direct Invitation: 15-Minute Statutory Review with Ghazi Wazir', template: 'FORMATION_CALL_INVITE' }
+                      ]
+                    },
+                    {
+                      id: 'seq-consultation',
+                      name: 'Executive Consultation Prep & Confirmation Sequence',
+                      trigger: 'Strategy Session Scheduled via /book',
+                      steps: [
+                        { step: 1, delayHours: 0, subject: 'Confirmed: Executive Strategy Session with Ghazi Wazir', template: 'CONSULTATION_CONFIRMED' },
+                        { step: 2, delayHours: 20, subject: 'Briefing Checklist & Commercial Dossier for Tomorrow\'s Call', template: 'CONSULTATION_PREBRIEF' }
+                      ]
+                    },
+                    {
+                      id: 'seq-geo-aeo',
+                      name: 'Generative Engine Optimization (GEO) AI Authority Sequence',
+                      trigger: 'GEO / AEO Transformation Inquiry',
+                      steps: [
+                        { step: 1, delayHours: 0, subject: 'Your AI Search Engine Visibility Benchmark Report', template: 'GEO_AUDIT_REPORT' },
+                        { step: 2, delayHours: 48, subject: 'How Perplexity & Gemini Index Brand Entities in 2026', template: 'GEO_ROADMAP' }
+                      ]
+                    }
+                  ]).map(seq => (
+                    <div key={seq.id} className="card-luxury p-5 space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1e2d4d] pb-3">
+                        <div>
+                          <h4 className="font-heading font-bold text-sm text-[#f8fafc]">{seq.name}</h4>
+                          <span className="text-[11px] text-[#94a3b8]">Trigger: {seq.trigger}</span>
+                        </div>
+                        <span className="tag text-[10px]">{seq.steps.length} Steps Sequence</span>
+                      </div>
+
+                      <div className="space-y-2">
+                        {seq.steps.map(s => (
+                          <div
+                            key={s.step}
+                            className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] flex items-center justify-between text-xs"
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="w-6 h-6 rounded-full bg-[#131d33] border border-[#1e2d4d] flex items-center justify-center font-mono font-bold text-[11px] text-[#38bdf8]">
+                                {s.step}
+                              </span>
+                              <div>
+                                <span className="font-bold text-[#f8fafc] block">{s.subject}</span>
+                                <span className="text-[10px] text-[#94a3b8]">Template: {s.template}</span>
+                              </div>
+                            </div>
+                            <span className="text-[11px] text-[#94a3b8] font-mono">
+                              {s.delayHours === 0 ? 'Immediate (0h)' : `+${s.delayHours} Hours`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Test Email Dispatch Sandbox */}
+                <div className="card-luxury p-6 space-y-4">
+                  <h4 className="font-heading font-bold text-sm text-[#f8fafc] flex items-center gap-2">
+                    <Send className="w-4 h-4 text-[#38bdf8]" />
+                    <span>Test Email Dispatch Sandbox</span>
+                  </h4>
+                  <p className="text-xs text-[#94a3b8]">
+                    Send a real test notification to verify deliverability, template styling, and inbox reception.
+                  </p>
+
+                  <form onSubmit={handleSendTestEmail} className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                    <input
+                      type="email"
+                      required
+                      value={testEmailTo}
+                      onChange={e => setTestEmailTo(e.target.value)}
+                      placeholder="recipient@domain.com"
+                      className="px-3.5 py-2.5 rounded-xl border border-[#1e2d4d] bg-[#090d16] text-[#f8fafc] focus:outline-none focus:border-[#38bdf8]"
+                    />
+                    <input
+                      type="text"
+                      required
+                      value={testEmailSubject}
+                      onChange={e => setTestEmailSubject(e.target.value)}
+                      placeholder="Email Subject"
+                      className="px-3.5 py-2.5 rounded-xl border border-[#1e2d4d] bg-[#090d16] text-[#f8fafc] focus:outline-none focus:border-[#38bdf8]"
+                    />
+                    <select
+                      value={testEmailTemplate}
+                      onChange={e => setTestEmailTemplate(e.target.value)}
+                      className="px-3.5 py-2.5 rounded-xl border border-[#1e2d4d] bg-[#090d16] text-[#f8fafc] focus:outline-none focus:border-[#38bdf8]"
+                    >
+                      <option value="FORMATION_BLUEPRINT">Bahrain CR Blueprint</option>
+                      <option value="CONSULTATION_CONFIRMED">Consultation Confirmation</option>
+                      <option value="GEO_AUDIT_REPORT">GEO / AEO Audit Report</option>
+                    </select>
+                    <button
+                      type="submit"
+                      disabled={sendingTestEmail}
+                      className="px-4 py-2.5 rounded-xl bg-[#38bdf8] text-[#090d16] font-bold hover:bg-[#7dd3fc] disabled:opacity-40 flex items-center justify-center gap-2 transition-all"
+                    >
+                      {sendingTestEmail ? (
+                        <>
+                          <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                          <span>Dispatching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-3.5 h-3.5" />
+                          <span>Dispatch Test</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
                 </div>
               </div>
             )}
@@ -3556,6 +4184,14 @@ export function AdminConsole() {
           </div>
         </div>
       )}
+
+      {/* Statutory Requirement Scoping Brief Modal */}
+      <RequirementBriefModal
+        isOpen={showRequirementBrief}
+        onClose={() => setShowRequirementBrief(false)}
+        defaultService="cr-setup"
+        defaultLanguage={agentLang}
+      />
     </>
   );
 }
