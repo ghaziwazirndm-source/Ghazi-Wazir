@@ -309,3 +309,64 @@ export interface ToastItem extends ToastOptions {
   createdAt: number;
 }
 
+// -------------------------------------------------------------
+// Omni-Funnel Performance Analytics Types
+// -------------------------------------------------------------
+export interface FunnelMetricItem {
+  slug: string;
+  name: string;
+  company: 'Bab Al-Khaleej' | 'Back for Brand LLC' | 'Executive Hub';
+  category: string;
+  views: number;
+  leads: number;
+  bookings: number;
+  sales: number;
+  revenueUSD: number;
+  revenueBHD: number;
+  sources: Record<string, number>;
+  avgTimeOnPageSec: number;
+  lastEventTs: number;
+  optInRate: number;
+  bookingRate: number;
+  winRate: number;
+  overallRate: number;
+  topSource: string;
+  healthStatus: 'Optimal' | 'Healthy' | 'Needs Attention';
+}
+
+export interface FunnelAnalyticsResponse {
+  summary: {
+    totalFunnels: number;
+    totalViews: number;
+    totalLeads: number;
+    totalBookings: number;
+    totalSales: number;
+    totalRevenueUSD: number;
+    totalRevenueBHD: number;
+    avgOptInRate: number;
+    avgBookingRate: number;
+    avgWinRate: number;
+    overallConversionRate: number;
+  };
+  funnels: FunnelMetricItem[];
+  topFunnelsByRevenue: FunnelMetricItem[];
+  topFunnelsByConversion: FunnelMetricItem[];
+  attributionTotals: Record<string, number>;
+  companyBreakdown: Record<string, {
+    views: number;
+    leads: number;
+    bookings: number;
+    sales: number;
+    revenueUSD: number;
+    revenueBHD: number;
+    funnelsCount: number;
+  }>;
+  stageFunnel: {
+    stage: string;
+    count: number;
+    pct: number;
+    dropoffPct: number;
+  }[];
+}
+
+

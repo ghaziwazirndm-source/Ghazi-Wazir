@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
 import { api } from '../../services/api';
@@ -11,6 +11,10 @@ export function FormationIndexPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    api.trackFunnelEvent('/formation', 'view', { service: 'Bahrain Formation Blueprint' });
+  }, []);
 
   const handleOptIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +35,8 @@ export function FormationIndexPage() {
         message: 'Opted in for the free 7-Step Bahrain Company Formation Blueprint',
         consent: true,
       });
+
+      api.trackFunnelEvent('/formation', 'opt_in', { service: 'Bahrain Formation Blueprint' });
 
       // Navigate to Epiphany Bridge video page
       navigate('/formation/bridge');

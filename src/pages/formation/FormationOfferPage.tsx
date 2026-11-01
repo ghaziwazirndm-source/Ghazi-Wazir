@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
 import { LeadModal } from '../../components/LeadModal';
+import { api } from '../../services/api';
 import { CheckCircle2, XCircle, ArrowRight, ShieldCheck, Calendar, Phone, Sparkles, HelpCircle } from 'lucide-react';
 
 export function FormationOfferPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState('');
+
+  useEffect(() => {
+    api.trackFunnelEvent('/formation/offer', 'view', { service: 'Fast-Track Formation Offer Package' });
+  }, []);
 
   const handleQuoteClick = (tier: string) => {
     setSelectedOffer(tier);

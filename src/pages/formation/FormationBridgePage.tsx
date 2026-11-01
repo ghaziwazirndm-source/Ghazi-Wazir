@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { api } from '../../services/api';
 import { CheckCircle2, ArrowRight, Play, BookOpen, Sparkles, ShieldAlert } from 'lucide-react';
 
 export function FormationBridgePage() {
+  useEffect(() => {
+    api.trackFunnelEvent('/formation/bridge', 'view', { service: 'Formation Bridge Video' });
+  }, []);
   return (
     <>
       <SEOHead

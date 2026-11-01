@@ -53,6 +53,7 @@ export function FunnelSalesAgent({
 
       if (res.leadCaptured) {
         setContactCaptured(true);
+        api.trackFunnelEvent(funnelSlug, 'opt_in', { service: serviceName });
       }
 
       setMessages(prev => [

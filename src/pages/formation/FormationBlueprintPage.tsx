@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { api } from '../../services/api';
 import { Printer, CheckSquare, Square, ArrowRight, ShieldAlert, Sparkles } from 'lucide-react';
 import { FunnelSalesAgent } from '../../components/FunnelSalesAgent';
 
@@ -86,6 +87,10 @@ const BLUEPRINT_STEPS: StepData[] = [
 
 export function FormationBlueprintPage() {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    api.trackFunnelEvent('/formation/blueprint', 'view', { service: 'Statutory 7-Step Blueprint' });
+  }, []);
 
   const toggleCheck = (id: string) => {
     setCheckedItems(prev => ({

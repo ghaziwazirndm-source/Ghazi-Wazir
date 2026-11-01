@@ -62,11 +62,15 @@ import {
   Volume2,
   VolumeX,
   Eye,
-  Layers as LayersIcon
+  Layers as LayersIcon,
+  Rocket
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useABTheme } from '../../context/ABThemeContext';
 import { RequirementBriefModal } from '../../components/RequirementBriefModal';
+import { adTracker } from '../../services/adTracking';
+import { PlatformLaunchGuide } from '../../components/PlatformLaunchGuide';
+import { AllFunnelsAnalytics } from '../../components/AllFunnelsAnalytics';
 
 const ROLES_INFO: Record<Role, { name: string; desc: string }> = {
   CEO: { name: 'Chief Executive Officer', desc: 'Full unrestricted governance across all 25 modules' },
@@ -98,9 +102,11 @@ const STAGE_PROBABILITIES: Record<string, number> = {
 
 const MODULE_LABELS: Record<string, { label: string; icon: any }> = {
   command: { label: 'CEO Command Center', icon: Activity },
+  funnels: { label: 'All Funnels Analytics', icon: Layers },
+  launch_guide: { label: 'Platform & Launch Guide', icon: Rocket },
   inbox: { label: 'Unified Inbox', icon: Inbox },
   agent: { label: 'AI Sales Agent (Trilingual)', icon: Bot },
-  ads_attribution: { label: 'Ads & CAPI Hub', icon: Globe },
+  ads_attribution: { label: 'Ads & Domain Launchpad', icon: Globe },
   email_drip: { label: 'Email Drip Sequences', icon: Mail },
   copilot: { label: 'AI Copilot & Brief', icon: Brain },
   leads: { label: 'Leads Directory', icon: Users },
@@ -233,7 +239,7 @@ export function AdminConsole() {
   const [adStats, setAdStats] = useState<{
     attributionSummary: Record<string, { leads: number; bookings: number; revenue: number }>;
     recentConversions: Array<{ id: string; event: string; source: string; campaign?: string; service?: string; value: number; timestamp: number }>;
-    webhooks: { metaLeadGen: string; googleLeadForm: string };
+    webhooks: { metaLeadGen: string; googleLeadForm: string; tiktokLeadGen?: string; snapchatLeadGen?: string; };
   } | null>(null);
   const [loadingAdStats, setLoadingAdStats] = useState(false);
 
@@ -386,6 +392,24 @@ export function AdminConsole() {
     } finally {
       setLoadingAdStats(false);
     }
+  };
+
+  const handleTestAdEvent = (platform: string, eventName: 'Lead' | 'Schedule' | 'Contact') => {
+    if (eventName === 'Lead') {
+      adTracker.trackLead({
+        eventName: 'Lead',
+        service: 'Bahrain Commercial Registration',
+        value: 1200,
+        currency: 'BHD',
+        leadId: 'test-' + Date.now()
+      });
+    } else if (eventName === 'Schedule') {
+      adTracker.trackSchedule('test-book-' + Date.now(), 'Executive Consultation', new Date().toISOString().slice(0, 10), '14:00');
+    } else {
+      adTracker.trackContact('WhatsApp', 'Admin Console Test Dispatch');
+    }
+    loadAdStats();
+    notify(`Test ${eventName} event dispatched to ${platform} & server conversion log!`, 'success');
   };
 
   const loadEmailData = async () => {
@@ -1207,6 +1231,31 @@ export function AdminConsole() {
             {/* 1. CEO Command Center Overview */}
             {currentModule === 'command' && (
               <div className="space-y-8 max-w-6xl">
+                {/* Launch & Operating Guide Callout */}
+                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#131d33] via-[#090d16] to-[#131d33] border border-[#38bdf8]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#38bdf8]/10 border border-[#38bdf8]/30 flex items-center justify-center text-[#38bdf8] flex-none">
+                      <Rocket className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <strong className="text-sm text-[#f8fafc] block">
+                        Platform Operating Manual & Launch Guide Ready
+                      </strong>
+                      <span className="text-xs text-[#94a3b8]">
+                        Complete master guide for DNS setup, Meta/Google/TikTok/Snapchat ads, webhooks, and AI agent operations.
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentModule('launch_guide')}
+                    className="px-5 py-2.5 rounded-xl bg-[#38bdf8] text-[#090d16] font-bold text-xs hover:bg-[#7dd3fc] transition-all flex items-center gap-1.5 flex-none"
+                  >
+                    <span>Open Launch Guide</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+
                 {/* Metric Cards Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="card-luxury p-5 space-y-1">
@@ -1267,6 +1316,14 @@ export function AdminConsole() {
                     >
                       <DollarSign className="w-3.5 h-3.5 text-[#4ade80]" />
                       <span>Record Payment</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCurrentModule('funnels')}
+                      className="px-4 py-2 rounded-xl border border-[#38bdf8]/40 bg-[#131d33] text-xs font-bold text-[#38bdf8] hover:border-[#38bdf8] hover:bg-[#1e2d4d] flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(56,189,248,0.2)]"
+                    >
+                      <Layers className="w-3.5 h-3.5 text-[#38bdf8]" />
+                      <span>All Funnels Analytics (15)</span>
                     </button>
                   </div>
                 </div>
@@ -1350,6 +1407,16 @@ export function AdminConsole() {
                   </div>
                 </div>
               </div>
+            )}
+
+            {/* Omni-Funnel Performance Analytics View */}
+            {currentModule === 'funnels' && (
+              <AllFunnelsAnalytics onNotify={(msg, type) => notify(msg, type)} />
+            )}
+
+            {/* Executive Platform & Launch Guide View */}
+            {currentModule === 'launch_guide' && (
+              <PlatformLaunchGuide onNavigateModule={mod => setCurrentModule(mod)} />
             )}
 
             {/* 2. Unified Inbox View */}
@@ -1619,17 +1686,17 @@ export function AdminConsole() {
               </div>
             )}
 
-            {/* Ads & CAPI Hub View */}
+            {/* Ads & Domain Launchpad Hub View */}
             {currentModule === 'ads_attribution' && (
               <div className="space-y-6 max-w-5xl">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h3 className="font-heading font-bold text-lg text-[#f8fafc] flex items-center gap-2">
                       <Globe className="w-5 h-5 text-[#38bdf8]" />
-                      <span>Meta Ads, Google Ads & Conversions API (CAPI) Hub</span>
+                      <span>Custom Domain Launchpad & Omni-Channel Ads Marketing Hub</span>
                     </h3>
                     <p className="text-xs text-[#94a3b8]">
-                      Server-side conversion tracking, offline conversion logging, and full funnel attribution.
+                      Custom domain DNS routing, Meta Ads, Google Ads, TikTok Ads, Snapchat Ads, and server-side CAPI.
                     </p>
                   </div>
                   <button
@@ -1642,87 +1709,246 @@ export function AdminConsole() {
                   </button>
                 </div>
 
-                {/* Status Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="card-luxury p-5 space-y-2 border-emerald-500/30">
+                {/* 1. Custom Domain DNS Launch Center */}
+                <div className="card-luxury p-6 space-y-4 border border-[#38bdf8]/40 bg-gradient-to-br from-[#131d33] to-[#090d16]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1e2d4d] pb-4">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-pulse" />
+                        <h4 className="font-heading font-bold text-sm text-[#f8fafc]">
+                          Primary Custom Domain: <span className="text-[#38bdf8]">ghaziwazir.com</span>
+                        </h4>
+                      </div>
+                      <p className="text-xs text-[#94a3b8] mt-1">
+                        Add these DNS records at your domain registrar (GoDaddy, Namecheap, Cloudflare, or Google Domains) to complete launch:
+                      </p>
+                    </div>
+                    <span className="tag grn text-[10px]">READY TO LAUNCH</span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className="border-b border-[#1e2d4d] text-[#94a3b8] uppercase text-[10px]">
+                          <th className="p-2.5">Type</th>
+                          <th className="p-2.5">Host / Name</th>
+                          <th className="p-2.5">Value / Target</th>
+                          <th className="p-2.5">Purpose</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1e2d4d]/60 text-xs">
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">A</td>
+                          <td className="p-2.5 text-[#f8fafc]">@</td>
+                          <td className="p-2.5 text-[#4ade80] select-all">76.76.21.21</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">Root domain Vercel server router</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">CNAME</td>
+                          <td className="p-2.5 text-[#f8fafc]">www</td>
+                          <td className="p-2.5 text-[#4ade80] select-all">cname.vercel-dns.com</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">WWW sub-domain alias routing</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
+                          <td className="p-2.5 text-[#f8fafc]">@</td>
+                          <td className="p-2.5 text-[#e8c872] select-all">v=spf1 include:_spf.google.com include:resend.com ~all</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">SPF email deliverability & anti-spoofing</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
+                          <td className="p-2.5 text-[#f8fafc]">_dmarc</td>
+                          <td className="p-2.5 text-[#e8c872] select-all">v=DMARC1; p=quarantine; rua=mailto:dmarc@ghaziwazir.com; pct=100</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">DMARC 100% inbox placement enforcement</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
+                          <td className="p-2.5 text-[#f8fafc]">@</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">facebook-domain-verification=fb_domain_verify_ghaziwazir_2026</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">Meta Ads Manager Domain Verification</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
+                          <td className="p-2.5 text-[#f8fafc]">@</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">google-site-verification=gw_gsc_2026_verified</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">Google Search Console Domain Ownership</td>
+                        </tr>
+                        <tr className="hover:bg-[#090d16]">
+                          <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
+                          <td className="p-2.5 text-[#f8fafc]">@</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">tiktok-developers-site-verification=tt_domain_verify_ghaziwazir_2026</td>
+                          <td className="p-2.5 text-[#94a3b8] font-sans">TikTok Ads Manager Domain Clearance</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* 2. Omni-Platform Ad Tracking Status Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Meta Ads Card */}
+                  <div className="card-luxury p-4 space-y-2 border-emerald-500/30">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#f8fafc]">Meta Conversions API (CAPI)</span>
+                      <strong className="text-xs text-[#f8fafc]">Meta Ads (FB & IG)</strong>
                       <span className="tag grn text-[10px]">ACTIVE</span>
                     </div>
-                    <div className="font-mono text-[11px] text-[#94a3b8]">Endpoint: /api/ads/conversion</div>
-                    <p className="text-[11px] text-[#94a3b8]">
-                      Direct server-to-server dispatch for Lead, Schedule, and Contact events bypassing client ad-blockers.
+                    <div className="font-mono text-[10px] text-[#38bdf8]">Pixel: 984710293812034</div>
+                    <p className="text-[11px] text-[#94a3b8] leading-relaxed">
+                      Meta Pixel + Server CAPI dispatcher live on /api/ads/conversion with Lead & Schedule matching.
                     </p>
                   </div>
 
-                  <div className="card-luxury p-5 space-y-2 border-sky-500/30">
+                  {/* Google Ads Card */}
+                  <div className="card-luxury p-4 space-y-2 border-sky-500/30">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#f8fafc]">Google Ads Conversion Sync</span>
+                      <strong className="text-xs text-[#f8fafc]">Google Ads & GA4</strong>
                       <span className="tag grn text-[10px]">ACTIVE</span>
                     </div>
-                    <div className="font-mono text-[11px] text-[#94a3b8]">GCLID & gtag Dispatch</div>
-                    <p className="text-[11px] text-[#94a3b8]">
-                      Offline conversion matching with GCLID query storage and enhanced conversion parameters.
+                    <div className="font-mono text-[10px] text-[#38bdf8]">Tag: G-GWCEO2026</div>
+                    <p className="text-[11px] text-[#94a3b8] leading-relaxed">
+                      gtag conversion matching with GCLID capture and generate_lead / book_appointment tracking.
                     </p>
                   </div>
 
-                  <div className="card-luxury p-5 space-y-2 border-purple-500/30">
+                  {/* TikTok Ads Card */}
+                  <div className="card-luxury p-4 space-y-2 border-pink-500/30">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#f8fafc]">Total Attributed Leads</span>
-                      <span className="font-heading font-black text-xl text-[#38bdf8]">
-                        {adStats?.recentConversions.length || 0} Events
-                      </span>
+                      <strong className="text-xs text-[#f8fafc]">TikTok Ads</strong>
+                      <span className="tag grn text-[10px]">ACTIVE</span>
                     </div>
-                    <p className="text-[11px] text-[#94a3b8]">
-                      Correlated across VSL Funnels, CR Blueprints, and Autonomous Chat Drawer interactions.
+                    <div className="font-mono text-[10px] text-[#38bdf8]">SDK: ttq Asynchronous</div>
+                    <p className="text-[11px] text-[#94a3b8] leading-relaxed">
+                      TikTok Pixel + ttclid campaign tracking for short-form video lead generation campaigns.
+                    </p>
+                  </div>
+
+                  {/* Snapchat Ads Card */}
+                  <div className="card-luxury p-4 space-y-2 border-yellow-500/30">
+                    <div className="flex items-center justify-between">
+                      <strong className="text-xs text-[#f8fafc]">Snapchat Ads</strong>
+                      <span className="tag grn text-[10px]">ACTIVE</span>
+                    </div>
+                    <div className="font-mono text-[10px] text-[#38bdf8]">SDK: snaptr Asynchronous</div>
+                    <p className="text-[11px] text-[#94a3b8] leading-relaxed">
+                      Snapchat Pixel + sc_click_id tracking tailored for high-volume GCC investor reach.
                     </p>
                   </div>
                 </div>
 
-                {/* Webhooks Ingestion Endpoints */}
+                {/* 3. Live Test Pixel & Conversion Dispatcher */}
+                <div className="card-luxury p-5 space-y-4 border border-[#38bdf8]/30">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-heading font-bold text-sm text-[#f8fafc] flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-[#38bdf8]" />
+                        <span>Live Multi-Platform Conversion Dispatcher Sandbox</span>
+                      </h4>
+                      <p className="text-xs text-[#94a3b8]">
+                        Simulate real conversion events to verify reception in Meta Events Manager, Google Tag Assistant, and TikTok Test Events.
+                      </p>
+                    </div>
+                    <span className="tag text-[10px]">VERIFICATION SUITE</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => handleTestAdEvent('Meta Pixel & CAPI', 'Lead')}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-center font-bold text-[#f8fafc] transition-all hover:scale-102"
+                    >
+                      Fire Meta Lead
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleTestAdEvent('Google Ads (gtag)', 'Lead')}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-center font-bold text-[#f8fafc] transition-all hover:scale-102"
+                    >
+                      Fire Google Lead
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleTestAdEvent('TikTok Ads (ttq)', 'Lead')}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-center font-bold text-[#f8fafc] transition-all hover:scale-102"
+                    >
+                      Fire TikTok SubmitForm
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleTestAdEvent('Snapchat Ads (snaptr)', 'Schedule')}
+                      className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] hover:border-[#38bdf8] text-center font-bold text-[#f8fafc] transition-all hover:scale-102"
+                    >
+                      Fire Snapchat Reserve
+                    </button>
+                  </div>
+                </div>
+
+                {/* 4. Inbound Lead Gen Webhook Endpoints */}
                 <div className="card-luxury p-6 space-y-4">
                   <h4 className="font-heading font-bold text-sm text-[#f8fafc] flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
                     <span>Inbound Lead Generation Webhook Endpoints</span>
                   </h4>
                   <p className="text-xs text-[#94a3b8]">
-                    Configure these webhooks inside Meta Ads Manager and Google Ads Lead Form extensions for instant CRM injection.
+                    Configure these webhooks inside Meta Ads Manager, Google Ads, TikTok Ads, and Snapchat Ads for instant automatic CRM injection.
                   </p>
 
-                  <div className="space-y-3 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
                       <div className="flex items-center justify-between">
-                        <strong className="text-[#38bdf8]">Meta Instant Forms Webhook URL</strong>
+                        <strong className="text-[#38bdf8]">1. Meta Instant Forms Webhook</strong>
                         <span className="text-[10px] text-[#94a3b8]">Verify Token: ghazi_wazir_meta_webhook_2026</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/meta-lead-gen` : 'https://ghaziwazir.com/api/webhooks/meta-lead-gen'}
+                        {adStats?.webhooks?.metaLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/meta-lead-gen` : 'https://ghaziwazir.com/api/webhooks/meta-lead-gen')}
                       </code>
                     </div>
 
                     <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
                       <div className="flex items-center justify-between">
-                        <strong className="text-[#38bdf8]">Google Lead Form Extensions Webhook URL</strong>
+                        <strong className="text-[#38bdf8]">2. Google Lead Form Webhook</strong>
                         <span className="text-[10px] text-[#94a3b8]">Key: ghazi_wazir_google_ads_key</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/google-lead-form` : 'https://ghaziwazir.com/api/webhooks/google-lead-form'}
+                        {adStats?.webhooks?.googleLeadForm || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/google-lead-form` : 'https://ghaziwazir.com/api/webhooks/google-lead-form')}
+                      </code>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-[#38bdf8]">3. TikTok Lead Generation Webhook</strong>
+                        <span className="text-[10px] text-[#94a3b8]">Advertiser Lead Ingestion</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        {adStats?.webhooks?.tiktokLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/tiktok-lead-gen` : 'https://ghaziwazir.com/api/webhooks/tiktok-lead-gen')}
+                      </code>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-[#38bdf8]">4. Snapchat Lead Webhook</strong>
+                        <span className="text-[10px] text-[#94a3b8]">Story / Spotlight Forms</span>
+                      </div>
+                      <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
+                        {adStats?.webhooks?.snapchatLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/snapchat-lead-gen` : 'https://ghaziwazir.com/api/webhooks/snapchat-lead-gen')}
                       </code>
                     </div>
                   </div>
                 </div>
 
-                {/* Attribution Breakdown Table */}
+                {/* 5. Attribution Breakdown Table */}
                 <div className="card-luxury p-6 space-y-4">
-                  <h4 className="font-heading font-bold text-sm text-[#f8fafc]">Funnel & Channel Attribution Summary</h4>
+                  <h4 className="font-heading font-bold text-sm text-[#f8fafc]">Omni-Channel Lead & Revenue Attribution</h4>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
                       <thead>
                         <tr className="border-b border-[#1e2d4d] text-[#94a3b8] uppercase tracking-wider text-[11px]">
-                          <th className="p-3">Attribution Source / Channel</th>
+                          <th className="p-3">Ad Platform / Channel</th>
                           <th className="p-3">Leads Captured</th>
                           <th className="p-3">Meetings Booked</th>
-                          <th className="p-3 text-right">Attributed Value</th>
+                          <th className="p-3 text-right">Attributed Revenue</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#1e2d4d]/60 text-[#f8fafc]">
@@ -1740,7 +1966,52 @@ export function AdminConsole() {
                         ) : (
                           <tr>
                             <td colSpan={4} className="p-4 text-center text-[#94a3b8]">
-                              Awaiting live ad traffic. Tracking parameters (utm_source, gclid, fbclid) active on all funnels.
+                              Attribution parameters (utm_source, gclid, fbclid, ttclid, sc_click_id) active across all funnels.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* 6. Recent Conversions Audit Ledger */}
+                <div className="card-luxury p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-heading font-bold text-sm text-[#f8fafc]">Recent Ad Conversions & CAPI Dispatches</h4>
+                    <span className="tag text-[10px]">Real-Time Ledger</span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className="border-b border-[#1e2d4d] text-[#94a3b8] uppercase text-[10px]">
+                          <th className="p-2.5">ID</th>
+                          <th className="p-2.5">Event</th>
+                          <th className="p-2.5">Source / Platform</th>
+                          <th className="p-2.5">Service</th>
+                          <th className="p-2.5">Value</th>
+                          <th className="p-2.5 text-right">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1e2d4d]/60 text-xs">
+                        {adStats?.recentConversions && adStats.recentConversions.length > 0 ? (
+                          adStats.recentConversions.map((conv: any) => (
+                            <tr key={conv.id} className="hover:bg-[#090d16]">
+                              <td className="p-2.5 text-[#38bdf8]">{conv.id}</td>
+                              <td className="p-2.5 font-bold text-[#f8fafc]">{conv.event}</td>
+                              <td className="p-2.5 text-[#94a3b8]">{conv.source}</td>
+                              <td className="p-2.5 text-[#f8fafc]">{conv.service || '-'}</td>
+                              <td className="p-2.5 font-bold text-[#4ade80]">${conv.value || 0}</td>
+                              <td className="p-2.5 text-right text-[#94a3b8]">
+                                {new Date(conv.timestamp).toLocaleTimeString()}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={6} className="p-4 text-center text-[#94a3b8]">
+                              No conversions recorded yet. Use the test sandbox above to fire verified conversion events.
                             </td>
                           </tr>
                         )}

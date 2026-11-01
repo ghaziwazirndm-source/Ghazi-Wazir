@@ -47,8 +47,12 @@
     <meta name="twitter:image" content="/ghazi-wazir-photo.jpg" />
     <meta name="twitter:creator" content="@ghaziwazir" />
 
-    <!-- Google Site Verification (Configurable) -->
-    <meta name="google-site-verification" content="google-site-verification-ghazi-wazir-placeholder" />
+    <!-- Custom Domain Ownership Verifications for Google, Meta, TikTok, Snapchat & Bing -->
+    <meta name="google-site-verification" content="google-site-verification-ghazi-wazir-custom-domain" />
+    <meta name="facebook-domain-verification" content="fb_domain_verify_ghaziwazir_2026" />
+    <meta name="tiktok-domain-verification" content="tt_domain_verify_ghaziwazir_2026" />
+    <meta name="snapchat-domain-verification" content="snap_domain_verify_ghaziwazir_2026" />
+    <meta name="msvalidate.01" content="bing_site_verification_gw_2026" />
 
     <!-- Performance: Preconnect & Non-Render-Blocking Google Fonts -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -97,7 +101,7 @@
         'send_page_view': true
       });
 
-      // Meta Pixel Base Code (with safe stub)
+      // Meta Pixel Base Code (Facebook & Instagram)
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -108,12 +112,30 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '984710293812034'); // Ghazi Wazir Meta Pixel ID
       fbq('track', 'PageView');
+
+      // TikTok Pixel Base Code (TikTok Ads)
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+        ttq.load('C_TIKTOK_PIXEL_ID');
+        ttq.page();
+      }(window, document, 'ttq');
+
+      // Snapchat Pixel Base Code (Snapchat Ads)
+      (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+      {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+      a.queue=[];var s='script';var r=t.createElement(s);r.async=!0;
+      r.src=n;var u=t.getElementsByTagName(s)[0];
+      u.parentNode.insertBefore(r,u);})(window,document,
+      'https://sc-static.net/scevent.min.js');
+      snaptr('init', 'snapchat-pixel-id-placeholder');
+      snaptr('track', 'PAGE_VIEW');
     </script>
+  </head>
+  <body class="bg-[#090d16] text-[#f8fafc] min-h-screen antialiased selection:bg-[#38bdf8]/30 selection:text-[#f8fafc]">
+    <!-- Meta Pixel noscript fallback (placed in body to comply with HTML5 parse5 spec) -->
     <noscript>
       <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=984710293812034&ev=PageView&noscript=1" alt="" />
     </noscript>
-  </head>
-  <body class="bg-[#090d16] text-[#f8fafc] min-h-screen antialiased selection:bg-[#38bdf8]/30 selection:text-[#f8fafc]">
     <!-- 
       Semantic Pre-rendered HTML inside #root:
       Guarantees 100% LLM readability and optimal initial rendering score for web crawlers.

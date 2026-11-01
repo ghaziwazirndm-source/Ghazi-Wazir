@@ -18,7 +18,7 @@
       "email": "admin@babalkhaleej.com",
       "role": "ADMIN",
       "enabled": true,
-      "lastLogin": 1793385180659,
+      "lastLogin": 1793546008234,
       "failed": 0,
       "lockUntil": 0,
       "salt": "39k3Gfi3ykxuRIaVPMfAEw==",
@@ -646,6 +646,18 @@
       "result": "ok",
       "prev": "Hob0oPqBe6kminFnHJViKMXxJhCbGxfzCjWoBIlpblQ=",
       "hash": "gDvTdpf0X6iJ2bTKZuKg2ho+Akrhn6jd4OOwI+lbRjA="
+    },
+    {
+      "id": 24,
+      "ts": "2026-11-01T15:13:28.235Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.quick_login",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "gDvTdpf0X6iJ2bTKZuKg2ho+Akrhn6jd4OOwI+lbRjA=",
+      "hash": "WYKClVRV1jniI3qgPIvp8CKt5PQaG1tleFr12oZ9aX8="
     }
   ],
   "warnings": [

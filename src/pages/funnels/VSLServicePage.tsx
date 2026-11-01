@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
 import { SERVICES_CATALOG } from '../ServiceDetailPage';
+import { api } from '../../services/api';
 import {
   Play,
   Calendar,
@@ -17,6 +19,12 @@ import { FunnelSalesAgent } from '../../components/FunnelSalesAgent';
 export function VSLServicePage() {
   const { service } = useParams<{ service: string }>();
   const svc = service ? SERVICES_CATALOG[service] : null;
+
+  useEffect(() => {
+    if (svc) {
+      api.trackFunnelEvent(`/funnels/${svc.id}`, 'view', { service: svc.name });
+    }
+  }, [svc?.id]);
 
   if (!svc) {
     return <Navigate to="/funnels" replace />;

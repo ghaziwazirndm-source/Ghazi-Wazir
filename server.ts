@@ -922,6 +922,571 @@ app.get('/api/ab-test/stats', (req, res) => {
   });
 });
 
+// -------------------------------------------------------------
+// Omni-Funnel Performance Analytics Store & Engine
+// -------------------------------------------------------------
+const FUNNEL_DB_FILE = path.join(DATA_DIR, 'funnels-analytics.json');
+
+export interface FunnelRecord {
+  slug: string;
+  name: string;
+  company: 'Bab Al-Khaleej' | 'Back for Brand LLC' | 'Executive Hub';
+  category: string;
+  views: number;
+  leads: number;
+  bookings: number;
+  sales: number;
+  revenueUSD: number;
+  revenueBHD: number;
+  sources: Record<string, number>;
+  avgTimeOnPageSec: number;
+  lastEventTs: number;
+}
+
+const DEFAULT_FUNNELS: FunnelRecord[] = [
+  {
+    slug: '/formation',
+    name: 'Bahrain Formation Blueprint Opt-in',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Legal & CR',
+    views: 1840,
+    leads: 268,
+    bookings: 74,
+    sales: 26,
+    revenueUSD: 31200,
+    revenueBHD: 11780,
+    sources: { 'Meta Ads': 740, 'Google Ads': 420, 'TikTok Ads': 210, 'Snapchat Ads': 180, 'Organic Search': 190, 'WhatsApp Direct': 100 },
+    avgTimeOnPageSec: 142,
+    lastEventTs: Date.now() - 3600000 * 2
+  },
+  {
+    slug: '/formation/bridge',
+    name: 'Formation Epiphany Bridge Video',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Legal & CR',
+    views: 1420,
+    leads: 198,
+    bookings: 62,
+    sales: 21,
+    revenueUSD: 25200,
+    revenueBHD: 9510,
+    sources: { 'Meta Ads': 560, 'Google Ads': 380, 'TikTok Ads': 140, 'Snapchat Ads': 120, 'Organic Search': 130, 'WhatsApp Direct': 90 },
+    avgTimeOnPageSec: 285,
+    lastEventTs: Date.now() - 3600000 * 4
+  },
+  {
+    slug: '/formation/blueprint',
+    name: 'Statutory 7-Step Blueprint Guide',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Legal & CR',
+    views: 1650,
+    leads: 220,
+    bookings: 65,
+    sales: 23,
+    revenueUSD: 27600,
+    revenueBHD: 10420,
+    sources: { 'Meta Ads': 610, 'Google Ads': 450, 'TikTok Ads': 160, 'Snapchat Ads': 150, 'Organic Search': 180, 'WhatsApp Direct': 100 },
+    avgTimeOnPageSec: 320,
+    lastEventTs: Date.now() - 3600000 * 3
+  },
+  {
+    slug: '/formation/offer',
+    name: 'Fast-Track Formation Offer Package',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Legal & CR',
+    views: 890,
+    leads: 154,
+    bookings: 78,
+    sales: 34,
+    revenueUSD: 40800,
+    revenueBHD: 15400,
+    sources: { 'Meta Ads': 340, 'Google Ads': 260, 'TikTok Ads': 90, 'Snapchat Ads': 80, 'Organic Search': 70, 'WhatsApp Direct': 50 },
+    avgTimeOnPageSec: 195,
+    lastEventTs: Date.now() - 3600000 * 5
+  },
+  {
+    slug: '/funnels/business-registration',
+    name: 'Sijilat CR & 100% Foreign Ownership VSL',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Legal & CR',
+    views: 2410,
+    leads: 312,
+    bookings: 98,
+    sales: 38,
+    revenueUSD: 45600,
+    revenueBHD: 17200,
+    sources: { 'Meta Ads': 880, 'Google Ads': 620, 'TikTok Ads': 260, 'Snapchat Ads': 220, 'Organic Search': 280, 'WhatsApp Direct': 150 },
+    avgTimeOnPageSec: 215,
+    lastEventTs: Date.now() - 3600000 * 1
+  },
+  {
+    slug: '/funnels/investor-visa',
+    name: 'Investor & 10-Year Golden Visa VSL',
+    company: 'Bab Al-Khaleej',
+    category: 'Bahrain Visas & Residency',
+    views: 1950,
+    leads: 245,
+    bookings: 86,
+    sales: 31,
+    revenueUSD: 37200,
+    revenueBHD: 14040,
+    sources: { 'Meta Ads': 690, 'Google Ads': 490, 'TikTok Ads': 230, 'Snapchat Ads': 210, 'Organic Search': 210, 'WhatsApp Direct': 120 },
+    avgTimeOnPageSec: 180,
+    lastEventTs: Date.now() - 3600000 * 2
+  },
+  {
+    slug: '/funnels/document-consultancy',
+    name: 'Ministry Clearance & Scoping VSL',
+    company: 'Bab Al-Khaleej',
+    category: 'Corporate Documentation',
+    views: 1120,
+    leads: 135,
+    bookings: 42,
+    sales: 16,
+    revenueUSD: 19200,
+    revenueBHD: 7240,
+    sources: { 'Meta Ads': 380, 'Google Ads': 310, 'TikTok Ads': 110, 'Snapchat Ads': 90, 'Organic Search': 140, 'WhatsApp Direct': 90 },
+    avgTimeOnPageSec: 165,
+    lastEventTs: Date.now() - 3600000 * 6
+  },
+  {
+    slug: '/funnels/geo-aeo',
+    name: 'Generative Engine Optimization (GEO/AEO) VSL',
+    company: 'Back for Brand LLC',
+    category: 'AI & Generative Search',
+    views: 2890,
+    leads: 380,
+    bookings: 124,
+    sales: 48,
+    revenueUSD: 72000,
+    revenueBHD: 27180,
+    sources: { 'Google Ads': 980, 'Meta Ads': 720, 'LinkedIn Ads': 410, 'Organic Search': 520, 'TikTok Ads': 140, 'WhatsApp Direct': 120 },
+    avgTimeOnPageSec: 340,
+    lastEventTs: Date.now() - 3600000 * 1
+  },
+  {
+    slug: '/funnels/ai-agents',
+    name: 'Autonomous Conversational Sales Agents VSL',
+    company: 'Back for Brand LLC',
+    category: 'AI Agents & Automation',
+    views: 2640,
+    leads: 340,
+    bookings: 115,
+    sales: 42,
+    revenueUSD: 63000,
+    revenueBHD: 23780,
+    sources: { 'Google Ads': 860, 'Meta Ads': 680, 'LinkedIn Ads': 390, 'Organic Search': 460, 'TikTok Ads': 130, 'WhatsApp Direct': 120 },
+    avgTimeOnPageSec: 295,
+    lastEventTs: Date.now() - 3600000 * 2
+  },
+  {
+    slug: '/funnels/automation',
+    name: 'Workflow & Systems Automation VSL',
+    company: 'Back for Brand LLC',
+    category: 'Business Systems',
+    views: 1480,
+    leads: 192,
+    bookings: 58,
+    sales: 22,
+    revenueUSD: 33000,
+    revenueBHD: 12460,
+    sources: { 'Google Ads': 490, 'Meta Ads': 390, 'LinkedIn Ads': 240, 'Organic Search': 220, 'TikTok Ads': 80, 'WhatsApp Direct': 60 },
+    avgTimeOnPageSec: 210,
+    lastEventTs: Date.now() - 3600000 * 7
+  },
+  {
+    slug: '/funnels/digital-marketing',
+    name: 'High-ROI Paid Multi-Platform Ads VSL',
+    company: 'Back for Brand LLC',
+    category: 'Growth & Performance Ads',
+    views: 2210,
+    leads: 285,
+    bookings: 89,
+    sales: 33,
+    revenueUSD: 49500,
+    revenueBHD: 18690,
+    sources: { 'Meta Ads': 840, 'Google Ads': 640, 'TikTok Ads': 260, 'Snapchat Ads': 210, 'Organic Search': 160, 'WhatsApp Direct': 100 },
+    avgTimeOnPageSec: 220,
+    lastEventTs: Date.now() - 3600000 * 3
+  },
+  {
+    slug: '/funnels/seo',
+    name: 'Search Engine Authority & Ranking VSL',
+    company: 'Back for Brand LLC',
+    category: 'Search & Organic Authority',
+    views: 1730,
+    leads: 210,
+    bookings: 64,
+    sales: 25,
+    revenueUSD: 37500,
+    revenueBHD: 14160,
+    sources: { 'Google Ads': 620, 'Organic Search': 530, 'Meta Ads': 320, 'LinkedIn Ads': 140, 'TikTok Ads': 65, 'WhatsApp Direct': 55 },
+    avgTimeOnPageSec: 235,
+    lastEventTs: Date.now() - 3600000 * 4
+  },
+  {
+    slug: '/funnels/websites-funnels',
+    name: 'High-Converting Funnels & Web Architecture VSL',
+    company: 'Back for Brand LLC',
+    category: 'Conversion Rate Optimization',
+    views: 1890,
+    leads: 248,
+    bookings: 79,
+    sales: 29,
+    revenueUSD: 43500,
+    revenueBHD: 16420,
+    sources: { 'Meta Ads': 680, 'Google Ads': 520, 'LinkedIn Ads': 260, 'Organic Search': 240, 'TikTok Ads': 110, 'WhatsApp Direct': 80 },
+    avgTimeOnPageSec: 250,
+    lastEventTs: Date.now() - 3600000 * 2
+  },
+  {
+    slug: '/funnels/ongoing-support',
+    name: 'PRO Retainer & Corporate Advisory VSL',
+    company: 'Bab Al-Khaleej',
+    category: 'Corporate Advisory',
+    views: 1040,
+    leads: 125,
+    bookings: 48,
+    sales: 20,
+    revenueUSD: 24000,
+    revenueBHD: 9060,
+    sources: { 'Meta Ads': 340, 'Google Ads': 290, 'Organic Search': 180, 'LinkedIn Ads': 110, 'WhatsApp Direct': 80, 'Direct': 40 },
+    avgTimeOnPageSec: 190,
+    lastEventTs: Date.now() - 3600000 * 8
+  },
+  {
+    slug: '/book',
+    name: 'Direct Executive Consultation Booking Funnel',
+    company: 'Executive Hub',
+    category: 'Executive Strategy',
+    views: 3420,
+    leads: 610,
+    bookings: 245,
+    sales: 88,
+    revenueUSD: 105600,
+    revenueBHD: 39870,
+    sources: { 'Meta Ads': 1120, 'Google Ads': 940, 'Organic Search': 510, 'LinkedIn Ads': 380, 'WhatsApp Direct': 310, 'TikTok Ads': 160 },
+    avgTimeOnPageSec: 270,
+    lastEventTs: Date.now() - 3600000 * 1
+  }
+];
+
+// In-memory store with file persistence
+let funnelStore: Record<string, FunnelRecord> = {};
+
+function initFunnelStore() {
+  try {
+    if (fs.existsSync(FUNNEL_DB_FILE)) {
+      const data = fs.readFileSync(FUNNEL_DB_FILE, 'utf8');
+      const parsed = JSON.parse(data);
+      if (typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+        funnelStore = parsed;
+        return;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to read funnel analytics DB, initializing default seed:', e);
+  }
+
+  // Populate defaults
+  funnelStore = {};
+  for (const f of DEFAULT_FUNNELS) {
+    funnelStore[f.slug] = { ...f };
+  }
+  saveFunnelStore();
+}
+
+function saveFunnelStore() {
+  try {
+    fs.writeFileSync(FUNNEL_DB_FILE, JSON.stringify(funnelStore, null, 2), 'utf8');
+  } catch (e) {
+    console.error('Failed to save funnel analytics DB:', e);
+  }
+}
+
+initFunnelStore();
+
+function normalizeFunnelSlug(rawSlug?: string): string {
+  if (!rawSlug) return '/book';
+  let slug = rawSlug.trim().toLowerCase();
+  if (slug.endsWith('/') && slug.length > 1) {
+    slug = slug.slice(0, -1);
+  }
+  if (!slug.startsWith('/')) {
+    slug = '/' + slug;
+  }
+  if (funnelStore[slug]) return slug;
+
+  // Attempt fuzzy matches
+  if (slug.includes('formation')) {
+    if (slug.includes('offer')) return '/formation/offer';
+    if (slug.includes('blueprint')) return '/formation/blueprint';
+    if (slug.includes('bridge')) return '/formation/bridge';
+    return '/formation';
+  }
+  if (slug.includes('book') || slug.includes('consultation')) return '/book';
+  if (slug.includes('business') || slug.includes('cr') || slug.includes('sijilat')) return '/funnels/business-registration';
+  if (slug.includes('investor') || slug.includes('visa')) return '/funnels/investor-visa';
+  if (slug.includes('document')) return '/funnels/document-consultancy';
+  if (slug.includes('geo') || slug.includes('aeo')) return '/funnels/geo-aeo';
+  if (slug.includes('agent') || slug.includes('ai')) return '/funnels/ai-agents';
+  if (slug.includes('automation')) return '/funnels/automation';
+  if (slug.includes('marketing') || slug.includes('ads')) return '/funnels/digital-marketing';
+  if (slug.includes('seo')) return '/funnels/seo';
+  if (slug.includes('funnel') || slug.includes('website')) return '/funnels/websites-funnels';
+  if (slug.includes('support') || slug.includes('retainer')) return '/funnels/ongoing-support';
+
+  return '/book';
+}
+
+function recordFunnelEvent(
+  rawSlug: string,
+  step: 'view' | 'opt_in' | 'booking' | 'sale',
+  meta?: {
+    attribution?: any;
+    value?: number;
+    service?: string;
+  }
+) {
+  const slug = normalizeFunnelSlug(rawSlug);
+  const funnel = funnelStore[slug];
+  if (!funnel) return null;
+
+  // Determine attribution source name
+  let source = 'Organic Search';
+  const attr = meta?.attribution;
+  if (attr?.utm_source) {
+    source = attr.utm_source;
+  } else if (attr?.fbclid) {
+    source = 'Meta Ads';
+  } else if (attr?.gclid) {
+    source = 'Google Ads';
+  } else if (attr?.ttclid) {
+    source = 'TikTok Ads';
+  } else if (attr?.sc_click_id) {
+    source = 'Snapchat Ads';
+  } else if (attr?.li_fat_id) {
+    source = 'LinkedIn Ads';
+  }
+
+  // Update counts
+  if (step === 'view') {
+    funnel.views += 1;
+    funnel.sources[source] = (funnel.sources[source] || 0) + 1;
+  } else if (step === 'opt_in') {
+    funnel.leads += 1;
+    funnel.sources[source] = (funnel.sources[source] || 0) + 1;
+  } else if (step === 'booking') {
+    funnel.bookings += 1;
+    funnel.sources[source] = (funnel.sources[source] || 0) + 1;
+  } else if (step === 'sale') {
+    funnel.sales += 1;
+    const addValUSD = meta?.value || 1200;
+    funnel.revenueUSD += addValUSD;
+    funnel.revenueBHD += Math.round(addValUSD * 0.377);
+    funnel.sources[source] = (funnel.sources[source] || 0) + 1;
+  }
+
+  funnel.lastEventTs = Date.now();
+  saveFunnelStore();
+  return funnel;
+}
+
+function computeFunnelAnalytics() {
+  const funnelsList = Object.values(funnelStore).map(f => {
+    const optInRate = f.views > 0 ? Number(((f.leads / f.views) * 100).toFixed(1)) : 0;
+    const bookingRate = f.leads > 0 ? Number(((f.bookings / f.leads) * 100).toFixed(1)) : 0;
+    const winRate = f.bookings > 0 ? Number(((f.sales / f.bookings) * 100).toFixed(1)) : 0;
+    const overallRate = f.views > 0 ? Number(((f.sales / f.views) * 100).toFixed(2)) : 0;
+
+    // Determine top traffic source
+    let topSource = 'Meta Ads';
+    let maxSrcVal = 0;
+    for (const [s, count] of Object.entries(f.sources || {})) {
+      if (count > maxSrcVal) {
+        maxSrcVal = count;
+        topSource = s;
+      }
+    }
+
+    const healthStatus: 'Optimal' | 'Healthy' | 'Needs Attention' =
+      optInRate >= 14 ? 'Optimal' : optInRate >= 8 ? 'Healthy' : 'Needs Attention';
+
+    return {
+      ...f,
+      optInRate,
+      bookingRate,
+      winRate,
+      overallRate,
+      topSource,
+      healthStatus
+    };
+  });
+
+  // Calculate aggregates
+  let totalViews = 0;
+  let totalLeads = 0;
+  let totalBookings = 0;
+  let totalSales = 0;
+  let totalRevenueUSD = 0;
+  let totalRevenueBHD = 0;
+
+  const attributionTotals: Record<string, number> = {
+    'Meta Ads': 0,
+    'Google Ads': 0,
+    'TikTok Ads': 0,
+    'Snapchat Ads': 0,
+    'LinkedIn Ads': 0,
+    'Organic Search': 0,
+    'WhatsApp Direct': 0,
+    'Direct': 0
+  };
+
+  const companyBreakdown = {
+    'Bab Al-Khaleej': { views: 0, leads: 0, bookings: 0, sales: 0, revenueUSD: 0, revenueBHD: 0, funnelsCount: 0 },
+    'Back for Brand LLC': { views: 0, leads: 0, bookings: 0, sales: 0, revenueUSD: 0, revenueBHD: 0, funnelsCount: 0 },
+    'Executive Hub': { views: 0, leads: 0, bookings: 0, sales: 0, revenueUSD: 0, revenueBHD: 0, funnelsCount: 0 }
+  };
+
+  for (const f of funnelsList) {
+    totalViews += f.views;
+    totalLeads += f.leads;
+    totalBookings += f.bookings;
+    totalSales += f.sales;
+    totalRevenueUSD += f.revenueUSD;
+    totalRevenueBHD += f.revenueBHD;
+
+    const comp = f.company;
+    if (companyBreakdown[comp]) {
+      companyBreakdown[comp].views += f.views;
+      companyBreakdown[comp].leads += f.leads;
+      companyBreakdown[comp].bookings += f.bookings;
+      companyBreakdown[comp].sales += f.sales;
+      companyBreakdown[comp].revenueUSD += f.revenueUSD;
+      companyBreakdown[comp].revenueBHD += f.revenueBHD;
+      companyBreakdown[comp].funnelsCount += 1;
+    }
+
+    for (const [src, count] of Object.entries(f.sources || {})) {
+      let mapped = src;
+      if (src.toLowerCase().includes('meta') || src.toLowerCase().includes('facebook') || src.toLowerCase().includes('instagram')) mapped = 'Meta Ads';
+      else if (src.toLowerCase().includes('google')) mapped = 'Google Ads';
+      else if (src.toLowerCase().includes('tiktok')) mapped = 'TikTok Ads';
+      else if (src.toLowerCase().includes('snapchat')) mapped = 'Snapchat Ads';
+      else if (src.toLowerCase().includes('linkedin')) mapped = 'LinkedIn Ads';
+      else if (src.toLowerCase().includes('whatsapp')) mapped = 'WhatsApp Direct';
+      else if (src.toLowerCase().includes('organic')) mapped = 'Organic Search';
+
+      attributionTotals[mapped] = (attributionTotals[mapped] || 0) + count;
+    }
+  }
+
+  const avgOptInRate = totalViews > 0 ? Number(((totalLeads / totalViews) * 100).toFixed(1)) : 0;
+  const avgBookingRate = totalLeads > 0 ? Number(((totalBookings / totalLeads) * 100).toFixed(1)) : 0;
+  const avgWinRate = totalBookings > 0 ? Number(((totalSales / totalBookings) * 100).toFixed(1)) : 0;
+  const overallConversionRate = totalViews > 0 ? Number(((totalSales / totalViews) * 100).toFixed(2)) : 0;
+
+  // Ranked Top 3 by Revenue
+  const topFunnelsByRevenue = [...funnelsList].sort((a, b) => b.revenueUSD - a.revenueUSD).slice(0, 3);
+  // Ranked Top 3 by Conversion Rate
+  const topFunnelsByConversion = [...funnelsList].sort((a, b) => b.optInRate - a.optInRate).slice(0, 3);
+
+  return {
+    summary: {
+      totalFunnels: funnelsList.length,
+      totalViews,
+      totalLeads,
+      totalBookings,
+      totalSales,
+      totalRevenueUSD,
+      totalRevenueBHD,
+      avgOptInRate,
+      avgBookingRate,
+      avgWinRate,
+      overallConversionRate
+    },
+    funnels: funnelsList,
+    topFunnelsByRevenue,
+    topFunnelsByConversion,
+    attributionTotals,
+    companyBreakdown,
+    stageFunnel: [
+      { stage: '1. Funnel Impressions', count: totalViews, pct: 100, dropoffPct: 0 },
+      { stage: '2. Captured Opt-ins', count: totalLeads, pct: totalViews > 0 ? Number(((totalLeads / totalViews) * 100).toFixed(1)) : 0, dropoffPct: totalViews > 0 ? Number((100 - (totalLeads / totalViews) * 100).toFixed(1)) : 0 },
+      { stage: '3. Strategy Consultations', count: totalBookings, pct: totalLeads > 0 ? Number(((totalBookings / totalLeads) * 100).toFixed(1)) : 0, dropoffPct: totalLeads > 0 ? Number((100 - (totalBookings / totalLeads) * 100).toFixed(1)) : 0 },
+      { stage: '4. Closed Deals (Won)', count: totalSales, pct: totalBookings > 0 ? Number(((totalSales / totalBookings) * 100).toFixed(1)) : 0, dropoffPct: totalBookings > 0 ? Number((100 - (totalSales / totalBookings) * 100).toFixed(1)) : 0 }
+    ]
+  };
+}
+
+// -------------------------------------------------------------
+// Funnel Analytics Public & Admin Routes
+// -------------------------------------------------------------
+app.post('/api/funnels/track', (req, res) => {
+  const { slug, step, attribution, value, service } = req.body;
+  if (!slug || !step) {
+    return res.status(400).json({ error: 'slug and step (view | opt_in | booking | sale) are required' });
+  }
+
+  const updated = recordFunnelEvent(slug, step, { attribution, value, service });
+  res.json({ success: true, funnel: updated });
+});
+
+app.get('/api/admin/funnels/analytics', (req, res) => {
+  const auth = authenticateToken(req);
+  if (!auth) return res.status(401).json({ error: 'Unauthorized.' });
+
+  const analytics = computeFunnelAnalytics();
+  res.json(analytics);
+});
+
+app.post('/api/admin/funnels/simulate-traffic', (req, res) => {
+  const auth = authenticateToken(req);
+  if (!auth) return res.status(401).json({ error: 'Unauthorized.' });
+
+  const { slug, views, leads, bookings } = req.body;
+  const targetSlug = normalizeFunnelSlug(slug);
+  const funnel = funnelStore[targetSlug];
+  if (!funnel) {
+    return res.status(404).json({ error: `Funnel not found for slug: ${slug}` });
+  }
+
+  const addViews = Number(views) || 50;
+  const addLeads = Number(leads) || 6;
+  const addBookings = Number(bookings) || 2;
+
+  funnel.views += addViews;
+  funnel.leads += addLeads;
+  funnel.bookings += addBookings;
+  funnel.sources['Meta Ads'] = (funnel.sources['Meta Ads'] || 0) + Math.round(addViews * 0.45);
+  funnel.sources['Google Ads'] = (funnel.sources['Google Ads'] || 0) + Math.round(addViews * 0.35);
+  funnel.sources['Organic Search'] = (funnel.sources['Organic Search'] || 0) + Math.round(addViews * 0.20);
+  funnel.lastEventTs = Date.now();
+  saveFunnelStore();
+
+  logAudit(auth.user.email, auth.user.role, 'funnels.simulate_traffic', funnel.name, `+${addViews} views, +${addLeads} leads, +${addBookings} bookings`);
+
+  res.json({
+    success: true,
+    message: `Simulated +${addViews} views, +${addLeads} leads, and +${addBookings} bookings on ${funnel.name}`,
+    funnel
+  });
+});
+
+app.post('/api/admin/funnels/reset-simulation', (req, res) => {
+  const auth = authenticateToken(req);
+  if (!auth) return res.status(401).json({ error: 'Unauthorized.' });
+
+  funnelStore = {};
+  for (const f of DEFAULT_FUNNELS) {
+    funnelStore[f.slug] = { ...f };
+  }
+  saveFunnelStore();
+
+  logAudit(auth.user.email, auth.user.role, 'funnels.reset', 'All 15 Funnels', 'Reset to baseline metrics');
+  res.json({ success: true, message: 'All funnels successfully reset to baseline metrics.' });
+});
+
 // 2. Lead Capture (Public with Honeypot, Validation, Rate Limiting, Scoring)
 app.post('/api/leads', (req, res) => {
   const ip = req.ip || 'unknown';
@@ -1030,6 +1595,10 @@ app.post('/api/leads', (req, res) => {
     timestamp: Date.now(),
     leadId: newLeadRecord.id
   });
+
+  // Record in Omni-Funnel Performance Engine
+  const funnelTarget = attribution?.funnelSlug || service || '/book';
+  recordFunnelEvent(funnelTarget, 'opt_in', { attribution, value: 1200, service: newLeadRecord.svc });
 
   // Also push into Unified Inbox for CEO Command Center
   db.inbox.unshift({
@@ -1223,6 +1792,10 @@ app.post('/api/bookings', (req, res) => {
     timestamp: Date.now(),
     leadId: lead.id
   });
+
+  // Record in Omni-Funnel Performance Engine
+  const bookingFunnelTarget = attribution?.funnelSlug || service || '/book';
+  recordFunnelEvent(bookingFunnelTarget, 'booking', { attribution, value: 800, service: service || 'Consultation' });
 
   saveDatabase(db);
 
@@ -2557,17 +3130,110 @@ app.post('/api/webhooks/google-lead-form', (req, res) => {
   }
 });
 
-// 4. Client-Side Conversion Recorder & CAPI Sync
+// 4. TikTok Lead Generation Webhook
+app.post('/api/webhooks/tiktok-lead-gen', (req, res) => {
+  try {
+    const { advertiser_id, lead_id, ad_id, adgroup_id, name, email, phone, service } = req.body;
+    logAudit('SYSTEM', 'TIKTOK_ADS_WEBHOOK', 'webhook.received', 'TikTok Lead Gen', `Lead: ${lead_id || 'n/a'}`);
+
+    const newLead: Lead = {
+      id: 'lead-' + crypto.randomBytes(4).toString('hex'),
+      name: String(name || 'TikTok Inbound Prospect').trim(),
+      email: String(email || `lead-${Date.now()}@tiktok-inbound.com`).trim().toLowerCase(),
+      phone: phone || undefined,
+      svc: service || 'Bahrain Commercial Registration',
+      src: 'TikTok Ads (Lead Gen Form)',
+      value: 1200,
+      stage: 'QUALIFIED',
+      factors: { need: 4, budget: 4, timeline: 4, fit: 4, urgency: 4, authority: 4, signals: 5 },
+      score: 86,
+      owner: 'Ghazi Wazir',
+      next: 'Contact prospect via WhatsApp (+973 3562 8353)',
+      notes: [{ ts: Date.now(), by: 'TikTok Ads Webhook', t: `Ingested from TikTok Lead Form (Ad ID: ${ad_id || 'n/a'})` }],
+      created: Date.now(),
+      updated: Date.now()
+    };
+
+    db.leads.unshift(newLead);
+    adConversionsLog.unshift({
+      id: 'conv-' + crypto.randomBytes(3).toString('hex'),
+      event: 'Lead',
+      source: 'TikTok Ads',
+      service: newLead.svc,
+      value: 1200,
+      timestamp: Date.now(),
+      leadId: newLead.id
+    });
+
+    saveDatabase(db);
+    logAudit('TIKTOK_ADS', 'WEBHOOK', 'lead.ingested', newLead.name, `TikTok Lead ID: ${lead_id}`);
+    res.status(200).json({ success: true, leadId: newLead.id });
+  } catch (err: any) {
+    res.status(500).json({ error: 'TikTok Ads Webhook Error: ' + err.message });
+  }
+});
+
+// 5. Snapchat Lead Generation Webhook
+app.post('/api/webhooks/snapchat-lead-gen', (req, res) => {
+  try {
+    const { campaign_id, lead_id, name, email, phone, service } = req.body;
+    logAudit('SYSTEM', 'SNAPCHAT_ADS_WEBHOOK', 'webhook.received', 'Snapchat Lead Gen', `Lead: ${lead_id || 'n/a'}`);
+
+    const newLead: Lead = {
+      id: 'lead-' + crypto.randomBytes(4).toString('hex'),
+      name: String(name || 'Snapchat Inbound Prospect').trim(),
+      email: String(email || `lead-${Date.now()}@snapchat-inbound.com`).trim().toLowerCase(),
+      phone: phone || undefined,
+      svc: service || 'Investor Visa & Residency',
+      src: 'Snapchat Ads (Story / Spotlight)',
+      value: 1000,
+      stage: 'QUALIFIED',
+      factors: { need: 4, budget: 4, timeline: 4, fit: 4, urgency: 4, authority: 4, signals: 5 },
+      score: 85,
+      owner: 'Ghazi Wazir',
+      next: 'Send investor visa requirements dossier',
+      notes: [{ ts: Date.now(), by: 'Snapchat Ads Webhook', t: `Ingested from Snapchat Form (Campaign: ${campaign_id || 'n/a'})` }],
+      created: Date.now(),
+      updated: Date.now()
+    };
+
+    db.leads.unshift(newLead);
+    adConversionsLog.unshift({
+      id: 'conv-' + crypto.randomBytes(3).toString('hex'),
+      event: 'Lead',
+      source: 'Snapchat Ads',
+      service: newLead.svc,
+      value: 1000,
+      timestamp: Date.now(),
+      leadId: newLead.id
+    });
+
+    saveDatabase(db);
+    logAudit('SNAPCHAT_ADS', 'WEBHOOK', 'lead.ingested', newLead.name, `Snapchat Lead ID: ${lead_id}`);
+    res.status(200).json({ success: true, leadId: newLead.id });
+  } catch (err: any) {
+    res.status(500).json({ error: 'Snapchat Ads Webhook Error: ' + err.message });
+  }
+});
+
+// 6. Client-Side Conversion Recorder & Omni-Channel Sync
 app.post('/api/ads/conversion', (req, res) => {
   const { eventName, value, currency, service, leadId, attribution } = req.body;
 
-  const eventSource = attribution?.utm_source
-    ? `${attribution.utm_source} (${attribution.utm_campaign || 'direct'})`
-    : attribution?.fbclid
-    ? 'Meta Ads'
-    : attribution?.gclid
-    ? 'Google Ads'
-    : 'Website Direct';
+  let eventSource = 'Website Direct';
+  if (attribution?.utm_source) {
+    eventSource = `${attribution.utm_source} (${attribution.utm_campaign || 'direct'})`;
+  } else if (attribution?.fbclid) {
+    eventSource = 'Meta Ads';
+  } else if (attribution?.gclid) {
+    eventSource = 'Google Ads';
+  } else if (attribution?.ttclid) {
+    eventSource = 'TikTok Ads';
+  } else if (attribution?.sc_click_id) {
+    eventSource = 'Snapchat Ads';
+  } else if (attribution?.li_fat_id) {
+    eventSource = 'LinkedIn Ads';
+  }
 
   adConversionsLog.unshift({
     id: 'conv-' + crypto.randomBytes(3).toString('hex'),
@@ -2586,25 +3252,31 @@ app.post('/api/ads/conversion', (req, res) => {
   res.json({ success: true, recorded: true });
 });
 
-// 5. Admin Ad Stats & Webhook URLs
+// 7. Admin Ad Stats & Webhook URLs
 app.get('/api/admin/ads/stats', (req, res) => {
   const auth = authenticateToken(req);
   if (!auth) return res.status(401).json({ error: 'Unauthorized.' });
 
   // Calculate summary by source
   const summary: Record<string, { leads: number; bookings: number; revenue: number }> = {
-    'Meta Ads': { leads: 0, bookings: 0, revenue: 0 },
-    'Google Ads': { leads: 0, bookings: 0, revenue: 0 },
-    'Website Funnels': { leads: 0, bookings: 0, revenue: 0 },
-    'Organic / Direct': { leads: 0, bookings: 0, revenue: 0 }
+    'Meta Ads (Facebook & IG)': { leads: 0, bookings: 0, revenue: 0 },
+    'Google Ads (Search & Display)': { leads: 0, bookings: 0, revenue: 0 },
+    'TikTok Ads (Short-Form)': { leads: 0, bookings: 0, revenue: 0 },
+    'Snapchat Ads (GCC Reach)': { leads: 0, bookings: 0, revenue: 0 },
+    'LinkedIn Ads (B2B Corporates)': { leads: 0, bookings: 0, revenue: 0 },
+    'Website Funnels (VSL & Blueprints)': { leads: 0, bookings: 0, revenue: 0 },
+    'Organic Search & Direct': { leads: 0, bookings: 0, revenue: 0 }
   };
 
   for (const l of db.leads) {
     const srcLower = (l.src || '').toLowerCase();
-    let cat = 'Organic / Direct';
-    if (srcLower.includes('meta') || srcLower.includes('facebook') || srcLower.includes('instagram')) cat = 'Meta Ads';
-    else if (srcLower.includes('google')) cat = 'Google Ads';
-    else if (srcLower.includes('funnel') || srcLower.includes('vsl') || srcLower.includes('blueprint')) cat = 'Website Funnels';
+    let cat = 'Organic Search & Direct';
+    if (srcLower.includes('meta') || srcLower.includes('facebook') || srcLower.includes('instagram')) cat = 'Meta Ads (Facebook & IG)';
+    else if (srcLower.includes('google')) cat = 'Google Ads (Search & Display)';
+    else if (srcLower.includes('tiktok')) cat = 'TikTok Ads (Short-Form)';
+    else if (srcLower.includes('snapchat')) cat = 'Snapchat Ads (GCC Reach)';
+    else if (srcLower.includes('linkedin')) cat = 'LinkedIn Ads (B2B Corporates)';
+    else if (srcLower.includes('funnel') || srcLower.includes('vsl') || srcLower.includes('blueprint')) cat = 'Website Funnels (VSL & Blueprints)';
 
     summary[cat].leads += 1;
     if (l.stage === 'BOOKED' || l.stage === 'CONSULTATION') summary[cat].bookings += 1;
@@ -2615,10 +3287,12 @@ app.get('/api/admin/ads/stats', (req, res) => {
 
   res.json({
     attributionSummary: summary,
-    recentConversions: adConversionsLog.slice(0, 15),
+    recentConversions: adConversionsLog.slice(0, 20),
     webhooks: {
       metaLeadGen: `${appUrl}/api/webhooks/meta-lead-gen`,
-      googleLeadForm: `${appUrl}/api/webhooks/google-lead-form`
+      googleLeadForm: `${appUrl}/api/webhooks/google-lead-form`,
+      tiktokLeadGen: `${appUrl}/api/webhooks/tiktok-lead-gen`,
+      snapchatLeadGen: `${appUrl}/api/webhooks/snapchat-lead-gen`
     }
   });
 });

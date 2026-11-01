@@ -215,6 +215,8 @@ export const api = {
       webhooks: {
         metaLeadGen: string;
         googleLeadForm: string;
+        tiktokLeadGen?: string;
+        snapchatLeadGen?: string;
       };
     }>('/api/admin/ads/stats');
   },
@@ -414,4 +416,42 @@ export const api = {
       body: JSON.stringify(data),
     });
   },
+
+  // -------------------------------------------------------------
+  // Omni-Funnel Performance Analytics Methods
+  // -------------------------------------------------------------
+  async trackFunnelEvent(
+    slug: string,
+    step: 'view' | 'opt_in' | 'booking' | 'sale',
+    meta?: { attribution?: any; value?: number; service?: string }
+  ) {
+    try {
+      const attr = meta?.attribution || (typeof window !== 'undefined' ? (await import('./attribution')).getStoredAttribution() : {});
+      return await this.request<{ success: boolean; funnel: any }>('/api/funnels/track', {
+        method: 'POST',
+        body: JSON.stringify({ slug, step, attribution: attr, value: meta?.value, service: meta?.service }),
+      });
+    } catch (e) {
+      // Non-blocking telemetry
+      return { success: false };
+    }
+  },
+
+  async getFunnelAnalytics() {
+    return this.request<import('../types').FunnelAnalyticsResponse>('/api/admin/funnels/analytics');
+  },
+
+  async simulateFunnelTraffic(slug: string, views: number = 50, leads: number = 6, bookings: number = 2) {
+    return this.request<{ success: boolean; message: string; funnel: any }>('/api/admin/funnels/simulate-traffic', {
+      method: 'POST',
+      body: JSON.stringify({ slug, views, leads, bookings }),
+    });
+  },
+
+  async resetFunnelSimulation() {
+    return this.request<{ success: boolean; message: string }>('/api/admin/funnels/reset-simulation', {
+      method: 'POST',
+    });
+  },
 };
+

@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { SEOHead } from '../components/SEOHead';
 import { BookingWidget } from '../components/BookingWidget';
+import { api } from '../services/api';
 import { Calendar, ShieldCheck, Clock, Phone, Mail } from 'lucide-react';
 
 export function BookPage() {
+  useEffect(() => {
+    api.trackFunnelEvent('/book', 'view', { service: 'Direct Consultation Booking' });
+  }, []);
   return (
     <>
       <SEOHead
