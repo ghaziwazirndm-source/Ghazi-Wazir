@@ -453,5 +453,87 @@ export const api = {
       method: 'POST',
     });
   },
+
+  // -------------------------------------------------------------
+  // Cross-Platform Content Management & AI Autopilot Methods
+  // -------------------------------------------------------------
+  async getContentStudio() {
+    return this.request<import('../types').ContentStudioResponse>('/api/admin/content/posts');
+  },
+
+  async generateContentAutopilot(payload: {
+    topic: string;
+    entity?: string;
+    language?: string;
+    funnelSlug?: string;
+    tone?: string;
+  }) {
+    return this.request<{
+      success: boolean;
+      topic: string;
+      entity: string;
+      funnelTarget: string;
+      content: {
+        facebook?: string;
+        x?: string;
+        linkedin?: string;
+        meta?: string;
+        twitter?: string;
+        instagram?: string;
+        youtube?: string;
+        tiktok?: string;
+        snapchat?: string;
+        quora?: string;
+        dailymotion?: string;
+        wikipedia?: string;
+        google_business?: string;
+        blog?: string;
+      };
+      graphicPrompt?: string;
+      hashtags?: string[];
+      storyboard?: import('../types').ShortsStoryboard;
+      mode: string;
+    }>('/api/admin/content/generate-autopilot', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async createContentPost(payload: {
+    topic: string;
+    entity?: string;
+    platforms: string[];
+    content: any;
+    scheduledFor?: number;
+    status?: string;
+    funnelTarget?: string;
+  }) {
+    return this.request<{ success: boolean; post: import('../types').ContentPostItem }>('/api/admin/content/create-post', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async publishContentPost(id: string) {
+    return this.request<{ success: boolean; message: string; post: import('../types').ContentPostItem }>('/api/admin/content/publish-post', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+    });
+  },
+
+  async toggleContentAutopilot(payload: { enabled?: boolean; frequency?: string; autoPublish?: boolean }) {
+    return this.request<{ success: boolean; autopilot: any }>('/api/admin/content/autopilot-toggle', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async deleteContentPost(id: string) {
+    return this.request<{ success: boolean; message: string }>('/api/admin/content/delete-post', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+    });
+  },
 };
+
 

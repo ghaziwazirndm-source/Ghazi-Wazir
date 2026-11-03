@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Calendar, ChevronDown, Building2, Globe, ShieldCheck } from 'lucide-react';
+import { Menu, X, Calendar, ChevronDown, Building2, Globe, ShieldCheck, Lock, Share2 } from 'lucide-react';
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,7 +31,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             <Link
               to="/companies"
               className={`text-sm font-medium transition-colors ${
@@ -126,6 +126,18 @@ export function Navbar() {
             </div>
 
             <Link
+              to="/content-studio"
+              className={`text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                isActive('/content-studio') ? 'text-[#38bdf8]' : 'text-[#a8a7b3] hover:text-[#f8fafc]'
+              }`}
+            >
+              <span>Content Studio</span>
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#38bdf8]/15 text-[#38bdf8] border border-[#38bdf8]/30">
+                AI
+              </span>
+            </Link>
+
+            <Link
               to="/blog"
               className={`text-sm font-medium transition-colors ${
                 isActive('/blog') ? 'text-[#e8c872]' : 'text-[#a8a7b3] hover:text-[#f5f1e8]'
@@ -153,13 +165,21 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Header Action CTA */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Header Action CTA & Login Portal */}
+          <div className="hidden sm:flex items-center gap-2.5">
+            <Link
+              to="/login"
+              className="px-3.5 py-2 rounded-full text-xs font-semibold text-[#f8fafc] bg-[#131d33] hover:bg-[#1e2d4d] border border-[#1e2d4d] hover:border-[#38bdf8]/40 transition-colors flex items-center gap-1.5"
+            >
+              <Lock className="w-3.5 h-3.5 text-[#38bdf8]" />
+              <span>Login</span>
+            </Link>
+
             <Link
               to="/book"
-              className="btn-gold px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg"
+              className="btn-gold px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg"
             >
-              <Calendar className="w-4 h-4 text-[#16120a]" />
+              <Calendar className="w-3.5 h-3.5 text-[#16120a]" />
               <span>Book Consultation</span>
             </Link>
           </div>
@@ -231,11 +251,22 @@ export function Navbar() {
             About Ghazi Wazir
           </Link>
           <Link
-            to="/contact"
+            to="/content-studio"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="block px-3 py-2 rounded-lg text-base font-medium text-[#38bdf8] hover:bg-[#14141d] flex items-center justify-between"
           >
-            Contact
+            <span>Content Studio (AI Autopilot)</span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black uppercase bg-[#38bdf8]/15 text-[#38bdf8]">
+              AI
+            </span>
+          </Link>
+          <Link
+            to="/login"
+            onClick={() => setMobileOpen(false)}
+            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f8fafc] hover:bg-[#14141d] flex items-center gap-2"
+          >
+            <Lock className="w-4 h-4 text-[#38bdf8]" />
+            <span>Executive Login Portal</span>
           </Link>
           <div className="pt-2">
             <Link

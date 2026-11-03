@@ -27,6 +27,8 @@ import { GuideDetailPage } from './pages/GuideDetailPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ThankYouPage } from './pages/ThankYouPage';
+import { LoginPage } from './pages/LoginPage';
+import { ContentStudioPage } from './pages/ContentStudioPage';
 
 // Funnels
 import { FunnelsIndexPage } from './pages/funnels/FunnelsIndexPage';
@@ -104,6 +106,12 @@ function AppContent() {
           <Route path="/terms-of-service" element={<TermsPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+
+          {/* Dedicated Platform Login Portal */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Standalone All-Platform Content Studio & Autopilot */}
+          <Route path="/content-studio" element={<ContentStudioPage />} />
 
           {/* CEO Command Center */}
           <Route path="/admin" element={<AdminConsole />} />

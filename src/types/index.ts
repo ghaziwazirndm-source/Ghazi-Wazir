@@ -369,4 +369,142 @@ export interface FunnelAnalyticsResponse {
   }[];
 }
 
+// -------------------------------------------------------------
+// Cross-Platform Content Studio, Hashtags & Graphic Design Types
+// -------------------------------------------------------------
+export type SocialPlatform =
+  | 'facebook'
+  | 'x'
+  | 'linkedin'
+  | 'meta'
+  | 'twitter'
+  | 'instagram'
+  | 'youtube'
+  | 'tiktok'
+  | 'snapchat'
+  | 'quora'
+  | 'dailymotion'
+  | 'wikipedia'
+  | 'google_business'
+  | 'blog';
+
+export type BrandTheme = 'gold_luxury' | 'cyber_azure' | 'executive_sovereign';
+export type GraphicAspectRatio = '1:1' | '9:16' | '16:9' | '1.91:1';
+export type GraphicTemplate =
+  | 'executive_spotlight'
+  | 'data_matrix'
+  | 'statutory_gazette'
+  | 'contrarian_quote'
+  | 'carousel_slide';
+
+export interface GraphicDesignConfig {
+  headline: string;
+  subheadline: string;
+  badge: string;
+  ctaText: string;
+  theme: BrandTheme;
+  aspectRatio: GraphicAspectRatio;
+  template: GraphicTemplate;
+  showPhoto: boolean;
+  showWatermark: boolean;
+  backgroundStyle: 'gradient' | 'grid' | 'mesh' | 'luxury' | 'photo';
+  authorTag: string;
+  stickerText?: string;
+  backgroundImage?: string;
+  backgroundBlur?: number;
+  backgroundOverlay?: number;
+  colorGrading?: 'natural' | 'gold_monolith' | 'cyber_matrix' | 'high_contrast' | 'noir';
+  showLetterbox?: boolean;
+}
+
+export interface ShortsScene {
+  id: string;
+  title: string;
+  timing: string;
+  durationSec: number;
+  voiceover: string;
+  visualCue: string;
+  captionHighlight: string;
+  backgroundImage?: string;
+  motionStyle?: 'ken_burns_zoom' | 'whip_pan' | 'impact_shake' | 'glitch_pulse' | 'smooth_drift';
+}
+
+export interface ShortsStoryboard {
+  title: string;
+  totalDurationSec: number;
+  targetPlatform: 'TikTok' | 'YouTube Shorts' | 'Instagram Reels' | 'Snapchat Spotlight';
+  scenes: ShortsScene[];
+  voiceoverFull: string;
+  bRollSuggestions: string[];
+  soundtrackMood: string;
+  videoPreset?: 'bahrain_harbour' | 'boardroom' | 'cyber_mesh' | 'manama_skyline' | 'canvas_particles' | 'custom';
+  customBackgroundUrl?: string;
+  motionVFX?: {
+    particlesEnabled: boolean;
+    waveformEnabled: boolean;
+    chromaticGlitch: boolean;
+    cinematicBars: boolean;
+    soundFXEnabled: boolean;
+    cameraMotion: 'cinematic_push' | 'dynamic_shake' | 'subtle_float';
+    captionStyle: 'hormozi_bold' | 'cyber_neon' | 'beast_yellow' | 'executive_minimal';
+  };
+}
+
+export interface ContentPostItem {
+  id: string;
+  topic: string;
+  entity: 'Bab Al-Khaleej' | 'Back for Brand LLC' | 'Executive Hub';
+  platforms: SocialPlatform[];
+  status: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'AUTOPILOT_QUEUED';
+  scheduledFor: number;
+  publishedAt?: number;
+  funnelTarget?: string;
+  content: {
+    facebook?: string;
+    x?: string;
+    linkedin?: string;
+    meta?: string;
+    twitter?: string;
+    instagram?: string;
+    youtube?: string;
+    tiktok?: string;
+    snapchat?: string;
+    quora?: string;
+    dailymotion?: string;
+    wikipedia?: string;
+    google_business?: string;
+    blog?: string;
+  };
+  graphicConfig?: Partial<GraphicDesignConfig>;
+  hashtags?: string[];
+  metrics?: {
+    impressions?: number;
+    clicks?: number;
+    leads?: number;
+  };
+  createdAt: number;
+}
+
+export interface ContentStudioResponse {
+  posts: ContentPostItem[];
+  autopilot: {
+    enabled: boolean;
+    frequency: string;
+    autoPublish: boolean;
+    targetEntities: string[];
+    languages: string[];
+    platforms: string[];
+  };
+  stats: {
+    totalPosts: number;
+    publishedCount: number;
+    scheduledCount: number;
+    draftCount: number;
+    totalImpressions: number;
+    totalClicks: number;
+    totalLeads: number;
+  };
+}
+
+
 

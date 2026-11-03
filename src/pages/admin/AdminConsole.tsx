@@ -63,7 +63,8 @@ import {
   VolumeX,
   Eye,
   Layers as LayersIcon,
-  Rocket
+  Rocket,
+  Share2
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useABTheme } from '../../context/ABThemeContext';
@@ -71,6 +72,7 @@ import { RequirementBriefModal } from '../../components/RequirementBriefModal';
 import { adTracker } from '../../services/adTracking';
 import { PlatformLaunchGuide } from '../../components/PlatformLaunchGuide';
 import { AllFunnelsAnalytics } from '../../components/AllFunnelsAnalytics';
+import { ContentStudio } from '../../components/ContentStudio';
 
 const ROLES_INFO: Record<Role, { name: string; desc: string }> = {
   CEO: { name: 'Chief Executive Officer', desc: 'Full unrestricted governance across all 25 modules' },
@@ -103,6 +105,7 @@ const STAGE_PROBABILITIES: Record<string, number> = {
 const MODULE_LABELS: Record<string, { label: string; icon: any }> = {
   command: { label: 'CEO Command Center', icon: Activity },
   funnels: { label: 'All Funnels Analytics', icon: Layers },
+  content: { label: 'Content Studio & Autopilot', icon: Share2 },
   launch_guide: { label: 'Platform & Launch Guide', icon: Rocket },
   inbox: { label: 'Unified Inbox', icon: Inbox },
   agent: { label: 'AI Sales Agent (Trilingual)', icon: Bot },
@@ -1325,6 +1328,14 @@ export function AdminConsole() {
                       <Layers className="w-3.5 h-3.5 text-[#38bdf8]" />
                       <span>All Funnels Analytics (15)</span>
                     </button>
+                    <button
+                      type="button"
+                      onClick={() => setCurrentModule('content')}
+                      className="px-4 py-2 rounded-xl border border-[#a855f7]/40 bg-[#131d33] text-xs font-bold text-[#c084fc] hover:border-[#a855f7] hover:bg-[#1e2d4d] flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(168,85,247,0.2)]"
+                    >
+                      <Share2 className="w-3.5 h-3.5 text-[#c084fc]" />
+                      <span>Content Studio & Autopilot</span>
+                    </button>
                   </div>
                 </div>
 
@@ -1412,6 +1423,11 @@ export function AdminConsole() {
             {/* Omni-Funnel Performance Analytics View */}
             {currentModule === 'funnels' && (
               <AllFunnelsAnalytics onNotify={(msg, type) => notify(msg, type)} />
+            )}
+
+            {/* All-Platform Content Studio & AI Autopilot View */}
+            {currentModule === 'content' && (
+              <ContentStudio onNotify={(msg, type) => notify(msg, type)} />
             )}
 
             {/* Executive Platform & Launch Guide View */}
