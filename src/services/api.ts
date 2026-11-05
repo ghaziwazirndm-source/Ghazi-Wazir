@@ -1,18 +1,81 @@
 import { WorkspaceState, Lead, Booking, User } from '../types';
 
+let memoryToken: string | null = null;
 const TOKEN_KEY = 'gw_auth_token';
+
+function safeStorageGet(key: string): string | null {
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const s = window.sessionStorage.getItem(key);
+      if (s) return s;
+    }
+  } catch {
+    // Ignore iframe / restricted environment errors
+  }
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const l = window.localStorage.getItem(key);
+      if (l) return l;
+    }
+  } catch {
+    // Ignore iframe / restricted environment errors
+  }
+  return null;
+}
+
+function safeStorageSet(key: string, value: string): void {
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.setItem(key, value);
+    }
+  } catch {
+    // Ignore restricted storage
+  }
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(key, value);
+    }
+  } catch {
+    // Ignore restricted storage
+  }
+}
+
+function safeStorageRemove(key: string): void {
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.removeItem(key);
+    }
+  } catch {
+    // Ignore restricted storage
+  }
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.removeItem(key);
+    }
+  } catch {
+    // Ignore restricted storage
+  }
+}
 
 export const api = {
   getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    if (memoryToken) return memoryToken;
+    const stored = safeStorageGet(TOKEN_KEY);
+    if (stored) {
+      memoryToken = stored;
+      return stored;
+    }
+    return null;
   },
 
   setToken(token: string) {
-    localStorage.setItem(TOKEN_KEY, token);
+    memoryToken = token;
+    safeStorageSet(TOKEN_KEY, token);
   },
 
   clearToken() {
-    localStorage.removeItem(TOKEN_KEY);
+    memoryToken = null;
+    safeStorageRemove(TOKEN_KEY);
   },
 
   async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -31,7 +94,12 @@ export const api = {
       headers,
     });
 
-    const data = await res.json();
+    let data: any = {};
+    try {
+      data = await res.json();
+    } catch {
+      data = { error: `Server error (${res.status}: ${res.statusText || 'Unknown'})` };
+    }
     if (!res.ok) {
       if (res.status === 401) {
         this.clearToken();
@@ -533,6 +601,41 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ id }),
     });
+  },
+
+  // -------------------------------------------------------------
+  // Free AI Image & Video Generation API Methods
+  // -------------------------------------------------------------
+  async generateImage(payload: {
+    prompt: string;
+    style?: string;
+    aspectRatio?: string;
+    entity?: string;
+    engine?: 'pollinations' | 'gemini';
+  }) {
+    return this.request<{
+      success: boolean;
+      image: import('../types').GeneratedImageItem;
+      message: string;
+    }>('/api/admin/media/generate-image', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async getFreeVideos() {
+    return this.request<{
+      success: boolean;
+      videos: import('../types').FreeVideoClip[];
+      categories: string[];
+    }>('/api/admin/media/free-videos');
+  },
+
+  async getGeneratedImages() {
+    return this.request<{
+      success: boolean;
+      images: import('../types').GeneratedImageItem[];
+    }>('/api/admin/media/generated-images');
   },
 };
 

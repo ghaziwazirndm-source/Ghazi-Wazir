@@ -158,6 +158,7 @@ export function AdminConsole() {
   const [setupPassword, setSetupPassword] = useState('');
   const [setupConfirm, setSetupConfirm] = useState('');
   const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
 
   // CRM & Lead Selection State
   const [selectedLeadId, setSelectedLeadId] = useState<string>('');
@@ -276,6 +277,14 @@ export function AdminConsole() {
   }, [currentModule]);
 
   const checkAuthAndLoad = async () => {
+    const existingToken = api.getToken();
+    if (!existingToken) {
+      setUser(null);
+      setWorkspace(null);
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     setAuthError('');
     try {
@@ -283,10 +292,10 @@ export function AdminConsole() {
       setUser(session.user);
       const ws = await api.getWorkspace();
       setWorkspace(ws);
-      if (ws.leads.length && !selectedLeadId) {
+      if (ws.leads?.length && !selectedLeadId) {
         setSelectedLeadId(ws.leads[0].id);
       }
-    } catch {
+    } catch (err: any) {
       api.clearToken();
       setUser(null);
       setWorkspace(null);
@@ -310,19 +319,23 @@ export function AdminConsole() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError('');
+    setAuthLoading(true);
     try {
-      const res = await api.login(loginEmail, loginPassword);
+      const res = await api.login(loginEmail.trim(), loginPassword.trim());
       setUser(res.user);
       const ws = await api.getWorkspace();
       setWorkspace(ws);
       notify(`Welcome back, ${res.user.name}`, 'success');
     } catch (err: any) {
       setAuthError(err.message || 'Login failed. Please verify credentials.');
+    } finally {
+      setAuthLoading(false);
     }
   };
 
   const handleQuickLogin = async (role: string = 'CEO') => {
     setAuthError('');
+    setAuthLoading(true);
     try {
       const res = await api.quickLogin(role);
       setUser(res.user);
@@ -331,6 +344,8 @@ export function AdminConsole() {
       notify(`Instant session authorized: ${res.user.name} (${res.user.role})`, 'success');
     } catch (err: any) {
       setAuthError(err.message || 'Quick login failed.');
+    } finally {
+      setAuthLoading(false);
     }
   };
 
@@ -895,9 +910,32 @@ export function AdminConsole() {
             </div>
 
             {authError && (
-              <div className="p-3 bg-[#2a1313] border border-[#ff5d5d] rounded-xl text-xs text-[#ffb3b3] flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 flex-none" />
-                <span>{authError}</span>
+              <div className="p-3.5 bg-[#2a1313] border border-[#ff5d5d] rounded-xl text-xs text-[#ffb3b3] space-y-2">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 flex-none text-[#ff5d5d]" />
+                  <span>{authError}</span>
+                </div>
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => handleQuickLogin('CEO')}
+                    disabled={authLoading}
+                    className="px-3 py-1.5 rounded-lg bg-[#e8c872] text-[#16120a] font-bold text-[11px] hover:bg-[#d4b35e] transition-all disabled:opacity-50"
+                  >
+                    👑 Instant CEO Login Bypass
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginEmail('ghaziwazirndm@gmail.com');
+                      setLoginPassword('GhaziWazir2026!');
+                      setAuthError('');
+                    }}
+                    className="px-2.5 py-1.5 rounded-lg bg-[#2a2a38] text-[#f5f1e8] text-[11px] hover:bg-[#38384a]"
+                  >
+                    Reset Defaults
+                  </button>
+                </div>
               </div>
             )}
 
@@ -913,10 +951,11 @@ export function AdminConsole() {
               <button
                 type="button"
                 onClick={() => handleQuickLogin('CEO')}
-                className="btn-gold w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-[#16120a] flex items-center justify-center gap-2 shadow-lg hover:shadow-[#e8c872]/20"
+                disabled={authLoading}
+                className="btn-gold w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-[#16120a] flex items-center justify-center gap-2 shadow-lg hover:shadow-[#e8c872]/20 disabled:opacity-50"
               >
                 <span>👑</span>
-                <span>Enter as Ghazi Wazir (CEO)</span>
+                <span>{authLoading ? 'Authorizing Session...' : 'Enter as Ghazi Wazir (CEO)'}</span>
               </button>
 
               <div className="flex items-center justify-between pt-1 gap-2 text-[11px]">
@@ -925,26 +964,48 @@ export function AdminConsole() {
                   <button
                     type="button"
                     onClick={() => handleQuickLogin('ADMIN')}
-                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium"
+                    disabled={authLoading}
+                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium disabled:opacity-50"
                   >
                     Admin
                   </button>
                   <button
                     type="button"
                     onClick={() => handleQuickLogin('SALES')}
-                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium"
+                    disabled={authLoading}
+                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium disabled:opacity-50"
                   >
                     Sales
                   </button>
                   <button
                     type="button"
                     onClick={() => handleQuickLogin('FINANCE')}
-                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium"
+                    disabled={authLoading}
+                    className="px-2.5 py-1 rounded-lg bg-[#2a2a38]/60 hover:bg-[#2a2a38] text-[#f5f1e8] text-[10px] font-medium disabled:opacity-50"
                   >
                     Finance
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Seeded Credentials Helper */}
+            <div className="p-3 rounded-xl bg-[#14141d] border border-[#2a2a38] flex items-center justify-between text-xs">
+              <div className="space-y-0.5">
+                <span className="text-[10px] uppercase font-bold text-[#e8c872] block">Seeded CEO Credentials:</span>
+                <span className="text-[#a8a7b3] font-mono text-[11px]">ghaziwazirndm@gmail.com</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setLoginEmail('ghaziwazirndm@gmail.com');
+                  setLoginPassword('GhaziWazir2026!');
+                  setAuthError('');
+                }}
+                className="px-2.5 py-1 rounded-lg bg-[#2a2a38] hover:bg-[#e8c872] hover:text-[#16120a] text-[#e8c872] font-bold text-[10px] uppercase tracking-wider transition-colors"
+              >
+                Auto-Fill
+              </button>
             </div>
 
             <div className="relative flex py-1 items-center">
@@ -992,9 +1053,11 @@ export function AdminConsole() {
 
                 <button
                   type="submit"
-                  className="btn-gold w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#16120a]"
+                  disabled={authLoading}
+                  className="btn-gold w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#16120a] flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  Verify Credentials & Enter
+                  <Lock className="w-4 h-4" />
+                  <span>{authLoading ? 'Verifying Credentials...' : 'Verify Credentials & Enter'}</span>
                 </button>
               </form>
             ) : (

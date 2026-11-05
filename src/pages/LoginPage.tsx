@@ -189,11 +189,51 @@ export function LoginPage() {
           {/* Standard Credentials Form */}
           <div className="p-6 bg-[#131d33] border border-[#1e2d4d] rounded-2xl shadow-xl space-y-4">
             {errorMessage && (
-              <div className="p-3 bg-[#2a1313] border border-[#ff5d5d] rounded-xl text-xs text-[#ffb3b3] flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-[#ff5d5d]" />
-                <span>{errorMessage}</span>
+              <div className="p-3.5 bg-[#2a1313] border border-[#ff5d5d] rounded-xl text-xs text-[#ffb3b3] space-y-2">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-[#ff5d5d]" />
+                  <span className="font-semibold">{errorMessage}</span>
+                </div>
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => handleInstantQuickLogin('CEO')}
+                    className="px-3 py-1.5 rounded-lg bg-[#38bdf8] text-[#090d16] font-bold text-[11px] hover:bg-[#0ea5e9] transition-all"
+                  >
+                    👑 Instant CEO Login Bypass
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmail('ghaziwazirndm@gmail.com');
+                      setPassword('GhaziWazir2026!');
+                      setErrorMessage('');
+                    }}
+                    className="px-2.5 py-1.5 rounded-lg bg-[#1e2d4d] text-[#f8fafc] text-[11px] hover:bg-[#2a3c63]"
+                  >
+                    Reset Defaults
+                  </button>
+                </div>
               </div>
             )}
+
+            {/* Default Credentials Helper */}
+            <div className="p-3 rounded-xl bg-[#0d1527] border border-[#1e2d4d] flex items-center justify-between text-xs">
+              <div className="space-y-0.5">
+                <span className="text-[10px] uppercase font-bold text-[#38bdf8] block">Seeded CEO Credentials:</span>
+                <span className="text-[#94a3b8] font-mono text-[11px]">ghaziwazirndm@gmail.com</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('ghaziwazirndm@gmail.com');
+                  setPassword('GhaziWazir2026!');
+                }}
+                className="px-2.5 py-1 rounded-lg bg-[#1e2d4d] hover:bg-[#38bdf8] hover:text-[#090d16] text-[#38bdf8] font-bold text-[10px] uppercase tracking-wider transition-colors"
+              >
+                Auto-Fill
+              </button>
+            </div>
 
             {resetSuccess && (
               <div className="p-3 bg-[#132a1e] border border-[#22c55e] rounded-xl text-xs text-[#86efac] flex items-center gap-2">

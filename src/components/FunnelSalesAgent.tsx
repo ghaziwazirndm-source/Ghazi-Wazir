@@ -95,8 +95,10 @@ export function FunnelSalesAgent({
             </p>
           </div>
         </div>
-        <div className="text-[10px] text-[#38bdf8] font-bold px-2.5 py-1 rounded-full bg-[#131d33] border border-[#38bdf8]/30">
-          24/7 Autonomous
+        <div className="flex items-center gap-2">
+          <div className="text-[10px] text-[#38bdf8] font-bold px-2 py-1 rounded-full bg-[#131d33] border border-[#38bdf8]/30">
+            24/7 Autonomous
+          </div>
         </div>
       </div>
 

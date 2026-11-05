@@ -137,7 +137,7 @@ export function ContactPage() {
             </div>
 
             <div className="p-6 bg-[#14141d] rounded-2xl border border-[#2a2a38] text-center space-y-3">
-              <span className="text-xs text-[#a8a7b3]">Prefer to schedule a direct 1-on-1 video call?</span>
+              <span className="text-xs text-[#a8a7b3]">Prefer to schedule a direct 1-on-1 consultation?</span>
               <div>
                 <Link to="/book" className="btn-gold inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#16120a]">
                   <Calendar className="w-4 h-4" />

@@ -6,7 +6,7 @@
       "email": "ghaziwazirndm@gmail.com",
       "role": "CEO",
       "enabled": true,
-      "lastLogin": 1793616500965,
+      "lastLogin": 1793875479190,
       "failed": 0,
       "lockUntil": 0,
       "salt": "z9ew7Wzmj6uY9jHpN7wdAA==",
@@ -18,7 +18,7 @@
       "email": "admin@babalkhaleej.com",
       "role": "ADMIN",
       "enabled": true,
-      "lastLogin": 1793616180423,
+      "lastLogin": 1793875324178,
       "failed": 0,
       "lockUntil": 0,
       "salt": "39k3Gfi3ykxuRIaVPMfAEw==",
@@ -38,6 +38,37 @@
     }
   ],
   "leads": [
+    {
+      "id": "lead-e70e1ea1",
+      "name": "ghazi u rehman",
+      "email": "ghaziwazirndm@gmail.com",
+      "phone": "0097335628353",
+      "svc": "business-registration",
+      "src": "Referral: https://aistudio.google.com/",
+      "value": 0,
+      "stage": "BOOKED",
+      "factors": {
+        "need": 3,
+        "budget": 3,
+        "timeline": 3,
+        "fit": 4,
+        "urgency": 3,
+        "authority": 4,
+        "signals": 2
+      },
+      "score": 64,
+      "owner": "Ghazi Wazir",
+      "next": "Initial contact via WhatsApp or Email",
+      "notes": [
+        {
+          "ts": 1793874468788,
+          "by": "Website System",
+          "t": "Inquiry message: Business Ragistertion "
+        }
+      ],
+      "created": 1793874468788,
+      "updated": 1793874718272
+    },
     {
       "id": "lead-27fb3e9d",
       "name": "Test Investor Lead",
@@ -235,6 +266,30 @@
   ],
   "bookings": [
     {
+      "id": "book-bdf2052c",
+      "leadId": "direct",
+      "leadName": "Direct Client",
+      "date": "2026-11-05",
+      "time": "11:00",
+      "service": "General Consultation",
+      "status": "CONFIRMED",
+      "by": "Adnan Malik",
+      "notes": "Booked directly via CEO Command Center",
+      "created": 1793874775757
+    },
+    {
+      "id": "book-407f2e95",
+      "leadId": "direct",
+      "leadName": "Direct Client",
+      "date": "2026-11-05",
+      "time": "11:00",
+      "service": "General Consultation",
+      "status": "CONFIRMED",
+      "by": "Adnan Malik",
+      "notes": "Booked directly via CEO Command Center",
+      "created": 1793874775568
+    },
+    {
       "id": "book-001",
       "leadId": "lead-001",
       "leadName": "Ahmed Al-Mansoor",
@@ -256,6 +311,61 @@
       "status": "PENDING_CALENDAR",
       "notes": "Establishing regional tech subsidiary",
       "created": 1793385518952
+    },
+    {
+      "id": "book-4f7469db",
+      "leadId": "lead-e70e1ea1",
+      "leadName": "ghazi u rehman",
+      "date": "2026-11-05",
+      "time": "09:45",
+      "service": "Investor Visa & Residency",
+      "status": "PENDING_CALENDAR",
+      "notes": "i need invester visa",
+      "created": 1793874578929
+    },
+    {
+      "id": "book-4053a51c",
+      "leadId": "lead-e70e1ea1",
+      "leadName": "ghazi u rehman",
+      "date": "2026-11-08",
+      "time": "11:15",
+      "service": "Investor Visa & Residency",
+      "status": "PENDING_CALENDAR",
+      "notes": "i need invester visa",
+      "created": 1793874595824
+    },
+    {
+      "id": "book-7b79c5b7",
+      "leadId": "lead-e70e1ea1",
+      "leadName": "ghazi u rehman",
+      "date": "2026-12-01",
+      "time": "11:15",
+      "service": "Free Strategic Consultation",
+      "status": "PENDING_CALENDAR",
+      "notes": "teast",
+      "created": 1793874637636
+    },
+    {
+      "id": "book-c15da8d3",
+      "leadId": "lead-e70e1ea1",
+      "leadName": "ghazi u rehman",
+      "date": "2027-01-03",
+      "time": "15:00",
+      "service": "Business Registration (CR) in Bahrain",
+      "status": "PENDING_CALENDAR",
+      "notes": "teasty",
+      "created": 1793874678644
+    },
+    {
+      "id": "book-e1e1336e",
+      "leadId": "lead-e70e1ea1",
+      "leadName": "ghazi u rehman",
+      "date": "2026-12-10",
+      "time": "16:30",
+      "service": "Free Strategic Consultation",
+      "status": "PENDING_CALENDAR",
+      "notes": "chek",
+      "created": 1793874718272
     }
   ],
   "proposals": [
@@ -886,6 +996,474 @@
       "result": "ok",
       "prev": "V2+0p9ESDU27CW2t3BXSeHouvKXMINwk2ATFEVDIp0Q=",
       "hash": "cvGfLO4jBm+RjAWApNwsuozbGcuF8BmsOCfHuQLR32k="
+    },
+    {
+      "id": 44,
+      "ts": "2026-11-05T10:20:15.730Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Successful session initialized",
+      "result": "ok",
+      "prev": "cvGfLO4jBm+RjAWApNwsuozbGcuF8BmsOCfHuQLR32k=",
+      "hash": "r73z1KXBsMjaEKiHlii8UV+Zb7X/GuSg326ttcDgK8o="
+    },
+    {
+      "id": 45,
+      "ts": "2026-11-05T10:24:00.222Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "r73z1KXBsMjaEKiHlii8UV+Zb7X/GuSg326ttcDgK8o=",
+      "hash": "TQ90JNhrb7y4tILAEQU+jokcwlEDW43lneFcnIKKTwE="
+    },
+    {
+      "id": 46,
+      "ts": "2026-11-05T10:25:03.272Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "TQ90JNhrb7y4tILAEQU+jokcwlEDW43lneFcnIKKTwE=",
+      "hash": "DmDv6v2WB7yWgjl+ffa/bg9qMYRlUINnRu7AcfFNmng="
+    },
+    {
+      "id": 47,
+      "ts": "2026-11-05T10:25:44.806Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.login",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "Successful session initialized",
+      "result": "ok",
+      "prev": "DmDv6v2WB7yWgjl+ffa/bg9qMYRlUINnRu7AcfFNmng=",
+      "hash": "JLevWTev4LJhEqp2G/iLvJsDygHCexyMiW7VTpiZr+Q="
+    },
+    {
+      "id": 48,
+      "ts": "2026-11-05T10:27:48.789Z",
+      "actor": "public-visitor",
+      "role": "GUEST",
+      "action": "lead.create",
+      "resource": "ghazi u rehman",
+      "detail": "Service: business-registration, Source: Referral: https://aistudio.google.com/, Score: 64",
+      "result": "ok",
+      "prev": "JLevWTev4LJhEqp2G/iLvJsDygHCexyMiW7VTpiZr+Q=",
+      "hash": "dbGKu+Le/Nw7ckSGsiQyl1lBgG4ayQgiUmUqYAneqIA="
+    },
+    {
+      "id": 49,
+      "ts": "2026-11-05T10:27:48.790Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Lead",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "dbGKu+Le/Nw7ckSGsiQyl1lBgG4ayQgiUmUqYAneqIA=",
+      "hash": "yNFgQ+NXxokcXh66eKjhrtJ9h0pCcEftABLJ1B5SCds="
+    },
+    {
+      "id": 50,
+      "ts": "2026-11-05T10:27:48.790Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Your Corporate Inquiry Regarding business-registration — Ghazi Wazir",
+      "result": "ok",
+      "prev": "yNFgQ+NXxokcXh66eKjhrtJ9h0pCcEftABLJ1B5SCds=",
+      "hash": "vQhg2ITNKsg2Zz4269+GnMncgweZUFomFTXTkmDfrUo="
+    },
+    {
+      "id": 51,
+      "ts": "2026-11-05T10:27:48.791Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 🚨 Inbound Lead: ghazi u rehman (business-registration) — Score: 64/100",
+      "result": "ok",
+      "prev": "vQhg2ITNKsg2Zz4269+GnMncgweZUFomFTXTkmDfrUo=",
+      "hash": "kkIcHFRfvYXR6b5MldH6IPa2Yd0yeIy7m3E0bqEGx+I="
+    },
+    {
+      "id": 52,
+      "ts": "2026-11-05T10:29:31.540Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "kkIcHFRfvYXR6b5MldH6IPa2Yd0yeIy7m3E0bqEGx+I=",
+      "hash": "IwAIya4VqS4GJYnTOIIKk8/bIFLjjH769MQqWfsZP9k="
+    },
+    {
+      "id": 53,
+      "ts": "2026-11-05T10:29:35.606Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Successful session initialized",
+      "result": "ok",
+      "prev": "IwAIya4VqS4GJYnTOIIKk8/bIFLjjH769MQqWfsZP9k=",
+      "hash": "XSK5q+n6C7Li4JZ+90OGpkoB6y3GGIo+c+Hven14kvM="
+    },
+    {
+      "id": 54,
+      "ts": "2026-11-05T10:29:38.929Z",
+      "actor": "ghazi u rehman",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2026-11-05 09:45",
+      "detail": "Service: Investor Visa & Residency, Source: Booking Calendar",
+      "result": "ok",
+      "prev": "XSK5q+n6C7Li4JZ+90OGpkoB6y3GGIo+c+Hven14kvM=",
+      "hash": "VuTTC3VqeJMGIw9HKzyQjZIoIirOYKVtfOWoBGiJbPI="
+    },
+    {
+      "id": 55,
+      "ts": "2026-11-05T10:29:38.930Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Schedule",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "VuTTC3VqeJMGIw9HKzyQjZIoIirOYKVtfOWoBGiJbPI=",
+      "hash": "8wZFdnnwMchzJ5uunIeI1tFlGLNufETzGE5lgk62O1c="
+    },
+    {
+      "id": 56,
+      "ts": "2026-11-05T10:29:38.930Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2026-11-05 at 09:45 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "8wZFdnnwMchzJ5uunIeI1tFlGLNufETzGE5lgk62O1c=",
+      "hash": "C0xW6K42DyHdJyA90SC3F4zaUWNBxS7PomIriz4qIPo="
+    },
+    {
+      "id": 57,
+      "ts": "2026-11-05T10:29:38.930Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: ghazi u rehman on 2026-11-05 at 09:45 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "C0xW6K42DyHdJyA90SC3F4zaUWNBxS7PomIriz4qIPo=",
+      "hash": "gLLJJydulJKMZVBoBvXHzi2od2o7xXOemOs67qELijA="
+    },
+    {
+      "id": 58,
+      "ts": "2026-11-05T10:29:55.825Z",
+      "actor": "ghazi u rehman",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2026-11-08 11:15",
+      "detail": "Service: Investor Visa & Residency, Source: Booking Calendar",
+      "result": "ok",
+      "prev": "gLLJJydulJKMZVBoBvXHzi2od2o7xXOemOs67qELijA=",
+      "hash": "ODP1swoacp9KwKI7eRfFgIY9FGxyVzmNfy1TJ4z8wEk="
+    },
+    {
+      "id": 59,
+      "ts": "2026-11-05T10:29:55.826Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Schedule",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "ODP1swoacp9KwKI7eRfFgIY9FGxyVzmNfy1TJ4z8wEk=",
+      "hash": "m7UcYDOfqvDB3Bt/8nkDb/uYrkqXlSQNXuD7gKm21Fo="
+    },
+    {
+      "id": 60,
+      "ts": "2026-11-05T10:29:55.826Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2026-11-08 at 11:15 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "m7UcYDOfqvDB3Bt/8nkDb/uYrkqXlSQNXuD7gKm21Fo=",
+      "hash": "WLUr7xr/U2AFvtYNtshAqKJ9AOg2Vi3i0+BSyUTCSSo="
+    },
+    {
+      "id": 61,
+      "ts": "2026-11-05T10:29:55.827Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: ghazi u rehman on 2026-11-08 at 11:15 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "WLUr7xr/U2AFvtYNtshAqKJ9AOg2Vi3i0+BSyUTCSSo=",
+      "hash": "x2u9k8HUPoRPB0Xzi0FkXGElEYvqr3BgGipgxt2BX1Y="
+    },
+    {
+      "id": 62,
+      "ts": "2026-11-05T10:30:37.637Z",
+      "actor": "ghazi u rehman",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2026-12-01 11:15",
+      "detail": "Service: Free Strategic Consultation, Source: Booking Calendar",
+      "result": "ok",
+      "prev": "x2u9k8HUPoRPB0Xzi0FkXGElEYvqr3BgGipgxt2BX1Y=",
+      "hash": "oW93SMbYOxH8Ja2SoEkbQsqA0VOXQMp7iZngbPNkjWI="
+    },
+    {
+      "id": 63,
+      "ts": "2026-11-05T10:30:37.637Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Schedule",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "oW93SMbYOxH8Ja2SoEkbQsqA0VOXQMp7iZngbPNkjWI=",
+      "hash": "zsSeTp6si9/tfuY8KCQ4E2zmjSC/fCmm6XXNiDz2snk="
+    },
+    {
+      "id": 64,
+      "ts": "2026-11-05T10:30:37.638Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2026-12-01 at 11:15 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "zsSeTp6si9/tfuY8KCQ4E2zmjSC/fCmm6XXNiDz2snk=",
+      "hash": "3yCAEjLXAk4LAhNgmBs2QByAgDHLIJ/MLzKxqg3fs58="
+    },
+    {
+      "id": 65,
+      "ts": "2026-11-05T10:30:37.638Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: ghazi u rehman on 2026-12-01 at 11:15 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "3yCAEjLXAk4LAhNgmBs2QByAgDHLIJ/MLzKxqg3fs58=",
+      "hash": "LsE0uQ08poB8dgLXZ1RA2RRBRDmJnJMroy/IjuicW6E="
+    },
+    {
+      "id": 66,
+      "ts": "2026-11-05T10:31:18.645Z",
+      "actor": "ghazi u rehman",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2027-01-03 15:00",
+      "detail": "Service: Business Registration (CR) in Bahrain, Source: Booking Calendar",
+      "result": "ok",
+      "prev": "LsE0uQ08poB8dgLXZ1RA2RRBRDmJnJMroy/IjuicW6E=",
+      "hash": "6V6MQIP/T65DDX/eMLfo/v2qU67c4sZ+akN0d4NZ89c="
+    },
+    {
+      "id": 67,
+      "ts": "2026-11-05T10:31:18.645Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Schedule",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "6V6MQIP/T65DDX/eMLfo/v2qU67c4sZ+akN0d4NZ89c=",
+      "hash": "+LUeZIgFuPrNP6UAp9WdbyqajkGWykACGN48kkRCh64="
+    },
+    {
+      "id": 68,
+      "ts": "2026-11-05T10:31:18.646Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2027-01-03 at 15:00 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "+LUeZIgFuPrNP6UAp9WdbyqajkGWykACGN48kkRCh64=",
+      "hash": "IKnQEmd5CfvPejB4g49q28L5AmD2p4TJuPvU2LxfiDo="
+    },
+    {
+      "id": 69,
+      "ts": "2026-11-05T10:31:18.646Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: ghazi u rehman on 2027-01-03 at 15:00 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "IKnQEmd5CfvPejB4g49q28L5AmD2p4TJuPvU2LxfiDo=",
+      "hash": "bRrA/qcTz91QAEChFjvNgrEB11w0dQwWQ4s4nXg4CPY="
+    },
+    {
+      "id": 70,
+      "ts": "2026-11-05T10:31:58.273Z",
+      "actor": "murree",
+      "role": "GUEST",
+      "action": "booking.request",
+      "resource": "2026-12-10 16:30",
+      "detail": "Service: Free Strategic Consultation, Source: Booking Calendar",
+      "result": "ok",
+      "prev": "bRrA/qcTz91QAEChFjvNgrEB11w0dQwWQ4s4nXg4CPY=",
+      "hash": "8mQ6LQUwxgQI37VpNo9J8ODRFUTy2bE0lCwqeGLTtk0="
+    },
+    {
+      "id": 71,
+      "ts": "2026-11-05T10:31:58.274Z",
+      "actor": "SYSTEM",
+      "role": "META_CAPI",
+      "action": "capi.queued_audit",
+      "resource": "Schedule",
+      "detail": "[CONFIG REQUIRED: META_ACCESS_TOKEN] Pixel: 984710293812034, Lead: lead-e70e1ea1",
+      "result": "ok",
+      "prev": "8mQ6LQUwxgQI37VpNo9J8ODRFUTy2bE0lCwqeGLTtk0=",
+      "hash": "1c48ocd7GtDBAh/YTlqp6sizAXDjGmpN4Lc7nEdZkcE="
+    },
+    {
+      "id": 72,
+      "ts": "2026-11-05T10:31:58.274Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: Consultation Scheduled: 2026-12-10 at 16:30 (Asia/Bahrain) — Ghazi Wazir",
+      "result": "ok",
+      "prev": "1c48ocd7GtDBAh/YTlqp6sizAXDjGmpN4Lc7nEdZkcE=",
+      "hash": "VloXAyy8VoTwTrII+QeaDNX4RzCySpnQ2wrDLjkKtFU="
+    },
+    {
+      "id": 73,
+      "ts": "2026-11-05T10:31:58.275Z",
+      "actor": "SYSTEM",
+      "role": "EMAIL_SERVICE",
+      "action": "email.queued_audit",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "[CONFIG REQUIRED: RESEND_API_KEY] Subject: 📅 New Consultation Booked: murree on 2026-12-10 at 16:30 (Asia/Bahrain)",
+      "result": "ok",
+      "prev": "VloXAyy8VoTwTrII+QeaDNX4RzCySpnQ2wrDLjkKtFU=",
+      "hash": "2cI05PZJibv3q/3kUY8T+EZ6L6MV26ylGrCN1Sfpoqc="
+    },
+    {
+      "id": 74,
+      "ts": "2026-11-05T10:32:11.046Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.quick_login",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "2cI05PZJibv3q/3kUY8T+EZ6L6MV26ylGrCN1Sfpoqc=",
+      "hash": "n7nfZ1a10txBhY6ENDGKgkvApo9dWGNV1b+1Yr4vt4I="
+    },
+    {
+      "id": 75,
+      "ts": "2026-11-05T10:32:55.569Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "booking.create_manual",
+      "resource": "Direct Client",
+      "detail": "2026-11-05 @ 11:00",
+      "result": "ok",
+      "prev": "n7nfZ1a10txBhY6ENDGKgkvApo9dWGNV1b+1Yr4vt4I=",
+      "hash": "Y2xrOFJXbf4EZOX7JYL1hzPCkoXaSgQLwtgud2yiY6E="
+    },
+    {
+      "id": 76,
+      "ts": "2026-11-05T10:32:55.757Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "booking.create_manual",
+      "resource": "Direct Client",
+      "detail": "2026-11-05 @ 11:00",
+      "result": "ok",
+      "prev": "Y2xrOFJXbf4EZOX7JYL1hzPCkoXaSgQLwtgud2yiY6E=",
+      "hash": "PNbpKRkVr0gPXXc47MAO8CyArT9kuREjVQDHFnqPKek="
+    },
+    {
+      "id": 77,
+      "ts": "2026-11-05T10:33:07.994Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Successful session initialized",
+      "result": "ok",
+      "prev": "PNbpKRkVr0gPXXc47MAO8CyArT9kuREjVQDHFnqPKek=",
+      "hash": "a0v5tB1dMtVC4upLciE8UCeQDHjqqNuak5ycH9PU3UE="
+    },
+    {
+      "id": 78,
+      "ts": "2026-11-05T10:33:15.017Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "a0v5tB1dMtVC4upLciE8UCeQDHjqqNuak5ycH9PU3UE=",
+      "hash": "Zx51j39nsF6BhHTEDmJZKNSR1bKm99eGXqF9HKszWXE="
+    },
+    {
+      "id": 79,
+      "ts": "2026-11-05T10:42:04.179Z",
+      "actor": "admin@babalkhaleej.com",
+      "role": "ADMIN",
+      "action": "auth.quick_login",
+      "resource": "admin@babalkhaleej.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "Zx51j39nsF6BhHTEDmJZKNSR1bKm99eGXqF9HKszWXE=",
+      "hash": "r//sCLKwKzSGt5lNXUiFOBubDPC0YztQ5OSYURKC5bo="
+    },
+    {
+      "id": 80,
+      "ts": "2026-11-05T10:44:39.190Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "auth.quick_login",
+      "resource": "ghaziwazirndm@gmail.com",
+      "detail": "Instant authenticated session granted",
+      "result": "ok",
+      "prev": "r//sCLKwKzSGt5lNXUiFOBubDPC0YztQ5OSYURKC5bo=",
+      "hash": "H/N/4n2KVtewnCGVDhinSpx2C2g+AwxcDQE1IZzqJnA="
+    },
+    {
+      "id": 81,
+      "ts": "2026-11-05T10:44:39.207Z",
+      "actor": "ghaziwazirndm@gmail.com",
+      "role": "CEO",
+      "action": "media.generate_image",
+      "resource": "Bahrain Financial Harbour corporate headquarters",
+      "detail": "Generated AI image via pollinations_flux",
+      "result": "ok",
+      "prev": "H/N/4n2KVtewnCGVDhinSpx2C2g+AwxcDQE1IZzqJnA=",
+      "hash": "9e4+E/enJIZ2fta8WdCrqsQ9rkqZJg8LG2fCJYRkjMM="
+    },
+    {
+      "id": 82,
+      "ts": "2026-11-05T10:47:13.099Z",
+      "actor": "content-studio@babalkhaleej.com",
+      "role": "CONTENT_CREATOR",
+      "action": "media.generate_image",
+      "resource": "Luxury business office in Manama Bahrain",
+      "detail": "Generated AI image via pollinations_flux",
+      "result": "ok",
+      "prev": "9e4+E/enJIZ2fta8WdCrqsQ9rkqZJg8LG2fCJYRkjMM=",
+      "hash": "VG7vdBTNlwEPOkctVlYh3o/uMOmmKtgIrVSStQm/sIo="
     }
   ],
   "warnings": [
@@ -899,6 +1477,17 @@
     }
   ],
   "inbox": [
+    {
+      "id": "msg-a2f2350f",
+      "ts": 1793874468788,
+      "ch": "WhatsApp / Form",
+      "from": "ghazi u rehman <ghaziwazirndm@gmail.com>",
+      "text": "Business Ragistertion ",
+      "flags": [
+        "INBOUND"
+      ],
+      "lead": "lead-e70e1ea1"
+    },
     {
       "id": "msg-63deeab8",
       "ts": 1793460342115,
@@ -990,5 +1579,29 @@
         "cur": "USD"
       }
     ]
-  }
+  },
+  "generatedImages": [
+    {
+      "id": "img-98cbb707",
+      "url": "https://image.pollinations.ai/prompt/Bahrain%20Financial%20Harbour%20skyline%2C%20modern%20Manama%20urban%20commercial%20towers%2C%20Luxury%20business%20office%20in%20Manama%20Bahrain%2C%20Arabian%20Gulf%20crystal%20water%20reflections%2C%20sunny%20midday%2C%20corporate%20realism%2C%20crisp%20architectural%20photography%2C%20high%20resolution?width=1280&height=720&seed=9224854&nologo=true&enhance=true&model=flux",
+      "prompt": "Bahrain Financial Harbour skyline, modern Manama urban commercial towers, Luxury business office in Manama Bahrain, Arabian Gulf crystal water reflections, sunny midday, corporate realism, crisp architectural photography, high resolution",
+      "originalPrompt": "Luxury business office in Manama Bahrain",
+      "style": "bahrain_corporate",
+      "aspectRatio": "16:9",
+      "entity": "Bab Al-Khaleej",
+      "engine": "pollinations_flux",
+      "createdAt": 1793875633098
+    },
+    {
+      "id": "img-f02e1450",
+      "url": "https://image.pollinations.ai/prompt/high-end%20editorial%20corporate%20photograph%2C%20executive%20governance%2C%20Bab%20Al-Khaleej%20Bahrain%2C%20Bahrain%20Financial%20Harbour%20corporate%20headquarters%2C%20obsidian%20glass%20architectural%20boardroom%2C%20gold%20metallic%20accents%2C%208k%20resolution%2C%20cinematic%20soft%20box%20lighting%2C%20photorealistic%2C%20elegant?width=1080&height=1080&seed=118929&nologo=true&enhance=true&model=flux",
+      "prompt": "high-end editorial corporate photograph, executive governance, Bab Al-Khaleej Bahrain, Bahrain Financial Harbour corporate headquarters, obsidian glass architectural boardroom, gold metallic accents, 8k resolution, cinematic soft box lighting, photorealistic, elegant",
+      "originalPrompt": "Bahrain Financial Harbour corporate headquarters",
+      "style": "executive_luxury",
+      "aspectRatio": "1:1",
+      "entity": "Bab Al-Khaleej",
+      "engine": "pollinations_flux",
+      "createdAt": 1793875479207
+    }
+  ]
 }

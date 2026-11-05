@@ -60,6 +60,7 @@ import {
   playMotionSoundFX,
   ParticleSimulation
 } from '../services/motionStudio';
+import { speakStudioText } from '../utils/speechVoiceEngine';
 import {
   ContentStudioResponse,
   ContentPostItem,
@@ -69,7 +70,9 @@ import {
   GraphicDesignConfig,
   GraphicTemplate,
   ShortsScene,
-  ShortsStoryboard
+  ShortsStoryboard,
+  GeneratedImageItem,
+  FreeVideoClip
 } from '../types';
 
 interface ContentStudioProps {
@@ -462,6 +465,132 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
   const particleCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const particleSimRef = useRef<ParticleSimulation | null>(null);
 
+  // Free AI Image Generation API State
+  const [generatingAiImage, setGeneratingAiImage] = useState(false);
+  const [aiImageStyle, setAiImageStyle] = useState<'executive_luxury' | 'cyber_matrix' | 'bahrain_corporate' | 'studio_minimal'>('executive_luxury');
+  const [aiImageAspect, setAiImageAspect] = useState<'1:1' | '16:9' | '9:16' | '4:5'>('1:1');
+  const [aiImageEngine, setAiImageEngine] = useState<'pollinations' | 'gemini-nano-banana-2.1' | 'gemini-3.1-flash-lite-image'>('pollinations');
+  const [lastGeneratedImage, setLastGeneratedImage] = useState<GeneratedImageItem | null>(null);
+  const [generatedImagesHistory, setGeneratedImagesHistory] = useState<GeneratedImageItem[]>([]);
+  const [showImageHistoryDrawer, setShowImageHistoryDrawer] = useState(false);
+
+  // Free Video Clips API State
+  const [freeVideos, setFreeVideos] = useState<FreeVideoClip[]>([]);
+  const [videoCategoryFilter, setVideoCategoryFilter] = useState<string>('All');
+  const [loadingFreeVideos, setLoadingFreeVideos] = useState(false);
+  const [showFreeVideosDrawer, setShowFreeVideosDrawer] = useState(false);
+
+  const loadFreeVideos = async () => {
+    setLoadingFreeVideos(true);
+    try {
+      const res = await api.getFreeVideos();
+      if (res.videos && res.videos.length > 0) {
+        setFreeVideos(res.videos);
+      }
+    } catch {
+      // fallback handled gracefully
+    } finally {
+      setLoadingFreeVideos(false);
+    }
+  };
+
+  const loadGeneratedImages = async () => {
+    try {
+      const res = await api.getGeneratedImages();
+      if (res.images && res.images.length > 0) {
+        setGeneratedImagesHistory(res.images);
+        if (!lastGeneratedImage) {
+          setLastGeneratedImage(res.images[0]);
+        }
+      }
+    } catch {}
+  };
+
+  const handleGenerateFreeImage = async (customPrompt?: string) => {
+    const targetPrompt = customPrompt || aiImagePrompt || topic || 'Bahrain Commercial Registration & AI Growth';
+    setGeneratingAiImage(true);
+    if (onNotify) {
+      onNotify('Calling Free AI Image Generation API (Pollinations FLUX / Gemini)...', 'info');
+    }
+    try {
+      playMotionSoundFX('whoosh');
+      const res = await api.generateImage({
+        prompt: targetPrompt,
+        style: aiImageStyle,
+        aspectRatio: aiImageAspect,
+        entity: entity === 'Both' ? 'Executive Hub' : entity,
+        engine: aiImageEngine
+      });
+
+      if (res.success && res.image) {
+        setLastGeneratedImage(res.image);
+        setGeneratedImagesHistory(prev => [res.image, ...prev.filter(x => x.id !== res.image.id)].slice(0, 40));
+        // Auto apply to post graphic
+        setGraphicConfig(prev => ({
+          ...prev,
+          backgroundImage: res.image.url,
+          backgroundStyle: 'photo',
+          aspectRatio: (aiImageAspect === '16:9' ? '16:9' : aiImageAspect === '9:16' ? '9:16' : aiImageAspect === '4:5' ? '4:5' : '1:1') as any
+        }));
+        playMotionSoundFX('shimmer');
+        if (onNotify) {
+          const engineLabel = res.image.engine.includes('banana') || res.image.engine.includes('gemini')
+            ? `Google ${res.image.engine}`
+            : '100% Free FLUX Engine';
+          onNotify(`✨ Visual generated via ${engineLabel}! ${res.image.note ? `• ${res.image.note}` : ''}`, 'success');
+        }
+      }
+    } catch (err: any) {
+      if (onNotify) {
+        onNotify(err.message || 'Image generation failed. Please try again.', 'error');
+      }
+    } finally {
+      setGeneratingAiImage(false);
+    }
+  };
+
+  const handleApplyImageToGraphic = (url: string) => {
+    setGraphicConfig(prev => ({
+      ...prev,
+      backgroundImage: url,
+      backgroundStyle: 'photo'
+    }));
+    playMotionSoundFX('click');
+    if (onNotify) {
+      onNotify('Visual applied as Post Graphic background!', 'success');
+    }
+  };
+
+  const handleApplyImageToVideo = (url: string) => {
+    setCustomBackdropUrl(url);
+    setVideoPresetId('custom');
+    setStoryboard(prev => ({
+      ...prev,
+      customBackgroundUrl: url,
+      videoPreset: 'custom',
+      scenes: prev.scenes.map((s, idx) => idx === activeSceneIndex ? { ...s, backgroundImage: url } : s)
+    }));
+    playMotionSoundFX('click');
+    if (onNotify) {
+      onNotify(`Visual applied to Scene ${activeSceneIndex + 1} video backdrop!`, 'success');
+    }
+  };
+
+  const handleSelectFreeVideo = (clip: { id: string; title?: string; videoUrl?: string; name?: string; fallbackPoster?: string; url?: string }) => {
+    setVideoPresetId(clip.id);
+    const videoUrl = clip.videoUrl || clip.url || '';
+    setCustomBackdropUrl(videoUrl);
+    setStoryboard(prev => ({
+      ...prev,
+      customBackgroundUrl: videoUrl,
+      videoPreset: 'custom'
+    }));
+    playMotionSoundFX('whoosh');
+    if (onNotify) {
+      onNotify(`Free HD video background loaded: ${clip.title || clip.name}`, 'success');
+    }
+  };
+
   const fetchStudioData = async (manual = false) => {
     if (manual) setRefreshing(true);
     try {
@@ -482,6 +611,8 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
 
   useEffect(() => {
     fetchStudioData();
+    loadFreeVideos();
+    loadGeneratedImages();
   }, []);
 
   // Update AI image prompt dynamically when topic or brand changes
@@ -893,29 +1024,43 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
     }
   };
 
-  // Shorts Audio Voiceover Handlers (Web Speech API)
+  const cancelVoiceoverRef = useRef<(() => void) | null>(null);
+
+  // Shorts Audio Voiceover Handlers (Web Speech API via Studio Voice Engine)
   const playAudioVoiceover = (textToSpeak?: string) => {
-    if (!('speechSynthesis' in window)) {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
       if (onNotify) onNotify('Speech synthesis is not supported in this browser.', 'error');
       return;
     }
+    if (cancelVoiceoverRef.current) cancelVoiceoverRef.current();
     window.speechSynthesis.cancel();
+
     const text = textToSpeak || storyboard.voiceoverFull;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.05;
-    utterance.pitch = 1.0;
-    utterance.onend = () => setIsPlayingAudio(false);
-    utterance.onerror = () => setIsPlayingAudio(false);
     setIsPlayingAudio(true);
-    window.speechSynthesis.speak(utterance);
-    if (onNotify) onNotify('Playing AI executive voiceover preview...', 'info');
+
+    const cancel = speakStudioText(text, {
+      gender: 'male',
+      langCode: 'en-US',
+      pitch: 0.92,
+      rate: 1.02,
+      onStart: () => setIsPlayingAudio(true),
+      onEnd: () => setIsPlayingAudio(false),
+      onError: () => setIsPlayingAudio(false),
+    });
+
+    cancelVoiceoverRef.current = cancel;
+    if (onNotify) onNotify('Playing studio-calibrated executive voiceover preview...', 'info');
   };
 
   const stopAudioVoiceover = () => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      setIsPlayingAudio(false);
+    if (cancelVoiceoverRef.current) {
+      cancelVoiceoverRef.current();
+      cancelVoiceoverRef.current = null;
     }
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsPlayingAudio(false);
   };
 
   // SRT Subtitle Generator & Download
@@ -1460,6 +1605,37 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                   </div>
                 </div>
 
+                {/* Free Media Quick Actions */}
+                <div className="p-3 bg-gradient-to-r from-[#1e2d4d]/60 via-[#131d33] to-[#1e2d4d]/60 rounded-xl border border-[#38bdf8]/30 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#38bdf8]" />
+                    <span className="text-xs font-bold text-[#f8fafc]">
+                      Free AI Media for {ALL_PLATFORM_CONFIG[selectedPreviewPlatform].name}:
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveTab('graphics');
+                        handleGenerateFreeImage();
+                      }}
+                      className="px-3 py-1.5 rounded-lg bg-[#38bdf8] text-[#090d16] text-xs font-bold flex items-center gap-1.5 hover:bg-[#0ea5e9] transition-all"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      <span>Generate Free AI Image</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('shorts')}
+                      className="px-3 py-1.5 rounded-lg bg-[#00f2fe]/20 text-[#00f2fe] border border-[#00f2fe]/40 text-xs font-bold flex items-center gap-1.5 hover:bg-[#00f2fe]/30 transition-all"
+                    >
+                      <Film className="w-3.5 h-3.5" />
+                      <span>Select Free HD Video Clip</span>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Platform Specific Guidance Note */}
                 <div className="p-3 bg-[#090d16] rounded-xl border border-[#1e2d4d] text-[11px] text-[#94a3b8] flex flex-wrap items-center justify-between gap-2">
                   <span>
@@ -1544,6 +1720,70 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                 <div className="relative w-[280px] sm:w-[310px] h-[580px] bg-[#050811] rounded-[44px] border-[5px] border-[#1e2d4d] shadow-[0_0_40px_rgba(0,242,254,0.15)] overflow-hidden flex flex-col justify-between p-4 select-none">
                   {/* Dynamic Island / Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-4 bg-black rounded-full z-30" />
+
+                  {/* Real MP4 Video Loop & AI Image Backdrop Layer (Free Video API) */}
+                  {(() => {
+                    const activePreset = MEDIA_PRESETS.find(p => p.id === videoPresetId) || MEDIA_PRESETS[0];
+                    const backdropUrl = customBackdropUrl || currentScene.backgroundImage || activePreset.videoUrl || activePreset.url;
+                    const isVideo = backdropUrl && (backdropUrl.endsWith('.mp4') || backdropUrl.includes('.mp4') || backdropUrl.includes('mixkit'));
+                    const isImg = !isVideo && backdropUrl && backdropUrl !== 'canvas_loop';
+
+                    const gradingFilter =
+                      videoColorGrading === 'gold_monolith'
+                        ? 'sepia(0.35) saturate(1.3) contrast(1.1)'
+                        : videoColorGrading === 'cyber_matrix'
+                        ? 'hue-rotate(180deg) saturate(1.4) contrast(1.15)'
+                        : videoColorGrading === 'high_contrast'
+                        ? 'contrast(1.4) brightness(0.95)'
+                        : videoColorGrading === 'noir'
+                        ? 'grayscale(1) contrast(1.3)'
+                        : 'none';
+
+                    return (
+                      <>
+                        {isVideo && (
+                          <video
+                            key={backdropUrl}
+                            src={backdropUrl}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none transition-all duration-700"
+                            style={{
+                              opacity: 1 - videoOverlayOpacity,
+                              filter: `blur(${videoBackdropBlur}px) ${gradingFilter}`
+                            }}
+                          />
+                        )}
+
+                        {isImg && (
+                          <img
+                            src={backdropUrl}
+                            alt="Scene Backdrop"
+                            className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none transition-all duration-700"
+                            style={{
+                              opacity: 1 - videoOverlayOpacity,
+                              filter: `blur(${videoBackdropBlur}px) ${gradingFilter}`
+                            }}
+                          />
+                        )}
+
+                        {/* Particle Simulation Canvas Overlay (60fps Particles) */}
+                        <canvas
+                          ref={particleCanvasRef}
+                          className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-300"
+                          style={{ opacity: particleEngineEnabled ? 0.9 : 0 }}
+                        />
+
+                        {/* Dark Vignette Overlay for Ultra-Crisp Kinetic Captions */}
+                        <div
+                          className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-t from-[#050811] via-[#050811]/40 to-[#050811]/75"
+                          style={{ opacity: videoOverlayOpacity + 0.15 }}
+                        />
+                      </>
+                    );
+                  })()}
 
                   {/* Top Progress Bar */}
                   <div className="relative z-20 pt-4 px-2">
@@ -1673,6 +1913,53 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                       </>
                     )}
                   </button>
+                </div>
+
+                {/* Free Video Clips API Selector */}
+                <div className="w-full max-w-[310px] p-3.5 bg-[#0d1527] border border-[#1e2d4d] rounded-2xl space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-[#00f2fe] uppercase tracking-wider flex items-center gap-1.5">
+                      <Film className="w-3.5 h-3.5" />
+                      Free HD Video Clips API
+                    </span>
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#00f2fe]/20 text-[#00f2fe] font-mono">
+                      No Watermark
+                    </span>
+                  </div>
+
+                  <p className="text-[10px] text-[#94a3b8] leading-tight">
+                    Select a free high-resolution background video loop for your 9:16 Shorts & Reels:
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-1.5 max-h-[160px] overflow-y-auto pr-1 no-scrollbar">
+                    {MEDIA_PRESETS.filter(p => p.type === 'video_clip').map(clip => (
+                      <button
+                        key={clip.id}
+                        type="button"
+                        onClick={() => handleSelectFreeVideo(clip)}
+                        className={`p-2 rounded-xl text-left border transition-all ${
+                          videoPresetId === clip.id
+                            ? 'bg-[#1e2d4d] border-[#00f2fe] text-[#00f2fe] shadow-[0_0_12px_rgba(0,242,254,0.2)]'
+                            : 'bg-[#090d16] border-[#1e2d4d] text-[#94a3b8] hover:text-[#f8fafc]'
+                        }`}
+                      >
+                        <span className="text-[10px] font-bold block truncate">{clip.shortName}</span>
+                        <span className="text-[8px] text-[#64748b] block">{clip.tag}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="pt-2 border-t border-[#1e2d4d]">
+                    <button
+                      type="button"
+                      onClick={() => handleGenerateFreeImage(`Visual for ${currentScene.title}: ${currentScene.visualCue}`)}
+                      disabled={generatingAiImage}
+                      className="w-full py-2 px-2.5 rounded-xl bg-gradient-to-r from-[#00f2fe]/20 to-[#38bdf8]/20 hover:from-[#00f2fe]/30 hover:to-[#38bdf8]/30 border border-[#00f2fe]/40 text-[#00f2fe] text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all disabled:opacity-50"
+                    >
+                      <Sparkles className={`w-3.5 h-3.5 ${generatingAiImage ? 'animate-spin' : ''}`} />
+                      <span>{generatingAiImage ? 'Generating AI Visual...' : '✨ Generate AI Scene Visual'}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -1845,11 +2132,21 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
 
                 <button
                   type="button"
+                  onClick={() => handleGenerateFreeImage()}
+                  disabled={generatingAiImage}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#e8c872] to-[#f59e0b] hover:opacity-95 text-[#090d16] text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all disabled:opacity-50"
+                >
+                  <Sparkles className={`w-3.5 h-3.5 ${generatingAiImage ? 'animate-spin' : ''}`} />
+                  <span>{generatingAiImage ? 'Generating AI Image...' : '✨ Generate Free AI Image'}</span>
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => handleCopy(aiImagePrompt, 'ai_prompt')}
                   className="px-3.5 py-2 rounded-xl bg-[#090d16] hover:bg-[#1e2d4d] text-xs font-semibold text-[#e8c872] border border-[#d4af37]/40 flex items-center gap-1.5 transition-all"
                 >
                   <Sparkle className="w-3.5 h-3.5" />
-                  <span>{copiedKey === 'ai_prompt' ? 'Copied Prompt!' : 'Copy AI Image Prompt'}</span>
+                  <span>{copiedKey === 'ai_prompt' ? 'Copied Prompt!' : 'Copy AI Prompt'}</span>
                 </button>
               </div>
             </div>
@@ -1857,6 +2154,165 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Controls Column (Left) */}
               <div className="lg:col-span-5 space-y-5">
+                {/* Free AI Image Generation Panel */}
+                <div className="p-4 bg-gradient-to-br from-[#1a233a] via-[#101728] to-[#131d33] border border-[#38bdf8]/40 rounded-2xl shadow-xl space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#38bdf8] uppercase tracking-wider flex items-center gap-1.5">
+                      <Wand2 className="w-4 h-4 text-[#38bdf8]" />
+                      Free AI Image Generation API
+                    </span>
+                    <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#22c55e]/20 text-[#4ade80] border border-[#22c55e]/40 font-bold uppercase">
+                      Free & Unlimited
+                    </span>
+                  </div>
+
+                  {/* Prompt Textarea */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[11px] font-semibold text-[#f8fafc]">Image Prompt:</label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const p = `Ultra-detailed executive graphic for ${topic || 'Bahrain Corporate Formation'}. Cinematic lighting, luxury obsidian glass office in Bahrain Financial Harbour, 8k resolution.`;
+                          setAiImagePrompt(p);
+                        }}
+                        className="text-[10px] text-[#38bdf8] hover:underline"
+                      >
+                        Craft from Topic
+                      </button>
+                    </div>
+                    <textarea
+                      rows={3}
+                      value={aiImagePrompt}
+                      onChange={e => setAiImagePrompt(e.target.value)}
+                      placeholder="Describe the image you want the AI to generate..."
+                      className="w-full p-2.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] placeholder-[#64748b] focus:border-[#38bdf8] focus:outline-none resize-none"
+                    />
+                  </div>
+
+                  {/* Style Chips */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-semibold text-[#f8fafc] block">Style Preset:</label>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {[
+                        { id: 'executive_luxury', label: '👑 Luxury Executive', desc: 'Gold & Obsidian' },
+                        { id: 'cyber_matrix', label: '⚡ Cyber AI & GEO', desc: 'Neon Neural Grid' },
+                        { id: 'bahrain_corporate', label: '🇧🇭 Bahrain Towers', desc: 'Harbour Skyline' },
+                        { id: 'studio_minimal', label: '🎯 Minimal Studio', desc: 'High Contrast' }
+                      ].map(st => (
+                        <button
+                          key={st.id}
+                          type="button"
+                          onClick={() => setAiImageStyle(st.id as any)}
+                          className={`p-2 rounded-xl text-left border transition-all ${
+                            aiImageStyle === st.id
+                              ? 'bg-[#1e2d4d] border-[#38bdf8] text-[#38bdf8]'
+                              : 'bg-[#090d16] border-[#1e2d4d] text-[#94a3b8] hover:text-[#f8fafc]'
+                          }`}
+                        >
+                          <span className="text-[11px] font-bold block">{st.label}</span>
+                          <span className="text-[9px] text-[#64748b] block">{st.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Aspect Ratio & Engine */}
+                  <div className="grid grid-cols-2 gap-3 pt-1">
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-semibold text-[#f8fafc] block">Aspect Ratio:</label>
+                      <select
+                        value={aiImageAspect}
+                        onChange={e => setAiImageAspect(e.target.value as any)}
+                        className="w-full px-2.5 py-1.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] focus:outline-none"
+                      >
+                        <option value="1:1">1:1 Square (Feed)</option>
+                        <option value="16:9">16:9 Cinema (X/YouTube)</option>
+                        <option value="9:16">9:16 Vertical (Shorts/Reels)</option>
+                        <option value="4:5">4:5 Portrait (Instagram)</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-semibold text-[#f8fafc] block">AI Engine:</label>
+                      <select
+                        value={aiImageEngine}
+                        onChange={e => setAiImageEngine(e.target.value as any)}
+                        className="w-full px-2.5 py-1.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] focus:outline-none"
+                      >
+                        <option value="pollinations">Pollinations FLUX (Free)</option>
+                        <option value="gemini">Gemini 3.1 Image AI</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Generate Button */}
+                  <button
+                    type="button"
+                    onClick={() => handleGenerateFreeImage()}
+                    disabled={generatingAiImage}
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] hover:from-[#0ea5e9] hover:to-[#0284c7] text-[#090d16] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)] transition-all disabled:opacity-50"
+                  >
+                    <Sparkles className={`w-4 h-4 ${generatingAiImage ? 'animate-spin' : ''}`} />
+                    <span>{generatingAiImage ? 'Generating AI Image (FLUX)...' : '✨ Generate Free AI Image'}</span>
+                  </button>
+
+                  {/* Last Generated Image Card */}
+                  {lastGeneratedImage && (
+                    <div className="p-3 bg-[#090d16] border border-[#38bdf8]/30 rounded-xl space-y-2.5 animate-fade-in">
+                      <div className="flex items-center justify-between text-[10px]">
+                        <span className="font-bold text-[#38bdf8] uppercase">Generated Visual Preview</span>
+                        <span className="text-[#94a3b8] font-mono">{lastGeneratedImage.aspectRatio}</span>
+                      </div>
+                      <div className="relative rounded-lg overflow-hidden border border-[#1e2d4d] aspect-video bg-black flex items-center justify-center">
+                        <img
+                          src={lastGeneratedImage.url}
+                          alt="AI Generated Visual"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => handleApplyImageToGraphic(lastGeneratedImage.url)}
+                          className="py-1.5 px-2 rounded-lg bg-[#38bdf8] text-[#090d16] text-[10px] font-bold uppercase tracking-wider hover:bg-[#0ea5e9] transition-all text-center"
+                        >
+                          🖼️ Apply to Graphic
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleApplyImageToVideo(lastGeneratedImage.url)}
+                          className="py-1.5 px-2 rounded-lg bg-[#1e2d4d] text-[#38bdf8] text-[10px] font-bold uppercase tracking-wider hover:bg-[#2a3f6d] border border-[#38bdf8]/30 transition-all text-center"
+                        >
+                          🎬 Apply to Video
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Recent History Reel */}
+                  {generatedImagesHistory.length > 1 && (
+                    <div className="space-y-1.5 pt-1 border-t border-[#1e2d4d]">
+                      <span className="text-[10px] uppercase font-bold text-[#94a3b8] block">Recent Generations:</span>
+                      <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                        {generatedImagesHistory.slice(0, 6).map((img, idx) => (
+                          <button
+                            key={img.id || idx}
+                            type="button"
+                            onClick={() => {
+                              setLastGeneratedImage(img);
+                              handleApplyImageToGraphic(img.url);
+                            }}
+                            className="w-12 h-12 rounded-lg overflow-hidden border border-[#1e2d4d] hover:border-[#38bdf8] flex-shrink-0 transition-all hover:scale-105"
+                            title={img.prompt}
+                          >
+                            <img src={img.url} alt="" className="w-full h-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
                 {/* Visual Layout Template Switcher */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-[#f8fafc] block">
@@ -2130,11 +2586,30 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                       fill={graphicConfig.theme === 'cyber_azure' ? 'url(#bgGradAzure)' : 'url(#bgGradGold)'}
                     />
 
+                    {/* AI Generated / Photographic Background Image */}
+                    {graphicConfig.backgroundImage && graphicConfig.backgroundImage !== 'canvas_loop' && (
+                      <image
+                        href={graphicConfig.backgroundImage}
+                        width={canvasWidth}
+                        height={canvasHeight}
+                        preserveAspectRatio="xMidYMid slice"
+                        opacity="0.88"
+                      />
+                    )}
+
+                    {/* Dark Vignette Overlay for Readability */}
+                    <rect
+                      width={canvasWidth}
+                      height={canvasHeight}
+                      fill={`rgba(9, 13, 22, ${graphicConfig.backgroundOverlay ?? 0.55})`}
+                    />
+
                     {/* Texture Pattern */}
                     <rect
                       width={canvasWidth}
                       height={canvasHeight}
                       fill={graphicConfig.theme === 'cyber_azure' ? 'url(#gridPattern)' : 'url(#goldLattice)'}
+                      opacity={graphicConfig.backgroundImage ? 0.35 : 1}
                     />
 
                     {/* Frame Borders */}

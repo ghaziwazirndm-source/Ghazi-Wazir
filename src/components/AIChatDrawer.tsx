@@ -21,6 +21,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import { RequirementBriefModal } from './RequirementBriefModal';
+import { speakStudioText, VoiceGender } from '../utils/speechVoiceEngine';
 
 interface ChatMessage {
   id: string;
@@ -33,7 +34,7 @@ interface ChatMessage {
   suggestedAction?: 'BOOK_CALL' | 'WHATSAPP' | 'DOWNLOAD_BLUEPRINT';
 }
 
-type SupportedLang = 'en' | 'ar' | 'ur';
+type SupportedLang = 'en' | 'ar' | 'ur' | 'bn' | 'fil' | 'mwr';
 
 const TRANSLATIONS: Record<
   SupportedLang,
@@ -104,6 +105,60 @@ const TRANSLATIONS: Record<
     bookBtn: '📅 فری مشاورتی میٹنگ بک کریں',
     whatsappBtn: '💬 ڈائریکٹ واٹس ایپ (+973 3562 8353)',
     disclaimer: 'ہم پرائیویٹ کنسلٹنسی ہیں۔ تمام ویزوں اور لائسنس کے حتمی فیصلے بحرین حکومت کے مجاز ادارے کرتے ہیں۔'
+  },
+  bn: {
+    title: 'এক্সিকিউটিভ এআই সেলস কনসালটেন্ট',
+    subtitle: 'বাব আল-খালিজ (বাহরাইন) &middot; ব্যাক ফর ব্র্যান্ড (ইউএসএ)',
+    welcome: 'নমস্কার ও শুভকামনা! আমি গাজী উজিরের এআই সেলস কনসালটেন্ট। বাহরাইনে ১০০% বিদেশি মালিকানায় বাণিজ্যিক কোম্পানি স্থাপন (CR), ইনভেস্টর রেসিডেন্সি ভিসা এবং আধুনিক ডিজিটাল প্রযুক্তির জন্য আমি আপনার সেবায় প্রস্তুত। কীভাবে সাহায্য করতে পারি?',
+    inputPlaceholder: 'সিআর, ভিসা, খরচ বা অন্যান্য তথ্যের জন্য প্রশ্ন লিখুন...',
+    quickPrompts: [
+      'বাহরাইনে কোম্পানি খোলার জন্য কী কী কাগজপত্র প্রয়োজন হয়?',
+      'ইনভেস্টর রেসিডেন্সি ভিসার খরচ এবং সম্পূর্ণ সময় কত?',
+      'কীভাবে ১০০% বিদেশি মালিকানা ও বাণিজ্যিক ব্যাংক অ্যাকাউন্ট পাব?',
+      'আমি গাজী উজিরের সাথে সরাসরি পরামর্শ মিটিং করতে চাই'
+    ],
+    pdfBtn: '📄 রিকয়ারমেন্টস চেকলিস্ট (PDF) ডাউনলোড করুন',
+    dealCloseHeader: 'আপনি কি চুক্তি চূড়ান্ত করতে প্রস্তুত?',
+    dealCloseSub: 'গাজী উজিরের সাথে এক্সিকিউটিভ মিটিং বুক করুন অথবা সরাসরি হোয়াটসঅ্যাপে যোগাযোগ করুন।',
+    bookBtn: '📅 কনসালটেশন স্লট বুক করুন',
+    whatsappBtn: '💬 হোয়াটসঅ্যাপ সরাসরি (+973 3562 8353)',
+    disclaimer: 'আমরা প্রাইভেট কর্পোরেট কনসালটেন্সি। সকল সরকারি অনুমোদন সংশ্লিষ্ট মন্ত্রণালয়ের অধীনে।'
+  },
+  fil: {
+    title: 'Executive AI Sales Partner',
+    subtitle: 'Bab Al-Khaleej &middot; Back for Brand LLC',
+    welcome: 'Mabuhay! Ako ang AI Sales Partner ni Ghazi Wazir. Nandito ako para magbigay ng verified guidance ukol sa 100% foreign-owned commercial registration sa Bahrain, investor visa, at AI digital growth sa Back for Brand LLC. Paano kita matutulungan ngayon?',
+    inputPlaceholder: 'Magtanong ukol sa CR, visa, pricing, o ilagay ang iyong details...',
+    quickPrompts: [
+      'Ano ang mga requirements para magtayo ng kumpanya sa Bahrain?',
+      'Paano makakuha ng Investor Visa at Residency sa Bahrain?',
+      'Gaano katagal ang proseso at magkano ang total cost?',
+      'Gusto kong mag-book ng direct session kay Ghazi Wazir'
+    ],
+    pdfBtn: '📄 I-download ang Official Requirements PDF',
+    dealCloseHeader: 'Handa ka na bang isara ang kasunduan?',
+    dealCloseSub: 'Mag-book ng session kay Ghazi Wazir o mag-chat sa WhatsApp.',
+    bookBtn: '📅 Mag-book ng Konsultasyon',
+    whatsappBtn: '💬 WhatsApp Direct (+973 3562 8353)',
+    disclaimer: 'Pribadong konsultansya; ang pinal na pag-apruba ay nakasalalay sa pamahalaan ng Bahrain.'
+  },
+  mwr: {
+    title: 'एग्जीक्यूटिव एआई सेल्स सलाहकार',
+    subtitle: 'बाब अल-खलीज &middot; बैक फॉर ब्रांड',
+    welcome: 'खम्मा घणी सा! प्रणाम। मैं गाजी वजीर रो अधिकृत एआई व्यापारिक सलाहकार हूं। बहरीन में 100% मालिकाना हक री कंपनी (CR), इन्वेस्टर वीजा एवं बैक फॉर ब्रांड एआई टेक्नोलॉजी सारू आपरी सेवा में हाजिर हूं। हुकम करो सा, आज कांई सलाह चाहीजे?',
+    inputPlaceholder: 'कंपनी रजिस्ट्रेशन, इन्वेस्टर वीजा या धंधे बाबत सवाल पूछो...',
+    quickPrompts: [
+      'बहरीन में 100% मालिकाना हक री कंपनी कियां बने सा?',
+      'इन्वेस्टर वीजा और रेजिडेंसी रो पूरो खर्च अर टेम कितरो लागे?',
+      'व्यापारी और एक्सपोर्ट फर्म सारू बहरीन क्यूं फायदামंद है?',
+      'गाजी वजीर सूं सीधी मीटिंग या बात करवा रो तरीको कांई है?'
+    ],
+    pdfBtn: '📄 सरकारी नियम चेकलिस्ट (PDF) डाउनलोड करो सा',
+    dealCloseHeader: 'कांई आप सौदो पक्को कर काम शुरू करवा चाहो हो?',
+    dealCloseSub: 'गाजी वजीर सूं सीधी मीटिंग तय करो या व्हाट्सएप माथे बात करो सा।',
+    bookBtn: '📅 मीटिंग रो स्लॉट पक्को करो',
+    whatsappBtn: '💬 सीधी व्हाट्सएप बात (+973 3562 8353)',
+    disclaimer: 'म्हे प्राइवेट सलाहकार हां। वीजा व लाइसेंस रा फैसला बहरीन सरकार रा महकमा करे।'
   }
 };
 
@@ -202,31 +257,39 @@ export function AIChatDrawer() {
     }
   };
 
-  // Voice Synthesis (Text-to-Speech)
+  const cancelSpeechRef = useRef<(() => void) | null>(null);
+
+  // Voice Synthesis (Text-to-Speech) with Strict Gender and Acoustic Clarity
   const handleSpeak = (text: string, msgId: string) => {
-    if (!('speechSynthesis' in window)) return;
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
     if (speakingMessageId === msgId) {
+      if (cancelSpeechRef.current) cancelSpeechRef.current();
       window.speechSynthesis.cancel();
       setSpeakingMessageId(null);
       return;
     }
 
+    if (cancelSpeechRef.current) cancelSpeechRef.current();
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang === 'ar' ? 'ar-SA' : lang === 'ur' ? 'ur-PK' : 'en-US';
-    utterance.rate = 1.0;
 
-    utterance.onend = () => {
-      setSpeakingMessageId(null);
-    };
-
-    utterance.onerror = () => {
-      setSpeakingMessageId(null);
-    };
+    // Strict gender calibration: Arabic Tariq = male, Urdu Ayesha = female, English Sarah = female
+    const targetGender: VoiceGender = lang === 'ar' ? 'male' : 'female';
+    const langCode = lang === 'ar' ? 'ar-SA' : lang === 'ur' ? 'ur-PK' : 'en-US';
 
     setSpeakingMessageId(msgId);
-    window.speechSynthesis.speak(utterance);
+
+    const cancel = speakStudioText(text, {
+      gender: targetGender,
+      langCode,
+      pitch: targetGender === 'female' ? 1.18 : 0.90,
+      rate: 0.98,
+      onStart: () => setSpeakingMessageId(msgId),
+      onEnd: () => setSpeakingMessageId(null),
+      onError: () => setSpeakingMessageId(null),
+    });
+
+    cancelSpeechRef.current = cancel;
   };
 
   const handleSendMessage = async (textToSend?: string) => {
@@ -315,11 +378,11 @@ export function AIChatDrawer() {
         aria-label="Open AI Sales Agent Chat"
       >
         <span className="relative flex h-2.5 w-2.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#38bdf8] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#38bdf8]"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
         </span>
         <Bot className="w-4 h-4 text-[#38bdf8]" />
-        <span>Ask Sales Agent (EN &middot; AR &middot; UR)</span>
+        <span>AI Sales Agent &amp; Advisory</span>
       </button>
 
       {/* Slide-out Drawer */}
@@ -355,37 +418,24 @@ export function AIChatDrawer() {
               </button>
             </div>
 
-            {/* Trilingual Selector Strip */}
-            <div className="px-4 py-2 bg-[#0c1322] border-b border-[#1e2d4d] flex items-center justify-between text-xs">
-              <span className="text-[11px] text-[#94a3b8] font-bold">Language:</span>
-              <div className="flex rounded-lg bg-[#131d33] p-0.5 border border-[#1e2d4d]">
-                <button
-                  type="button"
-                  onClick={() => setLang('en')}
-                  className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                    lang === 'en' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
-                  }`}
-                >
-                  English
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('ar')}
-                  className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                    lang === 'ar' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
-                  }`}
-                >
-                  العربية
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('ur')}
-                  className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                    lang === 'ur' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
-                  }`}
-                >
-                  اردو
-                </button>
+
+
+            {/* Hexa-lingual Locale Selector Strip */}
+            <div className="px-4 py-2 bg-[#0c1322] border-b border-[#1e2d4d] flex items-center justify-between text-xs overflow-x-auto">
+              <span className="text-[11px] text-[#94a3b8] font-bold mr-2 whitespace-nowrap">Locale:</span>
+              <div className="flex rounded-lg bg-[#131d33] p-0.5 border border-[#1e2d4d] gap-0.5 overflow-x-auto">
+                {(['en', 'ar', 'ur', 'bn', 'fil', 'mwr'] as SupportedLang[]).map(l => (
+                  <button
+                    key={l}
+                    type="button"
+                    onClick={() => setLang(l)}
+                    className={`px-2 py-1 rounded text-[11px] font-bold transition-colors whitespace-nowrap ${
+                      lang === l ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                    }`}
+                  >
+                    {l === 'en' ? 'EN' : l === 'ar' ? 'العربية' : l === 'ur' ? 'اردو' : l === 'bn' ? 'বাংলা' : l === 'fil' ? 'Tagalog' : 'मारवाड़ी'}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -599,7 +649,7 @@ export function AIChatDrawer() {
       <RequirementBriefModal
         isOpen={showBriefModal}
         onClose={() => setShowBriefModal(false)}
-        defaultLanguage={lang}
+        defaultLanguage={lang === 'ar' ? 'ar' : lang === 'ur' ? 'ur' : 'en'}
       />
     </>
   );

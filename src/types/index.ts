@@ -506,5 +506,29 @@ export interface ContentStudioResponse {
   };
 }
 
+export interface GeneratedImageItem {
+  id: string;
+  url: string;
+  prompt: string;
+  originalPrompt?: string;
+  style: string;
+  aspectRatio: string;
+  entity: string;
+  engine: string;
+  note?: string;
+  createdAt: number;
+}
+
+export interface FreeVideoClip {
+  id: string;
+  title: string;
+  category: string;
+  videoUrl: string;
+  fallbackPoster: string;
+  aspectRatio: '9:16' | '16:9' | 'all';
+  durationSec: number;
+  tags: string[];
+}
+
 
 

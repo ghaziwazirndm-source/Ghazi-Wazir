@@ -167,6 +167,7 @@ export function Navbar() {
 
           {/* Header Action CTA & Login Portal */}
           <div className="hidden sm:flex items-center gap-2.5">
+
             <Link
               to="/login"
               className="px-3.5 py-2 rounded-full text-xs font-semibold text-[#f8fafc] bg-[#131d33] hover:bg-[#1e2d4d] border border-[#1e2d4d] hover:border-[#38bdf8]/40 transition-colors flex items-center gap-1.5"
@@ -268,7 +269,7 @@ export function Navbar() {
             <Lock className="w-4 h-4 text-[#38bdf8]" />
             <span>Executive Login Portal</span>
           </Link>
-          <div className="pt-2">
+          <div className="pt-2 space-y-2">
             <Link
               to="/book"
               onClick={() => setMobileOpen(false)}

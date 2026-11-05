@@ -5,6 +5,7 @@ export interface MediaPreset {
   name: string;
   shortName: string;
   url: string;
+  videoUrl?: string;
   aspect: '9:16' | '16:9' | '1:1' | 'all';
   type: 'video_clip' | 'photo' | 'motion_loop';
   tag: string;
@@ -18,6 +19,7 @@ export const MEDIA_PRESETS: MediaPreset[] = [
     name: 'Bahrain Financial Harbour Twilight',
     shortName: 'Bahrain Towers',
     url: '/src/assets/images/bahrain_harbour_shorts_1793617591962.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyscrapers-and-skyline-at-night-42469-large.mp4',
     aspect: '9:16',
     type: 'video_clip',
     tag: '🇧🇭 9:16 Footage',
@@ -25,21 +27,11 @@ export const MEDIA_PRESETS: MediaPreset[] = [
     description: 'Dusk illuminated twin towers & Arabian Gulf waterfront reflections'
   },
   {
-    id: 'luxury_boardroom',
-    name: 'Executive Boardroom at Sunset',
-    shortName: 'Luxury Boardroom',
-    url: '/src/assets/images/luxury_boardroom_office_1793617592714.jpg',
-    aspect: '16:9',
-    type: 'video_clip',
-    tag: '🏢 16:9 Cinema',
-    category: 'Corporate Luxury',
-    description: 'Obsidian marble conference suite overlooking glowing sunset skyline'
-  },
-  {
     id: 'cyber_mesh',
     name: 'Cyber AI Neural Network Stream',
     shortName: 'AI Neural Matrix',
     url: '/src/assets/images/cyber_ai_network_mesh_1793617593219.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-blue-digital-technology-grid-background-48135-large.mp4',
     aspect: '9:16',
     type: 'video_clip',
     tag: '⚡ 9:16 Motion',
@@ -47,15 +39,64 @@ export const MEDIA_PRESETS: MediaPreset[] = [
     description: 'Dynamic cyan and gold neural stream with active data nodes'
   },
   {
+    id: 'luxury_boardroom',
+    name: 'Executive Boardroom at Sunset',
+    shortName: 'Luxury Boardroom',
+    url: '/src/assets/images/luxury_boardroom_office_1793617592714.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-in-a-conference-room-42358-large.mp4',
+    aspect: '16:9',
+    type: 'video_clip',
+    tag: '🏢 16:9 Cinema',
+    category: 'Corporate Luxury',
+    description: 'Obsidian marble conference suite overlooking glowing sunset skyline'
+  },
+  {
+    id: 'financial_growth',
+    name: 'Global Financial Growth & Market Analytics',
+    shortName: 'Financial Growth',
+    url: '/src/assets/images/manama_skyline_square_1793617593135.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-financial-data-charts-on-a-digital-screen-42364-large.mp4',
+    aspect: '16:9',
+    type: 'video_clip',
+    tag: '📈 16:9 Cinema',
+    category: 'Finance & Banking',
+    description: 'Kinetic 3D financial growth curves and market telemetry'
+  },
+  {
+    id: 'deal_handshake',
+    name: 'Corporate Deal Agreement & Handshake',
+    shortName: 'Deal Handshake',
+    url: '/src/assets/images/luxury_boardroom_office_1793617592714.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-hands-of-businesspeople-shaking-hands-over-a-deal-42360-large.mp4',
+    aspect: '16:9',
+    type: 'video_clip',
+    tag: '🤝 Commercial Deal',
+    category: 'Corporate Luxury',
+    description: 'Executive deal closing, Sijilat registration & partner agreements'
+  },
+  {
     id: 'manama_skyline',
     name: 'Manama Financial District Aerial',
     shortName: 'Manama Skyline',
     url: '/src/assets/images/manama_skyline_square_1793617593135.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-and-skyscrapers-at-night-42470-large.mp4',
     aspect: '1:1',
-    type: 'photo',
-    tag: '🏙️ 1:1 Square',
+    type: 'video_clip',
+    tag: '🏙️ Aerial City',
     category: 'Architecture',
-    description: 'Golden hour commercial district skyscrapers with water view'
+    description: 'Golden hour commercial district skyscrapers with coastal water view'
+  },
+  {
+    id: 'tech_datacenter',
+    name: 'Cloud Datacenter & Fiber Optic Racks',
+    shortName: 'AI Cloud Server',
+    url: '/src/assets/images/cyber_ai_network_mesh_1793617593219.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-server-room-rack-doors-with-flashing-led-lights-42475-large.mp4',
+    aspect: '16:9',
+    type: 'video_clip',
+    tag: '☁️ Cloud Tech',
+    category: 'Autonomous AI',
+    description: 'High-speed cloud servers with pulsing neon optical data'
   },
   {
     id: 'canvas_particles',
