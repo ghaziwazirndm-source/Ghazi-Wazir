@@ -596,6 +596,18 @@ export const api = {
     });
   },
 
+  async runAutopilotCycle(forcePublish = true) {
+    return this.request<{
+      success: boolean;
+      message: string;
+      posts: { graphicPost: import('../types').ContentPostItem; videoPost: import('../types').ContentPostItem };
+      autopilot: any;
+    }>('/api/admin/content/autopilot-run-cycle', {
+      method: 'POST',
+      body: JSON.stringify({ forcePublish }),
+    });
+  },
+
   async deleteContentPost(id: string) {
     return this.request<{ success: boolean; message: string }>('/api/admin/content/delete-post', {
       method: 'POST',
@@ -611,7 +623,7 @@ export const api = {
     style?: string;
     aspectRatio?: string;
     entity?: string;
-    engine?: 'pollinations' | 'gemini';
+    engine?: 'pollinations' | 'gemini' | 'gemini-nano-banana-2.1' | 'gemini-3.1-flash-lite-image';
   }) {
     return this.request<{
       success: boolean;

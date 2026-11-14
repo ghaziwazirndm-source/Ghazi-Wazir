@@ -476,6 +476,10 @@ export interface ContentPostItem {
     blog?: string;
   };
   graphicConfig?: Partial<GraphicDesignConfig>;
+  postType?: 'graphic_post' | 'video_shorts' | 'omni_post';
+  imageUrl?: string;
+  videoUrl?: string;
+  storyboard?: ShortsStoryboard;
   hashtags?: string[];
   metrics?: {
     impressions?: number;
@@ -494,6 +498,10 @@ export interface ContentStudioResponse {
     targetEntities: string[];
     languages: string[];
     platforms: string[];
+    lastRunAt?: number;
+    nextRunAt?: number;
+    autoCreateVideos?: boolean;
+    autoGenerateAiImages?: boolean;
   };
   stats: {
     totalPosts: number;
