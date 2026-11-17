@@ -25,7 +25,20 @@ import { querySalesAgentKnowledge } from './src/services/salesAgentKnowledge.ts'
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const resolvePort = (): number => {
+  const portArgIdx = process.argv.indexOf('--port');
+  if (portArgIdx !== -1 && process.argv[portArgIdx + 1]) {
+    const parsed = parseInt(process.argv[portArgIdx + 1], 10);
+    if (!Number.isNaN(parsed) && parsed > 0) return parsed;
+  }
+  const envPort = process.env.PORT ? parseInt(process.env.PORT, 10) : NaN;
+  const nginxPort = process.env.NGINX_PORT ? parseInt(process.env.NGINX_PORT, 10) : 8080;
+  if (!Number.isNaN(envPort) && envPort > 0 && envPort !== nginxPort) {
+    return envPort;
+  }
+  return process.env.DEFAULT_APP_PORT ? parseInt(process.env.DEFAULT_APP_PORT, 10) || 3000 : 3000;
+};
+const PORT = resolvePort();
 const DATA_DIR = path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'workspace.json');
 
@@ -4455,24 +4468,50 @@ async function startServer() {
   const isProd = process.env.NODE_ENV === 'production';
 
   if (!isProd) {
-    const { createServer } = await import('vite');
-    const vite = await createServer({
-      server: { middlewareMode: true }
+    const disableHmr = process.env.DISABLE_HMR === 'true';
+    const vitePromise = (async () => {
+      const { createServer } = await import('vite');
+      return createServer({
+        server: {
+          middlewareMode: true,
+          hmr: disableHmr ? false : undefined,
+          watch: disableHmr ? null : undefined,
+        },
+      });
+    })();
+
+    app.use(async (req, res, next) => {
+      try {
+        const vite = await vitePromise;
+        return vite.middlewares(req, res, next);
+      } catch (err) {
+        return next(err);
+      }
     });
-    app.use(vite.middlewares);
+
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`[Ghazi Wazir App] Server running on http://0.0.0.0:${PORT}`);
+      console.log(`[Environment] Mode: Development`);
+      console.log(`[Storage] Workspace DB loaded: ${db.users.length} users, ${db.leads.length} leads`);
+    });
+
+    await vitePromise;
   } else {
     const distPath = path.resolve(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
-  }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Ghazi Wazir App] Server running on http://0.0.0.0:${PORT}`);
-    console.log(`[Environment] Mode: ${isProd ? 'Production' : 'Development'}`);
-    console.log(`[Storage] Workspace DB loaded: ${db.users.length} users, ${db.leads.length} leads`);
-  });
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`[Ghazi Wazir App] Server running on http://0.0.0.0:${PORT}`);
+      console.log(`[Environment] Mode: Production`);
+      console.log(`[Storage] Workspace DB loaded: ${db.users.length} users, ${db.leads.length} leads`);
+    });
+  }
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error('[Ghazi Wazir App] Fatal startup error:', err);
+  process.exit(1);
+});
