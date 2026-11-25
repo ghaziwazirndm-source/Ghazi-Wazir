@@ -4022,16 +4022,18 @@ export function AdminConsole() {
                       <span className="font-bold text-[#f5f1e8]">Ghazi Wazir</span>
                     </div>
                     <div>
-                      <span className="text-[#a8a7b3] block">Executive WhatsApp:</span>
+                      <span className="text-[#a8a7b3] block">Executive WhatsApp &amp; Office Line:</span>
                       <span className="font-bold text-[#4ade80]">+973 3562 8353</span>
+                      <span className="text-[#a8a7b3] mx-1.5">&bull;</span>
+                      <span className="font-bold text-[#e8c872]">+973 3439 8754</span>
                     </div>
                     <div>
                       <span className="text-[#a8a7b3] block">Executive Corporate Email:</span>
                       <span className="font-bold text-[#f5f1e8]">ghaziwazirndm@gmail.com</span>
                     </div>
                     <div>
-                      <span className="text-[#a8a7b3] block">Bahrain Jurisdiction:</span>
-                      <span className="font-bold text-[#f5f1e8]">Manama, Kingdom of Bahrain</span>
+                      <span className="text-[#a8a7b3] block">Bahrain Office Address:</span>
+                      <span className="font-bold text-[#f5f1e8]">The Collective Hub, Yateem Center, Manama, Kingdom of Bahrain</span>
                     </div>
                   </div>
                 </div>

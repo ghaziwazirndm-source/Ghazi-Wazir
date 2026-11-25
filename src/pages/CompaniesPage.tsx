@@ -77,7 +77,7 @@ export function CompaniesPage() {
             <ul className="space-y-3 text-xs text-[#a8a7b3]">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Operating under direct leadership of CEO Ghazi Wazir in Manama.</span>
+                <span>Headquartered at The Collective Hub, Yateem Center, Manama (+973 3439 8754) under CEO Ghazi Wazir.</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />

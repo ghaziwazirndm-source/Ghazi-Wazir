@@ -92,12 +92,21 @@ export function SEOHead({
         '@id': 'https://ghaziwazir.com/#person',
         name: 'Ghazi Wazir',
         jobTitle: 'CEO of Bab Al-Khaleej & Back for Brand LLC',
-        telephone: '+97335628353',
-        contactPoint: {
-          '@type': 'ContactPoint',
-          contactType: 'executive advisory',
-          url: 'https://ghaziwazir.com/contact'
-        },
+        telephone: '+97334398754',
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'executive advisory',
+            telephone: '+97334398754',
+            url: 'https://ghaziwazir.com/contact'
+          },
+          {
+            '@type': 'ContactPoint',
+            contactType: 'WhatsApp VIP',
+            telephone: '+97335628353',
+            url: 'https://wa.me/97335628353'
+          }
+        ],
         url: 'https://ghaziwazir.com/',
         image: 'https://ghaziwazir.com/ghazi-wazir-photo.jpg',
         description: 'Business leader in Bahrain and the United States guiding enterprise company formation, investor residency, and cutting-edge Generative Engine Optimization.',
@@ -136,10 +145,11 @@ export function SEOHead({
             },
             address: {
               '@type': 'PostalAddress',
+              streetAddress: 'The Collective Hub, Yateem Center',
               addressLocality: 'Manama',
               addressCountry: 'BH'
             },
-            telephone: '+97335628353',
+            telephone: '+97334398754',
             url: 'https://ghaziwazir.com/contact'
           },
           {

@@ -4,7 +4,7 @@ import { SEOHead } from '../components/SEOHead';
 import { api } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useABTheme } from '../context/ABThemeContext';
-import { Phone, Send, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
+import { Phone, PhoneCall, MapPin, Send, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
 import { ProtectedEmailButton } from '../components/ProtectedEmailButton';
 
 export function ContactPage() {
@@ -63,8 +63,8 @@ export function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Ghazi Wazir — WhatsApp & Executive Inquiry | Bab Al-Khaleej & Back for Brand"
-        description="Direct corporate contact desk for Ghazi Wazir via WhatsApp (+973 3562 8353) and secure executive inquiry form. Offices in Bahrain and USA."
+        title="Contact Ghazi Wazir — WhatsApp, Office & Executive Inquiry | Bab Al-Khaleej & Back for Brand"
+        description="Direct corporate contact desk for Ghazi Wazir at The Collective Hub, Yateem Center, Manama (+973 3439 8754 / WhatsApp +973 3562 8353). Offices in Bahrain and USA."
         canonical="https://ghaziwazir.com/contact"
       />
 
@@ -103,6 +103,17 @@ export function ContactPage() {
                   </div>
                 </a>
 
+                <a
+                  href="tel:+97334398754"
+                  className="flex items-start gap-3 p-3.5 rounded-xl border border-[#2a2a38] bg-[#101018] hover:border-[#e8c872] transition-colors"
+                >
+                  <PhoneCall className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#f5f1e8] text-sm block">Manama Office Line</span>
+                    <span className="text-[#a8a7b3]">+973 3439 8754 (Yateem Center Direct)</span>
+                  </div>
+                </a>
+
                 <ProtectedEmailButton variant="card" />
               </div>
             </div>
@@ -114,16 +125,21 @@ export function ContactPage() {
               </h3>
 
               <div className="space-y-3">
-                <div className="p-3 bg-[#101018] rounded-xl border border-[#2a2a38]">
-                  <strong className="text-[#f5f1e8] block mb-1">Bab Al-Khaleej (Bahrain)</strong>
+                <div className="p-3.5 bg-[#101018] rounded-xl border border-[#2a2a38] space-y-1">
+                  <strong className="text-[#f5f1e8] flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#e8c872]" />
+                    <span>Bab Al-Khaleej (Bahrain)</span>
+                  </strong>
+                  <p className="text-[#f5f1e8] font-medium">The Collective Hub, Yateem Center</p>
                   <p>Manama, Kingdom of Bahrain</p>
-                  <p className="text-[11px] text-[#ffa24d] mt-1">*Physical address details: CONFIGURATION REQUIRED</p>
+                  <p className="text-[11px] text-[#e8c872] pt-0.5">
+                    Direct Office: <a href="tel:+97334398754" className="hover:underline font-semibold">+973 3439 8754</a>
+                  </p>
                 </div>
 
-                <div className="p-3 bg-[#101018] rounded-xl border border-[#2a2a38]">
+                <div className="p-3.5 bg-[#101018] rounded-xl border border-[#2a2a38]">
                   <strong className="text-[#f5f1e8] block mb-1">Back for Brand LLC (USA)</strong>
                   <p>State of Florida, United States of America</p>
-                  <p className="text-[11px] text-[#ffa24d] mt-1">*Registration number: CONFIGURATION REQUIRED</p>
                 </div>
               </div>
             </div>

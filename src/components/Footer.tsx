@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Lock, ShieldAlert } from 'lucide-react';
+import { Phone, PhoneCall, MapPin, Lock, ShieldAlert } from 'lucide-react';
 import { ProtectedEmailButton } from './ProtectedEmailButton';
 
 export function Footer() {
@@ -34,6 +34,17 @@ export function Footer() {
                 <Phone className="w-4 h-4 text-[#4ade80]" />
                 <span>+973 3562 8353 (WhatsApp VIP)</span>
               </a>
+              <a
+                href="tel:+97334398754"
+                className="flex items-center gap-2 text-sm text-[#f5f1e8] hover:text-[#e8c872] transition-colors"
+              >
+                <PhoneCall className="w-4 h-4 text-[#e8c872]" />
+                <span>+973 3439 8754 (Manama Office)</span>
+              </a>
+              <div className="flex items-start gap-2 text-xs text-[#a8a7b3]">
+                <MapPin className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
+                <span>The Collective Hub, Yateem Center, Manama, Bahrain</span>
+              </div>
               <ProtectedEmailButton variant="footer" />
             </div>
           </div>
@@ -191,8 +202,8 @@ export function Footer() {
           <div>
             &copy; {new Date().getFullYear()} Ghazi Wazir. All rights reserved. Two companies. One standard.
           </div>
-          <div className="flex items-center gap-4 text-[11px]">
-            <span>Manama, Kingdom of Bahrain</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[11px]">
+            <span>The Collective Hub, Yateem Center, Manama, Bahrain</span>
             <span>&bull;</span>
             <span>Florida, United States</span>
           </div>

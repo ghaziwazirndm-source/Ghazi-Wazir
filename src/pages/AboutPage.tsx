@@ -109,7 +109,7 @@ export function AboutPage() {
               <h3 className="font-heading font-bold text-xl text-[#f5f1e8]">Bab Al-Khaleej</h3>
             </div>
             <p className="text-xs text-[#a8a7b3] leading-relaxed">
-              Positioned in Manama, Bahrain. Specializing in Commercial Registration (CR), investor visa residency, employee LMRA clearing, and corporate document attestation.
+              Located at The Collective Hub, Yateem Center, Manama, Bahrain (+973 3439 8754). Specializing in Commercial Registration (CR), investor visa residency, employee LMRA clearing, and corporate document attestation.
             </p>
             <Link to="/companies" className="text-xs font-bold text-[#e8c872] hover:underline inline-block">
               Learn more about Bab Al-Khaleej &rarr;
