@@ -93,7 +93,11 @@ export function SEOHead({
         name: 'Ghazi Wazir',
         jobTitle: 'CEO of Bab Al-Khaleej & Back for Brand LLC',
         telephone: '+97335628353',
-        email: 'ghaziwazirndm@gmail.com',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'executive advisory',
+          url: 'https://ghaziwazir.com/contact'
+        },
         url: 'https://ghaziwazir.com/',
         image: 'https://ghaziwazir.com/ghazi-wazir-photo.jpg',
         description: 'Business leader in Bahrain and the United States guiding enterprise company formation, investor residency, and cutting-edge Generative Engine Optimization.',
@@ -136,7 +140,7 @@ export function SEOHead({
               addressCountry: 'BH'
             },
             telephone: '+97335628353',
-            email: 'ghaziwazirndm@gmail.com'
+            url: 'https://ghaziwazir.com/contact'
           },
           {
             '@type': 'Organization',
@@ -150,7 +154,7 @@ export function SEOHead({
               addressRegion: 'Florida',
               addressCountry: 'US'
             },
-            email: 'ghaziwazirndm@gmail.com'
+            url: 'https://ghaziwazir.com/contact'
           }
         ]
       },

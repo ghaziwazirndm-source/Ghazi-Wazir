@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { ProtectedEmailButton } from '../components/ProtectedEmailButton';
 import { BookingWidget } from '../components/BookingWidget';
 import {
   Building2,
@@ -622,10 +623,8 @@ export function ServiceDetailPage() {
                 <span className="text-[#f5f1e8] font-semibold">{service.company}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[#a8a7b3]">Email:</span>
-                <a href="mailto:ghaziwazirndm@gmail.com" className="text-[#e8c872] hover:underline">
-                  ghaziwazirndm@gmail.com
-                </a>
+                <span className="text-[#a8a7b3]">Email Desk:</span>
+                <ProtectedEmailButton variant="inline" />
               </div>
             </div>
           </aside>

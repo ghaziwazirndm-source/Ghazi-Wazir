@@ -97,7 +97,7 @@ export function HomePage() {
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
                   <Link
                     to="/book"
-                    className="btn-gold px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xl"
+                    className="btn-gold min-h-[48px] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xl"
                   >
                     <Calendar className="w-4 h-4 text-white" />
                     <span>Book a Free Consultation</span>
@@ -105,7 +105,7 @@ export function HomePage() {
 
                   <Link
                     to="/formation"
-                    className="px-7 py-4 rounded-full border border-[#e8c872]/60 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#1a1a26] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872]"
+                    className="min-h-[48px] px-7 py-4 rounded-full border border-[#e8c872]/60 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#1a1a26] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872]"
                   >
                     <span>Bahrain Formation Blueprint</span>
                     <ArrowRight className="w-4 h-4" />
@@ -138,6 +138,10 @@ export function HomePage() {
                     <img
                       src="/ghazi-wazir-photo.jpg"
                       alt="Ghazi Wazir, CEO of Bab Al-Khaleej and Back for Brand LLC"
+                      width={400}
+                      height={500}
+                      fetchPriority="high"
+                      decoding="async"
                       className="w-full h-auto aspect-[4/5] object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
                     />
                     <div className="p-4 bg-gradient-to-t from-[#0a0a0f] via-[#101018] to-transparent">

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, Lock, ExternalLink, ShieldAlert } from 'lucide-react';
+import { Phone, Lock, ShieldAlert } from 'lucide-react';
+import { ProtectedEmailButton } from './ProtectedEmailButton';
 
 export function Footer() {
   return (
@@ -33,13 +34,7 @@ export function Footer() {
                 <Phone className="w-4 h-4 text-[#4ade80]" />
                 <span>+973 3562 8353 (WhatsApp VIP)</span>
               </a>
-              <a
-                href="mailto:ghaziwazirndm@gmail.com"
-                className="flex items-center gap-2 text-sm text-[#f5f1e8] hover:text-[#e8c872] transition-colors"
-              >
-                <Mail className="w-4 h-4 text-[#e8c872]" />
-                <span>ghaziwazirndm@gmail.com</span>
-              </a>
+              <ProtectedEmailButton variant="footer" />
             </div>
           </div>
 

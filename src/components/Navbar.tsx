@@ -190,8 +190,9 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg text-[#a8a7b3] hover:text-[#f5f1e8] hover:bg-[#14141d] focus:outline-none"
-              aria-label="Toggle menu"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-[#a8a7b3] hover:text-[#f5f1e8] hover:bg-[#14141d] focus:outline-none"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -201,60 +202,60 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#101018] border-b border-[#2a2a38] px-4 pt-3 pb-6 space-y-3">
+        <div className="lg:hidden max-h-[calc(100vh-80px)] overflow-y-auto bg-[#101018] border-b border-[#2a2a38] px-4 pt-3 pb-24 space-y-1.5">
           <Link
             to="/"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             Home
           </Link>
           <Link
             to="/companies"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             Two Companies
           </Link>
           <Link
             to="/start"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             Start Funnel Hub
           </Link>
           <Link
             to="/packages"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             Services & Packages
           </Link>
           <Link
             to="/formation"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#e8c872] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#e8c872] hover:bg-[#14141d]"
           >
             Bahrain Formation Blueprint
           </Link>
           <Link
             to="/blog"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             Strategic Guides
           </Link>
           <Link
             to="/about"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
+            className="flex items-center min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f5f1e8] hover:bg-[#14141d]"
           >
             About Ghazi Wazir
           </Link>
           <Link
             to="/content-studio"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#38bdf8] hover:bg-[#14141d] flex items-center justify-between"
+            className="min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#38bdf8] hover:bg-[#14141d] flex items-center justify-between"
           >
             <span>Content Studio (AI Autopilot)</span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-black uppercase bg-[#38bdf8]/15 text-[#38bdf8]">
@@ -264,16 +265,16 @@ export function Navbar() {
           <Link
             to="/login"
             onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#f8fafc] hover:bg-[#14141d] flex items-center gap-2"
+            className="min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#f8fafc] hover:bg-[#14141d] flex items-center gap-2"
           >
             <Lock className="w-4 h-4 text-[#38bdf8]" />
             <span>Executive Login Portal</span>
           </Link>
-          <div className="pt-2 space-y-2">
+          <div className="pt-3 space-y-2">
             <Link
               to="/book"
               onClick={() => setMobileOpen(false)}
-              className="btn-gold block text-center py-3 rounded-full text-sm font-bold uppercase tracking-wider text-[#16120a]"
+              className="btn-gold min-h-[48px] flex items-center justify-center py-3 rounded-full text-sm font-bold uppercase tracking-wider text-[#16120a]"
             >
               📅 Book Free Consultation
             </Link>

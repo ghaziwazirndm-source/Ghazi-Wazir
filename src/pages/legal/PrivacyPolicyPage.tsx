@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
-import { ShieldCheck, AlertCircle } from 'lucide-react';
+import { ProtectedEmailButton } from '../../components/ProtectedEmailButton';
+import { AlertCircle } from 'lucide-react';
 
 export function PrivacyPolicyPage() {
   return (
@@ -61,8 +62,13 @@ export function PrivacyPolicyPage() {
 
           <section className="space-y-2">
             <h2 className="font-heading font-bold text-lg text-[#f5f1e8]">5. Your Rights & Data Deletion</h2>
-            <p>
-              Clients may request a complete export of their consultation history or request permanent deletion of their lead records at any time by contacting our data officer at <a href="mailto:ghaziwazirndm@gmail.com" className="text-[#e8c872] underline">ghaziwazirndm@gmail.com</a>.
+            <p className="flex flex-wrap items-center gap-1.5">
+              <span>Clients may request a complete export of their consultation history or request permanent deletion of their lead records at any time via our</span>
+              <Link to="/contact" className="text-[#e8c872] underline">
+                Data Officer Contact Form
+              </Link>
+              <span>or</span>
+              <ProtectedEmailButton variant="inline" />.
             </p>
           </section>
         </div>

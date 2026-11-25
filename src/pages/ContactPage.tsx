@@ -4,7 +4,8 @@ import { SEOHead } from '../components/SEOHead';
 import { api } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useABTheme } from '../context/ABThemeContext';
-import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
+import { Phone, Send, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
+import { ProtectedEmailButton } from '../components/ProtectedEmailButton';
 
 export function ContactPage() {
   const { variantId, recordConversion } = useABTheme();
@@ -62,8 +63,8 @@ export function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Ghazi Wazir — WhatsApp, Email & Executive Inquiry | Bab Al-Khaleej & Back for Brand"
-        description="Direct corporate contacts for Ghazi Wazir. WhatsApp: +973 3562 8353, Email: ghaziwazirndm@gmail.com. Offices in Bahrain and USA."
+        title="Contact Ghazi Wazir — WhatsApp & Executive Inquiry | Bab Al-Khaleej & Back for Brand"
+        description="Direct corporate contact desk for Ghazi Wazir via WhatsApp (+973 3562 8353) and secure executive inquiry form. Offices in Bahrain and USA."
         canonical="https://ghaziwazir.com/contact"
       />
 
@@ -102,16 +103,7 @@ export function ContactPage() {
                   </div>
                 </a>
 
-                <a
-                  href="mailto:ghaziwazirndm@gmail.com"
-                  className="flex items-start gap-3 p-3.5 rounded-xl border border-[#2a2a38] bg-[#101018] hover:border-[#e8c872] transition-colors"
-                >
-                  <Mail className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
-                  <div>
-                    <span className="font-bold text-[#f5f1e8] text-sm block">Executive Email</span>
-                    <span className="text-[#a8a7b3]">ghaziwazirndm@gmail.com</span>
-                  </div>
-                </a>
+                <ProtectedEmailButton variant="card" />
               </div>
             </div>
 
