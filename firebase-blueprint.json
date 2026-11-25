@@ -1,0 +1,401 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user account and RBAC role assignment.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Verified email address",
+          "minLength": 3,
+          "maxLength": 254
+        },
+        "role": {
+          "type": "string",
+          "description": "RBAC role",
+          "enum": ["CEO", "ADMIN", "SALES", "SUPPORT", "FINANCE", "VIEWER", "USER"]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether account access is active"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server last update timestamp"
+        }
+      },
+      "required": ["uid", "name", "email", "role", "enabled", "createdAt", "updatedAt"]
+    },
+    "AdminMarker": {
+      "title": "AdminMarker",
+      "description": "Trusted marker document designating an administrator UID.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["CEO", "ADMIN"]
+        },
+        "grantedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "role", "grantedBy", "createdAt"]
+    },
+    "SystemSetting": {
+      "title": "SystemSetting",
+      "description": "Operational settings and emergency stop flags.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "updatedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["key", "enabled", "updatedBy", "updatedAt"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "CRM inbound lead inquiry.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 254
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 40
+        },
+        "serviceName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["NEW", "CONTACTED", "QUALIFIED", "BOOKED", "CONSULTATION", "PROPOSAL", "NEGOTIATION", "PAYMENT_PENDING", "WON", "LOST", "NURTURE"]
+        },
+        "assignedTo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["name", "email", "phone", "serviceName", "stage", "createdAt", "updatedAt"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Scheduled consultation booking.",
+      "type": "object",
+      "properties": {
+        "clientName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "clientEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 254
+        },
+        "slotDate": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 32
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["clientName", "clientEmail", "slotDate", "status", "createdAt", "updatedAt"]
+    },
+    "Proposal": {
+      "title": "Proposal",
+      "description": "Commercial proposal and contract record.",
+      "type": "object",
+      "properties": {
+        "leadId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "amount": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["DRAFT", "PENDING_APPROVAL", "APPROVED", "SENT", "REJECTED"]
+        },
+        "createdBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["leadId", "title", "amount", "status", "createdBy", "createdAt", "updatedAt"]
+    },
+    "Approval": {
+      "title": "Approval",
+      "description": "Executive approval queue item.",
+      "type": "object",
+      "properties": {
+        "requesterId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "riskTier": {
+          "type": "string",
+          "enum": ["TIER_1", "TIER_2", "TIER_3"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "APPROVED", "REJECTED"]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "approverId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["requesterId", "riskTier", "status", "reason", "createdAt", "updatedAt"]
+    },
+    "AuditEntry": {
+      "title": "AuditEntry",
+      "description": "Immutable append-only audit log entry.",
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "sha256Hash": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 128
+        },
+        "prevHash": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["actorId", "action", "sha256Hash", "prevHash", "createdAt"]
+    },
+    "KnowledgeBaseItem": {
+      "title": "KnowledgeBaseItem",
+      "description": "Public knowledge base article.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["title", "body", "published", "updatedAt"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment and invoice record.",
+      "type": "object",
+      "properties": {
+        "leadId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["BHD", "USD", "AED", "SAR"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["REQUESTED", "VERIFIED", "FAILED"]
+        },
+        "recordedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["leadId", "amount", "currency", "status", "recordedBy", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User RBAC profiles indexed by Firebase Auth UID."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminMarker" },
+      "description": "Admin UID allowlist marker documents."
+    },
+    "/system_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SystemSetting" },
+      "description": "Global platform configuration and emergency stop state."
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/Lead" },
+      "description": "CRM prospective client leads."
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Consultation appointments."
+    },
+    "/proposals/{proposalId}": {
+      "schema": { "$ref": "#/entities/Proposal" },
+      "description": "Commercial proposals linked to leads."
+    },
+    "/approvals/{approvalId}": {
+      "schema": { "$ref": "#/entities/Approval" },
+      "description": "Multi-tier approval workflow items."
+    },
+    "/audit_chain/{entryId}": {
+      "schema": { "$ref": "#/entities/AuditEntry" },
+      "description": "Tamper-evident append-only audit log entries."
+    },
+    "/knowledge_base/{docId}": {
+      "schema": { "$ref": "#/entities/KnowledgeBaseItem" },
+      "description": "Published advisory and FAQ articles."
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/Payment" },
+      "description": "Financial ledger entries linked to leads."
+    }
+  }
+}

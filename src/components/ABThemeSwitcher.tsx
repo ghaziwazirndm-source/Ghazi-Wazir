@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useABTheme } from '../context/ABThemeContext';
 import { useToast } from '../context/ToastContext';
 import { ABVariantId } from '../types';
@@ -9,6 +9,12 @@ export function ABThemeSwitcher() {
   const { currentVariant, variantId, variants, setVariant, stats } = useABTheme();
   const { showToast, soundEnabled, toggleSound, themeToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleToggle = () => setIsOpen(prev => !prev);
+    window.addEventListener('gw:toggle-theme-switcher', handleToggle);
+    return () => window.removeEventListener('gw:toggle-theme-switcher', handleToggle);
+  }, []);
 
   const handleSelectVariant = (id: ABVariantId) => {
     setVariant(id);
@@ -60,13 +66,13 @@ export function ABThemeSwitcher() {
   };
 
   return (
-    <aside aria-label="A/B theme switcher" className="fixed bottom-5 left-5 z-40">
-      {/* Floating Pill Trigger */}
+    <aside aria-label="A/B theme switcher" className="fixed bottom-[72px] left-3 right-3 md:right-auto md:bottom-5 md:left-5 z-40 pointer-events-none md:pointer-events-auto">
+      {/* Floating Pill Trigger (Desktop only; mobile uses unified MobileBottomBar) */}
       {!isOpen && (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-[#14141d]/90 hover:bg-[#1a1a28] border border-[#2a2a38] hover:border-[#e8c872]/60 backdrop-blur-xl shadow-2xl transition-all hover:scale-105 text-left"
+          className="hidden md:flex pointer-events-auto group items-center gap-2.5 px-3.5 py-2 rounded-full bg-[#14141d]/90 hover:bg-[#1a1a28] border border-[#2a2a38] hover:border-[#e8c872]/60 backdrop-blur-xl shadow-2xl transition-all hover:scale-105 text-left"
           title="Open A/B Theme & Toast Controller"
         >
           <div
@@ -88,7 +94,7 @@ export function ABThemeSwitcher() {
 
       {/* Expanded Modal / Glass Card */}
       {isOpen && (
-        <div className="w-[340px] sm:w-[380px] p-4 rounded-2xl bg-[#14141d]/98 border border-[#2a2a38] shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-2xl animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="pointer-events-auto w-full max-w-[380px] mx-auto md:mx-0 md:w-[380px] max-h-[75vh] overflow-y-auto p-4 rounded-2xl bg-[#14141d]/98 border border-[#2a2a38] shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-2xl animate-in fade-in slide-in-from-bottom-3 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between pb-3 border-b border-[#2a2a38]">
             <div className="flex items-center gap-2">

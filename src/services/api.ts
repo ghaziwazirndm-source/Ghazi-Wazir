@@ -94,19 +94,32 @@ export const api = {
       headers,
     });
 
-    let data: any = {};
+    let data: any = null;
+    const contentType = res.headers.get('content-type') || '';
+    const rawText = await res.text();
     try {
-      data = await res.json();
+      data = rawText ? JSON.parse(rawText) : {};
     } catch {
-      data = { error: `Server error (${res.status}: ${res.statusText || 'Unknown'})` };
+      if (!res.ok) {
+        if (res.status === 401) {
+          this.clearToken();
+        }
+        throw new Error(`Server error (${res.status}: ${res.statusText || 'Invalid response'})`);
+      }
+      throw new Error(
+        contentType.includes('text/html')
+          ? 'API endpoint returned HTML instead of JSON. Please verify the backend server is running.'
+          : 'Unexpected non-JSON response from server.'
+      );
     }
+
     if (!res.ok) {
       if (res.status === 401) {
         this.clearToken();
       }
-      throw new Error(data.error || 'Server request failed');
+      throw new Error(data?.error || `Server request failed (${res.status})`);
     }
-    return data;
+    return data as T;
   },
 
   // Public Endpoints
@@ -295,7 +308,10 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
     });
-    if (res.token) this.setToken(res.token);
+    if (!res?.token || !res?.user) {
+      throw new Error((res as any)?.error || 'Invalid setup response from authentication server.');
+    }
+    this.setToken(res.token);
     return res;
   },
 
@@ -304,7 +320,10 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
-    if (res.token) this.setToken(res.token);
+    if (!res?.token || !res?.user) {
+      throw new Error((res as any)?.error || 'Invalid login response from authentication server.');
+    }
+    this.setToken(res.token);
     return res;
   },
 
@@ -313,7 +332,22 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ role, email }),
     });
-    if (res.token) this.setToken(res.token);
+    if (!res?.token || !res?.user) {
+      throw new Error((res as any)?.error || 'Invalid quick-login response from authentication server.');
+    }
+    this.setToken(res.token);
+    return res;
+  },
+
+  async firebaseExchange(idToken: string) {
+    const res = await this.request<{ success: boolean; token: string; user: User }>('/api/auth/firebase-exchange', {
+      method: 'POST',
+      body: JSON.stringify({ idToken }),
+    });
+    if (!res?.token || !res?.user) {
+      throw new Error((res as any)?.error || 'Firebase session verification failed.');
+    }
+    this.setToken(res.token);
     return res;
   },
 

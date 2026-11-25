@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
 import { api } from '../services/api';
 import { useToast } from '../context/ToastContext';
+import { useFirebaseAuth } from '../context/FirebaseContext';
 import {
   Lock,
   Mail,
@@ -14,8 +15,6 @@ import {
   AlertCircle,
   ArrowRight,
   Sparkles,
-  Building2,
-  Globe,
   Share2
 } from 'lucide-react';
 
@@ -23,6 +22,7 @@ export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();
+  const { signInWithGoogle, firebaseUser, role: firebaseRole, enabled: firebaseEnabled } = useFirebaseAuth();
 
   const [email, setEmail] = useState('ghaziwazirndm@gmail.com');
   const [password, setPassword] = useState('GhaziWazir2026!');
@@ -37,10 +37,42 @@ export function LoginPage() {
   const [resetNewPassword, setResetNewPassword] = useState('');
   const [resetSuccess, setResetSuccess] = useState('');
 
+  useEffect(() => {
+    const redirectedError = (location.state as any)?.authError;
+    if (redirectedError) {
+      setErrorMessage(redirectedError);
+    }
+  }, [location.state]);
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setErrorMessage('');
+    try {
+      const { role } = await signInWithGoogle();
+      if (role) {
+        const from = (location.state as any)?.from?.pathname || '/admin';
+        navigate(from, { replace: true });
+      }
+    } catch (err: any) {
+      const msg = err?.message || 'Firebase Google authentication failed.';
+      setErrorMessage(msg);
+      showToast({
+        title: 'Authentication Failed',
+        message: msg,
+        type: 'error',
+        theme: 'crimson'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password) {
-      setErrorMessage('Please provide both corporate email and password.');
+      const msg = 'Please provide both corporate email and password.';
+      setErrorMessage(msg);
+      showToast({ title: 'Authentication Failed', message: msg, type: 'error', theme: 'crimson' });
       return;
     }
 
@@ -49,9 +81,10 @@ export function LoginPage() {
 
     try {
       const res = await api.login(email.trim(), password);
-      if (res.token) {
-        api.setToken(res.token);
+      if (!res?.token || !res?.user) {
+        throw new Error('Authentication did not return a valid user session.');
       }
+      api.setToken(res.token);
       showToast({
         title: 'Authentication Successful',
         message: `Welcome, ${res.user.name} (${res.user.role}). Command Center unlocked.`,
@@ -63,7 +96,14 @@ export function LoginPage() {
       const from = (location.state as any)?.from?.pathname || '/admin';
       navigate(from, { replace: true });
     } catch (err: any) {
-      setErrorMessage(err.message || 'Login failed. Please verify credentials.');
+      const msg = err.message || 'Login failed. Please verify credentials.';
+      setErrorMessage(msg);
+      showToast({
+        title: 'Authentication Failed',
+        message: msg,
+        type: 'error',
+        theme: 'crimson'
+      });
     } finally {
       setLoading(false);
     }
@@ -74,9 +114,10 @@ export function LoginPage() {
     setErrorMessage('');
     try {
       const res = await api.quickLogin(role);
-      if (res.token) {
-        api.setToken(res.token);
+      if (!res?.token || !res?.user) {
+        throw new Error('Quick login did not return a valid session.');
       }
+      api.setToken(res.token);
       showToast({
         title: 'Executive Session Verified',
         message: `Authenticated as ${res.user.name} [${res.user.role}].`,
@@ -85,7 +126,14 @@ export function LoginPage() {
       });
       navigate('/admin', { replace: true });
     } catch (err: any) {
-      setErrorMessage(err.message || 'Quick login failed.');
+      const msg = err.message || 'Quick login failed.';
+      setErrorMessage(msg);
+      showToast({
+        title: 'Authentication Failed',
+        message: msg,
+        type: 'error',
+        theme: 'crimson'
+      });
     } finally {
       setLoading(false);
     }
@@ -97,10 +145,12 @@ export function LoginPage() {
       setErrorMessage('New password must be at least 8 characters long.');
       return;
     }
+    setErrorMessage('');
     setLoading(true);
     try {
       const res: any = await api.resetPassword(resetEmail, resetNewPassword);
       setResetSuccess(res.message || 'Password successfully updated.');
+      setEmail(resetEmail);
       setPassword(resetNewPassword);
       setTimeout(() => {
         setShowReset(false);
@@ -121,7 +171,7 @@ export function LoginPage() {
         noindex={true}
       />
 
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center pt-10 pb-28 md:py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           {/* Brand Header */}
           <div className="text-center space-y-3">
@@ -138,37 +188,49 @@ export function LoginPage() {
             </div>
           </div>
 
-          {/* 1-Click Fast Executive Login */}
+          {/* Firebase Auth Google Sign-In (Required for Protected /admin Route) */}
           <div className="p-5 bg-gradient-to-br from-[#131d33] via-[#0f172a] to-[#131d33] border border-[#38bdf8]/40 rounded-2xl shadow-xl space-y-3.5">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold text-[#38bdf8] uppercase tracking-wider flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-                Instant Executive Control
+                Firebase Role Verification
               </span>
-              <span className="text-[10px] text-[#94a3b8]">Verified One-Click Access</span>
+              <span className="text-[10px] text-[#94a3b8]">Protected /admin Gate</span>
             </div>
 
-            <button
-              type="button"
-              onClick={() => handleInstantQuickLogin('CEO')}
-              disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)] transition-all hover:scale-[1.02] disabled:opacity-50"
-            >
-              <span>👑</span>
-              <span>Enter as Ghazi Wazir (CEO)</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            {firebaseUser && firebaseRole && firebaseEnabled ? (
+              <button
+                type="button"
+                onClick={() => navigate('/admin', { replace: true })}
+                className="w-full py-3.5 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-[#052e16] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.25)] transition-all"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>Enter Admin Console ({firebaseRole})</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                disabled={loading}
+                className="w-full py-3.5 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)] transition-all hover:scale-[1.02] disabled:opacity-50"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>{loading ? 'Verifying Firebase Session...' : 'Sign In with Google (Firebase Auth)'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
 
             {/* Quick Role Selectors */}
             <div className="pt-1 flex items-center justify-between text-[11px] text-[#94a3b8]">
-              <span>Switch Role:</span>
+              <span>Workspace Demo Role:</span>
               <div className="flex items-center gap-1.5">
-                {(['ADMIN', 'SALES', 'FINANCE'] as const).map(role => (
+                {(['CEO', 'ADMIN', 'SALES', 'FINANCE'] as const).map(role => (
                   <button
                     key={role}
                     type="button"
                     onClick={() => handleInstantQuickLogin(role)}
-                    className="px-2.5 py-1 rounded-lg bg-[#090d16] hover:bg-[#1e2d4d] text-[#f8fafc] text-[10px] font-bold border border-[#1e2d4d] transition-colors"
+                    className="px-2 py-1 rounded-lg bg-[#090d16] hover:bg-[#1e2d4d] text-[#f8fafc] text-[10px] font-bold border border-[#1e2d4d] transition-colors"
                   >
                     {role}
                   </button>
@@ -218,21 +280,34 @@ export function LoginPage() {
             )}
 
             {/* Default Credentials Helper */}
-            <div className="p-3 rounded-xl bg-[#0d1527] border border-[#1e2d4d] flex items-center justify-between text-xs">
-              <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-bold text-[#38bdf8] block">Seeded CEO Credentials:</span>
-                <span className="text-[#94a3b8] font-mono text-[11px]">ghaziwazirndm@gmail.com</span>
+            <div className="p-3 rounded-xl bg-[#0d1527] border border-[#1e2d4d] space-y-2 text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[10px] uppercase font-bold text-[#38bdf8]">Auto-Fill Credentials:</span>
+                <div className="flex flex-wrap items-center gap-1">
+                  {[
+                    { label: 'CEO', email: 'ghaziwazirndm@gmail.com', pass: 'GhaziWazir2026!' },
+                    { label: 'Admin', email: 'admin@babalkhaleej.com', pass: 'Admin2026!' },
+                    { label: 'Sales', email: 'sales@backforbrand.com', pass: 'Sales2026!' },
+                    { label: 'Finance', email: 'finance@babalkhaleej.com', pass: 'Finance2026!' }
+                  ].map(preset => (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => {
+                        setEmail(preset.email);
+                        setPassword(preset.pass);
+                        setErrorMessage('');
+                      }}
+                      className="px-2 py-0.5 rounded-md bg-[#1e2d4d] hover:bg-[#38bdf8] hover:text-[#090d16] text-[#38bdf8] font-bold text-[10px] uppercase tracking-wider transition-colors"
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setEmail('ghaziwazirndm@gmail.com');
-                  setPassword('GhaziWazir2026!');
-                }}
-                className="px-2.5 py-1 rounded-lg bg-[#1e2d4d] hover:bg-[#38bdf8] hover:text-[#090d16] text-[#38bdf8] font-bold text-[10px] uppercase tracking-wider transition-colors"
-              >
-                Auto-Fill
-              </button>
+              <div className="text-[11px] text-[#94a3b8] font-mono truncate">
+                {email || 'ghaziwazirndm@gmail.com'}
+              </div>
             </div>
 
             {resetSuccess && (
@@ -245,16 +320,17 @@ export function LoginPage() {
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-[#f8fafc] block">
-                  Corporate Email
+                  Corporate Email or Role Username
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-[#94a3b8] absolute left-3 top-3" />
                   <input
-                    type="email"
+                    type="text"
                     required
+                    autoComplete="username"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="ghaziwazirndm@gmail.com"
+                    placeholder="ghaziwazirndm@gmail.com or admin"
                     className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] placeholder-[#64748b] focus:border-[#38bdf8] focus:outline-none"
                   />
                 </div>

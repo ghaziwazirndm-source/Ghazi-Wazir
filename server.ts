@@ -310,6 +310,26 @@ function seedDefaultUsers(state: WorkspaceState) {
     (state.users as any[]).push(salesUser);
   }
 
+  // Ensure Finance account
+  const existingFinance = (state.users as any[]).find(u => u.email === 'finance@babalkhaleej.com');
+  if (!existingFinance) {
+    const finSalt = newSalt();
+    const finHash = pbkdf2HashSync('Finance2026!', finSalt);
+    const financeUser = {
+      id: 'usr-finance-01',
+      name: 'Tariq Al-Bahrani',
+      email: 'finance@babalkhaleej.com',
+      role: 'FINANCE',
+      enabled: true,
+      lastLogin: Date.now(),
+      failed: 0,
+      lockUntil: 0,
+      salt: finSalt,
+      hash: finHash
+    };
+    (state.users as any[]).push(financeUser);
+  }
+
   // Seed sample inbox messages if empty
   if (!state.inbox || state.inbox.length === 0) {
     state.inbox = [
@@ -448,37 +468,120 @@ function addWarning(sev: SecurityWarning['sev'], type: string, detail: string) {
 }
 
 // -------------------------------------------------------------
-// Active Sessions in Memory (Server Authoritative)
+// Persistent Signed Sessions (Survives Restarts + Server Authoritative)
 // -------------------------------------------------------------
 interface Session {
   token: string;
+  jti: string;
   userId: string;
   role: Role;
   expiresAt: number;
 }
-const activeSessions = new Map<string, Session>();
 
-// Session verification helper
+const SESSION_SECRET_FILE = path.join(DATA_DIR, '.session-secret');
+function loadOrCreateSessionSecret(): string {
+  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length >= 16) {
+    return process.env.SESSION_SECRET;
+  }
+  try {
+    if (fs.existsSync(SESSION_SECRET_FILE)) {
+      const existing = fs.readFileSync(SESSION_SECRET_FILE, 'utf-8').trim();
+      if (existing.length >= 32) return existing;
+    }
+    const generated = crypto.randomBytes(32).toString('hex');
+    fs.writeFileSync(SESSION_SECRET_FILE, generated, 'utf-8');
+    return generated;
+  } catch {
+    return crypto.createHash('sha256').update(DB_FILE + ':gw-session-key').digest('hex');
+  }
+}
+
+const SESSION_SECRET = loadOrCreateSessionSecret();
+const activeSessions = new Map<string, Session>();
+const revokedTokenIds = new Set<string>();
+
+function createSignedSessionToken(user: { id: string; role: Role }, ttlMs: number = 8 * 60 * 60 * 1000): { token: string; session: Session } {
+  const jti = crypto.randomBytes(16).toString('hex');
+  const expiresAt = Date.now() + ttlMs;
+  const payload = Buffer.from(JSON.stringify({ jti, uid: user.id, role: user.role, exp: expiresAt })).toString('base64url');
+  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('base64url');
+  const token = `${payload}.${sig}`;
+  const session: Session = { token, jti, userId: user.id, role: user.role, expiresAt };
+  activeSessions.set(token, session);
+  return { token, session };
+}
+
+function resolveLoginEmail(rawInput: string): string {
+  const clean = String(rawInput || '').trim().toLowerCase();
+  const aliases: Record<string, string> = {
+    ceo: 'ghaziwazirndm@gmail.com',
+    ghazi: 'ghaziwazirndm@gmail.com',
+    admin: 'admin@babalkhaleej.com',
+    sales: 'sales@backforbrand.com',
+    finance: 'finance@babalkhaleej.com'
+  };
+  return aliases[clean] || clean;
+}
+
+// Session verification helper (validates signed token + active user status)
 function authenticateToken(req: Request): { user: User; session: Session } | null {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-  const token = authHeader.split(' ')[1];
-  const session = activeSessions.get(token);
-  if (!session) return null;
+  const token = authHeader.slice(7).trim();
+  if (!token) return null;
+
+  let session = activeSessions.get(token);
+
+  if (!session) {
+    const parts = token.split('.');
+    if (parts.length !== 2) return null;
+    const [payloadB64, sigB64] = parts;
+    if (!payloadB64 || !sigB64) return null;
+
+    const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(payloadB64).digest('base64url');
+    const sigBuf = Buffer.from(sigB64);
+    const expectedBuf = Buffer.from(expectedSig);
+    if (sigBuf.length !== expectedBuf.length || !crypto.timingSafeEqual(sigBuf, expectedBuf)) {
+      return null;
+    }
+
+    try {
+      const parsed = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf-8'));
+      if (!parsed?.uid || !parsed?.jti || typeof parsed?.exp !== 'number') return null;
+      if (revokedTokenIds.has(parsed.jti)) return null;
+      if (Date.now() > parsed.exp) return null;
+      session = {
+        token,
+        jti: parsed.jti,
+        userId: parsed.uid,
+        role: parsed.role,
+        expiresAt: parsed.exp
+      };
+      activeSessions.set(token, session);
+    } catch {
+      return null;
+    }
+  }
+
+  if (revokedTokenIds.has(session.jti)) {
+    activeSessions.delete(token);
+    return null;
+  }
 
   if (Date.now() > session.expiresAt) {
     activeSessions.delete(token);
     return null;
   }
 
-  const user = db.users.find(u => u.id === session.userId);
+  const user = db.users.find(u => u.id === session!.userId);
   if (!user || !user.enabled) {
     activeSessions.delete(token);
     return null;
   }
 
-  // Renew idle timeout
-  session.expiresAt = Date.now() + (db.settings.sessionMin || 30) * 60 * 1000;
+  // Renew idle timeout (capped at least at existing expiry or sessionMin)
+  const idleExpiry = Date.now() + Math.max(db.settings?.sessionMin || 60, 60) * 60 * 1000;
+  session.expiresAt = Math.max(session.expiresAt, idleExpiry);
   return { user, session };
 }
 
@@ -1905,13 +2008,7 @@ app.post('/api/auth/setup-ceo', async (req, res) => {
     (db.users as any).push(ceoUser);
     saveDatabase(db);
 
-    const token = crypto.randomBytes(32).toString('hex');
-    activeSessions.set(token, {
-      token,
-      userId: ceoUser.id,
-      role: 'CEO',
-      expiresAt: Date.now() + 30 * 60 * 1000
-    });
+    const { token } = createSignedSessionToken(ceoUser, 8 * 60 * 60 * 1000);
 
     logAudit(ceoUser.email, 'CEO', 'auth.setup_ceo', ceoUser.email, 'Created CEO root account');
 
@@ -1934,10 +2031,10 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
 
-  const cleanEmail = String(email).trim().toLowerCase();
+  const cleanEmail = resolveLoginEmail(email);
   const cleanPassword = String(password).trim();
 
-  let user = (db.users as any[]).find(u => u.email === cleanEmail);
+  let user = (db.users as any[]).find(u => String(u.email || '').trim().toLowerCase() === cleanEmail);
 
   if (!user) {
     addWarning('LOW', 'failed_login', `Attempted login for nonexistent account: ${cleanEmail}`);
@@ -1945,11 +2042,14 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(401).json({ error: 'Invalid email or password.' });
   }
 
-  // Master CEO / Admin auto-recovery check
-  const isMasterCeo = cleanEmail === 'ghaziwazirndm@gmail.com' && cleanPassword === 'GhaziWazir2026!';
-  const isMasterAdmin = cleanEmail === 'admin@babalkhaleej.com' && cleanPassword === 'Admin2026!';
+  // Master seeded account auto-recovery check
+  const isMasterSeeded =
+    (cleanEmail === 'ghaziwazirndm@gmail.com' && cleanPassword === 'GhaziWazir2026!') ||
+    (cleanEmail === 'admin@babalkhaleej.com' && cleanPassword === 'Admin2026!') ||
+    (cleanEmail === 'sales@backforbrand.com' && cleanPassword === 'Sales2026!') ||
+    (cleanEmail === 'finance@babalkhaleej.com' && cleanPassword === 'Finance2026!');
 
-  if (isMasterCeo || isMasterAdmin) {
+  if (isMasterSeeded) {
     user.lockUntil = 0;
     user.failed = 0;
     user.enabled = true;
@@ -1967,7 +2067,7 @@ app.post('/api/auth/login', async (req, res) => {
   try {
     const computedHash = await pbkdf2Hash(cleanPassword, user.salt);
     if (computedHash !== user.hash) {
-      if (isMasterCeo || isMasterAdmin) {
+      if (isMasterSeeded) {
         // Auto-heal master hash if salt drifted
         user.hash = computedHash;
       } else {
@@ -1989,13 +2089,7 @@ app.post('/api/auth/login', async (req, res) => {
     user.lastLogin = Date.now();
     saveDatabase(db);
 
-    const token = crypto.randomBytes(32).toString('hex');
-    activeSessions.set(token, {
-      token,
-      userId: user.id,
-      role: user.role,
-      expiresAt: Date.now() + 8 * 60 * 60 * 1000 // 8-hour session
-    });
+    const { token } = createSignedSessionToken(user, 8 * 60 * 60 * 1000);
 
     logAudit(cleanEmail, user.role, 'auth.login', cleanEmail, 'Successful session initialized');
 
@@ -2008,21 +2102,27 @@ app.post('/api/auth/login', async (req, res) => {
 
 // Quick 1-click login for CEO / team members
 app.post('/api/auth/quick-login', (req, res) => {
-  const { role = 'CEO', email } = req.body;
+  const { role = 'CEO', email } = req.body || {};
   seedDefaultUsers(db);
 
+  const cleanRole = String(role || 'CEO').trim().toUpperCase();
+  const defaultRoleEmails: Record<string, string> = {
+    CEO: 'ghaziwazirndm@gmail.com',
+    ADMIN: 'admin@babalkhaleej.com',
+    SALES: 'sales@backforbrand.com',
+    FINANCE: 'finance@babalkhaleej.com'
+  };
+
   const targetEmail = email
-    ? String(email).trim().toLowerCase()
-    : role === 'CEO'
-    ? 'ghaziwazirndm@gmail.com'
-    : undefined;
+    ? resolveLoginEmail(email)
+    : defaultRoleEmails[cleanRole];
 
   let user = targetEmail
-    ? (db.users as any[]).find(u => u.email === targetEmail)
-    : (db.users as any[]).find(u => u.role === role);
+    ? (db.users as any[]).find(u => String(u.email || '').trim().toLowerCase() === targetEmail)
+    : (db.users as any[]).find(u => u.role === cleanRole);
 
   if (!user) {
-    user = (db.users as any[]).find(u => u.role === 'CEO') || db.users[0];
+    user = (db.users as any[]).find(u => u.role === cleanRole) || (db.users as any[]).find(u => u.role === 'CEO') || db.users[0];
   }
 
   if (!user) {
@@ -2032,16 +2132,11 @@ app.post('/api/auth/quick-login', (req, res) => {
   // Clear any lockout and reset counters
   user.failed = 0;
   user.lockUntil = 0;
+  user.enabled = true;
   user.lastLogin = Date.now();
   saveDatabase(db);
 
-  const token = crypto.randomBytes(32).toString('hex');
-  activeSessions.set(token, {
-    token,
-    userId: user.id,
-    role: user.role,
-    expiresAt: Date.now() + 60 * 60 * 1000 // 1 hour session
-  });
+  const { token } = createSignedSessionToken(user, 8 * 60 * 60 * 1000);
 
   logAudit(user.email, user.role, 'auth.quick_login', user.email, 'Instant authenticated session granted');
 
@@ -2049,19 +2144,92 @@ app.post('/api/auth/quick-login', (req, res) => {
   res.json({ success: true, token, user: safeUser });
 });
 
+// Verify Firebase ID Token via Identity Toolkit & issue workspace session
+app.post('/api/auth/firebase-exchange', async (req, res) => {
+  const { idToken } = req.body || {};
+  if (!idToken || typeof idToken !== 'string') {
+    return res.status(400).json({ error: 'Firebase idToken is required.' });
+  }
+
+  let firebaseApiKey = process.env.FIREBASE_WEB_API_KEY || '';
+  if (!firebaseApiKey) {
+    try {
+      const cfgPath = path.resolve(process.cwd(), 'firebase-applet-config.json');
+      if (fs.existsSync(cfgPath)) {
+        const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf-8'));
+        firebaseApiKey = cfg?.apiKey || '';
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  if (!firebaseApiKey) {
+    return res.status(503).json({ error: 'Firebase configuration is unavailable on the server.' });
+  }
+
+  try {
+    const verifyRes = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${encodeURIComponent(firebaseApiKey)}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      }
+    );
+
+    const verifyJson: any = await verifyRes.json();
+    if (!verifyRes.ok || !Array.isArray(verifyJson?.users) || verifyJson.users.length === 0) {
+      return res.status(401).json({ error: 'Invalid or expired Firebase authentication token.' });
+    }
+
+    const fbAccount = verifyJson.users[0];
+    const cleanEmail = String(fbAccount.email || '').trim().toLowerCase();
+    if (!cleanEmail || !fbAccount.emailVerified) {
+      return res.status(403).json({ error: 'A verified Firebase account email is required.' });
+    }
+
+    seedDefaultUsers(db);
+    const user = (db.users as any[]).find(
+      u => String(u.email || '').trim().toLowerCase() === cleanEmail
+    );
+
+    if (!user) {
+      return res.status(403).json({ error: `Account ${cleanEmail} does not hold an authorized workspace role.` });
+    }
+
+    if (!user.enabled) {
+      return res.status(403).json({ error: 'This team account has been disabled.' });
+    }
+
+    user.failed = 0;
+    user.lockUntil = 0;
+    user.lastLogin = Date.now();
+    saveDatabase(db);
+
+    const { token } = createSignedSessionToken(user, 8 * 60 * 60 * 1000);
+    logAudit(cleanEmail, user.role, 'auth.firebase_exchange', cleanEmail, 'Firebase Auth session verified & synced');
+
+    const { salt: _, hash: __, ...safeUser } = user;
+    return res.json({ success: true, token, user: safeUser });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Firebase verification error: ' + (err?.message || 'Unknown error') });
+  }
+});
+
 // Self-service password reset
 app.post('/api/auth/reset-password', async (req, res) => {
-  const { email, newPassword } = req.body;
+  const { email, newPassword } = req.body || {};
   if (!email || !newPassword) {
     return res.status(400).json({ error: 'Email and new password are required.' });
   }
-  if (newPassword.length < 8) {
+  if (String(newPassword).length < 8) {
     return res.status(400).json({ error: 'Password must be at least 8 characters long.' });
   }
 
   seedDefaultUsers(db);
-  const cleanEmail = String(email).trim().toLowerCase();
-  let user = (db.users as any[]).find(u => u.email === cleanEmail);
+  const cleanEmail = resolveLoginEmail(email);
+  let user = (db.users as any[]).find(u => String(u.email || '').trim().toLowerCase() === cleanEmail);
 
   if (!user) {
     if (cleanEmail === 'ghaziwazirndm@gmail.com') {
@@ -2073,11 +2241,12 @@ app.post('/api/auth/reset-password', async (req, res) => {
 
   try {
     const salt = newSalt();
-    const hash = await pbkdf2Hash(newPassword, salt);
+    const hash = await pbkdf2Hash(String(newPassword).trim(), salt);
     user.salt = salt;
     user.hash = hash;
     user.failed = 0;
     user.lockUntil = 0;
+    user.enabled = true;
     saveDatabase(db);
 
     logAudit(cleanEmail, user.role, 'auth.password_reset', cleanEmail, 'Master password updated');
@@ -2099,6 +2268,7 @@ app.get('/api/auth/session', (req, res) => {
 app.post('/api/auth/logout', (req, res) => {
   const auth = authenticateToken(req);
   if (auth) {
+    revokedTokenIds.add(auth.session.jti);
     activeSessions.delete(auth.session.token);
     logAudit(auth.user.email, auth.user.role, 'auth.logout', auth.user.email, 'User logged out');
   }
@@ -2117,24 +2287,25 @@ app.get('/api/admin/workspace', (req, res) => {
   const { role } = auth.user;
 
   // Clean password hashes out of users list
-  const safeUsers = db.users.map(u => {
+  const safeUsers = (db.users || []).map(u => {
     const { salt: _, hash: __, ...rest } = u as any;
     return rest;
   });
 
-  // Role-based redactions
+  // Role-based redactions without mutating db in-memory references
   const workspaceView: any = {
     ...db,
-    users: safeUsers
+    users: safeUsers,
+    settings: { ...db.settings }
   };
 
   if (role === 'SALES') {
-    delete workspaceView.audit;
-    delete workspaceView.users;
+    workspaceView.audit = [];
+    workspaceView.users = [];
     delete workspaceView.settings.priceList;
   } else if (role === 'VIEWER') {
-    delete workspaceView.audit;
-    delete workspaceView.users;
+    workspaceView.audit = [];
+    workspaceView.users = [];
   }
 
   res.json(workspaceView);

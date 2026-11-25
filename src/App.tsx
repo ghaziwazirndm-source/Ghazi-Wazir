@@ -13,6 +13,7 @@ import { WhatsAppButton } from './components/WhatsAppButton';
 import { AIChatDrawer } from './components/AIChatDrawer';
 import { CookieBanner } from './components/CookieBanner';
 import { ProgressBar } from './components/ProgressBar';
+import { MobileBottomBar } from './components/MobileBottomBar';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -48,9 +49,12 @@ import { CookiePolicyPage } from './pages/legal/CookiePolicyPage';
 
 // Admin Console
 import { AdminConsole } from './pages/admin/AdminConsole';
+import { ProtectedAdminRoute } from './components/ProtectedAdminRoute';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 import { ABThemeSwitcher } from './components/ABThemeSwitcher';
 import { ToastProvider } from './context/ToastContext';
+import { FirebaseProvider } from './context/FirebaseContext';
 import { ABThemeProvider } from './context/ABThemeContext';
 
 import { initAttributionTracking } from './services/attribution';
@@ -113,8 +117,15 @@ function AppContent() {
           {/* Standalone All-Platform Content Studio & Autopilot */}
           <Route path="/content-studio" element={<ContentStudioPage />} />
 
-          {/* CEO Command Center */}
-          <Route path="/admin" element={<AdminConsole />} />
+          {/* CEO Command Center (Protected by Firebase Auth & Role Verification) */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute allowedRoles={['CEO', 'ADMIN', 'SALES', 'SUPPORT', 'FINANCE', 'VIEWER']}>
+                <AdminConsole />
+              </ProtectedAdminRoute>
+            }
+          />
 
           {/* 404 Fallback */}
           <Route path="*" element={<NotFoundPage />} />
@@ -126,19 +137,24 @@ function AppContent() {
       {!isAdmin && <AIChatDrawer />}
       {!isAdmin && <CookieBanner />}
       {!isAdmin && <ABThemeSwitcher />}
+      {!isAdmin && <MobileBottomBar />}
     </div>
   );
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ToastProvider>
-        <ABThemeProvider>
-          <AppContent />
-        </ABThemeProvider>
-      </ToastProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ToastProvider>
+          <FirebaseProvider>
+            <ABThemeProvider>
+              <AppContent />
+            </ABThemeProvider>
+          </FirebaseProvider>
+        </ToastProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

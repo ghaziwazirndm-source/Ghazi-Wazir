@@ -62,12 +62,14 @@ import {
   Volume2,
   VolumeX,
   Eye,
+  EyeOff,
   Layers as LayersIcon,
   Rocket,
   Share2
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useABTheme } from '../../context/ABThemeContext';
+import { useFirebaseAuth } from '../../context/FirebaseContext';
 import { RequirementBriefModal } from '../../components/RequirementBriefModal';
 import { adTracker } from '../../services/adTracking';
 import { PlatformLaunchGuide } from '../../components/PlatformLaunchGuide';
@@ -138,6 +140,7 @@ const MODULE_LABELS: Record<string, { label: string; icon: any }> = {
 export function AdminConsole() {
   const { currentVariant, variantId, variants, setVariant, stats: abStats } = useABTheme();
   const { showToast, soundEnabled, toggleSound, themeToast } = useToast();
+  const { firebaseUser, signOutFirebase } = useFirebaseAuth();
 
   const [user, setUser] = useState<User | null>(null);
   const [workspace, setWorkspace] = useState<WorkspaceState | null>(null);
@@ -159,6 +162,7 @@ export function AdminConsole() {
   const [setupConfirm, setSetupConfirm] = useState('');
   const [authError, setAuthError] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   // CRM & Lead Selection State
   const [selectedLeadId, setSelectedLeadId] = useState<string>('');
@@ -276,26 +280,86 @@ export function AdminConsole() {
     }
   }, [currentModule]);
 
-  const checkAuthAndLoad = async () => {
-    const existingToken = api.getToken();
-    if (!existingToken) {
-      setUser(null);
-      setWorkspace(null);
-      setLoading(false);
-      return;
-    }
+  const normalizeWorkspace = (raw: any): WorkspaceState => ({
+    users: Array.isArray(raw?.users) ? raw.users : [],
+    leads: Array.isArray(raw?.leads) ? raw.leads : [],
+    bookings: Array.isArray(raw?.bookings) ? raw.bookings : [],
+    proposals: Array.isArray(raw?.proposals) ? raw.proposals : [],
+    payments: Array.isArray(raw?.payments) ? raw.payments : [],
+    kb: Array.isArray(raw?.kb) ? raw.kb : [],
+    resources: Array.isArray(raw?.resources) ? raw.resources : [],
+    followups: Array.isArray(raw?.followups) ? raw.followups : [],
+    approvals: Array.isArray(raw?.approvals) ? raw.approvals : [],
+    audit: Array.isArray(raw?.audit) ? raw.audit : [],
+    warnings: Array.isArray(raw?.warnings) ? raw.warnings : [],
+    inbox: Array.isArray(raw?.inbox) ? raw.inbox : [],
+    automations: {
+      scoring: raw?.automations?.scoring ?? true,
+      faq: raw?.automations?.faq ?? true,
+      followups: raw?.automations?.followups ?? true,
+      reminders: raw?.automations?.reminders ?? true,
+    },
+    stop: {
+      on: Boolean(raw?.stop?.on),
+      by: raw?.stop?.by,
+      at: raw?.stop?.at,
+    },
+    settings: {
+      hot: raw?.settings?.hot ?? 85,
+      warm: raw?.settings?.warm ?? 60,
+      sessionMin: raw?.settings?.sessionMin ?? 60,
+      discountMax: raw?.settings?.discountMax ?? 15,
+      highValue: raw?.settings?.highValue ?? 2500,
+      financeLimit: raw?.settings?.financeLimit ?? 1500,
+      approvalHours: raw?.settings?.approvalHours ?? 24,
+      weights: raw?.settings?.weights ?? {
+        need: 20,
+        budget: 15,
+        timeline: 15,
+        fit: 15,
+        urgency: 10,
+        authority: 15,
+        signals: 10,
+      },
+      priceList: Array.isArray(raw?.settings?.priceList) ? raw.settings.priceList : [],
+    },
+  });
 
+  const checkAuthAndLoad = async () => {
     setLoading(true);
     setAuthError('');
     try {
+      let existingToken = api.getToken();
+      if (!existingToken && firebaseUser) {
+        try {
+          const idToken = await firebaseUser.getIdToken();
+          if (idToken) {
+            const exchanged = await api.firebaseExchange(idToken);
+            existingToken = exchanged.token;
+          }
+        } catch {
+          // fall through to standard gate if exchange fails
+        }
+      }
+
+      if (!existingToken) {
+        setUser(null);
+        setWorkspace(null);
+        setLoading(false);
+        return;
+      }
+
       const session = await api.getSession();
+      if (!session?.user) {
+        throw new Error('Session expired.');
+      }
+      const ws = normalizeWorkspace(await api.getWorkspace());
       setUser(session.user);
-      const ws = await api.getWorkspace();
       setWorkspace(ws);
-      if (ws.leads?.length && !selectedLeadId) {
+      if (ws.leads.length && !selectedLeadId) {
         setSelectedLeadId(ws.leads[0].id);
       }
-    } catch (err: any) {
+    } catch {
       api.clearToken();
       setUser(null);
       setWorkspace(null);
@@ -318,15 +382,29 @@ export function AdminConsole() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!loginEmail.trim() || !loginPassword.trim()) {
+      setAuthError('Please enter both email/username and password.');
+      return;
+    }
     setAuthError('');
     setAuthLoading(true);
     try {
       const res = await api.login(loginEmail.trim(), loginPassword.trim());
+      if (!res?.user || !res?.token) {
+        throw new Error('Login did not return a valid session.');
+      }
+      const ws = normalizeWorkspace(await api.getWorkspace());
       setUser(res.user);
-      const ws = await api.getWorkspace();
       setWorkspace(ws);
+      setCurrentModule('command');
+      if (ws.leads.length && !selectedLeadId) {
+        setSelectedLeadId(ws.leads[0].id);
+      }
       notify(`Welcome back, ${res.user.name}`, 'success');
     } catch (err: any) {
+      api.clearToken();
+      setUser(null);
+      setWorkspace(null);
       setAuthError(err.message || 'Login failed. Please verify credentials.');
     } finally {
       setAuthLoading(false);
@@ -338,11 +416,21 @@ export function AdminConsole() {
     setAuthLoading(true);
     try {
       const res = await api.quickLogin(role);
+      if (!res?.user || !res?.token) {
+        throw new Error('Quick login did not return a valid session.');
+      }
+      const ws = normalizeWorkspace(await api.getWorkspace());
       setUser(res.user);
-      const ws = await api.getWorkspace();
       setWorkspace(ws);
+      setCurrentModule('command');
+      if (ws.leads.length && !selectedLeadId) {
+        setSelectedLeadId(ws.leads[0].id);
+      }
       notify(`Instant session authorized: ${res.user.name} (${res.user.role})`, 'success');
     } catch (err: any) {
+      api.clearToken();
+      setUser(null);
+      setWorkspace(null);
       setAuthError(err.message || 'Quick login failed.');
     } finally {
       setAuthLoading(false);
@@ -354,7 +442,8 @@ export function AdminConsole() {
     setAuthError('');
     try {
       await api.resetPassword(resetEmail, resetNewPassword);
-      setResetSuccess('Password updated successfully! Logging you in...');
+      setResetSuccess('Password updated successfully! You can now log in.');
+      setLoginEmail(resetEmail);
       setLoginPassword(resetNewPassword);
       notify('Password updated. You can now log in.', 'success');
       setTimeout(() => {
@@ -368,15 +457,16 @@ export function AdminConsole() {
 
   const handleLogout = async () => {
     await api.logout();
+    await signOutFirebase();
     setUser(null);
     setWorkspace(null);
   };
 
   const reloadWorkspace = async () => {
     try {
-      const ws = await api.getWorkspace();
+      const ws = normalizeWorkspace(await api.getWorkspace());
       setWorkspace(ws);
-    } catch (e) {
+    } catch {
       // ignore
     }
   };
@@ -990,22 +1080,34 @@ export function AdminConsole() {
             </div>
 
             {/* Seeded Credentials Helper */}
-            <div className="p-3 rounded-xl bg-[#14141d] border border-[#2a2a38] flex items-center justify-between text-xs">
-              <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-bold text-[#e8c872] block">Seeded CEO Credentials:</span>
-                <span className="text-[#a8a7b3] font-mono text-[11px]">ghaziwazirndm@gmail.com</span>
+            <div className="p-3 rounded-xl bg-[#14141d] border border-[#2a2a38] space-y-2 text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[10px] uppercase font-bold text-[#e8c872]">Auto-Fill Credentials:</span>
+                <div className="flex flex-wrap items-center gap-1">
+                  {[
+                    { label: 'CEO', email: 'ghaziwazirndm@gmail.com', pass: 'GhaziWazir2026!' },
+                    { label: 'Admin', email: 'admin@babalkhaleej.com', pass: 'Admin2026!' },
+                    { label: 'Sales', email: 'sales@backforbrand.com', pass: 'Sales2026!' },
+                    { label: 'Finance', email: 'finance@babalkhaleej.com', pass: 'Finance2026!' }
+                  ].map(preset => (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => {
+                        setLoginEmail(preset.email);
+                        setLoginPassword(preset.pass);
+                        setAuthError('');
+                      }}
+                      className="px-2 py-0.5 rounded-md bg-[#2a2a38] hover:bg-[#e8c872] hover:text-[#16120a] text-[#e8c872] font-bold text-[10px] uppercase tracking-wider transition-colors"
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setLoginEmail('ghaziwazirndm@gmail.com');
-                  setLoginPassword('GhaziWazir2026!');
-                  setAuthError('');
-                }}
-                className="px-2.5 py-1 rounded-lg bg-[#2a2a38] hover:bg-[#e8c872] hover:text-[#16120a] text-[#e8c872] font-bold text-[10px] uppercase tracking-wider transition-colors"
-              >
-                Auto-Fill
-              </button>
+              <div className="text-[#a8a7b3] font-mono text-[11px] truncate">
+                {loginEmail || 'ghaziwazirndm@gmail.com'}
+              </div>
             </div>
 
             <div className="relative flex py-1 items-center">
@@ -1018,13 +1120,15 @@ export function AdminConsole() {
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label className="block text-[11px] font-semibold text-[#a8a7b3] uppercase tracking-wider mb-1">
-                    Email Address
+                    Email Address or Role Username
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     required
+                    autoComplete="username"
                     value={loginEmail}
                     onChange={e => setLoginEmail(e.target.value)}
+                    placeholder="ghaziwazirndm@gmail.com or admin"
                     className="w-full px-4 py-3 rounded-xl border border-[#2a2a38] bg-[#101018] text-sm text-[#f5f1e8] focus:outline-none focus:border-[#e8c872]"
                   />
                 </div>
@@ -1042,13 +1146,24 @@ export function AdminConsole() {
                       Reset Password?
                     </button>
                   </div>
-                  <input
-                    type="password"
-                    required
-                    value={loginPassword}
-                    onChange={e => setLoginPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-[#2a2a38] bg-[#101018] text-sm text-[#f5f1e8] focus:outline-none focus:border-[#e8c872]"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showLoginPassword ? 'text' : 'password'}
+                      required
+                      autoComplete="current-password"
+                      value={loginPassword}
+                      onChange={e => setLoginPassword(e.target.value)}
+                      className="w-full pl-4 pr-10 py-3 rounded-xl border border-[#2a2a38] bg-[#101018] text-sm text-[#f5f1e8] focus:outline-none focus:border-[#e8c872]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowLoginPassword(prev => !prev)}
+                      aria-label={showLoginPassword ? 'Hide password' : 'Show password'}
+                      className="absolute right-3 top-3 text-[#a8a7b3] hover:text-[#e8c872]"
+                    >
+                      {showLoginPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 <button
@@ -1074,10 +1189,10 @@ export function AdminConsole() {
 
                 <div>
                   <label className="block text-[11px] font-semibold text-[#a8a7b3] uppercase tracking-wider mb-1">
-                    Account Email
+                    Account Email or Role Username
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     required
                     value={resetEmail}
                     onChange={e => setResetEmail(e.target.value)}
@@ -3680,7 +3795,7 @@ export function AdminConsole() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#2a2a38]/60 text-xs">
-                      {workspace.audit.slice(-25).reverse().map(entry => (
+                      {(workspace.audit || []).slice(-25).reverse().map(entry => (
                         <tr key={entry.id} className="hover:bg-[#14141d]">
                           <td className="p-3 text-[#e8c872]">{entry.id}</td>
                           <td className="p-3 text-[#a8a7b3]">{entry.ts.slice(11, 19)}</td>
@@ -3765,7 +3880,7 @@ export function AdminConsole() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#2a2a38]/60 text-[#f5f1e8]">
-                      {workspace.users.map(u => (
+                      {(workspace.users || []).map(u => (
                         <tr key={u.id}>
                           <td className="p-3.5 font-bold">{u.name}</td>
                           <td className="p-3.5 text-[#a8a7b3]">{u.email}</td>

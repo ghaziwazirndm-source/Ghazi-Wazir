@@ -199,6 +199,12 @@ export function AIChatDrawer() {
     }
   }, [messages, isOpen]);
 
+  useEffect(() => {
+    const handleOpenChat = () => setIsOpen(true);
+    window.addEventListener('gw:open-ai-chat', handleOpenChat);
+    return () => window.removeEventListener('gw:open-ai-chat', handleOpenChat);
+  }, []);
+
   // When language changes, update initial welcome message if only 1 message exists
   useEffect(() => {
     setMessages(prev => {
@@ -370,11 +376,11 @@ export function AIChatDrawer() {
 
   return (
     <>
-      {/* Floating Launcher Button */}
+      {/* Floating Launcher Button (Desktop; mobile uses unified MobileBottomBar) */}
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-30 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#131d33] border border-[#38bdf8]/50 text-xs font-bold text-[#38bdf8] shadow-2xl hover:border-[#38bdf8] hover:bg-[#1a2744] hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all hover:scale-105 active:scale-95"
+        className="hidden md:flex fixed bottom-5 right-24 z-40 items-center gap-2.5 px-4 py-3 rounded-full bg-[#131d33] border border-[#38bdf8]/50 text-xs font-bold text-[#38bdf8] shadow-2xl hover:border-[#38bdf8] hover:bg-[#1a2744] hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all hover:scale-105 active:scale-95"
         aria-label="Open AI Sales Agent Chat"
       >
         <span className="relative flex h-2.5 w-2.5">
