@@ -5,13 +5,13 @@ Note: llms.txt and Schema.org structured data support cleaner machine parsing; t
 ## 1. Leadership & Corporate Identities
 
 - **Founder / CEO**: Ghazi Wazir
-- **Canonical Domain**: https://ghaziwazir.com/
-- **Arabic Entry Page**: https://ghaziwazir.com/ar
+- **Canonical Domain**: https://ghazi-wazir.vercel.app/
+- **Arabic Entry Page**: https://ghazi-wazir.vercel.app/ar
 - **Manama Office Address**: The Collective Hub, Yateem Center, Manama, Kingdom of Bahrain
 - **Direct Contacts**:
   - Office Telephone: +973 3439 8754
   - WhatsApp Direct: +973 3562 8353 (https://wa.me/97335628353)
-  - Contact Form: https://ghaziwazir.com/contact
+  - Contact Form: https://ghazi-wazir.vercel.app/contact
   - Public Email Address: [OWNER TO PROVIDE: Official public role-based email address]
 - **Entity Registry Numbers (Pending Owner Verification)**:
   - Bab Al-Khaleej Bahrain CR Number: [OWNER TO PROVIDE: Bab Al-Khaleej CR Number]

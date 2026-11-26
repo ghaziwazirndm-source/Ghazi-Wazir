@@ -516,14 +516,14 @@ export function ServiceDetailPage() {
     '@graph': [
       {
         '@type': 'Service',
-        '@id': `https://ghaziwazir.com/services/${service.id}#service`,
+        '@id': `https://ghazi-wazir.vercel.app/services/${service.id}#service`,
         name: service.name,
         serviceType: service.name,
         description: service.seoDescription,
         provider: {
           '@id': service.company.includes('Bab Al-Khaleej')
-            ? 'https://ghaziwazir.com/#babal-khaleej'
-            : 'https://ghaziwazir.com/#backforbrand',
+            ? 'https://ghazi-wazir.vercel.app/#babal-khaleej'
+            : 'https://ghazi-wazir.vercel.app/#backforbrand',
         },
         areaServed: service.company.includes('Bab Al-Khaleej') ? 'Bahrain' : 'Worldwide',
         hasOfferCatalog: {
@@ -541,7 +541,7 @@ export function ServiceDetailPage() {
       },
       {
         '@type': 'FAQPage',
-        '@id': `https://ghaziwazir.com/services/${service.id}#faq`,
+        '@id': `https://ghazi-wazir.vercel.app/services/${service.id}#faq`,
         mainEntity: service.faqs.map(faq => ({
           '@type': 'Question',
           name: faq.q,
@@ -559,7 +559,7 @@ export function ServiceDetailPage() {
       <SEOHead
         title={service.seoTitle}
         description={service.seoDescription}
-        canonical={`https://ghaziwazir.com/services/${service.id}`}
+        canonical={`https://ghazi-wazir.vercel.app/services/${service.id}`}
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Services', item: '/packages' },

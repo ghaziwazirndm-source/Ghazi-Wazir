@@ -177,7 +177,7 @@ export async function renderAndExportVideo(options: RenderVideoOptions): Promise
           title: 'THE CALL TO ACTION',
           timing: '0:13 - 0:16',
           durationSec: 3,
-          voiceover: 'Tap the link in bio right now to download our free blueprint at ghaziwazir.com!',
+          voiceover: 'Tap the link in bio right now to download our free blueprint at ghazi-wazir.vercel.app!',
           visualCue: 'Arrow pointing down',
           captionHighlight: 'TAP LINK IN BIO'
         }
@@ -460,7 +460,7 @@ export async function renderAndExportVideo(options: RenderVideoOptions): Promise
     // 4. Bottom CTA banner
     ctx.font = 'bold 16px sans-serif';
     ctx.fillStyle = '#38bdf8';
-    ctx.fillText('ghaziwazir.com • Bahrain & USA Formation', width / 2, height - 60);
+    ctx.fillText('ghazi-wazir.vercel.app • Bahrain & USA Formation', width / 2, height - 60);
 
     ctx.restore();
 

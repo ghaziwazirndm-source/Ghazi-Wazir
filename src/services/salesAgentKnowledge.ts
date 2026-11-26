@@ -37,7 +37,7 @@ export function querySalesAgentKnowledge(
 1. تأسيس السجل التجاري (CR): يبدأ من 280 دينار بحريني للشركات الفردية و350 دينار لشركات ذات مسؤولية محدودة (W.L.L.)، شاملاً الموافقات والتوثيق عبر سجلات.
 2. باقة تأشيرة وإقامة المستثمر: 450 دينار بحريني، وتتضمن الفحص الطبي، التخليص الأمني الحكومي، وإصدار بطاقة الهوية السكانية الذكية (CPR).
 3. العنوان المكتبي وحاضنات الأعمال: 180 دينار سنوياً للمكاتب المعتمدة.
-نوفر خصماً فورياً بنسبة 10% عند تأكيد حجز الاستشارة المباشرة اليوم عبر الرابط https://ghaziwazir.com/book أو التواصل مباشرة مع غازي وزير عبر الواتساب على +973 3562 8353.`
+نوفر خصماً فورياً بنسبة 10% عند تأكيد حجز الاستشارة المباشرة اليوم عبر الرابط https://ghazi-wazir.vercel.app/book أو التواصل مباشرة مع غازي وزير عبر الواتساب على +973 3562 8353.`
       };
     }
     if (isVisa) {
@@ -59,7 +59,7 @@ export function querySalesAgentKnowledge(
 • قانون الشركات التجارية البحريني يسمح للمستثمرين الأجانب بتملك كامل للشركة بنسبة 100% دون اشتراط شريك بحريني في أكثر من 98% من الأنشطة الاقتصادية.
 • المستندات المطلوبة: نسخة جواز سفر سارية، إثبات عنوان الإقامة، وثلاثة خيارات للاسم التجاري، مع تحديد النشاط (ISIC).
 • المدة الزمنية: تستغرق الموافقة المبدئية واستخراج السجل التجاري عبر بوابة سجلات (Sijilat) من 3 إلى 5 أيام عمل فقط.
-• تشمل خدماتنا استخراج السجل، توفير العنوان التجاري المعتمد، وتجهيز ملف فتح الحساب البنكي التجاري. تفضل بطلب الدليل الشامل أو احجز موعدك الآن عبر https://ghaziwazir.com/book.`
+• تشمل خدماتنا استخراج السجل، توفير العنوان التجاري المعتمد، وتجهيز ملف فتح الحساب البنكي التجاري. تفضل بطلب الدليل الشامل أو احجز موعدك الآن عبر https://ghazi-wazir.vercel.app/book.`
       };
     }
     if (isBanking) {
@@ -95,7 +95,7 @@ export function querySalesAgentKnowledge(
 1. کمپنی رجسٹریشن (CR): سنگل اونر (SPC/WLL) کے لیے 280 بحرینی دینار اور پارٹنرشپ فرم کے لیے 350 دینار سے شروع ہوتا ہے، جس میں تمام سرکاری وزارتوں کے اندراج شامل ہیں۔
 2. انویسٹر ریزیڈنسی ویزا پیکج: کل 450 بحرینی دینار، جس میں میڈیکل فٹنس، سیکیورٹی کلیرنس، اور بائیومیٹرک اسمارٹ CPR شناختی کارڈ کی فیس شامل ہے۔
 3. سالانہ رجسٹرڈ آفس ایڈریس: 180 دینار سالانہ۔
-آج ویڈیو کال کے ذریعے بکنگ پر آپ کو 10 فیصد ڈسکاؤنٹ کی سہولت حاصل ہے۔ آپ غازی وزیر صاحب سے فوری واٹس ایپ پر +973 3562 8353 پر رابطہ کر سکتے ہیں یا https://ghaziwazir.com/book پر سیشن بک کر سکتے ہیں۔`
+آج ویڈیو کال کے ذریعے بکنگ پر آپ کو 10 فیصد ڈسکاؤنٹ کی سہولت حاصل ہے۔ آپ غازی وزیر صاحب سے فوری واٹس ایپ پر +973 3562 8353 پر رابطہ کر سکتے ہیں یا https://ghazi-wazir.vercel.app/book پر سیشن بک کر سکتے ہیں۔`
       };
     }
     if (isVisa) {
@@ -140,7 +140,7 @@ export function querySalesAgentKnowledge(
 ২. ইনভেস্টর রেসিডেন্সি ভিসা: প্যাকেজ খরচ ৪৫০ বাহরাইনি দিনার (মেডিকেল, সিকিউরিটি ক্লিয়ারেন্স ও স্মার্ট CPR কার্ড অন্তর্ভুক্ত)। এটি ২ বছরের জন্য নবায়নযোগ্য সেলফ-স্পন্সরড ভিসা।
 ৩. প্রয়োজনীয় কাগজপত্র: বৈধ পাসপোর্ট কপি, বর্তমান ঠিকানার প্রমাণ এবং প্রস্তাবিত কোম্পানির নাম।
 ৪. সময়সীমা: মাত্র ৫ থেকে ৭ কার্যদিবসের মধ্যে সম্পূর্ণ প্রক্রিয়া সম্পন্ন হয়।
-আপনি সরাসরি সিইও গাজী ওয়াজিরের সাথে হোয়াটসঅ্যাপে (+973 3562 8353) যোগাযোগ করতে পারেন অথবা https://ghaziwazir.com/book লিঙ্কে গিয়ে ফ্রি কনসালটেশন শিডিউল করতে পারেন।`
+আপনি সরাসরি সিইও গাজী ওয়াজিরের সাথে হোয়াটসঅ্যাপে (+973 3562 8353) যোগাযোগ করতে পারেন অথবা https://ghazi-wazir.vercel.app/book লিঙ্কে গিয়ে ফ্রি কনসালটেশন শিডিউল করতে পারেন।`
       };
     }
     return {
@@ -161,7 +161,7 @@ export function querySalesAgentKnowledge(
 2. 2-Year Investor Residency Visa: 450 BHD package kasama na ang medical clearance, security approval, at CPR smart card identity. Pwede ka ring mag-sponsor ng asawa at mga anak.
 3. Timeline: 5 hanggang 7 business days lamang ang buong proseso ng pagkuha ng CR at visa.
 4. Tax Advantage: 0% corporate tax at 0% personal income tax na may 100% free capital repatriation.
-Maaari kang makipag-ugnayan agad kay CEO Ghazi Wazir sa WhatsApp sa +973 3562 8353 o mag-book ng discovery session sa https://ghaziwazir.com/book.`
+Maaari kang makipag-ugnayan agad kay CEO Ghazi Wazir sa WhatsApp sa +973 3562 8353 o mag-book ng discovery session sa https://ghazi-wazir.vercel.app/book.`
       };
     }
     return {
@@ -182,7 +182,7 @@ Maaari kang makipag-ugnayan agad kay CEO Ghazi Wazir sa WhatsApp sa +973 3562 83
 २. 2 साल रो इन्वेस्टर रेजिडेंसी वीजा: पूरो खर्च 450 BHD है, जिमें मेडिकल, सरकारी सुरक्षा मंजूरी अर स्मार्ट CPR कार्ड सब शामिल है। आप आपरे परिवार ने भी वीजा स्पॉन्सर कर सको सा।
 ३. समय: पूरा काम 5 सूं 7 काम का दिनां में पूरो हो जावे सा।
 ४. 0% टैक्स: बहरीन में कोई इनकम टैक्स या कॉर्पोरेट टैक्स कोनी लागे सा।
-आप सीधा बाब अल-खलीज रा सीईओ गाजी वजीर सा'ब सूं व्हाट्सएप +973 3562 8353 पर बात कर सको हो या https://ghaziwazir.com/book पर मीटिंग तय कर सको सा।`
+आप सीधा बाब अल-खलीज रा सीईओ गाजी वजीर सा'ब सूं व्हाट्सएप +973 3562 8353 पर बात कर सको हो या https://ghazi-wazir.vercel.app/book पर मीटिंग तय कर सको सा।`
       };
     }
     return {
@@ -202,7 +202,7 @@ Maaari kang makipag-ugnayan agad kay CEO Ghazi Wazir sa WhatsApp sa +973 3562 83
 2. 2-Year Investor Visa Package: 450 BHD all-inclusive (covers Ministry security approvals, medical fitness examination, biometric enrollment, and physical CPR smart card issuance).
 3. Registered Commercial Office / Business Incubator: 180 BHD per year.
 4. Back for Brand AI Growth & GEO Foundation: 450 BHD ($1,500 USD).
-We offer a 10% instant discovery discount for sessions scheduled today. You can lock your slot at https://ghaziwazir.com/book or message CEO Ghazi Wazir directly on WhatsApp at +973 3562 8353.`
+We offer a 10% instant discovery discount for sessions scheduled today. You can lock your slot at https://ghazi-wazir.vercel.app/book or message CEO Ghazi Wazir directly on WhatsApp at +973 3562 8353.`
     };
   }
 
@@ -226,7 +226,7 @@ Processing duration is 5 to 7 business days. Contact Ghazi Wazir on WhatsApp at 
 • Legal Foundation: Under Legislative Decree No. 28 of 2020, foreign nationals and international corporations enjoy 100% statutory equity ownership without requiring a local Bahraini partner in over 98% of commercial activities (ISIC Rev. 4).
 • Statutory Requirements: Valid passport copies of all shareholders, proof of residential address, 3 proposed company trade names, and activity selection.
 • Approvals & Timeline: Standard Ministry of Industry & Commerce (MOIC) Sijilat clearance takes 3 to 5 business days.
-• Complete Turnkey Delivery: We handle name reservation, statutory document drafting, commercial address provision, and bank introduction. Generate our official PDF Requirements Brief or schedule a consultation at https://ghaziwazir.com/book.`
+• Complete Turnkey Delivery: We handle name reservation, statutory document drafting, commercial address provision, and bank introduction. Generate our official PDF Requirements Brief or schedule a consultation at https://ghazi-wazir.vercel.app/book.`
     };
   }
 
@@ -248,7 +248,7 @@ Processing duration is 5 to 7 business days. Contact Ghazi Wazir on WhatsApp at 
       reply: `Back for Brand LLC - Generative Engine Optimization (GEO) & AEO:
 • Beyond SEO: Over 45% of high-intent B2B inquiries now terminate in AI answer engines (ChatGPT Search, Perplexity AI, Google Gemini Overviews) rather than 10 blue links.
 • Our Architecture: We engineer semantic entity knowledge graphs, authoritative citation networks, and autonomous sales agent pipelines that ensure your brand is cited and recommended as the primary solution.
-• Proven ROI: Decreases customer acquisition cost by up to 60% with 24/7 multilingual sales qualification. Schedule an architecture review at https://ghaziwazir.com/book.`
+• Proven ROI: Decreases customer acquisition cost by up to 60% with 24/7 multilingual sales qualification. Schedule an architecture review at https://ghazi-wazir.vercel.app/book.`
     };
   }
 

@@ -18,7 +18,7 @@ export function PackagesPage() {
       <SEOHead
         title="Bahrain Setup & AI Growth Packages | Ghazi Wazir"
         description="Explore Bab Al-Khaleej company setup tiers and Back for Brand GEO, AI agent, and funnel scopes. Request a tailored written quotation now."
-        canonical="https://ghaziwazir.com/packages"
+        canonical="https://ghazi-wazir.vercel.app/packages"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Packages & Tiers', item: '/packages' },

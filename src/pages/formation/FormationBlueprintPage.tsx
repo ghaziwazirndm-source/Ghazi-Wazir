@@ -109,7 +109,7 @@ export function FormationBlueprintPage() {
       <SEOHead
         title="7-Step Bahrain Setup Blueprint Checklist | Ghazi Wazir"
         description="Follow our 7-step Bahrain company formation checklist from ISIC selection and Sijilat CR to banking & visas. Start your checklist now."
-        canonical="https://ghaziwazir.com/formation/blueprint"
+        canonical="https://ghazi-wazir.vercel.app/formation/blueprint"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Formation', item: '/formation' },

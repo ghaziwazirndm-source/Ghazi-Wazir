@@ -358,7 +358,7 @@ export function RequirementBriefModal({
               <div className="font-bold text-[#f7f4ec]">Ghazi Wazir</div>
               <div className="text-[11px] text-[#a39f96]">CEO, Bab Al-Khaleej &amp; Back for Brand LLC</div>
               <div className="text-[11px] text-[#4ade80] font-semibold">WhatsApp: +973 3562 8353</div>
-              <div className="text-[11px] text-[#e8c872]">Desk: ghaziwazir.com/contact</div>
+              <div className="text-[11px] text-[#e8c872]">Desk: ghazi-wazir.vercel.app/contact</div>
             </div>
           </div>
 

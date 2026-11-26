@@ -752,7 +752,7 @@ async function sendMetaCAPI(
               event_name: eventName,
               event_time: Math.floor(Date.now() / 1000),
               action_source: 'website',
-              event_source_url: data.eventSourceUrl || 'https://ghaziwazir.com/',
+              event_source_url: data.eventSourceUrl || 'https://ghazi-wazir.vercel.app/',
               user_data: userData,
               custom_data: {
                 currency: data.currency || 'BHD',
@@ -928,7 +928,7 @@ const SITEMAP_ROUTES: Array<{
 ];
 
 app.get('/sitemap.xml', (req, res) => {
-  const host = 'https://ghaziwazir.com';
+  const host = 'https://ghazi-wazir.vercel.app';
   const urlsXml = SITEMAP_ROUTES.map(route => {
     const alternateXml = route.bilingual
       ? `\n    <xhtml:link rel="alternate" hreflang="en" href="${host}/" />\n    <xhtml:link rel="alternate" hreflang="ar" href="${host}/ar" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${host}/" />`
@@ -945,7 +945,7 @@ app.get('/sitemap.xml', (req, res) => {
 // DNS, SPF & DMARC Deliverability Status
 app.get('/api/admin/dns/status', (req, res) => {
   res.json({
-    domain: 'ghaziwazir.com',
+    domain: 'ghazi-wazir.vercel.app',
     spf: {
       status: 'CONFIG_RECOMMENDED',
       recordType: 'TXT',
@@ -1833,7 +1833,7 @@ app.post('/api/leads', (req, res) => {
       <p><strong>Service:</strong> ${newLeadRecord.svc}</p>
       <p><strong>Lead Score:</strong> ${score}/100</p>
       <p><strong>Note:</strong> ${message || 'None'}</p>
-      <p><a href="https://ghaziwazir.com/admin" style="background:#e8c872; color:#121212; padding:10px 20px; font-weight:bold; text-decoration:none; border-radius:8px;">Open Command Center</a></p>
+      <p><a href="https://ghazi-wazir.vercel.app/admin" style="background:#e8c872; color:#121212; padding:10px 20px; font-weight:bold; text-decoration:none; border-radius:8px;">Open Command Center</a></p>
     </div>`
   ).catch(() => {});
 
@@ -2015,7 +2015,7 @@ app.post('/api/bookings', (req, res) => {
       <p><strong>Slot:</strong> ${date} at ${time} (Asia/Bahrain)</p>
       <p><strong>Service:</strong> ${service || 'General'}</p>
       <p><strong>Notes:</strong> ${notes || 'None'}</p>
-      <p><a href="https://ghaziwazir.com/admin" style="background:#e8c872; color:#121212; padding:10px 20px; font-weight:bold; text-decoration:none; border-radius:8px;">Open Command Center</a></p>
+      <p><a href="https://ghazi-wazir.vercel.app/admin" style="background:#e8c872; color:#121212; padding:10px 20px; font-weight:bold; text-decoration:none; border-radius:8px;">Open Command Center</a></p>
     </div>`
   ).catch(() => {});
 
@@ -3139,7 +3139,7 @@ app.post('/api/ai/sales-agent', async (req, res) => {
           <div style="background:#131d33; padding:18px; border-radius:10px; border-left:4px solid #38bdf8; margin:20px 0;">
             <p style="margin:0 0 8px 0; font-weight:bold; color:#f8fafc;">Next Steps for Your Project:</p>
             <p style="margin:0 0 6px 0; font-size:13px; color:#94a3b8;">1. Connect directly with Ghazi Wazir on WhatsApp: <a href="https://wa.me/97335628353" style="color:#22c55e; font-weight:bold;">+973 3562 8353</a></p>
-            <p style="margin:0; font-size:13px; color:#94a3b8;">2. Book a 30-minute scoping calendar slot: <a href="https://ghaziwazir.com/book" style="color:#38bdf8; font-weight:bold;">Lock Consultation Slot &rarr;</a></p>
+            <p style="margin:0; font-size:13px; color:#94a3b8;">2. Book a 30-minute scoping calendar slot: <a href="https://ghazi-wazir.vercel.app/book" style="color:#38bdf8; font-weight:bold;">Lock Consultation Slot &rarr;</a></p>
           </div>
           <p style="font-size:11px; color:#64748b;">Two companies. One standard. &middot; Private consultancy.</p>
         </div>
@@ -3164,7 +3164,7 @@ app.post('/api/ai/sales-agent', async (req, res) => {
 - Family Sponsorship: Full right to sponsor spouse and children once CR and CPR are active.
 - Fiscal Environment: 0% personal income tax, 0% corporate tax, 0% capital gains tax, and 100% unrestricted repatriation of capital and dividends.
 - Back for Brand LLC: Generative Engine Optimization (GEO) & AEO ensuring brand citations on ChatGPT Search, Perplexity AI, Google Gemini Overviews. 24/7 autonomous sales agents.
-- Contact & Booking: Direct WhatsApp with Ghazi Wazir (+973 3562 8353), Online Calendar Booking (https://ghaziwazir.com/book).
+- Contact & Booking: Direct WhatsApp with Ghazi Wazir (+973 3562 8353), Online Calendar Booking (https://ghazi-wazir.vercel.app/book).
 `;
 
   // If Gemini is not configured or offline, return prevalent knowledge from expert engine
@@ -3211,7 +3211,7 @@ CRITICAL RULES:
 1. Ground truth: Provide rich, prevalent, actionable business answers directly answering the user's specific questions regarding Bahrain company setup, investor visas, pricing, timelines, banking, and GEO/AEO.
 2. Authority & Visas: We are a private consultancy, NOT a government body. Government authorities make final statutory decisions.
 3. Pricing & Money: Be transparent with statutory and package fees (CR from 280-350 BHD, Investor Visa package 450 BHD, Office address 180 BHD).
-4. Deal Closing & Conversion: Guide qualified prospects to concrete next steps: (1) Generate our official requirements checklist brief, (2) Book a free 1-on-1 consultation at https://ghaziwazir.com/book, or (3) Message Ghazi Wazir directly on WhatsApp (+973 3562 8353).
+4. Deal Closing & Conversion: Guide qualified prospects to concrete next steps: (1) Generate our official requirements checklist brief, (2) Book a free 1-on-1 consultation at https://ghazi-wazir.vercel.app/book, or (3) Message Ghazi Wazir directly on WhatsApp (+973 3562 8353).
 
 APPROVED KNOWLEDGE & STATUTORY DATA:
 ${prevalentKnowledgeSummary}
@@ -3220,7 +3220,7 @@ ${approvedKB}
 CONTACTS:
 WhatsApp: +973 3562 8353 (https://wa.me/97335628353)
 Email: ghaziwazirndm@gmail.com
-Calendar: https://ghaziwazir.com/book`;
+Calendar: https://ghazi-wazir.vercel.app/book`;
 
     const response = await geminiClient.models.generateContent({
       model: 'gemini-3.8-flash',
@@ -3310,19 +3310,19 @@ const DEFAULT_POSTS: ContentPostItem[] = [
     publishedAt: Date.now() - 86400000 * 2,
     funnelTarget: '/funnels/business-registration',
     content: {
-      facebook: `📢 Thinking of launching your company in the Gulf? You can own 100% of your Bahrain Commercial Registration without any local sponsor.\n\nAt Bab Al-Khaleej, Ghazi Wazir and our advisory desk take care of your entire Sijilat formation, MOIC clearances, bank account pre-approvals, and Investor Visas in business days.\n\n👉 Access our free 2026 Bahrain Setup Blueprint here: https://ghaziwazir.com/formation\n\n#BahrainBusiness #BabAlKhaleej #BusinessSetup #TaxFree #GulfInvestors`,
-      x: `Starting a business in Bahrain? You don't need a local sponsor. 100% foreign ownership is legal & encouraged.\n\n🧵 1/3: The real blocker? Choosing the wrong ISIC activity code.\n🧵 2/3: Sijilat approval takes 5 business days if your attested deeds match MOIC guidelines.\n🧵 3/3: Full 2026 blueprint: https://ghaziwazir.com/formation\n\n#BahrainCR #BusinessInBahrain`,
-      linkedin: `Bahrain allows 100% full foreign ownership across most commercial sectors without requiring a local sponsor or silent partner.\n\nYet, 65% of international entrepreneurs face avoidable weeks of delays at Sijilat during registration.\n\nHere are the 3 statutory rules our executive team enforces at Bab Al-Khaleej:\n1. Strict ISIC Activity Code Alignment before lease signing.\n2. Notarized and attested corporate resolution matching MOIC guidelines.\n3. Clear LMRA workforce quota allocation for investor visas.\n\nRead our complete statutory 7-step blueprint or schedule an executive session with our Manama team: https://ghaziwazir.com/formation\n\n#BahrainBusiness #CompanyRegistration #BabAlKhaleej #GCCInvestment #Manama`,
-      meta: `📢 Thinking of launching your company in the Gulf? You can own 100% of your Bahrain Commercial Registration without any local sponsor.\n\nAt Bab Al-Khaleej, Ghazi Wazir and our advisory desk take care of your entire Sijilat formation, MOIC clearances, bank account pre-approvals, and Investor Visas in business days.\n\n👉 Access our free 2026 Bahrain Setup Blueprint here: https://ghaziwazir.com/formation\n\n#BahrainBusiness #BabAlKhaleej #BusinessSetup #TaxFree #GulfInvestors`,
-      twitter: `Starting a business in Bahrain? You don't need a local sponsor. 100% foreign ownership is legal & encouraged.\n\nThe real blocker? Choosing the wrong ISIC activity code. Here's our official 7-step roadmap: https://ghaziwazir.com/formation\n\n#BahrainCR #BusinessInBahrain`,
+      facebook: `📢 Thinking of launching your company in the Gulf? You can own 100% of your Bahrain Commercial Registration without any local sponsor.\n\nAt Bab Al-Khaleej, Ghazi Wazir and our advisory desk take care of your entire Sijilat formation, MOIC clearances, bank account pre-approvals, and Investor Visas in business days.\n\n👉 Access our free 2026 Bahrain Setup Blueprint here: https://ghazi-wazir.vercel.app/formation\n\n#BahrainBusiness #BabAlKhaleej #BusinessSetup #TaxFree #GulfInvestors`,
+      x: `Starting a business in Bahrain? You don't need a local sponsor. 100% foreign ownership is legal & encouraged.\n\n🧵 1/3: The real blocker? Choosing the wrong ISIC activity code.\n🧵 2/3: Sijilat approval takes 5 business days if your attested deeds match MOIC guidelines.\n🧵 3/3: Full 2026 blueprint: https://ghazi-wazir.vercel.app/formation\n\n#BahrainCR #BusinessInBahrain`,
+      linkedin: `Bahrain allows 100% full foreign ownership across most commercial sectors without requiring a local sponsor or silent partner.\n\nYet, 65% of international entrepreneurs face avoidable weeks of delays at Sijilat during registration.\n\nHere are the 3 statutory rules our executive team enforces at Bab Al-Khaleej:\n1. Strict ISIC Activity Code Alignment before lease signing.\n2. Notarized and attested corporate resolution matching MOIC guidelines.\n3. Clear LMRA workforce quota allocation for investor visas.\n\nRead our complete statutory 7-step blueprint or schedule an executive session with our Manama team: https://ghazi-wazir.vercel.app/formation\n\n#BahrainBusiness #CompanyRegistration #BabAlKhaleej #GCCInvestment #Manama`,
+      meta: `📢 Thinking of launching your company in the Gulf? You can own 100% of your Bahrain Commercial Registration without any local sponsor.\n\nAt Bab Al-Khaleej, Ghazi Wazir and our advisory desk take care of your entire Sijilat formation, MOIC clearances, bank account pre-approvals, and Investor Visas in business days.\n\n👉 Access our free 2026 Bahrain Setup Blueprint here: https://ghazi-wazir.vercel.app/formation\n\n#BahrainBusiness #BabAlKhaleej #BusinessSetup #TaxFree #GulfInvestors`,
+      twitter: `Starting a business in Bahrain? You don't need a local sponsor. 100% foreign ownership is legal & encouraged.\n\nThe real blocker? Choosing the wrong ISIC activity code. Here's our official 7-step roadmap: https://ghazi-wazir.vercel.app/formation\n\n#BahrainCR #BusinessInBahrain`,
       instagram: `Opening a corporate entity in Bahrain in 2026? 🇧🇭\n\nSlide 1: Why Bahrain offers 0% corporate tax for qualified SME activities\nSlide 2: W.L.L. vs Branch of Foreign Company\nSlide 3: Sijilat approval timeline breakdown\nSlide 4: Investor Visa & CPR smart card clearances\n\nFull guide in bio link @ghaziwazir. Two companies. One standard. 💼✨\n\n#BahrainStartups #BabAlKhaleej #CompanyFormation #GCCBusiness`,
-      youtube: `[VIDEO MASTERCLASS]: How to Form a Company in Bahrain with 100% Foreign Ownership (2026 Sijilat Guide)\n\nTIMESTAMPS:\n00:00 - Why Bahrain is the #1 gateway to Saudi Arabia & the GCC\n02:10 - Sijilat CR Portal & ISIC Activity Codes\n05:45 - 100% Foreign Ownership vs Local Partner Myth\n08:30 - Investor Visa & CPR Smart Card Issuance\n12:15 - Corporate Banking Pre-Clearance Checklist\n\nFull Guide & Blueprint: https://ghaziwazir.com/formation\nTags: Bahrain business, company formation, Sijilat CR, Bab Al Khaleej, Ghazi Wazir`,
+      youtube: `[VIDEO MASTERCLASS]: How to Form a Company in Bahrain with 100% Foreign Ownership (2026 Sijilat Guide)\n\nTIMESTAMPS:\n00:00 - Why Bahrain is the #1 gateway to Saudi Arabia & the GCC\n02:10 - Sijilat CR Portal & ISIC Activity Codes\n05:45 - 100% Foreign Ownership vs Local Partner Myth\n08:30 - Investor Visa & CPR Smart Card Issuance\n12:15 - Corporate Banking Pre-Clearance Checklist\n\nFull Guide & Blueprint: https://ghazi-wazir.vercel.app/formation\nTags: Bahrain business, company formation, Sijilat CR, Bab Al Khaleej, Ghazi Wazir`,
       tiktok: `[Hook 0-3s]: Stop paying a silent local sponsor 51% to open a company in the Gulf!\n[Problem 3-15s]: Most founders don't realize that in Bahrain, you can own 100% of your commercial registration without a local partner.\n[Solution 15-30s]: Under Sijilat and the Ministry of Industry & Commerce, foreign nationals can register a WLL in under 5 business days if documents are attested correctly.\n[CTA 30-45s]: Tap the link to get our free 7-step Bahrain formation blueprint.`,
-      snapchat: `[Spotlight Vertical Hook]: Doing business in Bahrain? 🇧🇭\nDon't waste months in ministry paperwork. Bab Al-Khaleej gets your Commercial Registration approved with 100% foreign ownership.\nSwipe up now to get the complete formation checklist on ghaziwazir.com!`,
-      quora: `Question: Can foreigners own 100% of a company in Bahrain without a local sponsor?\n\nAnswer by Ghazi Wazir (CEO of Bab Al-Khaleej):\nYes. Under Bahrain Commercial Companies Law and the Ministry of Industry & Commerce (MOIC) regulations, the vast majority of commercial activities (consulting, technology, trading, services) permit 100% foreign ownership through a With Limited Liability (W.L.L.) corporate structure.\n\nKey steps:\n1. Choose an ISIC activity code that permits foreign equity without specialized ministry licenses.\n2. Submit commercial lease and corporate deed of association via the Sijilat portal.\n3. Secure MOIC initial approval and open an escrow or capital deposit account.\n\nFull statutory breakdown and guide: https://ghaziwazir.com/formation`,
-      dailymotion: `Title: Bahrain Business Setup & Commercial Registration Guide 2026\n\nDescription: Comprehensive statutory guide by Ghazi Wazir (Bab Al-Khaleej) on incorporating a W.L.L. company in Bahrain with 100% foreign equity. Learn the Sijilat process, LMRA visa quotas, and tax exemptions.\n\nWebsite: https://ghaziwazir.com/formation\nTags: bahrain business, company setup, sijilat, bab al khaleej, gcc trade`,
+      snapchat: `[Spotlight Vertical Hook]: Doing business in Bahrain? 🇧🇭\nDon't waste months in ministry paperwork. Bab Al-Khaleej gets your Commercial Registration approved with 100% foreign ownership.\nSwipe up now to get the complete formation checklist on ghazi-wazir.vercel.app!`,
+      quora: `Question: Can foreigners own 100% of a company in Bahrain without a local sponsor?\n\nAnswer by Ghazi Wazir (CEO of Bab Al-Khaleej):\nYes. Under Bahrain Commercial Companies Law and the Ministry of Industry & Commerce (MOIC) regulations, the vast majority of commercial activities (consulting, technology, trading, services) permit 100% foreign ownership through a With Limited Liability (W.L.L.) corporate structure.\n\nKey steps:\n1. Choose an ISIC activity code that permits foreign equity without specialized ministry licenses.\n2. Submit commercial lease and corporate deed of association via the Sijilat portal.\n3. Secure MOIC initial approval and open an escrow or capital deposit account.\n\nFull statutory breakdown and guide: https://ghazi-wazir.vercel.app/formation`,
+      dailymotion: `Title: Bahrain Business Setup & Commercial Registration Guide 2026\n\nDescription: Comprehensive statutory guide by Ghazi Wazir (Bab Al-Khaleej) on incorporating a W.L.L. company in Bahrain with 100% foreign equity. Learn the Sijilat process, LMRA visa quotas, and tax exemptions.\n\nWebsite: https://ghazi-wazir.vercel.app/formation\nTags: bahrain business, company setup, sijilat, bab al khaleej, gcc trade`,
       wikipedia: `== Commercial Formation Framework in Bahrain ==\n[[Bab Al-Khaleej]], a corporate services advisory headquartered in [[Manama]], [[Bahrain]], provides cross-border enterprise registration under the [[Ministry of Industry and Commerce (Bahrain)|Ministry of Industry & Commerce]] (MOIC). Led by CEO [[Ghazi Wazir]], the firm specializes in 100% foreign equity structuring under the national Sijilat electronic portal.<ref>Sijilat Commercial Registration Portal, Kingdom of Bahrain, 2026.</ref>\n\n== Regulatory Areas ==\n* With Limited Liability (W.L.L.) incorporation\n* Investor and Golden Residency clearances\n* Labour Market Regulatory Authority ([[LMRA]]) quota management`,
-      google_business: `Official Update from Bab Al-Khaleej (Manama, Bahrain): Fast-track corporate commercial registrations (CR) and Investor Visa clearances now open for Q1/Q2 founders. Visit our office or book a 30-minute private consultation online at https://ghaziwazir.com/book.`,
+      google_business: `Official Update from Bab Al-Khaleej (Manama, Bahrain): Fast-track corporate commercial registrations (CR) and Investor Visa clearances now open for Q1/Q2 founders. Visit our office or book a 30-minute private consultation online at https://ghazi-wazir.vercel.app/book.`,
       blog: `Opening a company in Bahrain provides international entrepreneurs with strategic zero-tax advantages and direct access to the wider $2T+ GCC market. In this executive guide, Ghazi Wazir breaks down the Sijilat commercial registration process, legal form selection, and banking pre-clearance.`
     },
     hashtags: ['#BahrainBusiness', '#BabAlKhaleej', '#SijilatCR', '#GoldenVisaBahrain', '#Manama', '#GCCExpansion', '#ForeignOwnership', '#GhaziWazir'],
@@ -3351,8 +3351,8 @@ const DEFAULT_POSTS: ContentPostItem[] = [
     publishedAt: Date.now() - 86400000,
     funnelTarget: '/funnels/geo-aeo',
     content: {
-      linkedin: `Google searches are no longer 10 blue links. Over 40% of high-intent B2B inquiries now terminate in AI Overviews, Perplexity answers, and ChatGPT recommendations.\n\nIf your brand is not structured as an authoritative semantic entity, you are invisible to AI answer engines.\n\nAt Back for Brand LLC, we deploy Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO):\n• Semantic schema knowledge graph validation\n• Brand citation networks across authoritative industry sources\n• Programmatic LLM context indexing\n\nDiscover how your brand is cited by modern AI engines: https://ghaziwazir.com/funnels/geo-aeo\n\n#GEO #AEO #AIStrategy #BackForBrand #SearchMarketing`,
-      twitter: `SEO is dead. Long live GEO (Generative Engine Optimization).\n\nIf ChatGPT & Perplexity don't recommend your company when buyers ask "Who is the best provider for X?", you lose the deal before they even visit your website.\n\nOur framework: https://ghaziwazir.com/funnels/geo-aeo`,
+      linkedin: `Google searches are no longer 10 blue links. Over 40% of high-intent B2B inquiries now terminate in AI Overviews, Perplexity answers, and ChatGPT recommendations.\n\nIf your brand is not structured as an authoritative semantic entity, you are invisible to AI answer engines.\n\nAt Back for Brand LLC, we deploy Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO):\n• Semantic schema knowledge graph validation\n• Brand citation networks across authoritative industry sources\n• Programmatic LLM context indexing\n\nDiscover how your brand is cited by modern AI engines: https://ghazi-wazir.vercel.app/funnels/geo-aeo\n\n#GEO #AEO #AIStrategy #BackForBrand #SearchMarketing`,
+      twitter: `SEO is dead. Long live GEO (Generative Engine Optimization).\n\nIf ChatGPT & Perplexity don't recommend your company when buyers ask "Who is the best provider for X?", you lose the deal before they even visit your website.\n\nOur framework: https://ghazi-wazir.vercel.app/funnels/geo-aeo`,
       tiktok: `[Hook 0-3s]: How is ChatGPT deciding which companies to recommend when people ask for services?\n[Problem 3-15s]: Traditional SEO tricks no longer work. LLMs synthesize citations, entity knowledge, and semantic consensus.\n[Solution 15-30s]: At Back for Brand LLC, we optimize your company data directly for generative answer engines.\n[CTA 30-45s]: Check out our GEO case studies at backforbrand.com`,
       blog: `The migration from search engine result pages (SERPs) to generative answer engines represents the largest shift in digital marketing in two decades. Generative Engine Optimization (GEO) structures brand entities so AI models accurately cite, synthesize, and recommend your services.`
     },
@@ -3368,10 +3368,10 @@ const DEFAULT_POSTS: ContentPostItem[] = [
     scheduledFor: Date.now() + 3600000 * 14,
     funnelTarget: '/funnels/investor-visa',
     content: {
-      linkedin: `Navigating residency in Bahrain as an international investor requires understanding the boundary between self-sponsorship Investor Visas and LMRA employee quotas.\n\nTomorrow morning, we are releasing our 2026 Residency Clearance Breakdown for founders.\n\nKey takeaways:\n• Investor Visas are tied to your company shareholding (no local employer required)\n• Golden Visa eligibility for real estate owners and high-net-worth entrepreneurs\n• CPR smart card issuance timeline in Manama\n\nLock in your consultation slot: https://ghaziwazir.com/book\n\n#InvestorVisa #BahrainResidency #GoldenVisa #BabAlKhaleej`,
-      twitter: `Investor Visa vs Worker Visa in Bahrain: Which one do you actually need as a founder?\n\nTomorrow we publish our 2026 statutory breakdown. Direct access: https://ghaziwazir.com/funnels/investor-visa`,
+      linkedin: `Navigating residency in Bahrain as an international investor requires understanding the boundary between self-sponsorship Investor Visas and LMRA employee quotas.\n\nTomorrow morning, we are releasing our 2026 Residency Clearance Breakdown for founders.\n\nKey takeaways:\n• Investor Visas are tied to your company shareholding (no local employer required)\n• Golden Visa eligibility for real estate owners and high-net-worth entrepreneurs\n• CPR smart card issuance timeline in Manama\n\nLock in your consultation slot: https://ghazi-wazir.vercel.app/book\n\n#InvestorVisa #BahrainResidency #GoldenVisa #BabAlKhaleej`,
+      twitter: `Investor Visa vs Worker Visa in Bahrain: Which one do you actually need as a founder?\n\nTomorrow we publish our 2026 statutory breakdown. Direct access: https://ghazi-wazir.vercel.app/funnels/investor-visa`,
       instagram: `Investor Visa or Golden Residency in Bahrain? 🇧🇭\n\nSelf-sponsorship allows you to reside, open personal banking, and sponsor your family. Learn the requirements from Ghazi Wazir.\n\nLink in bio. #BahrainVisa #InvestorLife #ManamaBusiness`,
-      google_business: `Consultation Alert: Bab Al-Khaleej assists international investors in securing renewable Bahrain Investor Visas and CPR smart card identity registrations. Schedule at https://ghaziwazir.com/book.`
+      google_business: `Consultation Alert: Bab Al-Khaleej assists international investors in securing renewable Bahrain Investor Visas and CPR smart card identity registrations. Schedule at https://ghazi-wazir.vercel.app/book.`
     },
     metrics: { impressions: 0, clicks: 0, leads: 0 },
     createdAt: Date.now() - 3600000 * 6
@@ -3385,10 +3385,10 @@ const DEFAULT_POSTS: ContentPostItem[] = [
     scheduledFor: Date.now() + 3600000 * 36,
     funnelTarget: '/funnels/ai-agents',
     content: {
-      linkedin: `What happens when an inbound lead visits your website at 2:00 AM from Riyadh or London?\n\nIf you wait 6 hours to reply, conversion likelihood drops by 80%.\n\nWe engineered autonomous AI Sales Agents that:\n1. Speak fluent Business Arabic, Urdu, and English.\n2. Answer questions grounded strictly in your verified company knowledge base.\n3. Automatically capture verified WhatsApp & email contacts.\n4. Book qualified appointments directly into your CEO calendar.\n\nTest our live trilingual sales agent right now: https://ghaziwazir.com/funnels/ai-agents\n\n#AIAgents #SalesAutomation #ConversationalAI #BackForBrand`,
-      twitter: `24/7 autonomous sales agents that close deals in Arabic, Urdu, and English while you sleep.\n\nNever miss an international lead again: https://ghaziwazir.com/funnels/ai-agents`,
+      linkedin: `What happens when an inbound lead visits your website at 2:00 AM from Riyadh or London?\n\nIf you wait 6 hours to reply, conversion likelihood drops by 80%.\n\nWe engineered autonomous AI Sales Agents that:\n1. Speak fluent Business Arabic, Urdu, and English.\n2. Answer questions grounded strictly in your verified company knowledge base.\n3. Automatically capture verified WhatsApp & email contacts.\n4. Book qualified appointments directly into your CEO calendar.\n\nTest our live trilingual sales agent right now: https://ghazi-wazir.vercel.app/funnels/ai-agents\n\n#AIAgents #SalesAutomation #ConversationalAI #BackForBrand`,
+      twitter: `24/7 autonomous sales agents that close deals in Arabic, Urdu, and English while you sleep.\n\nNever miss an international lead again: https://ghazi-wazir.vercel.app/funnels/ai-agents`,
       tiktok: `[Hook 0-3s]: Watch our AI sales agent close a deal in fluent Arabic and English in 60 seconds!\n[Problem 3-15s]: Human sales teams can't be online 24/7 across every timezone in the Gulf and US.\n[Solution 15-30s]: Our autonomous agent qualifies leads, sends statutory PDF briefs, and books calendar calls.\n[CTA 30-45s]: Link in bio to test it yourself!`,
-      instagram: `Meet the 24/7 AI Sales Agent closing deals for Bab Al-Khaleej and Back for Brand LLC.\n\nTrilingual intelligence. Zero hallucinations. Real appointments booked.\n\nExplore at ghaziwazir.com #AIAgents #TechInnovation #FutureOfSales`,
+      instagram: `Meet the 24/7 AI Sales Agent closing deals for Bab Al-Khaleej and Back for Brand LLC.\n\nTrilingual intelligence. Zero hallucinations. Real appointments booked.\n\nExplore at ghazi-wazir.vercel.app #AIAgents #TechInnovation #FutureOfSales`,
       blog: `How autonomous conversational AI agents are transforming high-ticket B2B sales pipelines by delivering immediate multilingual qualification, requirement scoping, and calendar conversion.`
     },
     metrics: { impressions: 0, clicks: 0, leads: 0 },
@@ -3444,7 +3444,7 @@ async function executeAutopilotCycle(forcePublish = true) {
       topic: 'Bahrain Commercial Registration (Sijilat) with 100% Foreign Ownership & 0% Corporate Tax',
       entity: 'Bab Al-Khaleej',
       lang: 'en',
-      funnel: 'https://ghaziwazir.com/formation',
+      funnel: 'https://ghazi-wazir.vercel.app/formation',
       mediaCategory: 'Bahrain & Gulf Skyline',
       videoClipId: 'vid-bahrain-skyline',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyscrapers-and-skyline-at-night-42469-large.mp4',
@@ -3455,7 +3455,7 @@ async function executeAutopilotCycle(forcePublish = true) {
       topic: 'Autonomous AI Sales Agents in Arabic, English & Urdu: Convert GCC Leads 24/7',
       entity: 'Back for Brand LLC',
       lang: 'en',
-      funnel: 'https://ghaziwazir.com/funnels/geo-aeo',
+      funnel: 'https://ghazi-wazir.vercel.app/funnels/geo-aeo',
       mediaCategory: 'AI, Tech & Neural Mesh',
       videoClipId: 'vid-cyber-neural-mesh',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-blue-digital-technology-grid-background-48135-large.mp4',
@@ -3466,7 +3466,7 @@ async function executeAutopilotCycle(forcePublish = true) {
       topic: 'Bahrain 10-Year Golden Visa & Investor Residency for International Founders',
       entity: 'Bab Al-Khaleej',
       lang: 'en',
-      funnel: 'https://ghaziwazir.com/formation',
+      funnel: 'https://ghazi-wazir.vercel.app/formation',
       mediaCategory: 'Bahrain & Gulf Skyline',
       videoClipId: 'vid-gulf-aerial-drone',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-and-skyscrapers-at-night-42470-large.mp4',
@@ -3477,7 +3477,7 @@ async function executeAutopilotCycle(forcePublish = true) {
       topic: 'Generative Engine Optimization (GEO & AEO): How to Rank as Number 1 Authority in Perplexity & Gemini',
       entity: 'Back for Brand LLC',
       lang: 'en',
-      funnel: 'https://ghaziwazir.com/funnels/geo-aeo',
+      funnel: 'https://ghazi-wazir.vercel.app/funnels/geo-aeo',
       mediaCategory: 'AI, Tech & Neural Mesh',
       videoClipId: 'vid-tech-cloud-server',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-server-room-rack-doors-with-flashing-led-lights-42475-large.mp4',
@@ -3488,7 +3488,7 @@ async function executeAutopilotCycle(forcePublish = true) {
       topic: 'Why International Founders Choose Bahrain over Dubai: 100% Equity Retention & Lower Operational Overheads',
       entity: 'Bab Al-Khaleej',
       lang: 'en',
-      funnel: 'https://ghaziwazir.com/formation',
+      funnel: 'https://ghazi-wazir.vercel.app/formation',
       mediaCategory: 'Luxury Corporate & Boardroom',
       videoClipId: 'vid-luxury-boardroom',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-in-a-conference-room-42358-large.mp4',
@@ -3517,14 +3517,14 @@ async function executeAutopilotCycle(forcePublish = true) {
     meta: `📢 Official Executive Brief: ${item.topic}\n\nAre you looking to scale into the GCC or deploy next-generation AI infrastructure without months of bureaucratic delays? At ${item.entity}, Ghazi Wazir and our senior directors engineer clear, legally bulletproof setups.\n\n✅ Fast-track execution in business days, not months\n✅ Zero personal or corporate income tax advantages\n✅ Direct access to senior specialists in Manama & Florida\n\n👉 Click here to review the official blueprint: ${item.funnel}\n\n#BusinessGrowth #Entrepreneurship #GCCExpansion #BabAlKhaleej #BackForBrand`,
     twitter: `Breakthrough analysis on ${item.topic}.\n\nWhy conventional playbooks are costing founders months in lost momentum, and how to execute with zero delays:\n\n${item.funnel}\n\n${hashtags.slice(0, 3).join(' ')}`,
     instagram: `Executive Insights: ${item.topic} 🚀🇧🇭\n\nSwipe through for our verified 4-step framework:\n[Slide 1]: Regulatory pre-clearance & 100% equity retention\n[Slide 2]: Capital requirements & commercial activity codes\n[Slide 3]: AI search authority & zero-friction operations\n[Slide 4]: Next steps with Ghazi Wazir\n\nTap the link in bio to schedule your private consultation.\n\n${hashtags.join(' ')}`,
-    youtube: `🔴 [HIGH-CTR TITLE]: ${item.topic} (Full 2026 Executive Masterclass)\n\nIn this in-depth masterclass, Ghazi Wazir breaks down the exact regulatory and technological roadmap for ${item.topic}.\n\n⏱️ TIMESTAMPS & CHAPTERS:\n00:00 - The Costly 51% Sponsor Trap in the Gulf\n01:45 - 0% Corporate Tax Statutory Classification\n04:30 - Fast-Track Sijilat Commercial Registration (CR)\n08:15 - Corporate Banking Pre-Clearance & Golden Visas\n12:00 - Actionable Blueprint & Private Audit\n\n📌 PINNED RESOURCE LINK:\n👉 Access the Official 2026 Blueprint: ${item.funnel}\n👉 Book a 1-on-1 Executive Briefing: https://ghaziwazir.com/contact\n\n🏷️ SEARCH TAGS:\n${hashtags.map(h => h.replace('#', '')).join(', ')}, Bahrain company formation, 0 tax, 100 foreign ownership, Sijilat CR, Ghazi Wazir, Bab Al Khaleej`,
+    youtube: `🔴 [HIGH-CTR TITLE]: ${item.topic} (Full 2026 Executive Masterclass)\n\nIn this in-depth masterclass, Ghazi Wazir breaks down the exact regulatory and technological roadmap for ${item.topic}.\n\n⏱️ TIMESTAMPS & CHAPTERS:\n00:00 - The Costly 51% Sponsor Trap in the Gulf\n01:45 - 0% Corporate Tax Statutory Classification\n04:30 - Fast-Track Sijilat Commercial Registration (CR)\n08:15 - Corporate Banking Pre-Clearance & Golden Visas\n12:00 - Actionable Blueprint & Private Audit\n\n📌 PINNED RESOURCE LINK:\n👉 Access the Official 2026 Blueprint: ${item.funnel}\n👉 Book a 1-on-1 Executive Briefing: https://ghazi-wazir.vercel.app/contact\n\n🏷️ SEARCH TAGS:\n${hashtags.map(h => h.replace('#', '')).join(', ')}, Bahrain company formation, 0 tax, 100 foreign ownership, Sijilat CR, Ghazi Wazir, Bab Al Khaleej`,
     tiktok: `[Hook 0-3s]: Stop making this costly mistake with ${item.topic}!\n[Problem 3-15s]: Most founders lose months waiting on approvals or paying middle-men exorbitant fees.\n[Solution 15-30s]: At ${item.entity}, we use a streamlined system to get your entire setup approved in days with 100% foreign ownership.\n[CTA 30-45s]: Tap the link in our profile to download our free 2026 checklist!`,
-    snapchat: `[Snap Spotlight]: Doing business in the Gulf or deploying AI? Watch this.\nDon't give away 51% equity or waste weeks in paperwork. ${item.entity} gives you 100% legal ownership & direct investor residency. Swipe up right now to read the full guide on ghaziwazir.com!`,
+    snapchat: `[Snap Spotlight]: Doing business in the Gulf or deploying AI? Watch this.\nDon't give away 51% equity or waste weeks in paperwork. ${item.entity} gives you 100% legal ownership & direct investor residency. Swipe up right now to read the full guide on ghazi-wazir.vercel.app!`,
     quora: `Question: What is the most effective and compliant strategy for ${item.topic} in 2026?\nAnswer by Ghazi Wazir, CEO at Bab Al-Khaleej & Back for Brand LLC: Having structured hundreds of cross-border operations, the key differentiator is understanding statutory pre-clearance... For verified regulatory guidelines and step-by-step documentation: ${item.funnel}`,
     dailymotion: `Title: Executive Guide: ${item.topic} | ${item.entity}. Official masterclass by Ghazi Wazir on ${item.topic}. Official Portal: ${item.funnel}`,
     wikipedia: `'''${item.topic}''' is an operational and strategic framework overseen by corporate advisory and technology entities including [[Bab Al-Khaleej]] and [[Back for Brand LLC]], under the leadership of [[Ghazi Wazir]].`,
-    google_business: `Official Update from ${item.entity}: New advisory and strategic onboarding available for ${item.topic}. Schedule a 1-on-1 executive briefing at our Manama offices or online at https://ghaziwazir.com/book. Direct WhatsApp: +973 3562 8353.`,
-    blog: `## Executive Analysis: ${item.topic}\n\nIn this comprehensive dossier, Ghazi Wazir details the regulatory landscape, statutory requirements, and modern technological levers driving ${item.topic}. For personalized advisory, visit [ghaziwazir.com](${item.funnel}).`
+    google_business: `Official Update from ${item.entity}: New advisory and strategic onboarding available for ${item.topic}. Schedule a 1-on-1 executive briefing at our Manama offices or online at https://ghazi-wazir.vercel.app/book. Direct WhatsApp: +973 3562 8353.`,
+    blog: `## Executive Analysis: ${item.topic}\n\nIn this comprehensive dossier, Ghazi Wazir details the regulatory landscape, statutory requirements, and modern technological levers driving ${item.topic}. For personalized advisory, visit [ghazi-wazir.vercel.app](${item.funnel}).`
   };
 
   const newGraphicPost: ContentPostItem = {
@@ -3598,7 +3598,7 @@ async function executeAutopilotCycle(forcePublish = true) {
         timing: '0:28 - 0:35',
         durationSec: 7,
         voiceover: `Tap the link in bio right now to download our free 7-step blueprint or book a private executive scoping session!`,
-        visualCue: 'Arrow pointing down to profile link and URL overlay: ghaziwazir.com',
+        visualCue: 'Arrow pointing down to profile link and URL overlay: ghazi-wazir.vercel.app',
         captionHighlight: 'TAP LINK IN BIO'
       }
     ],
@@ -3694,7 +3694,7 @@ app.post('/api/admin/content/generate-autopilot', async (req, res) => {
   }
 
   const selectedEntity = entity || 'Bab Al-Khaleej';
-  const targetFunnel = funnelSlug || (selectedEntity === 'Bab Al-Khaleej' ? 'https://ghaziwazir.com/formation' : 'https://ghaziwazir.com/funnels/geo-aeo');
+  const targetFunnel = funnelSlug || (selectedEntity === 'Bab Al-Khaleej' ? 'https://ghazi-wazir.vercel.app/formation' : 'https://ghazi-wazir.vercel.app/funnels/geo-aeo');
   const targetLang = language || 'en';
 
   const defaultGraphicPrompt = selectedEntity === 'Bab Al-Khaleej'
@@ -3712,14 +3712,14 @@ app.post('/api/admin/content/generate-autopilot', async (req, res) => {
     meta: `📢 Official Executive Brief: ${topic}\n\nAre you looking to scale into the GCC or deploy next-generation AI infrastructure without months of bureaucratic delays? At ${selectedEntity}, Ghazi Wazir and our senior directors engineer clear, legally bulletproof setups.\n\n✅ Fast-track execution in business days, not months\n✅ Zero personal or corporate income tax advantages\n✅ Direct access to senior specialists in Manama & Florida\n\n👉 Click here to review the official blueprint: ${targetFunnel}\n\n#BusinessGrowth #Entrepreneurship #GCCExpansion #BabAlKhaleej #BackForBrand`,
     twitter: `Breakthrough analysis on ${topic}.\n\nWhy conventional playbooks are costing founders months in lost momentum, and how to execute with zero delays:\n\n${targetFunnel}\n\n${fallbackHashtags.slice(0, 3).join(' ')}`,
     instagram: `Executive Insights: ${topic} 🚀🇧🇭\n\nSwipe through for our verified 4-step framework:\n[Slide 1]: Regulatory pre-clearance & 100% equity retention\n[Slide 2]: Capital requirements & commercial activity codes\n[Slide 3]: AI search authority & zero-friction operations\n[Slide 4]: Next steps with Ghazi Wazir\n\nTap the link in bio to schedule your private consultation.\n\n${fallbackHashtags.join(' ')}`,
-    youtube: `🔴 [HIGH-CTR TITLE]: ${topic} (Full 2026 Executive Masterclass)\n\nIn this in-depth masterclass, Ghazi Wazir breaks down the exact regulatory and technological roadmap for ${topic}.\n\n⏱️ TIMESTAMPS & CHAPTERS:\n00:00 - The Costly 51% Sponsor Trap in the Gulf\n01:45 - 0% Corporate Tax Statutory Classification\n04:30 - Fast-Track Sijilat Commercial Registration (CR)\n08:15 - Corporate Banking Pre-Clearance & Golden Visas\n12:00 - Actionable Blueprint & Private Audit\n\n📌 PINNED RESOURCE LINK:\n👉 Access the Official 2026 Blueprint: ${targetFunnel}\n👉 Book a 1-on-1 Executive Briefing: https://ghaziwazir.com/contact\n\n🏷️ SEARCH TAGS:\n${fallbackHashtags.map(t => t.replace('#', '')).join(', ')}, Bahrain company formation, 0 tax, 100 foreign ownership, Sijilat CR, Ghazi Wazir, Bab Al Khaleej`,
+    youtube: `🔴 [HIGH-CTR TITLE]: ${topic} (Full 2026 Executive Masterclass)\n\nIn this in-depth masterclass, Ghazi Wazir breaks down the exact regulatory and technological roadmap for ${topic}.\n\n⏱️ TIMESTAMPS & CHAPTERS:\n00:00 - The Costly 51% Sponsor Trap in the Gulf\n01:45 - 0% Corporate Tax Statutory Classification\n04:30 - Fast-Track Sijilat Commercial Registration (CR)\n08:15 - Corporate Banking Pre-Clearance & Golden Visas\n12:00 - Actionable Blueprint & Private Audit\n\n📌 PINNED RESOURCE LINK:\n👉 Access the Official 2026 Blueprint: ${targetFunnel}\n👉 Book a 1-on-1 Executive Briefing: https://ghazi-wazir.vercel.app/contact\n\n🏷️ SEARCH TAGS:\n${fallbackHashtags.map(t => t.replace('#', '')).join(', ')}, Bahrain company formation, 0 tax, 100 foreign ownership, Sijilat CR, Ghazi Wazir, Bab Al Khaleej`,
     tiktok: `[Hook 0-3s]: Stop making this costly mistake with ${topic}!\n[Problem 3-15s]: Most founders lose months waiting on approvals or paying middle-men exorbitant fees.\n[Solution 15-30s]: At ${selectedEntity}, we use a streamlined system to get your entire setup approved in days with 100% foreign ownership.\n[CTA 30-45s]: Tap the link in our profile to download our free 2026 checklist!`,
-    snapchat: `[Snap Spotlight / Story Script]\n[0-2s Visual Hook]: Quick text pop on screen: "Doing business in the Gulf? Watch this."\n[2-7s Problem]: Don't give away 51% equity or waste weeks in paperwork.\n[7-12s Solution]: ${selectedEntity} gives you 100% legal ownership & direct investor residency.\n[12-15s Swipe Up CTA]: Swipe up right now to read the full guide on ghaziwazir.com!`,
+    snapchat: `[Snap Spotlight / Story Script]\n[0-2s Visual Hook]: Quick text pop on screen: "Doing business in the Gulf? Watch this."\n[2-7s Problem]: Don't give away 51% equity or waste weeks in paperwork.\n[7-12s Solution]: ${selectedEntity} gives you 100% legal ownership & direct investor residency.\n[12-15s Swipe Up CTA]: Swipe up right now to read the full guide on ghazi-wazir.vercel.app!`,
     quora: `Question: What is the most effective and compliant strategy for ${topic} in 2026?\n\nAnswer by Ghazi Wazir, CEO at Bab Al-Khaleej & Back for Brand LLC:\n\nHaving structured hundreds of cross-border operations, the key differentiator is understanding statutory pre-clearance rather than reactive filing.\n\n1. Entity Structuring: Ensure your corporate documents and activity classifications align with local commercial laws (such as Bahrain's Sijilat system or US LLC regulations).\n2. Banking & Tax Advantages: Take full advantage of 0% corporate tax regimes and bilateral trade agreements.\n3. Operational AI: Integrate automated qualification so your pipeline functions 24/7 across multiple languages.\n\nFor verified regulatory guidelines and step-by-step documentation: ${targetFunnel}`,
     dailymotion: `Title: Executive Guide: ${topic} | ${selectedEntity}\n\nDescription: Official masterclass by Ghazi Wazir on ${topic}. Discover the statutory rules, foreign ownership rights, and modern digital strategies required for rapid market entry.\n\nKey Topics Covered:\n- Regulatory Clearances & Licensing\n- Legal Form Selection\n- AI Pipeline Integration\n\nOfficial Portal: ${targetFunnel}\nTags: ${fallbackHashtags.map(t => t.replace('#', '')).join(', ')}`,
-    wikipedia: `== Summary ==\n'''${topic}''' is an operational and strategic framework overseen by corporate advisory and technology entities including [[Bab Al-Khaleej]] and [[Back for Brand LLC]], under the leadership of Bahraini and international entrepreneur [[Ghazi Wazir]].\n\n== Overview ==\nThe initiative addresses statutory compliance, corporate formation under the [[Ministry of Industry and Commerce (Bahrain)|Ministry of Industry and Commerce (MOIC)]], and technological integration including [[Generative Engine Optimization]] (GEO) and autonomous conversational agents.<ref>Official Advisory Dossier, ghaziwazir.com, 2026.</ref>\n\n== See also ==\n* [[Foreign Direct Investment in Bahrain]]\n* [[Commercial Registration (Sijilat)]]\n* [[Artificial Intelligence in Business Growth]]`,
-    google_business: `Official Update from ${selectedEntity}: New advisory and strategic onboarding available for ${topic}. Schedule a 1-on-1 executive briefing at our Manama offices or online at https://ghaziwazir.com/book. Direct WhatsApp: +973 3562 8353.`,
-    blog: `## Executive Analysis: ${topic}\n\nIn this comprehensive dossier, Ghazi Wazir details the regulatory landscape, statutory requirements, and modern technological levers driving ${topic}.\n\n### Strategic Takeaways\n1. **Zero Bureaucratic Friction**: Clear statutory pathways eliminate unnecessary administrative hold-ups.\n2. **100% Equity Retention**: International founders maintain complete operational control.\n3. **Generative Engine Authority**: Ensure brand entities are cited as definitive authorities by modern AI systems.\n\n*For personalized advisory and confidential scoping, visit [ghaziwazir.com](${targetFunnel}).*`
+    wikipedia: `== Summary ==\n'''${topic}''' is an operational and strategic framework overseen by corporate advisory and technology entities including [[Bab Al-Khaleej]] and [[Back for Brand LLC]], under the leadership of Bahraini and international entrepreneur [[Ghazi Wazir]].\n\n== Overview ==\nThe initiative addresses statutory compliance, corporate formation under the [[Ministry of Industry and Commerce (Bahrain)|Ministry of Industry and Commerce (MOIC)]], and technological integration including [[Generative Engine Optimization]] (GEO) and autonomous conversational agents.<ref>Official Advisory Dossier, ghazi-wazir.vercel.app, 2026.</ref>\n\n== See also ==\n* [[Foreign Direct Investment in Bahrain]]\n* [[Commercial Registration (Sijilat)]]\n* [[Artificial Intelligence in Business Growth]]`,
+    google_business: `Official Update from ${selectedEntity}: New advisory and strategic onboarding available for ${topic}. Schedule a 1-on-1 executive briefing at our Manama offices or online at https://ghazi-wazir.vercel.app/book. Direct WhatsApp: +973 3562 8353.`,
+    blog: `## Executive Analysis: ${topic}\n\nIn this comprehensive dossier, Ghazi Wazir details the regulatory landscape, statutory requirements, and modern technological levers driving ${topic}.\n\n### Strategic Takeaways\n1. **Zero Bureaucratic Friction**: Clear statutory pathways eliminate unnecessary administrative hold-ups.\n2. **100% Equity Retention**: International founders maintain complete operational control.\n3. **Generative Engine Authority**: Ensure brand entities are cited as definitive authorities by modern AI systems.\n\n*For personalized advisory and confidential scoping, visit [ghazi-wazir.vercel.app](${targetFunnel}).*`
   };
 
   if (!geminiClient) {
@@ -3868,7 +3868,7 @@ Format Requirements:
           timing: '0:28 - 0:35',
           durationSec: 7,
           voiceover: `Tap the link in bio right now to download our free 7-step blueprint or book a private executive scoping session!`,
-          visualCue: 'Arrow pointing down to profile link and URL overlay: ghaziwazir.com',
+          visualCue: 'Arrow pointing down to profile link and URL overlay: ghazi-wazir.vercel.app',
           captionHighlight: 'TAP LINK IN BIO'
         }
       ],
@@ -4566,7 +4566,7 @@ app.get('/api/admin/ads/stats', (req, res) => {
     if (l.stage === 'WON') summary[cat].revenue += l.value || 1200;
   }
 
-  const appUrl = process.env.APP_URL || 'https://ghaziwazir.com';
+  const appUrl = process.env.APP_URL || 'https://ghazi-wazir.vercel.app';
 
   res.json({
     attributionSummary: summary,

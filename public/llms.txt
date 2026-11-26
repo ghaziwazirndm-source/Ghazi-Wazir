@@ -14,26 +14,26 @@ Reference summary for search crawlers and AI retrieval systems (note: presence o
 
 - **Manama Office Line**: +973 3439 8754
 - **WhatsApp Direct**: https://wa.me/97335628353 (+973 3562 8353)
-- **Executive Contact Desk**: https://ghaziwazir.com/contact
-- **Official Public Email**: [OWNER TO PROVIDE: Public role-based business email, e.g. advisory@ghaziwazir.com]
-- **Canonical Website**: https://ghaziwazir.com/
-- **Arabic Version**: https://ghaziwazir.com/ar
+- **Executive Contact Desk**: https://ghazi-wazir.vercel.app/contact
+- **Official Public Email**: [OWNER TO PROVIDE: Official public role-based business email]
+- **Canonical Website**: https://ghazi-wazir.vercel.app/
+- **Arabic Version**: https://ghazi-wazir.vercel.app/ar
 
 ## Core Services & Guides (Canonical URLs)
 
-- [Bahrain Commercial Registration (CR)](https://ghaziwazir.com/services/business-registration): Private advisory for Sijilat CR formation, activity classification, and MOA preparation.
-- [Bahrain Investor & Partner Visas](https://ghaziwazir.com/services/investor-visa): Guidance on shareholder residency applications and CPR coordination.
-- [LMRA Worker Visas & Permits](https://ghaziwazir.com/services/worker-visa): Assistance with work permit submissions and LMRA quota planning.
-- [Document Consultancy & Attestation](https://ghaziwazir.com/services/document-consultancy): Embassy attestation, MOFA legalization, and translation coordination.
-- [Bahrain Formation Blueprint](https://ghaziwazir.com/formation/blueprint): Structured overview of the Bahrain company setup workflow.
-- [Generative & Answer Engine Optimization (GEO/AEO)](https://ghaziwazir.com/services/geo-aeo): Technical schema, entity clarity, and answer-first content architecture.
-- [Autonomous AI Sales Agents](https://ghaziwazir.com/services/ai-agents): Multilingual conversational qualification and booking workflows.
-- [Websites & High-Converting Funnels](https://ghaziwazir.com/services/websites-funnels): Custom web architectures and conversion tracking.
-- [Strategic Guides Hub](https://ghaziwazir.com/blog): Long-form operational guides on Bahrain company formation, visas, GEO, and AI agents.
+- [Bahrain Commercial Registration (CR)](https://ghazi-wazir.vercel.app/services/business-registration): Private advisory for Sijilat CR formation, activity classification, and MOA preparation.
+- [Bahrain Investor & Partner Visas](https://ghazi-wazir.vercel.app/services/investor-visa): Guidance on shareholder residency applications and CPR coordination.
+- [LMRA Worker Visas & Permits](https://ghazi-wazir.vercel.app/services/worker-visa): Assistance with work permit submissions and LMRA quota planning.
+- [Document Consultancy & Attestation](https://ghazi-wazir.vercel.app/services/document-consultancy): Embassy attestation, MOFA legalization, and translation coordination.
+- [Bahrain Formation Blueprint](https://ghazi-wazir.vercel.app/formation/blueprint): Structured overview of the Bahrain company setup workflow.
+- [Generative & Answer Engine Optimization (GEO/AEO)](https://ghazi-wazir.vercel.app/services/geo-aeo): Technical schema, entity clarity, and answer-first content architecture.
+- [Autonomous AI Sales Agents](https://ghazi-wazir.vercel.app/services/ai-agents): Multilingual conversational qualification and booking workflows.
+- [Websites & High-Converting Funnels](https://ghazi-wazir.vercel.app/services/websites-funnels): Custom web architectures and conversion tracking.
+- [Strategic Guides Hub](https://ghazi-wazir.vercel.app/blog): Long-form operational guides on Bahrain company formation, visas, GEO, and AI agents.
 
 ## Extended Reference
 
-- [llms-full.txt](https://ghaziwazir.com/llms-full.txt): Detailed scope summary, compliance notes, and unresolved owner verification items.
+- [llms-full.txt](https://ghazi-wazir.vercel.app/llms-full.txt): Detailed scope summary, compliance notes, and unresolved owner verification items.
 
 ## Official Verification & Regulatory Disclaimer
 

@@ -9,7 +9,7 @@ export function AboutPage() {
       <SEOHead
         title="About Ghazi Wazir — CEO in Manama & Florida | Ghazi Wazir"
         description="Meet Ghazi Wazir, CEO of Bab Al-Khaleej in Manama and Back for Brand LLC in Florida. Learn his standard and book a direct consultation."
-        canonical="https://ghaziwazir.com/about"
+        canonical="https://ghazi-wazir.vercel.app/about"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'About Ghazi Wazir', item: '/about' },

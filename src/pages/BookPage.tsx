@@ -14,7 +14,7 @@ export function BookPage() {
       <SEOHead
         title="Book a Consultation: Bahrain & GEO | Ghazi Wazir"
         description="Schedule a private 1-on-1 strategy session with Ghazi Wazir for Bahrain CR setup, investor visas, or GEO & AI automation. Reserve your slot."
-        canonical="https://ghaziwazir.com/book"
+        canonical="https://ghazi-wazir.vercel.app/book"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Book Consultation', item: '/book' },

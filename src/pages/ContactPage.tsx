@@ -66,7 +66,7 @@ export function ContactPage() {
       <SEOHead
         title="Contact Ghazi Wazir | Manama Office & WhatsApp"
         description="Contact Ghazi Wazir at The Collective Hub, Yateem Center, Manama (+973 3439 8754 / WhatsApp +973 3562 8353). Send an inquiry today."
-        canonical="https://ghaziwazir.com/contact"
+        canonical="https://ghazi-wazir.vercel.app/contact"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Contact', item: '/contact' },

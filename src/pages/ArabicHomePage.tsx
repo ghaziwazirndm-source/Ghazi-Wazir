@@ -15,7 +15,7 @@ import {
 export function ArabicHomePage() {
   const arabicFaqSchema = {
     '@type': 'FAQPage',
-    '@id': 'https://ghaziwazir.com/ar#faq',
+    '@id': 'https://ghazi-wazir.vercel.app/ar#faq',
     inLanguage: 'ar',
     mainEntity: [
       {
@@ -42,12 +42,12 @@ export function ArabicHomePage() {
       <SEOHead
         title="تأسيس الشركات في البحرين والتسويق بالذكاء الاصطناعي | غازي وزير"
         description="خدمات تأسيس الشركات في البحرين وإقامات المستثمرين مع باب الخليج، وحلول GEO و AEO والذكاء الاصطناعي مع باك فور براند. احجز استشارتك."
-        canonical="https://ghaziwazir.com/ar"
+        canonical="https://ghazi-wazir.vercel.app/ar"
         lang="ar"
-        alternateEn="https://ghaziwazir.com/"
-        alternateAr="https://ghaziwazir.com/ar"
+        alternateEn="https://ghazi-wazir.vercel.app/"
+        alternateAr="https://ghazi-wazir.vercel.app/ar"
         breadcrumbs={[
-          { name: 'الرئيسية', item: 'https://ghaziwazir.com/ar' }
+          { name: 'الرئيسية', item: 'https://ghazi-wazir.vercel.app/ar' }
         ]}
         schema={arabicFaqSchema}
       />

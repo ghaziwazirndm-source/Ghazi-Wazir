@@ -9,7 +9,7 @@ export function StartPage() {
       <SEOHead
         title="Start Here: Bahrain Setup or AI Growth | Ghazi Wazir"
         description="Choose your path with Ghazi Wazir: open a Bahrain company via Bab Al-Khaleej or scale with Back for Brand GEO & AI. Book a call today."
-        canonical="https://ghaziwazir.com/start"
+        canonical="https://ghazi-wazir.vercel.app/start"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Start Here', item: '/start' },

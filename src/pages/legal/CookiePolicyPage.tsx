@@ -7,7 +7,7 @@ export function CookiePolicyPage() {
       <SEOHead
         title="Cookie Policy — Ghazi Wazir | Bab Al-Khaleej & Back for Brand LLC"
         description="Comprehensive cookie policy explaining essential cookies, session storage, and analytical privacy."
-        canonical="https://ghaziwazir.com/cookie-policy"
+        canonical="https://ghazi-wazir.vercel.app/cookie-policy"
       />
 
       <div className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">

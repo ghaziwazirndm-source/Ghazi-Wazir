@@ -53,7 +53,7 @@ export function FormationIndexPage() {
       <SEOHead
         title="Bahrain Company Formation Blueprint | Ghazi Wazir"
         description="Get the 7-step Bahrain Company Formation Blueprint covering Sijilat CR sequence, documents, and visas. Request instant access today."
-        canonical="https://ghaziwazir.com/formation"
+        canonical="https://ghazi-wazir.vercel.app/formation"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Bahrain Formation Blueprint', item: '/formation' },

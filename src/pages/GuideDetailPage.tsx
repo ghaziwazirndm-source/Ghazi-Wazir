@@ -371,21 +371,21 @@ export function GuideDetailPage() {
     '@graph': [
       {
         '@type': 'Article',
-        '@id': `https://ghaziwazir.com/blog/${guide.canonicalSlug}#article`,
+        '@id': `https://ghazi-wazir.vercel.app/blog/${guide.canonicalSlug}#article`,
         headline: guide.title,
         description: guide.lead,
         author: {
           '@type': 'Person',
           name: 'Ghazi Wazir',
           jobTitle: 'CEO, Bab Al-Khaleej and Back for Brand LLC',
-          url: 'https://ghaziwazir.com/',
+          url: 'https://ghazi-wazir.vercel.app/',
         },
         publisher: {
           '@type': 'Organization',
           name: 'Ghazi Wazir Executive Ecosystem',
-          url: 'https://ghaziwazir.com/',
+          url: 'https://ghazi-wazir.vercel.app/',
         },
-        mainEntityOfPage: `https://ghaziwazir.com/blog/${guide.canonicalSlug}`,
+        mainEntityOfPage: `https://ghazi-wazir.vercel.app/blog/${guide.canonicalSlug}`,
         speakable: {
           '@type': 'SpeakableSpecification',
           cssSelector: ['#aeo-answer-box', '#guide-title']
@@ -393,7 +393,7 @@ export function GuideDetailPage() {
       },
       {
         '@type': 'FAQPage',
-        '@id': `https://ghaziwazir.com/blog/${guide.canonicalSlug}#faq`,
+        '@id': `https://ghazi-wazir.vercel.app/blog/${guide.canonicalSlug}#faq`,
         mainEntity: guide.faqs.map(faq => ({
           '@type': 'Question',
           name: faq.q,
@@ -411,7 +411,7 @@ export function GuideDetailPage() {
       <SEOHead
         title={guide.seoTitle}
         description={guide.seoDescription}
-        canonical={`https://ghaziwazir.com/blog/${guide.canonicalSlug}`}
+        canonical={`https://ghazi-wazir.vercel.app/blog/${guide.canonicalSlug}`}
         ogType="article"
         breadcrumbs={[
           { name: 'Home', item: '/' },

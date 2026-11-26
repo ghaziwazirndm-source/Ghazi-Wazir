@@ -9,7 +9,7 @@ export function PrivacyPolicyPage() {
       <SEOHead
         title="Privacy Policy — Ghazi Wazir | Bab Al-Khaleej & Back for Brand LLC"
         description="Official privacy policy governing data handling, PII protection, and inquiry processing for Ghazi Wazir's consultancies."
-        canonical="https://ghaziwazir.com/privacy-policy"
+        canonical="https://ghazi-wazir.vercel.app/privacy-policy"
       />
 
       <div className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">

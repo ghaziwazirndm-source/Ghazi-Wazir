@@ -343,7 +343,7 @@ const DEFAULT_STORYBOARD: ShortsStoryboard = {
       timing: '0:28 - 0:35',
       durationSec: 7,
       voiceover: 'Tap the link in bio right now to download our free 7-step blueprint or book a private executive scoping session!',
-      visualCue: 'Arrow pointing down to profile link and URL overlay: ghaziwazir.com',
+      visualCue: 'Arrow pointing down to profile link and URL overlay: ghazi-wazir.vercel.app',
       captionHighlight: 'TAP LINK IN BIO'
     }
   ],
@@ -509,7 +509,7 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
     `00:00 - The 51% Local Sponsor Trap\n01:35 - Bahrain 0% Corporate Tax Law Explained\n04:12 - Free Zone vs Mainland (Sijilat Breakdown)\n07:45 - 5-Day Fast-Track Commercial Registration with Ghazi Wazir\n10:30 - Golden Visa & Residence Requirements\n13:10 - Next Steps & Direct Advisory Call`
   );
   const [ytPinnedComment, setYtPinnedComment] = useState<string>(
-    `🔥 DOWNLOAD THE FREE 2026 FORMATION BLUEPRINT:\n👉 https://ghaziwazir.com/formation\n\nNeed direct assistance from Ghazi Wazir & the Bab Al-Khaleej executive team? Book your 1-on-1 strategy audit today at https://ghaziwazir.com/contact.\n\nDrop your questions below—we reply to every comment within 2 hours!`
+    `🔥 DOWNLOAD THE FREE 2026 FORMATION BLUEPRINT:\n👉 https://ghazi-wazir.vercel.app/formation\n\nNeed direct assistance from Ghazi Wazir & the Bab Al-Khaleej executive team? Book your 1-on-1 strategy audit today at https://ghazi-wazir.vercel.app/contact.\n\nDrop your questions below—we reply to every comment within 2 hours!`
   );
   const [ytTags, setYtTags] = useState<string>(
     'Bahrain company formation, 0% corporate tax, 100% foreign ownership, Sijilat CR registration, Bab Al Khaleej, Ghazi Wazir, Dubai freezone vs Bahrain, Gulf business setup, expat tax planning, Gulf Golden Visa, Middle East company incorporation 2026, foreign direct investment'
@@ -966,7 +966,7 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                 timing: '0:28 - 0:35',
                 durationSec: 7,
                 voiceover: `Tap the link in bio right now to download our free 2026 blueprint or schedule a direct consultation!`,
-                visualCue: 'Animated arrow pointing down to link with website URL: ghaziwazir.com',
+                visualCue: 'Animated arrow pointing down to link with website URL: ghazi-wazir.vercel.app',
                 captionHighlight: 'TAP LINK IN BIO'
               }
             ]
@@ -3760,7 +3760,7 @@ export function ContentStudio({ onNotify, standalone = false }: ContentStudioPro
                           {graphicConfig.authorTag}
                         </text>
                         <text x="68" y="44" fill="#94a3b8" fontSize="11">
-                          ghaziwazir.com • Verified Advisory
+                          ghazi-wazir.vercel.app • Verified Advisory
                         </text>
                       </g>
                     )}

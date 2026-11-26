@@ -8,7 +8,7 @@ export function TermsPage() {
       <SEOHead
         title="Terms of Service — Ghazi Wazir | Bab Al-Khaleej & Back for Brand LLC"
         description="Terms and conditions governing consulting agreements, scope of work, and advisory boundaries."
-        canonical="https://ghaziwazir.com/terms-of-service"
+        canonical="https://ghazi-wazir.vercel.app/terms-of-service"
       />
 
       <div className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">

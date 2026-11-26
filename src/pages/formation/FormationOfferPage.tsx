@@ -24,7 +24,7 @@ export function FormationOfferPage() {
       <SEOHead
         title="Done-With-You Bahrain Setup Offer | Ghazi Wazir"
         description="Have Bab Al-Khaleej handle your Bahrain CR filing, MOA drafting, and investor visa coordination step by step. Request a tailored quote today."
-        canonical="https://ghaziwazir.com/formation/offer"
+        canonical="https://ghazi-wazir.vercel.app/formation/offer"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Formation', item: '/formation' },

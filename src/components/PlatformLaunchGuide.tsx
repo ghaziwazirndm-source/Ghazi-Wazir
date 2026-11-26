@@ -38,7 +38,7 @@ export function PlatformLaunchGuide({ onNavigateModule }: PlatformLaunchGuidePro
   const [utmCampaign, setUtmCampaign] = useState('bahrain_cr_fasttrack');
   const [utmContent, setUtmContent] = useState('video_vsl_investor');
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ghaziwazir.com';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ghazi-wazir.vercel.app';
   const generatedUrl = `${origin}${utmPage}?utm_source=${utmSource}&utm_medium=${utmMedium}&utm_campaign=${utmCampaign}&utm_content=${utmContent}`;
 
   const copyToClipboard = (text: string, key: string) => {
@@ -61,14 +61,14 @@ export function PlatformLaunchGuide({ onNavigateModule }: PlatformLaunchGuidePro
               How to Operate Platform & Launch Ads Marketing Now
             </h2>
             <p className="text-xs sm:text-sm text-[#94a3b8] max-w-2xl leading-relaxed">
-              Step-by-step master instructions for launching with your custom domain (<span className="text-[#38bdf8] font-bold">ghaziwazir.com</span>), running paid traffic across Meta, Google, TikTok & Snapchat, deploying the trilingual AI Sales Agent, and closing commercial deals.
+              Step-by-step master instructions for launching with your custom domain (<span className="text-[#38bdf8] font-bold">ghazi-wazir.vercel.app</span>), running paid traffic across Meta, Google, TikTok & Snapchat, deploying the trilingual AI Sales Agent, and closing commercial deals.
             </p>
           </div>
 
           <div className="flex flex-col sm:items-end gap-2 text-xs">
             <span className="text-[11px] text-[#94a3b8]">Verified Master Domain:</span>
             <code className="px-3 py-1.5 bg-[#090d16] border border-[#1e2d4d] rounded-xl font-mono text-[#38bdf8] font-bold select-all">
-              https://ghaziwazir.com
+              https://ghazi-wazir.vercel.app
             </code>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function PlatformLaunchGuide({ onNavigateModule }: PlatformLaunchGuidePro
                 1
               </span>
               <h3 className="font-heading font-bold text-base text-[#f8fafc]">
-                Connecting <span className="text-[#38bdf8]">ghaziwazir.com</span> in Registrar & Vercel
+                Connecting <span className="text-[#38bdf8]">ghazi-wazir.vercel.app</span> in Registrar & Vercel
               </h3>
             </div>
             <p className="text-xs text-[#94a3b8] leading-relaxed">
@@ -126,7 +126,7 @@ export function PlatformLaunchGuide({ onNavigateModule }: PlatformLaunchGuidePro
                 <span className="text-[10px] font-black text-[#38bdf8] uppercase">Step 1.1</span>
                 <strong className="block text-[#f8fafc]">Add Domain in Vercel</strong>
                 <p className="text-[11px] text-[#94a3b8]">
-                  Open Vercel Project Settings &rarr; <strong>Domains</strong> &rarr; Add <code className="text-[#38bdf8]">ghaziwazir.com</code> and <code className="text-[#38bdf8]">www.ghaziwazir.com</code>.
+                  Open Vercel Project Settings &rarr; <strong>Domains</strong> &rarr; Add <code className="text-[#38bdf8]">ghazi-wazir.vercel.app</code> and <code className="text-[#38bdf8]">www.ghaziwazir.com</code>.
                 </p>
               </div>
 

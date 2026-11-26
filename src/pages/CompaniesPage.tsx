@@ -9,7 +9,7 @@ export function CompaniesPage() {
       <SEOHead
         title="Bab Al-Khaleej & Back for Brand LLC | Ghazi Wazir"
         description="Meet Bab Al-Khaleej (Bahrain business registration & visas) and Back for Brand LLC (Florida GEO, AEO & AI agents). Book a consultation today."
-        canonical="https://ghaziwazir.com/companies"
+        canonical="https://ghazi-wazir.vercel.app/companies"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Companies', item: '/companies' },

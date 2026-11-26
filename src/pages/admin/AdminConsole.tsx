@@ -1910,7 +1910,7 @@ export function AdminConsole() {
                       <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-pulse" />
                         <h4 className="font-heading font-bold text-sm text-[#f8fafc]">
-                          Primary Custom Domain: <span className="text-[#38bdf8]">ghaziwazir.com</span>
+                          Primary Custom Domain: <span className="text-[#38bdf8]">ghazi-wazir.vercel.app</span>
                         </h4>
                       </div>
                       <p className="text-xs text-[#94a3b8] mt-1">
@@ -2096,7 +2096,7 @@ export function AdminConsole() {
                         <span className="text-[10px] text-[#94a3b8]">Verify Token: ghazi_wazir_meta_webhook_2026</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {adStats?.webhooks?.metaLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/meta-lead-gen` : 'https://ghaziwazir.com/api/webhooks/meta-lead-gen')}
+                        {adStats?.webhooks?.metaLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/meta-lead-gen` : 'https://ghazi-wazir.vercel.app/api/webhooks/meta-lead-gen')}
                       </code>
                     </div>
 
@@ -2106,7 +2106,7 @@ export function AdminConsole() {
                         <span className="text-[10px] text-[#94a3b8]">Key: ghazi_wazir_google_ads_key</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {adStats?.webhooks?.googleLeadForm || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/google-lead-form` : 'https://ghaziwazir.com/api/webhooks/google-lead-form')}
+                        {adStats?.webhooks?.googleLeadForm || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/google-lead-form` : 'https://ghazi-wazir.vercel.app/api/webhooks/google-lead-form')}
                       </code>
                     </div>
 
@@ -2116,7 +2116,7 @@ export function AdminConsole() {
                         <span className="text-[10px] text-[#94a3b8]">Advertiser Lead Ingestion</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {adStats?.webhooks?.tiktokLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/tiktok-lead-gen` : 'https://ghaziwazir.com/api/webhooks/tiktok-lead-gen')}
+                        {adStats?.webhooks?.tiktokLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/tiktok-lead-gen` : 'https://ghazi-wazir.vercel.app/api/webhooks/tiktok-lead-gen')}
                       </code>
                     </div>
 
@@ -2126,7 +2126,7 @@ export function AdminConsole() {
                         <span className="text-[10px] text-[#94a3b8]">Story / Spotlight Forms</span>
                       </div>
                       <code className="block p-2 bg-[#131d33] rounded-lg font-mono text-[11px] text-[#f8fafc] select-all border border-[#1e2d4d]">
-                        {adStats?.webhooks?.snapchatLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/snapchat-lead-gen` : 'https://ghaziwazir.com/api/webhooks/snapchat-lead-gen')}
+                        {adStats?.webhooks?.snapchatLeadGen || (typeof window !== 'undefined' ? `${window.location.origin}/api/webhooks/snapchat-lead-gen` : 'https://ghazi-wazir.vercel.app/api/webhooks/snapchat-lead-gen')}
                       </code>
                     </div>
                   </div>

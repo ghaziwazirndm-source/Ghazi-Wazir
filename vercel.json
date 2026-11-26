@@ -4,30 +4,6 @@
   "outputDirectory": "dist",
   "trailingSlash": false,
   "framework": "vite",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "ghazi-wazir.vercel.app"
-        }
-      ],
-      "destination": "https://ghaziwazir.com/$1",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.ghaziwazir.com"
-        }
-      ],
-      "destination": "https://ghaziwazir.com/$1",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/((?!assets/|api/|.*\\..*).*)",

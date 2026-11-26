@@ -12,7 +12,7 @@ export function FunnelsIndexPage() {
       <SEOHead
         title="Bahrain Setup & AI Growth Video Briefings | Ghazi Wazir"
         description="Explore 12 focused video briefings covering Bahrain company setup, investor visas, GEO, AEO, and AI sales agents. Watch a briefing today."
-        canonical="https://ghaziwazir.com/funnels"
+        canonical="https://ghazi-wazir.vercel.app/funnels"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Video Briefings', item: '/funnels' },

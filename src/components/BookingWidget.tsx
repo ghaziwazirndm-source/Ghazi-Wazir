@@ -187,7 +187,7 @@ export function BookingWidget({ defaultService = 'Free Strategic Consultation' }
         {/* Calendar Integration Actions */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           <a
-            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Consultation: ${service} — Ghazi Wazir`)}&dates=${bookingResult.date.replace(/-/g, '')}T${bookingResult.time.replace(':', '')}00/${bookingResult.date.replace(/-/g, '')}T${String(Number(bookingResult.time.split(':')[0]) + 1).padStart(2, '0')}${bookingResult.time.split(':')[1]}00&ctz=Asia/Bahrain&details=${encodeURIComponent(`Executive Strategic Consultation with Ghazi Wazir (CEO of Bab Al-Khaleej & Back for Brand LLC).\n\nService: ${service}\nTimezone: Asia/Bahrain (GMT+3)\nWhatsApp: +973 3562 8353\nDesk: https://ghaziwazir.com/contact\n\nGoogle Meet / WhatsApp Audio link will be dispatched prior to start.`)}&location=Google+Meet`}
+            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Consultation: ${service} — Ghazi Wazir`)}&dates=${bookingResult.date.replace(/-/g, '')}T${bookingResult.time.replace(':', '')}00/${bookingResult.date.replace(/-/g, '')}T${String(Number(bookingResult.time.split(':')[0]) + 1).padStart(2, '0')}${bookingResult.time.split(':')[1]}00&ctz=Asia/Bahrain&details=${encodeURIComponent(`Executive Strategic Consultation with Ghazi Wazir (CEO of Bab Al-Khaleej & Back for Brand LLC).\n\nService: ${service}\nTimezone: Asia/Bahrain (GMT+3)\nWhatsApp: +973 3562 8353\nDesk: https://ghazi-wazir.vercel.app/contact\n\nGoogle Meet / WhatsApp Audio link will be dispatched prior to start.`)}&location=Google+Meet`}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-xl border border-[#2a2a38] bg-[#14141d] hover:border-[#4285F4] hover:bg-[#1a1a26] text-xs font-semibold text-[#f5f1e8] flex items-center justify-center gap-2 transition-all"
@@ -211,7 +211,7 @@ export function BookingWidget({ defaultService = 'Free Strategic Consultation' }
                 `DTSTART;TZID=Asia/Bahrain:${startD}`,
                 `DTEND;TZID=Asia/Bahrain:${endD}`,
                 `SUMMARY:Consultation: ${service} — Ghazi Wazir`,
-                `DESCRIPTION:Executive advisory consultation with Ghazi Wazir. Contact: +973 3562 8353 / https://ghaziwazir.com/contact`,
+                `DESCRIPTION:Executive advisory consultation with Ghazi Wazir. Contact: +973 3562 8353 / https://ghazi-wazir.vercel.app/contact`,
                 'LOCATION:Google Meet / WhatsApp Audio',
                 'END:VEVENT',
                 'END:VCALENDAR'

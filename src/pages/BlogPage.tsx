@@ -60,7 +60,7 @@ export function BlogPage() {
       <SEOHead
         title="Bahrain Business & GEO Strategic Guides | Ghazi Wazir"
         description="Read founder guides on Bahrain Sijilat registration, investor visas, document attestation, GEO, AEO, and AI agents. Explore our guides today."
-        canonical="https://ghaziwazir.com/blog"
+        canonical="https://ghazi-wazir.vercel.app/blog"
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Strategic Guides', item: '/blog' },

@@ -8,7 +8,7 @@ export function DisclaimerPage() {
       <SEOHead
         title="Consultancy Disclaimer — Ghazi Wazir | Private Consultancy Notice"
         description="Statutory non-government consultancy disclaimer and general legal notice for Bab Al-Khaleej and Back for Brand LLC."
-        canonical="https://ghaziwazir.com/disclaimer"
+        canonical="https://ghazi-wazir.vercel.app/disclaimer"
       />
 
       <div className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">

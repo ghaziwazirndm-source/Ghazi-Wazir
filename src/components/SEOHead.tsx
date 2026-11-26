@@ -19,12 +19,14 @@ interface SEOHeadProps {
   schema?: object;
 }
 
-const CANONICAL_HOST = 'https://ghaziwazir.com';
+const CANONICAL_HOST = 'https://ghazi-wazir.vercel.app';
 
 function toCanonicalUrl(pathOrUrl?: string): string {
   if (pathOrUrl) {
     if (pathOrUrl.startsWith('http')) {
-      return pathOrUrl.replace('https://ghazi-wazir.vercel.app', CANONICAL_HOST);
+      return pathOrUrl
+        .replace('https://ghaziwazir.com', CANONICAL_HOST)
+        .replace('https://www.ghaziwazir.com', CANONICAL_HOST);
     }
     const clean = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
     return `${CANONICAL_HOST}${clean}`;
@@ -78,7 +80,7 @@ export function SEOHead({
     }
     metaRobots.setAttribute('content', noindex ? 'noindex, nofollow' : 'index, follow');
 
-    // 4. Strictly Locked Canonical Link (Always https://ghaziwazir.com)
+    // 4. Strictly Locked Canonical Link (Always https://ghazi-wazir.vercel.app)
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');

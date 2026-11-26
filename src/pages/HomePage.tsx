@@ -37,7 +37,7 @@ export function HomePage() {
 
   const homeSchema = {
     '@type': 'FAQPage',
-    '@id': 'https://ghaziwazir.com/#faq',
+    '@id': 'https://ghazi-wazir.vercel.app/#faq',
     mainEntity: [
       {
         '@type': 'Question',
@@ -52,7 +52,7 @@ export function HomePage() {
         name: item.question,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `${item.solution} Detailed guidance is available at https://ghaziwazir.com${item.internalLink.to}.`
+          text: `${item.solution} Detailed guidance is available at https://ghazi-wazir.vercel.app${item.internalLink.to}.`
         }
       }))
     ]
@@ -63,9 +63,9 @@ export function HomePage() {
       <SEOHead
         title="Bahrain Company Formation, Visas & GEO | Ghazi Wazir"
         description="Set up your 100% foreign-owned Bahrain company and investor visas with Bab Al-Khaleej, or scale with Back for Brand GEO & AI. Book a consultation."
-        canonical="https://ghaziwazir.com/"
-        alternateEn="https://ghaziwazir.com/"
-        alternateAr="https://ghaziwazir.com/ar"
+        canonical="https://ghazi-wazir.vercel.app/"
+        alternateEn="https://ghazi-wazir.vercel.app/"
+        alternateAr="https://ghazi-wazir.vercel.app/ar"
         schema={homeSchema}
       />
 
