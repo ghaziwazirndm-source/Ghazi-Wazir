@@ -19,8 +19,8 @@ import {
   AuditEntry,
   SecurityWarning,
   InboxMessage
-} from './src/types/index.ts';
-import { querySalesAgentKnowledge } from './src/services/salesAgentKnowledge.ts';
+} from './src/types/index';
+import { querySalesAgentKnowledge } from './src/services/salesAgentKnowledge';
 
 dotenv.config();
 
@@ -39,12 +39,17 @@ const resolvePort = (): number => {
   return process.env.DEFAULT_APP_PORT ? parseInt(process.env.DEFAULT_APP_PORT, 10) || 3000 : 3000;
 };
 const PORT = resolvePort();
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const IS_SERVERLESS = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = IS_SERVERLESS ? '/tmp/gw-data' : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'workspace.json');
 
-// Ensure data folder exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+// Ensure data folder exists (safe in read-only serverless containers)
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.warn('[Storage] Unable to create DATA_DIR, falling back to memory:', err);
 }
 
 // -------------------------------------------------------------
@@ -4736,7 +4741,11 @@ async function startServer() {
   }
 }
 
-startServer().catch((err) => {
-  console.error('[Ghazi Wazir App] Fatal startup error:', err);
-  process.exit(1);
-});
+if (!IS_SERVERLESS) {
+  startServer().catch((err) => {
+    console.error('[Ghazi Wazir App] Fatal startup error:', err);
+    process.exit(1);
+  });
+}
+
+export default app;

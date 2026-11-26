@@ -15,7 +15,8 @@ export function BookingWidget({ defaultService = 'Free Strategic Consultation' }
   const [currentDate, setCurrentDate] = useState(() => new Date());
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
-  const [availableHours, setAvailableHours] = useState<string[]>([]);
+  const DEFAULT_HOURS = ['09:00', '09:45', '10:30', '11:15', '12:00', '13:30', '14:15', '15:00', '15:45', '16:30'];
+  const [availableHours, setAvailableHours] = useState<string[]>(DEFAULT_HOURS);
   const [bookedSlots, setBookedSlots] = useState<{ date: string; time: string }[]>([]);
   const [workingDays, setWorkingDays] = useState<number[]>([0, 1, 2, 3, 4]);
 
