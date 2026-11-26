@@ -5,6 +5,8 @@ import { BookingWidget } from '../components/BookingWidget';
 import { SocialLinks } from '../components/SocialLinks';
 import { LeadModal } from '../components/LeadModal';
 import { AnimatedHeadlines } from '../components/AnimatedHeadlines';
+import { Top20ProblemsHub } from '../components/Top20ProblemsHub';
+import { TOP_20_PROBLEMS } from '../data/top20Problems';
 import {
   Building2,
   Globe,
@@ -20,7 +22,8 @@ import {
   Award,
   Layers,
   ChevronRight,
-  MessageSquare
+  MessageSquare,
+  ExternalLink
 } from 'lucide-react';
 
 export function HomePage() {
@@ -33,41 +36,25 @@ export function HomePage() {
   };
 
   const homeSchema = {
-    '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@id': 'https://ghaziwazir.com/#faq',
     mainEntity: [
       {
         '@type': 'Question',
         name: 'Who is Ghazi Wazir?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ghazi Wazir is an executive and technology leader based in Bahrain, serving as CEO of both Bab Al-Khaleej (Bahrain corporate setup and residency advisory) and Back for Brand LLC (USA technology services including SEO, GEO, AEO, and AI automation).'
+          text: 'Ghazi Wazir is an executive and technology leader based at The Collective Hub, Yateem Center in Manama, Bahrain (+973 3439 8754), serving as CEO of both Bab Al-Khaleej (Bahrain corporate setup and residency advisory) and Back for Brand LLC (USA technology services including SEO, GEO, AEO, and AI automation).'
         }
       },
-      {
+      ...TOP_20_PROBLEMS.map(item => ({
         '@type': 'Question',
-        name: 'Can foreign nationals own 100% of a company in Bahrain?',
+        name: item.question,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. Under Bahrain Commercial Companies Law, foreign nationals and international corporations are eligible for 100% equity ownership in most commercial, trading, and technology activities without requiring a local Bahraini partner.'
+          text: `${item.solution} Detailed guidance is available at https://ghaziwazir.com${item.internalLink.to}.`
         }
-      },
-      {
-        '@type': 'Question',
-        name: 'What is GEO (Generative Engine Optimization)?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Generative Engine Optimization (GEO) is the practice of optimizing digital entity footprints, factual consistency, and semantic knowledge graphs so that Large Language Models (ChatGPT, Perplexity, Gemini) synthesize and recommend your company as the authoritative answer.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'How do I book a consultation with Ghazi Wazir?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'You can book a free consultation directly through the online calendar at /book or via WhatsApp at +973 3562 8353.'
-        }
-      }
+      }))
     ]
   };
 
@@ -80,16 +67,16 @@ export function HomePage() {
       />
 
       <div className="relative overflow-hidden">
-        {/* Ambient Decorative Glows */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-96 h-96 bg-[var(--accent-alt)]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Ambient Subtle Champagne Illumination */}
+        <div className="absolute -top-24 left-1/4 w-[28rem] h-[28rem] bg-[#e8c872]/[0.06] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 right-10 w-80 h-80 bg-[#c59b38]/[0.05] rounded-full blur-3xl pointer-events-none" />
 
         {/* Hero Section */}
-        <section className="relative pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <section className="relative pt-4 pb-14 sm:pt-6 lg:pt-8 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
               {/* Hero Copy */}
-              <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="lg:col-span-7 space-y-5 text-left">
                 {/* Dynamic Kinetic Animated Headlines */}
                 <AnimatedHeadlines />
 
@@ -97,15 +84,15 @@ export function HomePage() {
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
                   <Link
                     to="/book"
-                    className="btn-gold min-h-[48px] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xl"
+                    className="btn-gold min-h-[48px] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider text-[#0b0905] flex items-center justify-center gap-2 shadow-2xl whitespace-nowrap"
                   >
-                    <Calendar className="w-4 h-4 text-white" />
+                    <Calendar className="w-4 h-4 text-[#0b0905]" />
                     <span>Book a Free Consultation</span>
                   </Link>
 
                   <Link
                     to="/formation"
-                    className="min-h-[48px] px-7 py-4 rounded-full border border-[#e8c872]/60 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#1a1a26] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872]"
+                    className="min-h-[48px] px-7 py-4 rounded-full border border-[#e8c872]/50 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#181822] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872] whitespace-nowrap"
                   >
                     <span>Bahrain Formation Blueprint</span>
                     <ArrowRight className="w-4 h-4" />
@@ -113,44 +100,49 @@ export function HomePage() {
                 </div>
 
                 {/* Authority Highlights */}
-                <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-[#2a2a38]">
+                <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-5 border-t border-[#262633]">
                   <div>
-                    <div className="font-heading font-bold text-lg text-[#f5f1e8]">100% Foreign</div>
-                    <div className="text-xs text-[#a8a7b3]">Ownership Eligibility</div>
+                    <div className="font-heading font-bold text-xl text-[#f7f4ec] tabular-nums">100% Foreign</div>
+                    <div className="text-xs text-[#a39f96]">Ownership Eligibility</div>
                   </div>
                   <div>
-                    <div className="font-heading font-bold text-lg text-[#e8c872]">Dual CEO</div>
-                    <div className="text-xs text-[#a8a7b3]">Bahrain & USA Entities</div>
+                    <div className="font-heading font-bold text-xl text-[#e8c872]">Dual CEO</div>
+                    <div className="text-xs text-[#a39f96]">Manama &amp; Florida Entities</div>
                   </div>
                   <div>
-                    <div className="font-heading font-bold text-lg text-[#f5f1e8]">GEO & AEO</div>
-                    <div className="text-xs text-[#a8a7b3]">Generative AI Visibility</div>
+                    <div className="font-heading font-bold text-xl text-[#f7f4ec]">GEO &amp; AEO</div>
+                    <div className="text-xs text-[#a39f96]">Generative AI Authority</div>
                   </div>
                 </div>
               </div>
 
               {/* Hero Portrait Card */}
-              <div className="lg:col-span-5 relative flex justify-center">
+              <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-md">
-                  {/* Decorative Frame */}
-                  <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#e8c872] via-[#b8893a] to-transparent rounded-3xl blur-sm opacity-60" />
-                  <div className="relative bg-[#14141d] border border-[#2a2a38] rounded-3xl overflow-hidden p-3 shadow-2xl">
-                    <img
-                      src="/ghazi-wazir-photo.jpg"
-                      alt="Ghazi Wazir, CEO of Bab Al-Khaleej and Back for Brand LLC"
-                      width={400}
-                      height={500}
-                      fetchPriority="high"
-                      decoding="async"
-                      className="w-full h-auto aspect-[4/5] object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
-                    />
-                    <div className="p-4 bg-gradient-to-t from-[#0a0a0f] via-[#101018] to-transparent">
-                      <div className="font-heading font-bold text-xl text-[#f5f1e8]">Ghazi Wazir</div>
-                      <div className="text-xs text-[#e8c872] font-semibold mt-0.5">
-                        Chief Executive Officer
+                  <div className="absolute -inset-px bg-gradient-to-b from-[#e8c872]/45 via-[#e8c872]/15 to-transparent rounded-3xl pointer-events-none" />
+                  <div className="relative bg-[#121218] border border-[#e8c872]/25 rounded-3xl overflow-hidden shadow-[0_28px_60px_-20px_rgba(0,0,0,0.9)]">
+                    <div className="relative">
+                      <img
+                        src="/ghazi-wazir-photo.jpg"
+                        alt="Ghazi Wazir, CEO of Bab Al-Khaleej and Back for Brand LLC"
+                        width={400}
+                        height={500}
+                        fetchPriority="high"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto aspect-[4/5] object-cover transition-transform duration-500 hover:scale-[1.015]"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#121218] via-[#121218]/65 to-transparent pointer-events-none" />
+                    </div>
+                    <div className="px-6 pb-6 pt-2 bg-[#121218]">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="font-heading font-bold text-2xl text-[#f7f4ec]">Ghazi Wazir</div>
+                        <span className="text-[11px] font-semibold uppercase tracking-widest text-[#e8c872]">
+                          CEO &middot; Manama
+                        </span>
                       </div>
-                      <p className="text-xs text-[#a8a7b3] mt-2 leading-relaxed">
-                        &ldquo;We don't offer generic templates or bureaucratic promises. We deliver structured execution for entrepreneurs setting up in Bahrain and scaling worldwide.&rdquo;
+                      <p className="text-xs text-[#a39f96] mt-2 leading-relaxed">
+                        &ldquo;We don&rsquo;t offer generic templates or bureaucratic promises. We deliver structured execution for entrepreneurs setting up in Bahrain and scaling worldwide.&rdquo;
                       </p>
                     </div>
                   </div>
@@ -710,76 +702,76 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* Executive Semantic Linking Directory & Internal Architecture Mesh (Fixes Entry Page & Low Internal Link ratio) */}
-        <section className="py-16 bg-[#090d16] border-t border-[#1e2d4d]">
+        {/* Top 20 Searchable Founder & Growth Problems Knowledge Hub */}
+        <Top20ProblemsHub />
+
+        {/* Executive Semantic Linking Directory & Internal Architecture Mesh */}
+        <section className="py-16 bg-[#08080b] border-t border-[#262633]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#131d33] border border-[#38bdf8]/40 text-[#38bdf8] text-xs font-bold uppercase tracking-wider">
-                <Layers className="w-3.5 h-3.5" />
-                <span>Executive Semantic Index &amp; Architecture</span>
-              </div>
-              <h2 className="font-heading font-black text-2xl sm:text-3xl text-[#f8fafc]">
+              <div className="tag inline-block">Executive Semantic Index &amp; Architecture</div>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#f7f4ec]">
                 Complete Advisory Services &amp; Funnel Network
               </h2>
-              <p className="text-xs sm:text-sm text-[#94a3b8]">
+              <p className="text-xs sm:text-sm text-[#a39f96]">
                 Direct semantic navigation to all corporate formation pathways, AI marketing services, and verified statutory frameworks.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 rounded-2xl bg-[#0c1322] border border-[#1e2d4d]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 sm:p-8 rounded-2xl bg-[#111117] border border-[#262633]">
               {/* Column 1: Bab Al-Khaleej (Bahrain) */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
-                  <Building2 className="w-4 h-4 text-[#38bdf8]" />
+                <h3 className="flex items-center gap-2 text-base font-bold text-[#e8c872] pb-2 border-b border-[#262633]">
+                  <Building2 className="w-4 h-4 text-[#e8c872]" />
                   <span>Bab Al-Khaleej (Bahrain CR &amp; Visas)</span>
-                </div>
-                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                </h3>
+                <ul className="space-y-2.5 text-xs text-[#a39f96]">
                   <li>
-                    <Link to="/services/business-registration" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/business-registration" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Commercial Registration (CR) Formation</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/investor-visa" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/investor-visa" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Investor &amp; Partner Self-Sponsored Visas</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/worker-visa" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/worker-visa" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Worker Permits &amp; LMRA Workforce Quota</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/document-clearance" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/document-consultancy" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Document Clearance &amp; Notary Notarization</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/application-tracking" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/application-tracking" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Sijilat Status &amp; Real-Time Tracking</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/ongoing-support" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/ongoing-support" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Annual Corporate &amp; Municipal Compliance</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/formation/blueprint" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                    <Link to="/formation/blueprint" className="hover:text-[#e8c872] transition-colors flex items-center justify-between font-semibold text-[#f7f4ec]">
                       <span>7-Step Bahrain Formation Blueprint</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/formation/offer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                    <Link to="/formation/offer" className="hover:text-[#e8c872] transition-colors flex items-center justify-between font-semibold text-[#f7f4ec]">
                       <span>Done-With-You Corporate Execution Package</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                 </ul>
@@ -787,51 +779,57 @@ export function HomePage() {
 
               {/* Column 2: Back for Brand LLC (USA & Worldwide Tech) */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
-                  <Globe className="w-4 h-4 text-[#38bdf8]" />
+                <h3 className="flex items-center gap-2 text-base font-bold text-[#e8c872] pb-2 border-b border-[#262633]">
+                  <Globe className="w-4 h-4 text-[#e8c872]" />
                   <span>Back for Brand LLC (GEO, AEO &amp; AI)</span>
-                </div>
-                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                </h3>
+                <ul className="space-y-2.5 text-xs text-[#a39f96]">
                   <li>
-                    <Link to="/services/geo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/geo-aeo" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Generative Engine Optimization (GEO)</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/aeo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/geo-aeo" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Answer Engine Optimization (AEO Citations)</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/seo" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/seo" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Programmatic &amp; Technical Organic SEO</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/ai-agents" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/ai-agents" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>24/7 Autonomous AI Sales &amp; Voice Agents</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/automation" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/automation" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>CRM &amp; Workflow Business Automation</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/funnels" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/services/digital-marketing" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
+                      <span>Digital Performance &amp; Omnichannel Ads</span>
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services/websites-funnels" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>High-Converting VSL Web Applications</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/funnels" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#f8fafc]">
+                    <Link to="/funnels" className="hover:text-[#e8c872] transition-colors flex items-center justify-between font-semibold text-[#f7f4ec]">
                       <span>12 Direct-Response VSL Funnels Hub</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                 </ul>
@@ -839,60 +837,176 @@ export function HomePage() {
 
               {/* Column 3: Corporate Portals, Guides & AI Crawler Corpus */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-[#38bdf8] pb-2 border-b border-[#1e2d4d]">
-                  <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
+                <h3 className="flex items-center gap-2 text-base font-bold text-[#e8c872] pb-2 border-b border-[#262633]">
+                  <ShieldCheck className="w-4 h-4 text-[#e8c872]" />
                   <span>Authority Portals &amp; Discovery</span>
-                </div>
-                <ul className="space-y-2.5 text-xs text-[#94a3b8]">
+                </h3>
+                <ul className="space-y-2.5 text-xs text-[#a39f96]">
                   <li>
-                    <Link to="/companies" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/companies" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Two Companies. One Standard Portfolio</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/about" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/about" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Ghazi Wazir Executive Biography &amp; Track Record</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/packages" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/packages" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Complete Advisory &amp; Tech Packages</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/book" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between font-semibold text-[#38bdf8]">
+                    <Link to="/book" className="hover:text-[#e8c872] transition-colors flex items-center justify-between font-semibold text-[#e8c872]">
                       <span>Calendar Consultation Reservation</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/contact" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <Link to="/contact" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Direct Executive Contact Channels</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
-                    <a href="/llms.txt" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <a href="/llms.txt" target="_blank" rel="noreferrer" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>llms.txt (AI Discovery Standard)</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </a>
                   </li>
                   <li>
-                    <a href="/llms-full.txt" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <a href="/llms-full.txt" target="_blank" rel="noreferrer" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>llms-full.txt (Knowledge Corpus)</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </a>
                   </li>
                   <li>
-                    <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="hover:text-[#38bdf8] transition-colors flex items-center justify-between">
+                    <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>XML Sitemap Index</span>
-                      <ChevronRight className="w-3 h-3 text-[#38bdf8]" />
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </a>
                   </li>
                 </ul>
+              </div>
+            </div>
+
+            {/* Official Regulatory & Standards Outbound Authority Links */}
+            <div className="mt-8 p-6 sm:p-8 rounded-2xl bg-[#111117] border border-[#262633] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#262633]">
+                <h3 className="font-heading font-bold text-lg text-[#f7f4ec]">
+                  Official Statutory Portals &amp; Technical Authority References
+                </h3>
+                <span className="text-xs text-[#a39f96]">Verified external regulatory &amp; web standards</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <a
+                  href="https://www.sijilat.bh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>Sijilat Bahrain Portal</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Official commercial licensing &amp; ISIC4 registration system.</p>
+                </a>
+
+                <a
+                  href="https://www.moic.gov.bh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>MOIC Bahrain</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Ministry of Industry &amp; Commerce corporate regulations.</p>
+                </a>
+
+                <a
+                  href="https://www.lmra.gov.bh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>LMRA Authority</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Work permits, expatriate quotas &amp; labour compliance.</p>
+                </a>
+
+                <a
+                  href="https://www.npra.gov.bh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>NPRA Residency</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Golden Visa, investor &amp; partner residency permits.</p>
+                </a>
+
+                <a
+                  href="https://www.bahrainedb.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>Bahrain EDB</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Foreign Direct Investment incentives &amp; market data.</p>
+                </a>
+
+                <a
+                  href="https://www.nbr.gov.bh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>NBR Bahrain Tax</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">National Bureau for Revenue tax &amp; VAT compliance.</p>
+                </a>
+
+                <a
+                  href="https://schema.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>Schema.org Standard</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Structured semantic knowledge graph specification.</p>
+                </a>
+
+                <a
+                  href="https://developers.google.com/search"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-[#16161f] border border-[#262633] hover:border-[#e8c872] transition-colors space-y-1.5 block"
+                >
+                  <h4 className="font-bold text-[#f7f4ec] flex items-center justify-between gap-2">
+                    <span>Google Search Central</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#e8c872] flex-none" />
+                  </h4>
+                  <p className="text-[#a39f96]">Core Web Vitals, crawlability &amp; technical SEO rules.</p>
+                </a>
               </div>
             </div>
           </div>

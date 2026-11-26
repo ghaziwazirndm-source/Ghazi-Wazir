@@ -46,9 +46,9 @@ export function CookieBanner() {
             <Cookie className="w-5 h-5 text-[#e8c872]" />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-bold text-[#f5f1e8] font-heading">
-              Cookie & Data Privacy
-            </h4>
+            <p className="text-sm font-bold text-[#f5f1e8] font-heading">
+              Cookie &amp; Data Privacy
+            </p>
             <p className="text-xs text-[#a8a7b3] mt-1 leading-relaxed">
               We use necessary cookies to maintain session security and optional analytical signals. See our{' '}
               <Link to="/cookie-policy" className="text-[#e8c872] underline hover:text-[#f5f1e8]">

@@ -175,27 +175,27 @@ export function LoginPage() {
         <div className="w-full max-w-md space-y-8">
           {/* Brand Header */}
           <div className="text-center space-y-3">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#131d33] to-[#090d16] border-2 border-[#38bdf8] flex items-center justify-center mx-auto shadow-[0_0_25px_rgba(56,189,248,0.3)]">
-              <span className="font-heading font-black text-2xl text-[#38bdf8] tracking-tight">GW</span>
+            <div className="w-14 h-14 rounded-2xl bg-[#14141b] border border-[#e8c872]/60 flex items-center justify-center mx-auto shadow-[0_14px_34px_-12px_rgba(232,200,114,0.22)]">
+              <span className="font-heading font-bold text-2xl text-gold-gradient tracking-tight">GW</span>
             </div>
             <div>
-              <h1 className="font-heading font-black text-2xl sm:text-3xl text-[#f8fafc] tracking-tight">
+              <h1 className="font-heading font-bold text-3xl sm:text-4xl text-[#f7f4ec] tracking-tight">
                 Executive Platform Portal
               </h1>
-              <p className="text-xs text-[#94a3b8] mt-1">
+              <p className="text-xs text-[#a39f96] mt-1">
                 Bab Al-Khaleej (Bahrain) &middot; Back for Brand LLC (USA)
               </p>
             </div>
           </div>
 
           {/* Firebase Auth Google Sign-In (Required for Protected /admin Route) */}
-          <div className="p-5 bg-gradient-to-br from-[#131d33] via-[#0f172a] to-[#131d33] border border-[#38bdf8]/40 rounded-2xl shadow-xl space-y-3.5">
+          <div className="p-5 bg-[#14141b] border border-[#e8c872]/35 rounded-2xl shadow-xl space-y-3.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-[#38bdf8] uppercase tracking-wider flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
+              <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#4ade80]" />
                 Firebase Role Verification
               </span>
-              <span className="text-[10px] text-[#94a3b8]">Protected /admin Gate</span>
+              <span className="text-[10px] text-[#a39f96]">Protected /admin Gate</span>
             </div>
 
             {firebaseUser && firebaseRole && firebaseEnabled ? (
@@ -213,7 +213,7 @@ export function LoginPage() {
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)] transition-all hover:scale-[1.02] disabled:opacity-50"
+                className="btn-gold w-full py-3.5 rounded-xl text-[#0b0905] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
                 <ShieldCheck className="w-4 h-4" />
                 <span>{loading ? 'Verifying Firebase Session...' : 'Sign In with Google (Firebase Auth)'}</span>
@@ -222,7 +222,7 @@ export function LoginPage() {
             )}
 
             {/* Quick Role Selectors */}
-            <div className="pt-1 flex items-center justify-between text-[11px] text-[#94a3b8]">
+            <div className="pt-1 flex items-center justify-between text-[11px] text-[#a39f96]">
               <span>Workspace Demo Role:</span>
               <div className="flex items-center gap-1.5">
                 {(['CEO', 'ADMIN', 'SALES', 'FINANCE'] as const).map(role => (
@@ -230,7 +230,7 @@ export function LoginPage() {
                     key={role}
                     type="button"
                     onClick={() => handleInstantQuickLogin(role)}
-                    className="px-2 py-1 rounded-lg bg-[#090d16] hover:bg-[#1e2d4d] text-[#f8fafc] text-[10px] font-bold border border-[#1e2d4d] transition-colors"
+                    className="px-2 py-1 rounded-lg bg-[#08080b] hover:bg-[#1b1b24] text-[#f7f4ec] text-[10px] font-bold border border-[#262633] hover:border-[#e8c872]/50 transition-colors"
                   >
                     {role}
                   </button>
@@ -241,15 +241,15 @@ export function LoginPage() {
 
           {/* Divider */}
           <div className="relative flex items-center justify-center">
-            <div className="w-full border-t border-[#1e2d4d]" />
-            <span className="px-3 bg-[#090d16] text-[11px] text-[#94a3b8] uppercase tracking-wider shrink-0">
+            <div className="w-full border-t border-[#262633]" />
+            <span className="px-3 bg-[#08080b] text-[11px] text-[#a39f96] uppercase tracking-wider shrink-0">
               or enter credentials
             </span>
-            <div className="w-full border-t border-[#1e2d4d]" />
+            <div className="w-full border-t border-[#262633]" />
           </div>
 
           {/* Standard Credentials Form */}
-          <div className="p-6 bg-[#131d33] border border-[#1e2d4d] rounded-2xl shadow-xl space-y-4">
+          <div className="p-6 bg-[#14141b] border border-[#262633] rounded-2xl shadow-xl space-y-4">
             {errorMessage && (
               <div className="p-3.5 bg-[#2a1313] border border-[#ff5d5d] rounded-xl text-xs text-[#ffb3b3] space-y-2">
                 <div className="flex items-center gap-2">
@@ -260,9 +260,9 @@ export function LoginPage() {
                   <button
                     type="button"
                     onClick={() => handleInstantQuickLogin('CEO')}
-                    className="px-3 py-1.5 rounded-lg bg-[#38bdf8] text-[#090d16] font-bold text-[11px] hover:bg-[#0ea5e9] transition-all"
+                    className="btn-gold px-3 py-1.5 rounded-lg text-[#0b0905] font-bold text-[11px] transition-all"
                   >
-                    👑 Instant CEO Login Bypass
+                    Instant CEO Login Bypass
                   </button>
                   <button
                     type="button"
@@ -271,7 +271,7 @@ export function LoginPage() {
                       setPassword('GhaziWazir2026!');
                       setErrorMessage('');
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-[#1e2d4d] text-[#f8fafc] text-[11px] hover:bg-[#2a3c63]"
+                    className="px-2.5 py-1.5 rounded-lg bg-[#1b1b24] border border-[#262633] text-[#f7f4ec] text-[11px] hover:bg-[#262633]"
                   >
                     Reset Defaults
                   </button>
@@ -280,9 +280,9 @@ export function LoginPage() {
             )}
 
             {/* Default Credentials Helper */}
-            <div className="p-3 rounded-xl bg-[#0d1527] border border-[#1e2d4d] space-y-2 text-xs">
+            <div className="p-3 rounded-xl bg-[#0e0e14] border border-[#262633] space-y-2 text-xs">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[10px] uppercase font-bold text-[#38bdf8]">Auto-Fill Credentials:</span>
+                <span className="text-[10px] uppercase font-bold text-[#e8c872]">Auto-Fill Credentials:</span>
                 <div className="flex flex-wrap items-center gap-1">
                   {[
                     { label: 'CEO', email: 'ghaziwazirndm@gmail.com', pass: 'GhaziWazir2026!' },
@@ -298,14 +298,14 @@ export function LoginPage() {
                         setPassword(preset.pass);
                         setErrorMessage('');
                       }}
-                      className="px-2 py-0.5 rounded-md bg-[#1e2d4d] hover:bg-[#38bdf8] hover:text-[#090d16] text-[#38bdf8] font-bold text-[10px] uppercase tracking-wider transition-colors"
+                      className="px-2 py-0.5 rounded-md bg-[#1b1b24] hover:bg-[#e8c872] hover:text-[#0b0905] text-[#e8c872] font-bold text-[10px] uppercase tracking-wider transition-colors"
                     >
                       {preset.label}
                     </button>
                   ))}
                 </div>
               </div>
-              <div className="text-[11px] text-[#94a3b8] font-mono truncate">
+              <div className="text-[11px] text-[#a39f96] font-mono truncate">
                 {email || 'ghaziwazirndm@gmail.com'}
               </div>
             </div>
@@ -319,11 +319,11 @@ export function LoginPage() {
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-[#f8fafc] block">
+                <label className="text-xs font-semibold text-[#f7f4ec] block">
                   Corporate Email or Role Username
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-[#94a3b8] absolute left-3 top-3" />
+                  <Mail className="w-4 h-4 text-[#a39f96] absolute left-3 top-3" />
                   <input
                     type="text"
                     required
@@ -331,38 +331,38 @@ export function LoginPage() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="ghaziwazirndm@gmail.com or admin"
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] placeholder-[#64748b] focus:border-[#38bdf8] focus:outline-none"
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-[#08080b] border border-[#262633] text-xs text-[#f7f4ec] placeholder-[#6b6860] focus:border-[#e8c872] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-[#f8fafc]">
+                  <label className="text-xs font-semibold text-[#f7f4ec]">
                     Password
                   </label>
                   <button
                     type="button"
                     onClick={() => setShowReset(!showReset)}
-                    className="text-[11px] text-[#38bdf8] hover:underline"
+                    className="text-[11px] text-[#e8c872] hover:underline"
                   >
                     Reset Password
                   </button>
                 </div>
                 <div className="relative">
-                  <KeyRound className="w-4 h-4 text-[#94a3b8] absolute left-3 top-3" />
+                  <KeyRound className="w-4 h-4 text-[#a39f96] absolute left-3 top-3" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] placeholder-[#64748b] focus:border-[#38bdf8] focus:outline-none"
+                    className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#08080b] border border-[#262633] text-xs text-[#f7f4ec] placeholder-[#6b6860] focus:border-[#e8c872] focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-2.5 text-[#94a3b8] hover:text-[#f8fafc]"
+                    className="absolute right-3 top-2.5 text-[#a39f96] hover:text-[#f7f4ec]"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -370,16 +370,16 @@ export function LoginPage() {
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 text-xs text-[#94a3b8] cursor-pointer">
+                <label className="flex items-center gap-2 text-xs text-[#a39f96] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={rememberMe}
                     onChange={e => setRememberMe(e.target.checked)}
-                    className="rounded border-[#1e2d4d] text-[#38bdf8] focus:ring-0"
+                    className="rounded border-[#262633] accent-[#e8c872] focus:ring-0"
                   />
                   <span>Keep session active</span>
                 </label>
-                <span className="text-[11px] text-[#22c55e] flex items-center gap-1 font-semibold">
+                <span className="text-[11px] text-[#4ade80] flex items-center gap-1 font-semibold">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>256-bit Encrypted</span>
                 </span>
@@ -388,7 +388,7 @@ export function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-[#1e2d4d] hover:bg-[#38bdf8] hover:text-[#090d16] text-[#f8fafc] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-[#38bdf8]/30 transition-all disabled:opacity-50"
+                className="w-full py-3 rounded-xl bg-[#1b1b24] hover:bg-[#e8c872] hover:text-[#0b0905] text-[#f7f4ec] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-[#e8c872]/35 transition-all disabled:opacity-50"
               >
                 <Lock className="w-3.5 h-3.5" />
                 <span>{loading ? 'Authenticating...' : 'Sign In to Console'}</span>
@@ -397,8 +397,8 @@ export function LoginPage() {
 
             {/* In-Line Reset Form Toggle */}
             {showReset && (
-              <div className="pt-4 border-t border-[#1e2d4d] space-y-3 animate-fade-in">
-                <span className="text-xs font-bold text-[#f8fafc] block">
+              <div className="pt-4 border-t border-[#262633] space-y-3 animate-fade-in">
+                <span className="text-xs font-bold text-[#f7f4ec] block">
                   Reset Master Password
                 </span>
                 <form onSubmit={handlePasswordReset} className="space-y-3">
@@ -407,20 +407,20 @@ export function LoginPage() {
                     placeholder="Enter new 8+ character password..."
                     value={resetNewPassword}
                     onChange={e => setResetNewPassword(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-xs text-[#f8fafc] focus:border-[#38bdf8] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-[#08080b] border border-[#262633] text-xs text-[#f7f4ec] focus:border-[#e8c872] focus:outline-none"
                   />
                   <div className="flex justify-end gap-2">
                     <button
                       type="button"
                       onClick={() => setShowReset(false)}
-                      className="px-3 py-1.5 rounded-lg text-xs text-[#94a3b8]"
+                      className="px-3 py-1.5 rounded-lg text-xs text-[#a39f96]"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={loading}
-                      className="px-4 py-1.5 rounded-lg bg-[#38bdf8] text-[#090d16] font-bold text-xs"
+                      className="btn-gold px-4 py-1.5 rounded-lg text-[#0b0905] font-bold text-xs"
                     >
                       Save Password
                     </button>
@@ -434,17 +434,17 @@ export function LoginPage() {
           <div className="grid grid-cols-2 gap-3 text-center text-xs">
             <Link
               to="/content-studio"
-              className="p-3 bg-[#131d33] border border-[#1e2d4d] hover:border-[#38bdf8]/40 rounded-xl text-[#94a3b8] hover:text-[#38bdf8] transition-colors flex items-center justify-center gap-1.5"
+              className="p-3 bg-[#14141b] border border-[#262633] hover:border-[#e8c872]/50 rounded-xl text-[#a39f96] hover:text-[#e8c872] transition-colors flex items-center justify-center gap-1.5"
             >
-              <Share2 className="w-3.5 h-3.5 text-[#38bdf8]" />
+              <Share2 className="w-3.5 h-3.5 text-[#e8c872]" />
               <span>Content Studio</span>
             </Link>
 
             <Link
               to="/funnels"
-              className="p-3 bg-[#131d33] border border-[#1e2d4d] hover:border-[#38bdf8]/40 rounded-xl text-[#94a3b8] hover:text-[#38bdf8] transition-colors flex items-center justify-center gap-1.5"
+              className="p-3 bg-[#14141b] border border-[#262633] hover:border-[#e8c872]/50 rounded-xl text-[#a39f96] hover:text-[#e8c872] transition-colors flex items-center justify-center gap-1.5"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#38bdf8]" />
+              <Sparkles className="w-3.5 h-3.5 text-[#e8c872]" />
               <span>12 Sales Funnels</span>
             </Link>
           </div>

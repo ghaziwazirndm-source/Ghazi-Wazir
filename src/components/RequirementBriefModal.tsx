@@ -256,19 +256,19 @@ export function RequirementBriefModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="w-full max-w-3xl max-h-[90vh] bg-[#090d16] border border-[#1e2d4d] rounded-2xl shadow-2xl flex flex-col overflow-hidden text-[#f8fafc]"
+        className="w-full max-w-3xl max-h-[90vh] bg-[#08080b] border border-[#262633] rounded-2xl shadow-2xl flex flex-col overflow-hidden text-[#f7f4ec]"
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         {/* Modal Top Actions Bar */}
-        <div className="p-4 bg-[#131d33] border-b border-[#1e2d4d] flex items-center justify-between gap-4">
+        <div className="p-4 bg-[#121218] border-b border-[#262633] flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#94a3b8]">Language / زبان / اللغة:</span>
-            <div className="flex rounded-lg bg-[#090d16] p-1 border border-[#1e2d4d]">
+            <span className="text-xs font-bold text-[#a39f96]">Language / زبان / اللغة:</span>
+            <div className="flex rounded-lg bg-[#08080b] p-1 border border-[#262633]">
               <button
                 type="button"
                 onClick={() => setLang('en')}
                 className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                  lang === 'en' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                  lang === 'en' ? 'bg-[#e8c872] text-[#0b0905]' : 'text-[#a39f96] hover:text-[#f7f4ec]'
                 }`}
               >
                 English
@@ -277,7 +277,7 @@ export function RequirementBriefModal({
                 type="button"
                 onClick={() => setLang('ar')}
                 className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                  lang === 'ar' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                  lang === 'ar' ? 'bg-[#e8c872] text-[#0b0905]' : 'text-[#a39f96] hover:text-[#f7f4ec]'
                 }`}
               >
                 العربية
@@ -286,7 +286,7 @@ export function RequirementBriefModal({
                 type="button"
                 onClick={() => setLang('ur')}
                 className={`px-2.5 py-1 rounded text-xs font-bold transition-colors ${
-                  lang === 'ur' ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                  lang === 'ur' ? 'bg-[#e8c872] text-[#0b0905]' : 'text-[#a39f96] hover:text-[#f7f4ec]'
                 }`}
               >
                 اردو
@@ -298,7 +298,7 @@ export function RequirementBriefModal({
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-bold text-xs flex items-center gap-1.5 transition-colors shadow-md"
+              className="btn-gold px-3.5 py-1.5 rounded-xl text-[#0b0905] font-bold text-xs flex items-center gap-1.5 transition-colors shadow-md"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print / PDF</span>
@@ -306,7 +306,7 @@ export function RequirementBriefModal({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#1e2d4d] transition-colors"
+              className="p-1.5 rounded-lg text-[#a39f96] hover:text-[#f7f4ec] hover:bg-[#1c1c26] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -314,66 +314,66 @@ export function RequirementBriefModal({
         </div>
 
         {/* Service Toggle */}
-        <div className="px-6 py-3 bg-[#0c1322] border-b border-[#1e2d4d] flex gap-3 overflow-x-auto text-xs">
+        <div className="px-6 py-3 bg-[#0e0e14] border-b border-[#262633] flex gap-3 overflow-x-auto text-xs">
           <button
             type="button"
             onClick={() => setSelectedService('cr-setup')}
             className={`px-3.5 py-1.5 rounded-lg font-bold border transition-colors ${
               selectedService === 'cr-setup'
-                ? 'bg-[#131d33] border-[#38bdf8] text-[#38bdf8]'
-                : 'border-[#1e2d4d] text-[#94a3b8] hover:border-[#38bdf8]/50'
+                ? 'bg-[#14141b] border-[#e8c872] text-[#e8c872]'
+                : 'border-[#262633] text-[#a39f96] hover:border-[#e8c872]/50'
             }`}
           >
-            🏢 Commercial Registration (CR)
+            Commercial Registration (CR)
           </button>
           <button
             type="button"
             onClick={() => setSelectedService('investor-visa')}
             className={`px-3.5 py-1.5 rounded-lg font-bold border transition-colors ${
               selectedService === 'investor-visa'
-                ? 'bg-[#131d33] border-[#38bdf8] text-[#38bdf8]'
-                : 'border-[#1e2d4d] text-[#94a3b8] hover:border-[#38bdf8]/50'
+                ? 'bg-[#14141b] border-[#e8c872] text-[#e8c872]'
+                : 'border-[#262633] text-[#a39f96] hover:border-[#e8c872]/50'
             }`}
           >
-            🛂 Investor & Partner Visas
+            Investor &amp; Partner Visas
           </button>
         </div>
 
         {/* Document Printable View */}
-        <div id="printable-brief" className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 text-sm bg-[#090d16]">
+        <div id="printable-brief" className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 text-sm bg-[#08080b]">
           {/* Official Letterhead */}
-          <div className="pb-6 border-b border-[#1e2d4d] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="pb-6 border-b border-[#262633] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#131d33] border border-[#38bdf8]/40 text-[#38bdf8] text-[11px] font-bold uppercase tracking-wider mb-2">
-                <ShieldCheck className="w-3.5 h-3.5" />
+              <div className="tag mb-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#e8c872]" />
                 <span>Executive Corporate Advisory</span>
               </div>
-              <h2 className="font-heading font-black text-xl sm:text-2xl text-[#f8fafc]">
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#f7f4ec]">
                 {content.title}
               </h2>
-              <p className="text-xs text-[#94a3b8] mt-1">{content.subtitle}</p>
+              <p className="text-xs text-[#a39f96] mt-1">{content.subtitle}</p>
             </div>
 
-            <div className="text-right text-xs space-y-1 sm:border-l sm:border-[#1e2d4d] sm:pl-4">
-              <div className="font-bold text-[#f8fafc]">Ghazi Wazir</div>
-              <div className="text-[11px] text-[#94a3b8]">CEO, Bab Al-Khaleej & Back for Brand LLC</div>
-              <div className="text-[11px] text-[#22c55e] font-semibold">WhatsApp: +973 3562 8353</div>
-              <div className="text-[11px] text-[#38bdf8]">Desk: ghaziwazir.com/contact</div>
+            <div className="text-left sm:text-right text-xs space-y-1 sm:border-l sm:border-[#262633] sm:pl-4">
+              <div className="font-bold text-[#f7f4ec]">Ghazi Wazir</div>
+              <div className="text-[11px] text-[#a39f96]">CEO, Bab Al-Khaleej &amp; Back for Brand LLC</div>
+              <div className="text-[11px] text-[#4ade80] font-semibold">WhatsApp: +973 3562 8353</div>
+              <div className="text-[11px] text-[#e8c872]">Desk: ghaziwazir.com/contact</div>
             </div>
           </div>
 
           {/* Checklist Sections */}
           <div className="space-y-6">
             {content.sections.map((sec, idx) => (
-              <div key={idx} className="p-5 rounded-xl bg-[#131d33]/60 border border-[#1e2d4d] space-y-3">
-                <h3 className="font-heading font-bold text-base text-[#38bdf8] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
+              <div key={idx} className="p-5 rounded-xl bg-[#14141b] border border-[#262633] space-y-3">
+                <h3 className="font-heading font-bold text-lg text-[#e8c872] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#e8c872]" />
                   <span>{sec.title}</span>
                 </h3>
-                <ul className="space-y-2 text-xs text-[#f8fafc]">
+                <ul className="space-y-2 text-xs text-[#f7f4ec]">
                   {sec.items.map((item, itemIdx) => (
                     <li key={itemIdx} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#38bdf8] flex-none mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
                       <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
@@ -383,16 +383,16 @@ export function RequirementBriefModal({
           </div>
 
           {/* Disclaimer & Authority Notice */}
-          <div className="p-4 rounded-xl bg-[#0c1322] border border-[#1e2d4d] text-[11px] text-[#94a3b8] leading-relaxed flex items-start gap-3">
-            <ShieldCheck className="w-4 h-4 text-[#38bdf8] flex-none mt-0.5" />
+          <div className="p-4 rounded-xl bg-[#0e0e14] border border-[#262633] text-[11px] text-[#a39f96] leading-relaxed flex items-start gap-3">
+            <ShieldCheck className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
             <p>{content.disclaimer}</p>
           </div>
         </div>
 
         {/* Email Copy Footer */}
-        <div className="p-4 bg-[#131d33] border-t border-[#1e2d4d] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs print:hidden">
-          <div className="flex items-center gap-2 text-[#94a3b8]">
-            <Mail className="w-4 h-4 text-[#38bdf8]" />
+        <div className="p-4 bg-[#121218] border-t border-[#262633] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs print:hidden">
+          <div className="flex items-center gap-2 text-[#a39f96]">
+            <Mail className="w-4 h-4 text-[#e8c872]" />
             <span>Send this official PDF checklist to your inbox:</span>
           </div>
 
@@ -409,12 +409,12 @@ export function RequirementBriefModal({
                 value={emailInput}
                 onChange={e => setEmailInput(e.target.value)}
                 placeholder="Enter your email address..."
-                className="px-3 py-1.5 rounded-lg border border-[#1e2d4d] bg-[#090d16] text-xs text-[#f8fafc] placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8]"
+                className="px-3 py-1.5 rounded-lg border border-[#262633] bg-[#08080b] text-xs text-[#f7f4ec] placeholder-[#6b6860] focus:outline-none focus:border-[#e8c872]"
               />
               <button
                 type="submit"
                 disabled={loading || !emailInput.trim()}
-                className="px-3.5 py-1.5 rounded-lg bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-bold text-xs disabled:opacity-40 transition-colors flex items-center gap-1"
+                className="btn-gold px-3.5 py-1.5 rounded-lg text-[#0b0905] font-bold text-xs disabled:opacity-40 transition-colors flex items-center gap-1"
               >
                 <span>Email Brief</span>
                 <Send className="w-3 h-3" />

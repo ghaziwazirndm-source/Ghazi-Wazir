@@ -70,7 +70,7 @@ export function FormationIndexPage() {
 
         {/* 5 Blueprint Bullets */}
         <div className="card-luxury p-8 space-y-4 max-w-2xl mx-auto border-t-2 border-t-[#e8c872]">
-          <h3 className="font-heading font-bold text-lg text-[#f5f1e8]">What This Free Blueprint Reveals:</h3>
+          <h2 className="font-heading font-bold text-lg text-[#f5f1e8]">What This Free Blueprint Reveals:</h2>
           <ul className="space-y-3 text-xs sm:text-sm text-[#f5f1e8]">
             <li className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
@@ -99,7 +99,7 @@ export function FormationIndexPage() {
         <div className="card-luxury p-8 sm:p-10 border-gold-glow max-w-lg mx-auto shadow-2xl">
           <form onSubmit={handleOptIn} className="space-y-4">
             <div className="text-center space-y-1 mb-2">
-              <h3 className="font-heading font-bold text-xl text-[#f5f1e8]">Instant Access to the Blueprint</h3>
+              <h2 className="font-heading font-bold text-xl text-[#f5f1e8]">Instant Access to the Blueprint</h2>
               <p className="text-xs text-[#a8a7b3]">Enter your details below to proceed to the briefing video and interactive checklist.</p>
             </div>
 
@@ -190,8 +190,8 @@ export function FormationIndexPage() {
             className="w-20 h-20 rounded-full object-cover border-2 border-[#e8c872] flex-none"
           />
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-xs font-bold text-[#e8c872] uppercase tracking-wider block">Author & Guide</span>
-            <h4 className="font-heading font-bold text-base text-[#f5f1e8]">Ghazi Wazir</h4>
+            <span className="text-xs font-bold text-[#e8c872] uppercase tracking-wider block">Author &amp; Guide</span>
+            <h3 className="font-heading font-bold text-base text-[#f5f1e8]">Ghazi Wazir</h3>
             <p className="text-xs text-[#a8a7b3] leading-relaxed">
               CEO of Bab Al-Khaleej in Bahrain and Back for Brand LLC in the United States. Providing foreign founders with transparent, accountable company setup.
             </p>

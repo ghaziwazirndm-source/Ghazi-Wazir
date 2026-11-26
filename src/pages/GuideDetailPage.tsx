@@ -486,7 +486,7 @@ export function GuideDetailPage() {
           </p>
 
           <div className="space-y-2 pt-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">Key Strategic Takeaways</h4>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">Key Strategic Takeaways</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#a8a7b3]">
               {guide.keyTakeaways.map((takeaway, tIdx) => (
                 <li key={tIdx} className="flex items-start gap-2 bg-[#14141d] p-3 rounded-lg border border-[#2a2a38]">

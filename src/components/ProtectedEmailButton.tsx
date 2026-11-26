@@ -36,7 +36,7 @@ export function ProtectedEmailButton({ variant = 'footer', className = '' }: Pro
               </button>
               <Link
                 to="/contact"
-                className="text-[11px] text-[#38bdf8] hover:underline font-medium"
+                className="text-[11px] text-[#e8c872] hover:underline font-medium"
               >
                 Use Secure Form &rarr;
               </Link>

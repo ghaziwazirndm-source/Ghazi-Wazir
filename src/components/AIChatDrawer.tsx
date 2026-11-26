@@ -380,36 +380,33 @@ export function AIChatDrawer() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="hidden md:flex fixed bottom-5 right-24 z-40 items-center gap-2.5 px-4 py-3 rounded-full bg-[#131d33] border border-[#38bdf8]/50 text-xs font-bold text-[#38bdf8] shadow-2xl hover:border-[#38bdf8] hover:bg-[#1a2744] hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all hover:scale-105 active:scale-95"
+        className="hidden md:flex fixed bottom-5 right-24 z-40 items-center gap-2.5 px-4 py-3 rounded-xl bg-[#121218]/95 backdrop-blur-md border border-[#e8c872]/45 text-xs font-semibold text-[#f7f4ec] shadow-[0_14px_34px_-12px_rgba(0,0,0,0.85)] hover:border-[#e8c872] hover:bg-[#1a1a24] transition-all hover:-translate-y-0.5 active:scale-95"
         aria-label="Open AI Sales Agent Chat"
       >
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
-        </span>
-        <Bot className="w-4 h-4 text-[#38bdf8]" />
-        <span>AI Sales Agent &amp; Advisory</span>
+        <span className="inline-flex rounded-full h-2 w-2 bg-[#4ade80]" />
+        <Bot className="w-4 h-4 text-[#e8c872]" />
+        <span>Executive AI Advisor</span>
       </button>
 
       {/* Slide-out Drawer */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
           <div
-            className="w-full max-w-md bg-[#090d16] border-l border-[#1e2d4d] h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
+            className="w-full max-w-md bg-[#08080b] border-l border-[#262633] h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
             dir={isRTL ? 'rtl' : 'ltr'}
           >
             {/* Header */}
-            <div className="p-4 border-b border-[#1e2d4d] flex items-center justify-between bg-[#131d33]/90">
+            <div className="p-4 border-b border-[#262633] flex items-center justify-between bg-[#121218]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a2744] to-[#090d16] border border-[#38bdf8]/60 flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-                  <Bot className="w-5 h-5 text-[#38bdf8]" />
+                <div className="w-10 h-10 rounded-xl bg-[#181822] border border-[#e8c872]/50 flex items-center justify-center shadow-lg">
+                  <Bot className="w-5 h-5 text-[#e8c872]" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-sm text-[#f8fafc] flex items-center gap-2">
+                  <h3 className="font-heading font-bold text-base text-[#f7f4ec] flex items-center gap-2">
                     <span>{t.title}</span>
-                    <span className="w-2 h-2 rounded-full bg-[#38bdf8] shadow-[0_0_8px_#38bdf8]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#e8c872]" />
                   </h3>
-                  <p className="text-[11px] text-[#94a3b8]">{t.subtitle}</p>
+                  <p className="text-[11px] text-[#a39f96]">{t.subtitle}</p>
                 </div>
               </div>
               <button
@@ -418,25 +415,23 @@ export function AIChatDrawer() {
                   window.speechSynthesis?.cancel();
                   setIsOpen(false);
                 }}
-                className="p-2 text-[#94a3b8] hover:text-[#f8fafc] rounded-lg hover:bg-[#1a2744] transition-colors"
+                className="p-2 text-[#a39f96] hover:text-[#f7f4ec] rounded-lg hover:bg-[#1c1c26] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-
-
             {/* Hexa-lingual Locale Selector Strip */}
-            <div className="px-4 py-2 bg-[#0c1322] border-b border-[#1e2d4d] flex items-center justify-between text-xs overflow-x-auto">
-              <span className="text-[11px] text-[#94a3b8] font-bold mr-2 whitespace-nowrap">Locale:</span>
-              <div className="flex rounded-lg bg-[#131d33] p-0.5 border border-[#1e2d4d] gap-0.5 overflow-x-auto">
+            <div className="px-4 py-2 bg-[#0e0e14] border-b border-[#262633] flex items-center justify-between text-xs overflow-x-auto">
+              <span className="text-[11px] text-[#a39f96] font-bold mr-2 whitespace-nowrap">Locale:</span>
+              <div className="flex rounded-lg bg-[#14141b] p-0.5 border border-[#262633] gap-0.5 overflow-x-auto">
                 {(['en', 'ar', 'ur', 'bn', 'fil', 'mwr'] as SupportedLang[]).map(l => (
                   <button
                     key={l}
                     type="button"
                     onClick={() => setLang(l)}
                     className={`px-2 py-1 rounded text-[11px] font-bold transition-colors whitespace-nowrap ${
-                      lang === l ? 'bg-[#38bdf8] text-[#090d16]' : 'text-[#94a3b8] hover:text-[#f8fafc]'
+                      lang === l ? 'bg-[#e8c872] text-[#0b0905]' : 'text-[#a39f96] hover:text-[#f7f4ec]'
                     }`}
                   >
                     {l === 'en' ? 'EN' : l === 'ar' ? 'العربية' : l === 'ur' ? 'اردو' : l === 'bn' ? 'বাংলা' : l === 'fil' ? 'Tagalog' : 'मारवाड़ी'}
@@ -446,13 +441,13 @@ export function AIChatDrawer() {
             </div>
 
             {/* PDF Requirement Brief Generator Button */}
-            <div className="px-4 py-2 bg-[#0d1829] border-b border-[#1e2d4d] flex items-center justify-between">
+            <div className="px-4 py-2 bg-[#0e0e14] border-b border-[#262633] flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => setShowBriefModal(true)}
-                className="w-full py-1.5 px-3 rounded-lg bg-[#131d33] hover:bg-[#1a2744] border border-[#38bdf8]/40 hover:border-[#38bdf8] text-[#38bdf8] font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
+                className="w-full py-1.5 px-3 rounded-lg bg-[#14141b] hover:bg-[#1b1b24] border border-[#e8c872]/35 hover:border-[#e8c872] text-[#e8c872] font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
               >
-                <FileText className="w-3.5 h-3.5 text-[#38bdf8]" />
+                <FileText className="w-3.5 h-3.5 text-[#e8c872]" />
                 <span>{t.pdfBtn}</span>
               </button>
             </div>
@@ -483,8 +478,8 @@ export function AIChatDrawer() {
                   <div
                     className={`max-w-[88%] rounded-2xl px-4 py-3 leading-relaxed text-xs shadow-md relative group ${
                       m.sender === 'user'
-                        ? 'bg-gradient-to-r from-[#38bdf8] to-[#0284c7] text-[#090d16] font-semibold'
-                        : 'bg-[#131d33] border border-[#1e2d4d] text-[#f8fafc]'
+                        ? 'bg-gradient-to-r from-[#f0d788] to-[#c59b38] text-[#0b0905] font-semibold'
+                        : 'bg-[#14141b] border border-[#262633] text-[#f7f4ec]'
                     }`}
                   >
                     <div>{m.text}</div>
@@ -494,12 +489,12 @@ export function AIChatDrawer() {
                       <button
                         type="button"
                         onClick={() => handleSpeak(m.text, m.id)}
-                        className="mt-2 text-[10px] text-[#38bdf8] hover:text-[#f8fafc] flex items-center gap-1 font-bold pt-1 border-t border-[#1e2d4d]"
+                        className="mt-2 text-[10px] text-[#e8c872] hover:text-[#f7f4ec] flex items-center gap-1 font-bold pt-1 border-t border-[#262633]"
                         title="Listen to this response"
                       >
                         {speakingMessageId === m.id ? (
                           <>
-                            <VolumeX className="w-3 h-3 text-[#f59e0b] animate-pulse" />
+                            <VolumeX className="w-3 h-3 text-[#f59e0b]" />
                             <span>Stop voice</span>
                           </>
                         ) : (
@@ -527,12 +522,12 @@ export function AIChatDrawer() {
                   )}
 
                   {m.escalation && (
-                    <div className="mt-2.5 p-3 bg-[#131d33] border border-[#38bdf8]/50 rounded-xl text-[11px] text-[#38bdf8] max-w-[88%] space-y-2 shadow-lg">
+                    <div className="mt-2.5 p-3 bg-[#14141b] border border-[#e8c872]/40 rounded-xl text-[11px] text-[#e8c872] max-w-[88%] space-y-2 shadow-lg">
                       <div className="font-bold flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-[#38bdf8]" />
+                        <Sparkles className="w-3.5 h-3.5 text-[#e8c872]" />
                         <span>Executive Escalation: {m.escalationReason || 'Senior Advisory'}</span>
                       </div>
-                      <p className="text-[#94a3b8] text-[10px] leading-relaxed">
+                      <p className="text-[#a39f96] text-[10px] leading-relaxed">
                         For verified corporate agreements, ministry clearance, or custom retainers:
                       </p>
                       <div className="flex flex-col gap-1.5 pt-1">
@@ -552,8 +547,8 @@ export function AIChatDrawer() {
               ))}
 
               {loading && (
-                <div className="flex items-center gap-2.5 text-xs text-[#94a3b8] p-2 bg-[#131d33]/50 rounded-xl border border-[#1e2d4d]">
-                  <div className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
+                <div className="flex items-center gap-2.5 text-xs text-[#a39f96] p-2 bg-[#14141b] rounded-xl border border-[#262633]">
+                  <div className="w-2 h-2 rounded-full bg-[#e8c872]" />
                   <span>{lang === 'ur' ? 'اے آئی سیلز ایجنٹ جواب تیار کر رہا ہے...' : lang === 'ar' ? 'الوكيل الذكي يحلل اللوائح والأنظمة...' : 'AI Sales Agent analyzing approved policies...'}</span>
                 </div>
               )}
@@ -561,19 +556,19 @@ export function AIChatDrawer() {
             </div>
 
             {/* Deal Closer Banner */}
-            <div className="p-3 bg-[#0d1526] border-t border-[#1e2d4d] space-y-2">
+            <div className="p-3 bg-[#0e0e14] border-t border-[#262633] space-y-2">
               <div className="flex items-center justify-between text-[11px]">
-                <span className="font-bold text-[#f8fafc] flex items-center gap-1">
-                  <Briefcase className="w-3.5 h-3.5 text-[#38bdf8]" />
+                <span className="font-bold text-[#f7f4ec] flex items-center gap-1">
+                  <Briefcase className="w-3.5 h-3.5 text-[#e8c872]" />
                   <span>{t.dealCloseHeader}</span>
                 </span>
-                <span className="text-[10px] text-[#38bdf8] font-bold">VIP Direct</span>
+                <span className="text-[10px] text-[#e8c872] font-bold">VIP Direct</span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <Link
                   to="/book"
                   onClick={() => setIsOpen(false)}
-                  className="py-2 px-3 rounded-lg bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-bold text-center transition-colors shadow-sm"
+                  className="btn-gold py-2 px-3 rounded-lg text-[#0b0905] font-bold text-center transition-colors shadow-sm"
                 >
                   {t.bookBtn}
                 </Link>
@@ -596,13 +591,13 @@ export function AIChatDrawer() {
             </div>
 
             {/* Quick Prompt Chips */}
-            <div className="px-3 py-2 border-t border-[#1e2d4d] bg-[#090d16] flex gap-2 overflow-x-auto text-[11px]">
+            <div className="px-3 py-2 border-t border-[#262633] bg-[#08080b] flex gap-2 overflow-x-auto text-[11px]">
               {t.quickPrompts.map((qp, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => handleSendMessage(qp)}
-                  className="flex-none px-2.5 py-1 rounded-lg bg-[#131d33] border border-[#1e2d4d] text-[#94a3b8] hover:text-[#38bdf8] hover:border-[#38bdf8] transition-colors whitespace-nowrap"
+                  className="flex-none px-2.5 py-1 rounded-lg bg-[#14141b] border border-[#262633] text-[#a39f96] hover:text-[#e8c872] hover:border-[#e8c872]/60 transition-colors whitespace-nowrap"
                 >
                   {qp}
                 </button>
@@ -615,7 +610,7 @@ export function AIChatDrawer() {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="p-3 border-t border-[#1e2d4d] bg-[#131d33] flex items-center gap-2"
+              className="p-3 border-t border-[#262633] bg-[#121218] flex items-center gap-2"
             >
               {/* Microphone Button */}
               <button
@@ -623,8 +618,8 @@ export function AIChatDrawer() {
                 onClick={toggleRecording}
                 className={`p-2.5 rounded-xl border transition-all ${
                   isRecording
-                    ? 'bg-[#ef4444] border-[#ef4444] text-white animate-pulse'
-                    : 'bg-[#090d16] border-[#1e2d4d] text-[#94a3b8] hover:text-[#38bdf8] hover:border-[#38bdf8]'
+                    ? 'bg-[#ef4444] border-[#ef4444] text-white'
+                    : 'bg-[#08080b] border-[#262633] text-[#a39f96] hover:text-[#e8c872] hover:border-[#e8c872]/60'
                 }`}
                 title={isRecording ? 'Listening... click to stop' : 'Click to speak (Voice input)'}
               >
@@ -636,13 +631,13 @@ export function AIChatDrawer() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 placeholder={t.inputPlaceholder}
-                className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#1e2d4d] bg-[#090d16] text-xs text-[#f8fafc] placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8]"
+                className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#262633] bg-[#08080b] text-xs text-[#f7f4ec] placeholder-[#6b6860] focus:outline-none focus:border-[#e8c872]"
               />
 
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="p-2.5 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-bold disabled:opacity-40 transition-colors shadow-[0_0_12px_rgba(56,189,248,0.3)]"
+                className="btn-gold p-2.5 rounded-xl text-[#0b0905] font-bold disabled:opacity-40 transition-colors"
               >
                 <Send className="w-4 h-4" />
               </button>

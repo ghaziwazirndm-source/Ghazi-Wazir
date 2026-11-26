@@ -14,7 +14,6 @@ import { AIChatDrawer } from './components/AIChatDrawer';
 import { CookieBanner } from './components/CookieBanner';
 import { ProgressBar } from './components/ProgressBar';
 import { MobileBottomBar } from './components/MobileBottomBar';
-import { ABThemeSwitcher } from './components/ABThemeSwitcher';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 import { ToastProvider } from './context/ToastContext';
@@ -66,8 +65,8 @@ function RouteLoadingFallback() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-8">
       <div className="flex flex-col items-center gap-3 text-center">
-        <div className="w-9 h-9 rounded-full border-2 border-[#38bdf8]/30 border-t-[#38bdf8] animate-spin" />
-        <span className="text-xs font-mono text-[#94a3b8] uppercase tracking-widest">
+        <div className="w-9 h-9 rounded-full border-2 border-[#e8c872]/25 border-t-[#e8c872] animate-spin" />
+        <span className="text-xs font-mono text-[#a39f96] uppercase tracking-widest">
           Loading...
         </span>
       </div>
@@ -95,7 +94,7 @@ function AppContent() {
       {!isAdmin && <ProgressBar />}
       {!isAdmin && <Navbar />}
 
-      <main className={!isAdmin ? 'pt-20 min-h-[calc(100vh-80px)]' : 'min-h-screen'}>
+      <main className={!isAdmin ? 'min-h-[calc(100vh-80px)]' : 'min-h-screen'}>
         <Suspense fallback={<RouteLoadingFallback />}>
           <Routes>
             {/* Public Core Routes */}
@@ -162,7 +161,6 @@ function AppContent() {
       {!isAdmin && <WhatsAppButton />}
       {!isAdmin && <AIChatDrawer />}
       {!isAdmin && <CookieBanner />}
-      {!isAdmin && <ABThemeSwitcher />}
       {!isAdmin && <MobileBottomBar />}
     </div>
   );

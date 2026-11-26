@@ -100,8 +100,8 @@ export function ABThemeSwitcher() {
             <div className="flex items-center gap-2">
               <Palette className="w-4 h-4 text-[#e8c872]" />
               <div>
-                <h4 className="text-xs font-bold text-[#f5f1e8] uppercase tracking-wider">A/B Testing Theme Engine</h4>
-                <p className="text-[10px] text-[#a8a7b3]">Live Split-Test & Toast Experience</p>
+                <p className="text-xs font-bold text-[#f5f1e8] uppercase tracking-wider">A/B Testing Theme Engine</p>
+                <p className="text-[10px] text-[#a8a7b3]">Live Split-Test &amp; Toast Experience</p>
               </div>
             </div>
             <button

@@ -70,17 +70,17 @@ export function ProtectedAdminRoute({
 
   if (!authReady || verifying) {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#08080b] flex items-center justify-center p-4">
         <div className="flex flex-col items-center gap-4 text-center">
-          <div className="w-12 h-12 rounded-2xl bg-[#14141d] border border-[#38bdf8]/60 flex items-center justify-center text-[#38bdf8] shadow-[0_0_25px_rgba(56,189,248,0.2)]">
+          <div className="w-12 h-12 rounded-2xl bg-[#14141b] border border-[#e8c872]/50 flex items-center justify-center text-[#e8c872] shadow-[0_0_25px_rgba(232,200,114,0.15)]">
             <RefreshCw className="w-6 h-6 animate-spin" />
           </div>
           <div className="space-y-1">
-            <p className="text-xs font-mono text-[#f8fafc] tracking-widest uppercase">
+            <p className="text-xs font-mono text-[#f7f4ec] tracking-widest uppercase">
               Verifying Firebase Role Access...
             </p>
-            <p className="text-[11px] text-[#94a3b8]">
-              Validating Firebase Auth identity & Firestore permissions
+            <p className="text-[11px] text-[#a39f96]">
+              Validating Firebase Auth identity &amp; Firestore permissions
             </p>
           </div>
         </div>
@@ -107,26 +107,26 @@ export function ProtectedAdminRoute({
   // Authenticated via Firebase, but role/permissions failed verification
   if (!isAuthorized) {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4">
-        <div className="w-full max-w-md p-8 rounded-2xl bg-[#131d33] border border-red-500/40 shadow-2xl space-y-6 text-center">
+      <div className="min-h-screen bg-[#08080b] flex items-center justify-center p-4">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-[#14141b] border border-red-500/40 shadow-2xl space-y-6 text-center">
           <div className="w-14 h-14 rounded-2xl bg-red-500/15 border border-red-500/40 flex items-center justify-center mx-auto text-red-400">
             <ShieldAlert className="w-7 h-7" />
           </div>
 
           <div className="space-y-2">
-            <h1 className="font-heading font-black text-xl text-[#f8fafc]">
+            <h1 className="font-heading font-bold text-2xl text-[#f7f4ec]">
               Admin Access Denied
             </h1>
-            <p className="text-xs text-[#94a3b8] leading-relaxed">
+            <p className="text-xs text-[#a39f96] leading-relaxed">
               {authError ||
                 `Signed in as ${firebaseUser.email}, which does not hold an authorized role (${allowedRoles.join(', ')}).`}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-[#090d16] border border-[#1e2d4d] text-left text-[11px] text-[#94a3b8] space-y-1">
+          <div className="p-3 rounded-xl bg-[#0e0e14] border border-[#262633] text-left text-[11px] text-[#a39f96] space-y-1">
             <div className="flex items-center justify-between">
               <span>Account:</span>
-              <span className="font-mono text-[#f8fafc] truncate max-w-[220px]">
+              <span className="font-mono text-[#f7f4ec] truncate max-w-[220px]">
                 {firebaseUser.email || firebaseUser.uid}
               </span>
             </div>
@@ -140,7 +140,7 @@ export function ProtectedAdminRoute({
             <button
               type="button"
               onClick={() => void signInWithGoogle().catch(() => undefined)}
-              className="w-full py-3 rounded-xl bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#090d16] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+              className="btn-gold w-full py-3 rounded-xl text-[#0b0905] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
             >
               <Lock className="w-4 h-4" />
               <span>Switch Google Account</span>
@@ -150,9 +150,9 @@ export function ProtectedAdminRoute({
               <button
                 type="button"
                 onClick={() => void refreshUserRole()}
-                className="py-2.5 rounded-xl bg-[#1e2d4d] hover:bg-[#2a3c63] text-[#f8fafc] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                className="py-2.5 rounded-xl bg-[#1b1b24] hover:bg-[#262633] border border-[#262633] text-[#f7f4ec] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors"
               >
-                <RefreshCw className="w-3.5 h-3.5" />
+                <RefreshCw className="w-3.5 h-3.5 text-[#e8c872]" />
                 <span>Re-Verify Role</span>
               </button>
 
@@ -167,10 +167,10 @@ export function ProtectedAdminRoute({
             </div>
           </div>
 
-          <div className="pt-2 border-t border-[#1e2d4d]">
+          <div className="pt-2 border-t border-[#262633]">
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 text-xs text-[#94a3b8] hover:text-[#38bdf8] transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs text-[#a39f96] hover:text-[#e8c872] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Return to Public Site</span>

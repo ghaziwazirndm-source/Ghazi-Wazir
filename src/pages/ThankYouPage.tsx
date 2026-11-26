@@ -27,7 +27,7 @@ export function ThankYouPage() {
         </div>
 
         <div className="card-luxury p-8 max-w-xl mx-auto text-left space-y-4 border-gold-glow">
-          <h3 className="font-heading font-bold text-lg text-[#f5f1e8]">Next Steps:</h3>
+          <h2 className="font-heading font-bold text-lg text-[#f5f1e8]">Next Steps:</h2>
           <ul className="space-y-3 text-xs sm:text-sm text-[#a8a7b3]">
             <li className="flex items-start gap-2.5">
               <span className="text-[#e8c872] font-bold">1.</span>

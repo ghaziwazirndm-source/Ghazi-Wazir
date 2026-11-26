@@ -85,9 +85,9 @@ export function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
             {/* Direct Cards */}
             <div className="card-luxury p-6 space-y-4">
-              <h3 className="font-heading font-bold text-lg text-[#f5f1e8]">
+              <h2 className="font-heading font-bold text-lg text-[#f5f1e8]">
                 Direct Contacts
-              </h3>
+              </h2>
 
               <div className="space-y-4 text-xs">
                 <a
@@ -120,9 +120,9 @@ export function ContactPage() {
 
             {/* Entity Locations */}
             <div className="card-luxury p-6 space-y-4 text-xs text-[#a8a7b3]">
-              <h3 className="font-heading font-bold text-lg text-[#f5f1e8]">
+              <h2 className="font-heading font-bold text-lg text-[#f5f1e8]">
                 Corporate Locations
-              </h3>
+              </h2>
 
               <div className="space-y-3">
                 <div className="p-3.5 bg-[#101018] rounded-xl border border-[#2a2a38] space-y-1">
@@ -163,9 +163,9 @@ export function ContactPage() {
                   <div className="w-16 h-16 rounded-full bg-[#1c2e20] border border-[#4ade80] flex items-center justify-center mx-auto mb-2">
                     <CheckCircle2 className="w-8 h-8 text-[#4ade80]" />
                   </div>
-                  <h3 className="font-heading font-bold text-2xl text-[#f5f1e8]">
+                  <h2 className="font-heading font-bold text-2xl text-[#f5f1e8]">
                     Inquiry Received
-                  </h3>
+                  </h2>
                   <p className="text-sm text-[#a8a7b3] max-w-md mx-auto">
                     Your inquiry has been stored directly in the CEO Command Center. Ghazi Wazir or an authorized senior associate will respond to you promptly.
                   </p>
@@ -181,9 +181,9 @@ export function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="font-heading font-bold text-xl text-[#f5f1e8]">
+                  <h2 className="font-heading font-bold text-xl text-[#f5f1e8]">
                     Send a Message to the CEO
-                  </h3>
+                  </h2>
                   <p className="text-xs text-[#a8a7b3]">
                     Fill in your project requirements below. All submissions are processed through our secure server pipeline with honeypot spam protection.
                   </p>

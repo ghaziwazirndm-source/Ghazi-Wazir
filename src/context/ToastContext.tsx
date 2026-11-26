@@ -186,11 +186,11 @@ function ToastCard({ toast, onDismiss }: { toast: ToastItem; onDismiss: () => vo
   // Theming configurations
   const themeStyles = {
     gold: {
-      border: 'border-[#38bdf8]/50 shadow-[0_0_25px_rgba(56,189,248,0.25)]',
-      bg: 'bg-[#131d33]/95 backdrop-blur-xl',
-      title: 'text-[#38bdf8]',
-      accentBg: 'bg-gradient-to-r from-[#38bdf8] to-[#2563eb]',
-      icon: <Sparkles className="w-5 h-5 text-[#38bdf8] shrink-0" />
+      border: 'border-[#e8c872]/45 shadow-[0_14px_34px_-12px_rgba(232,200,114,0.22)]',
+      bg: 'bg-[#14141b]/95 backdrop-blur-xl',
+      title: 'text-[#e8c872]',
+      accentBg: 'bg-gradient-to-r from-[#f0d788] to-[#b8893a]',
+      icon: <Sparkles className="w-5 h-5 text-[#e8c872] shrink-0" />
     },
     emerald: {
       border: 'border-[#22c55e]/50 shadow-[0_0_20px_rgba(34,197,94,0.18)]',
@@ -200,11 +200,11 @@ function ToastCard({ toast, onDismiss }: { toast: ToastItem; onDismiss: () => vo
       icon: <CheckCircle2 className="w-5 h-5 text-[#4ade80] shrink-0" />
     },
     sapphire: {
-      border: 'border-[#38bdf8]/50 shadow-[0_0_20px_rgba(56,189,248,0.18)]',
-      bg: 'bg-[#0c162e]/95 backdrop-blur-xl',
-      title: 'text-[#38bdf8]',
-      accentBg: 'bg-gradient-to-r from-[#38bdf8] to-[#0284c7]',
-      icon: <Info className="w-5 h-5 text-[#38bdf8] shrink-0" />
+      border: 'border-[#e8c872]/40 shadow-[0_14px_34px_-12px_rgba(0,0,0,0.6)]',
+      bg: 'bg-[#14141b]/95 backdrop-blur-xl',
+      title: 'text-[#f3df9c]',
+      accentBg: 'bg-gradient-to-r from-[#e8c872] to-[#c59b38]',
+      icon: <Info className="w-5 h-5 text-[#e8c872] shrink-0" />
     },
     crimson: {
       border: 'border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.18)]',

@@ -14,7 +14,7 @@ export function Footer() {
                 <span className="font-heading font-black text-lg text-gold-gradient">GW</span>
               </div>
               <div>
-                <h3 className="font-heading font-bold text-lg text-[#f5f1e8]">Ghazi Wazir</h3>
+                <p className="font-heading font-bold text-lg text-[#f5f1e8]">Ghazi Wazir</p>
                 <p className="text-xs text-[#b8893a] font-medium tracking-wide">CEO &middot; Founder</p>
               </div>
             </div>
@@ -51,9 +51,9 @@ export function Footer() {
 
           {/* Bahrain Services */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
               Bab Al-Khaleej (Bahrain)
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/services/business-registration" className="hover:text-[#f5f1e8] transition-colors">
@@ -95,9 +95,9 @@ export function Footer() {
 
           {/* Technology Services */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
               Back for Brand LLC (USA)
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/services/geo-aeo" className="hover:text-[#f5f1e8] transition-colors">
@@ -139,9 +139,9 @@ export function Footer() {
 
           {/* Knowledge & Funnels */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
               Resources & Legal
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/blog" className="hover:text-[#f5f1e8] transition-colors">
@@ -187,13 +187,21 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Regulatory Disclaimer Notice */}
-        <div className="mt-12 pt-8 border-t border-[#2a2a38]/80 text-xs text-[#a8a7b3] leading-relaxed">
+        {/* Regulatory Disclaimer & Official External Authority Portals */}
+        <div className="mt-12 pt-8 border-t border-[#2a2a38]/80 text-xs text-[#a8a7b3] leading-relaxed space-y-4">
           <div className="flex items-start gap-2 max-w-4xl">
             <ShieldAlert className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
             <p>
-              <strong>Legal Notice & Authority Disclosure:</strong> We are a private management and technology consultancy, not a government ministry, authority, or law firm. All business registrations, Commercial Registration (CR) approvals, investor visas, and worker residence permits are subject to the independent statutory determination and approval of the Ministry of Industry and Commerce (MOIC), the Labour Market Regulatory Authority (LMRA), and the Nationality, Passports and Residence Affairs (NPRA) of the Kingdom of Bahrain. We never guarantee approvals, timelines, search engine ranks, or commercial revenues.
+              <strong>Legal Notice &amp; Authority Disclosure:</strong> We are a private management and technology consultancy, not a government ministry, authority, or law firm. All business registrations, Commercial Registration (CR) approvals, investor visas, and worker residence permits are subject to the independent statutory determination and approval of the Ministry of Industry and Commerce (MOIC), the Labour Market Regulatory Authority (LMRA), and the Nationality, Passports and Residence Affairs (NPRA) of the Kingdom of Bahrain. We never guarantee approvals, timelines, search engine ranks, or commercial revenues.
             </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px]">
+            <h3 className="font-bold uppercase tracking-wider text-[#e8c872]">Verified Official Portals:</h3>
+            <a href="https://www.sijilat.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">Sijilat Bahrain</a>
+            <a href="https://www.moic.gov.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">MOIC Bahrain</a>
+            <a href="https://www.lmra.gov.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">LMRA Portal</a>
+            <a href="https://www.npra.gov.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">NPRA Residency</a>
+            <a href="https://www.bahrainedb.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">Bahrain EDB</a>
           </div>
         </div>
 

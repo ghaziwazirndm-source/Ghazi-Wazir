@@ -134,11 +134,13 @@ export function SEOHead({
         ],
         worksFor: [
           {
-            '@type': 'Organization',
+            '@type': ['ProfessionalService', 'LocalBusiness'],
             '@id': 'https://ghaziwazir.com/#babal-khaleej',
             name: 'Bab Al-Khaleej',
             legalName: 'Bab Al-Khaleej Document Clearance & Corporate Advisory',
             description: 'Commercial registration (CR), investor visa, worker visa (LMRA), document clearance, and corporate advisory services in the Kingdom of Bahrain.',
+            image: 'https://ghaziwazir.com/ghazi-wazir-photo.jpg',
+            priceRange: '$$',
             areaServed: {
               '@type': 'Country',
               name: 'Bahrain'
@@ -150,7 +152,7 @@ export function SEOHead({
               addressCountry: 'BH'
             },
             telephone: '+97334398754',
-            url: 'https://ghaziwazir.com/contact'
+            url: 'https://ghaziwazir.com/services/business-registration'
           },
           {
             '@type': 'Organization',
@@ -164,7 +166,7 @@ export function SEOHead({
               addressRegion: 'Florida',
               addressCountry: 'US'
             },
-            url: 'https://ghaziwazir.com/contact'
+            url: 'https://ghaziwazir.com/services/geo-aeo'
           }
         ]
       },
@@ -176,7 +178,20 @@ export function SEOHead({
         description: 'Personal brand, corporate establishment in Bahrain (Bab Al-Khaleej), and global technology acceleration (Back for Brand LLC).',
         publisher: {
           '@id': 'https://ghaziwazir.com/#person'
+        },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://ghaziwazir.com/#top-20-problems?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
         }
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://ghaziwazir.com/#breadcrumbs',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghaziwazir.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Current Page', item: resolvedCanonical }
+        ]
       }
     ];
 
@@ -192,6 +207,9 @@ export function SEOHead({
         finalSchema['@graph'].push(schema);
       }
     }
+
+    const staticScript = document.getElementById('static-seo-jsonld');
+    if (staticScript) staticScript.remove();
 
     let scriptTag = document.querySelector('script[type="application/ld+json"]#seo-jsonld');
     if (!scriptTag) {

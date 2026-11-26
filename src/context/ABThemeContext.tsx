@@ -4,50 +4,50 @@ import { ABVariantId, ABVariant, ABTestStats } from '../types';
 export const AB_VARIANTS: Record<ABVariantId, ABVariant> = {
   variant_modern_azure: {
     id: 'variant_modern_azure',
-    name: 'Modern Azure & Slate',
-    badge: 'Modern Theme — Electric Azure',
-    tagline: 'High-Trust Modern Tech & Executive Precision',
+    name: 'Sovereign Obsidian & Gold',
+    badge: 'Executive Luxury — Obsidian & Gold',
+    tagline: 'Private-Office Executive Prestige & Precision',
     scope: 'Universal Executive Brand & Funnels (Default)',
     colors: {
-      bg: '#090d16',
-      bgAlt: '#0d1424',
-      surface: '#131d33',
-      border: '#1e2d4d',
-      accent: '#38bdf8',
-      accentDark: '#0284c7',
-      glow: 'rgba(56, 189, 248, 0.28)'
+      bg: '#08080b',
+      bgAlt: '#0e0e13',
+      surface: '#14141b',
+      border: '#262633',
+      accent: '#e8c872',
+      accentDark: '#c59b38',
+      glow: 'rgba(232, 200, 114, 0.16)'
     }
   },
   variant_modern_emerald: {
     id: 'variant_modern_emerald',
-    name: 'Modern Emerald & Titanium',
-    badge: 'Modern Theme — GCC Prestige',
+    name: 'Royal Emerald & Gold',
+    badge: 'Executive Theme — GCC Prestige',
     tagline: 'Kingdom of Bahrain Commercial Registrations & Sijilat',
     scope: 'Bab Al-Khaleej Corporate Formations',
     colors: {
-      bg: '#06100d',
-      bgAlt: '#0a1814',
-      surface: '#0f241e',
-      border: '#1a4034',
-      accent: '#10b981',
-      accentDark: '#059669',
-      glow: 'rgba(16, 185, 129, 0.28)'
+      bg: '#060b09',
+      bgAlt: '#0a120f',
+      surface: '#101b17',
+      border: '#1e332c',
+      accent: '#e8c872',
+      accentDark: '#c59b38',
+      glow: 'rgba(232, 200, 114, 0.16)'
     }
   },
   variant_modern_titanium: {
     id: 'variant_modern_titanium',
-    name: 'Modern Titanium & Indigo',
-    badge: 'Modern Theme — Global Tech',
+    name: 'Charcoal & Platinum Silk',
+    badge: 'Executive Theme — Global Tech',
     tagline: 'GEO, AEO & Autonomous AI Agent Dominance',
     scope: 'Back for Brand LLC Worldwide',
     colors: {
-      bg: '#0a0b14',
-      bgAlt: '#0f111e',
-      surface: '#16192c',
-      border: '#262a4a',
-      accent: '#818cf8',
-      accentDark: '#4f46e5',
-      glow: 'rgba(129, 140, 248, 0.28)'
+      bg: '#09090d',
+      bgAlt: '#101016',
+      surface: '#16161f',
+      border: '#2a2a38',
+      accent: '#e2d6b8',
+      accentDark: '#bfa97a',
+      glow: 'rgba(226, 214, 184, 0.16)'
     }
   }
 };
