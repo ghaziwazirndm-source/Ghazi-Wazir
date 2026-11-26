@@ -1,17 +1,28 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
-import { Shield, Building2, Globe, Calendar, Phone, Mail, Award, CheckCircle2 } from 'lucide-react';
+import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Building2, Globe, Calendar, Phone } from 'lucide-react';
 
 export function AboutPage() {
   return (
     <>
       <SEOHead
-        title="About Ghazi Wazir — CEO of Bab Al-Khaleej & Back for Brand LLC"
-        description="Learn about Ghazi Wazir, an executive based in Bahrain heading Bab Al-Khaleej (business setup, visas, tracking) and Back for Brand LLC (GEO, AEO, AI agents, funnels)."
+        title="About Ghazi Wazir — CEO in Manama & Florida | Ghazi Wazir"
+        description="Meet Ghazi Wazir, CEO of Bab Al-Khaleej in Manama and Back for Brand LLC in Florida. Learn his standard and book a direct consultation."
         canonical="https://ghaziwazir.com/about"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'About Ghazi Wazir', item: '/about' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'About Ghazi Wazir' },
+          ]}
+        />
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 flex justify-center">

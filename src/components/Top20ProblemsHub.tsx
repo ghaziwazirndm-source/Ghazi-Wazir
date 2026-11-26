@@ -49,7 +49,7 @@ export function Top20ProblemsHub() {
             Top 20 Bahrain Setup, Visa, Tax &amp; AI Growth Problems Solved
           </h2>
           <p className="text-sm text-[#a39f96] leading-relaxed">
-            Search verified executive answers to the 20 most frequent commercial registration, residency, banking, SEO/GEO, and automation roadblocks—linked directly to official portals and action blueprints.
+            Search structured advisory answers to the 20 most frequent commercial registration, residency, banking, SEO/GEO, and automation questions—linked to action routes and official authorities. Any summary of Bahraini law, fees, ownership rules, or timelines must be verified against official sources (Sijilat, MOIC, NPRA, LMRA).
           </p>
         </div>
 

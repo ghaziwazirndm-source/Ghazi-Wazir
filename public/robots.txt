@@ -1,29 +1,37 @@
-# Robots.txt for Ghazi Wazir Executive Ecosystem
+# Robots.txt for Ghazi Wazir (https://ghaziwazir.com)
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /login
 Disallow: /thank-you
+Disallow: /content-studio
+Disallow: /api/
 
-# Explicitly allow AI and Search Engine Crawlers for GEO & AEO
+# AI & Search Crawlers (Note: robots.txt controls crawl permissions; it does not guarantee indexing or citations)
 User-agent: GPTBot
 Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /login
+Disallow: /thank-you
+Disallow: /content-studio
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /thank-you
+Disallow: /content-studio
+Disallow: /api/
 
 User-agent: ChatGPT-User
 Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
 
 User-agent: ClaudeBot
 Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
 
 User-agent: PerplexityBot
 Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
 
 User-agent: Google-Extended
 Allow: /

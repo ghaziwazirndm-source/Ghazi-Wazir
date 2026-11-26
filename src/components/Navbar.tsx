@@ -155,8 +155,16 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Header Action CTA & Login Portal */}
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
+          {/* Header Action CTA, Bilingual Switch & Login Portal */}
+          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
+            <Link
+              to={location.pathname === '/ar' ? '/' : '/ar'}
+              hrefLang={location.pathname === '/ar' ? 'en' : 'ar'}
+              className="px-3 py-2 rounded-full text-xs font-semibold text-[#e8c872] bg-[#14141b] hover:bg-[#1b1b24] border border-[#262633] hover:border-[#e8c872]/50 transition-colors whitespace-nowrap"
+            >
+              {location.pathname === '/ar' ? 'EN' : 'العربية'}
+            </Link>
+
             <Link
               to="/login"
               className="px-3.5 py-2 rounded-full text-xs font-semibold text-[#f7f4ec] bg-[#14141b] hover:bg-[#1b1b24] border border-[#262633] hover:border-[#e8c872]/50 transition-colors flex items-center gap-1.5 whitespace-nowrap"
@@ -247,6 +255,13 @@ export function Navbar() {
             className="min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#e8c872] hover:bg-[#14141b] flex items-center justify-between"
           >
             <span>Content Studio</span>
+          </Link>
+          <Link
+            to={location.pathname === '/ar' ? '/' : '/ar'}
+            onClick={() => setMobileOpen(false)}
+            className="min-h-[44px] px-3 py-2.5 rounded-lg text-base font-medium text-[#e8c872] hover:bg-[#14141b] flex items-center justify-between"
+          >
+            <span>{location.pathname === '/ar' ? 'Switch to English' : 'النسخة العربية (Arabic)'}</span>
           </Link>
           <Link
             to="/login"

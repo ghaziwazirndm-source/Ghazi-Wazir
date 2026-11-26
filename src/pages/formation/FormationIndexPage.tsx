@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { api } from '../../services/api';
-import { CheckCircle2, ArrowRight, ShieldCheck, Download, AlertCircle, Clock } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Download, AlertCircle, Clock } from 'lucide-react';
 
 export function FormationIndexPage() {
   const [name, setName] = useState('');
@@ -50,12 +51,22 @@ export function FormationIndexPage() {
   return (
     <>
       <SEOHead
-        title="Free Bahrain Company Formation Blueprint | Ghazi Wazir"
-        description="Get the free 7-step Bahrain Company Formation Blueprint: the order to follow, documents to prepare, and mistakes that cause delays."
-        noindex={true}
+        title="Bahrain Company Formation Blueprint | Ghazi Wazir"
+        description="Get the 7-step Bahrain Company Formation Blueprint covering Sijilat CR sequence, documents, and visas. Request instant access today."
+        canonical="https://ghaziwazir.com/formation"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Bahrain Formation Blueprint', item: '/formation' },
+        ]}
       />
 
       <div className="py-12 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Bahrain Formation Hub' },
+          ]}
+        />
         {/* Funnel Header */}
         <div className="text-center space-y-4">
           <div className="tag inline-block">Free Strategic Blueprint &middot; Bahrain Formation</div>

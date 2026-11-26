@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { BookingWidget } from '../components/BookingWidget';
 import { GUIDES } from './BlogPage';
 import {
@@ -23,6 +24,8 @@ interface GuideFAQ {
 
 interface GuideContent {
   title: string;
+  seoTitle: string;
+  seoDescription: string;
   canonicalSlug: string;
   category: string;
   readTime: string;
@@ -40,11 +43,13 @@ interface GuideContent {
 const GUIDE_DETAILS: Record<string, GuideContent> = {
   'register-company-bahrain': {
     title: 'How to Register a Company in Bahrain: The Complete Founder Guide',
+    seoTitle: 'Register a Company in Bahrain: Guide | Ghazi Wazir',
+    seoDescription: 'Step-by-step Bahrain company registration guide covering Sijilat CR, 100% foreign ownership rules, and office leases. Book a consultation.',
     canonicalSlug: 'register-company-bahrain',
     category: 'Bahrain Corporate Setup',
     readTime: '8 min read',
-    lead: 'Bahrain has positioned itself as one of the most founder-friendly commercial gateways in the Gulf Cooperation Council (GCC), offering 100% foreign ownership across extensive sectors, competitive corporate operational costs, and access to the wider regional market.',
-    aeoDirectAnswer: 'Foreign entrepreneurs can establish a 100% foreign-owned company in Bahrain without a local sponsor by filing an SPC or W.L.L. commercial registration through the Ministry of Industry and Commerce (MOIC) Sijilat portal, securing commercial name clearance, and registering a verified physical address.',
+    lead: 'Bahrain provides foreign investors with 100% foreign ownership eligibility across many commercial and technology sectors through the MOIC Sijilat portal (VERIFY against official source: Sijilat, MOIC, NPRA, LMRA).',
+    aeoDirectAnswer: 'Foreign entrepreneurs can apply for a 100% foreign-owned company in Bahrain across eligible activities via the MOIC Sijilat portal, subject to name clearance, ISIC activity rules, and a municipality-verified commercial address. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keyTakeaways: [
       '100% foreign equity ownership is legal across commercial, industrial, and technology sectors.',
       'Applications are filed online via the MOIC Sijilat system with no initial local sponsor requirement.',
@@ -97,17 +102,19 @@ const GUIDE_DETAILS: Record<string, GuideContent> = {
       },
       {
         q: 'How long does company registration in Bahrain take?',
-        a: 'Unregulated standard activities generally take 5 to 10 working days from submission to active registration certificate issuance.',
+        a: 'Indicative timelines vary (often around 5 to 10 working days for standard unregulated activities), depending on external ministry clearances and documentation. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
     ],
   },
   'investor-vs-worker-visa': {
     title: 'Investor Visa vs Worker Visa in Bahrain: Rights, Rules, and Clearances',
+    seoTitle: 'Bahrain Investor Visa vs Worker Visa | Ghazi Wazir',
+    seoDescription: 'Compare Bahrain self-sponsored Investor Visas (NPRA) and employer-sponsored Worker Visas (LMRA). Schedule a residency consultation.',
     canonicalSlug: 'investor-vs-worker-visa',
     category: 'Residency & Visas',
     readTime: '7 min read',
-    lead: 'Securing legal residency in the Kingdom of Bahrain depends on whether you are entering as a business owner/partner or as an employee. Understanding these distinctions avoids unnecessary delays and ensures complete regulatory compliance.',
-    aeoDirectAnswer: 'In Bahrain, an Investor Visa is a renewable self-sponsored residence permit granted directly to commercial equity partners of a Commercial Registration (CR), whereas a Worker Visa is an employment residence permit sponsored by a corporate employer holding an approved LMRA quota.',
+    lead: 'Securing legal residency in the Kingdom of Bahrain depends on whether you enter as an equity shareholder or an employee. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
+    aeoDirectAnswer: 'In Bahrain, an Investor Visa is a renewable self-sponsored residence permit for eligible CR equity partners (via NPRA), whereas a Worker Visa is an employment permit sponsored by an employer holding an approved LMRA quota. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keyTakeaways: [
       'Investor visas provide self-sponsorship with no employer dependencies.',
       'Worker visas require an approved employer with available LMRA labor quotas and monthly levies.',
@@ -155,11 +162,13 @@ const GUIDE_DETAILS: Record<string, GuideContent> = {
   },
   'business-setup-checklist': {
     title: 'Bahrain Business Setup Documents Checklist: Everything You Need to Prepare',
+    seoTitle: 'Bahrain Business Setup Checklist 2026 | Ghazi Wazir',
+    seoDescription: 'Complete Bahrain company setup checklist covering passports, proof of address, MOA, and attested parent docs. Book a filing review.',
     canonicalSlug: 'business-setup-checklist',
     category: 'Documentation & Compliance',
     readTime: '6 min read',
-    lead: 'Bureaucratic friction occurs when documents are missing, improperly formatted, or un-attested. Use this master checklist before submitting your Sijilat application.',
-    aeoDirectAnswer: 'To register a business in Bahrain, individual founders need clear passport copies (valid for at least 6 months), recent utility bills for residential proof of address, and educational degrees if required by specialized activities; corporate parent shareholders additionally require attested board resolutions, articles of association, and powers of attorney.',
+    lead: 'Application stalls typically happen when shareholder passports, addresses, or foreign corporate attestations are incomplete. VERIFY current document standards against official source (Sijilat, MOIC, NPRA, LMRA).',
+    aeoDirectAnswer: 'Individual founders generally prepare valid passport copies, recent proof of address, and specialized qualifications if required, while corporate shareholders also provide attested parent incorporation documents and powers of attorney. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keyTakeaways: [
       'Passports must have minimum 6-month validity for all shareholders and directors.',
       'Residential proof of address must be dated within the last 90 days.',
@@ -205,16 +214,18 @@ const GUIDE_DETAILS: Record<string, GuideContent> = {
   },
   'what-is-geo-and-aeo': {
     title: 'What is GEO & AEO? The Evolution from Google Ranking to AI Answers',
+    seoTitle: 'What Is GEO & AEO? AI Search Guide | Ghazi Wazir',
+    seoDescription: 'Learn how Generative Engine Optimization (GEO) & AEO use schema graphs and clear facts for AI answers. Book an audit with Back for Brand.',
     canonicalSlug: 'what-is-geo-and-aeo',
     category: 'Generative AI Technology',
     readTime: '9 min read',
-    lead: 'The era of 10 blue search links is disappearing. Consumers and corporate decision-makers now ask ChatGPT, Perplexity, and Google Gemini for direct recommendations. Generative Engine Optimization (GEO) is how your company gets cited.',
-    aeoDirectAnswer: 'Generative Engine Optimization (GEO) optimizes a company\'s digital entity footprint and knowledge consensus so AI models cite it in conversational syntheses, while Answer Engine Optimization (AEO) formats direct factual answers (via Schema.org FAQPage and concise definition blocks) for voice and AI answer cards.',
+    lead: 'Search behavior now spans traditional search engines and AI synthesis interfaces like ChatGPT, Perplexity, and Google Gemini. GEO and AEO organize facts and schema cleanly for machine retrieval without guaranteeing citations.',
+    aeoDirectAnswer: 'Generative Engine Optimization (GEO) improves entity clarity and corroborating authority for AI synthesis models, while Answer Engine Optimization (AEO) formats concise direct answers via Schema.org and clear HTML structure.',
     keyTakeaways: [
-      'GEO targets Large Language Model synthesis (OpenAI, Gemini, Perplexity) rather than standard search crawler indexes.',
-      'AEO engineers immediate, structured answers to user inquiries with high factual density and zero ambiguity.',
-      'Entities with verified Schema.org graphs across 20+ verified directories enjoy up to 4x higher citation frequency in AI responses.',
-      'Combining traditional SEO with GEO and AEO creates compounding, omni-channel digital brand defensibility.'
+      'GEO focuses on Large Language Model retrieval and entity consensus across credible sources.',
+      'AEO structures clear, direct, verifiable answers to buyer questions without fluff.',
+      'Schema.org JSON-LD removes entity ambiguity for crawlers without guaranteeing AI citations.',
+      'Combining technical SEO, AEO clarity, and off-site authority builds durable search equity.'
     ],
     sections: [
       {
@@ -250,6 +261,8 @@ const GUIDE_DETAILS: Record<string, GuideContent> = {
   },
   'seo-vs-geo-vs-aeo': {
     title: 'SEO vs GEO vs AEO: Strategic Comparison for Modern Enterprise Growth',
+    seoTitle: 'SEO vs GEO vs AEO: Enterprise Strategy | Ghazi Wazir',
+    seoDescription: 'Compare SEO, Generative Engine Optimization (GEO), and AEO to structure B2B search growth. Schedule a strategy call with Back for Brand.',
     canonicalSlug: 'seo-vs-geo-vs-aeo',
     category: 'Search Strategy',
     readTime: '8 min read',
@@ -290,6 +303,8 @@ const GUIDE_DETAILS: Record<string, GuideContent> = {
   },
   'ai-agents-for-small-business': {
     title: 'Autonomous AI Agents for Small Business: Architecture, ROI, and Guardrails',
+    seoTitle: 'AI Sales Agents for Small Business | Ghazi Wazir',
+    seoDescription: 'Learn how grounded 24/7 AI sales agents qualify leads & schedule calls safely without hallucinations. Book a Back for Brand demo.',
     canonicalSlug: 'ai-agents-for-small-business',
     category: 'AI & Automation',
     readTime: '7 min read',
@@ -387,29 +402,6 @@ export function GuideDetailPage() {
             text: faq.a,
           },
         }))
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: 'https://ghaziwazir.com/'
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Guides',
-            item: 'https://ghaziwazir.com/blog'
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: guide.title,
-            item: `https://ghaziwazir.com/blog/${guide.canonicalSlug}`
-          }
-        ]
       }
     ]
   };
@@ -417,22 +409,26 @@ export function GuideDetailPage() {
   return (
     <>
       <SEOHead
-        title={`${guide.title} | Ghazi Wazir`}
-        description={guide.lead}
+        title={guide.seoTitle}
+        description={guide.seoDescription}
         canonical={`https://ghaziwazir.com/blog/${guide.canonicalSlug}`}
         ogType="article"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Strategic Guides', item: '/blog' },
+          { name: guide.title, item: `/blog/${guide.canonicalSlug}` },
+        ]}
         schema={compositeSchema}
       />
 
-      <article className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#a8a7b3]">
-          <Link to="/" className="hover:text-[#f5f1e8] transition-colors">Home</Link>
-          <span>/</span>
-          <Link to="/blog" className="hover:text-[#f5f1e8] transition-colors">Guides</Link>
-          <span>/</span>
-          <span className="text-[#e8c872] truncate max-w-xs">{guide.title}</span>
-        </nav>
+      <article className="py-12 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Strategic Guides', to: '/blog' },
+            { label: guide.title },
+          ]}
+        />
 
         {/* Article Header */}
         <header className="space-y-4">
@@ -556,7 +552,7 @@ export function GuideDetailPage() {
         <div className="card-luxury p-6 flex items-start gap-3 text-xs text-[#a8a7b3] bg-[#101018]">
           <ShieldAlert className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
           <p>
-            <strong>Regulatory Disclaimer:</strong> This guide is prepared for informational business intelligence and digital strategy education only. It does not constitute statutory legal advice or government regulation. All company formations, ministry approvals, and visa decisions remain subject to official Bahraini authority discretion.
+            <strong>Regulatory Disclaimer &amp; Verification:</strong> This guide is prepared for informational business education only and is not legal advice. All company formation rules, government fees, visa requirements, and timelines must be confirmed independently — <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong>.
           </p>
         </div>
 

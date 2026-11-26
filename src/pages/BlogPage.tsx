@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { BookOpen, ArrowRight, Clock, Building2, Globe, ShieldCheck } from 'lucide-react';
 
 export const GUIDES = [
@@ -57,12 +58,22 @@ export function BlogPage() {
   return (
     <>
       <SEOHead
-        title="Strategic Guides & Business Intelligence — Ghazi Wazir"
-        description="Comprehensive founder guides on Bahrain business registration, investor visas, document attestation, GEO, AEO, and autonomous AI agents."
+        title="Bahrain Business & GEO Strategic Guides | Ghazi Wazir"
+        description="Read founder guides on Bahrain Sijilat registration, investor visas, document attestation, GEO, AEO, and AI agents. Explore our guides today."
         canonical="https://ghaziwazir.com/blog"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Strategic Guides', item: '/blog' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Strategic Guides' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">Executive Knowledge Base</div>

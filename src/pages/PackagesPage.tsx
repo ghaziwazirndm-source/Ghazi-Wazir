@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { LeadModal } from '../components/LeadModal';
-import { CheckCircle2, Building2, Globe, ArrowRight, ShieldAlert, Calendar } from 'lucide-react';
+import { CheckCircle2, Building2, Globe, ShieldAlert } from 'lucide-react';
 
 export function PackagesPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -16,12 +16,22 @@ export function PackagesPage() {
   return (
     <>
       <SEOHead
-        title="Packages & Scope of Work — Bab Al-Khaleej & Back for Brand LLC | Ghazi Wazir"
-        description="Structured corporate formation and digital growth packages. Transparent scoping with direct executive management. Request a custom quote."
+        title="Bahrain Setup & AI Growth Packages | Ghazi Wazir"
+        description="Explore Bab Al-Khaleej company setup tiers and Back for Brand GEO, AI agent, and funnel scopes. Request a tailored written quotation now."
         canonical="https://ghaziwazir.com/packages"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Packages & Tiers', item: '/packages' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Packages & Service Tiers' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">Transparent Scoping</div>
@@ -268,7 +278,7 @@ export function PackagesPage() {
         <div className="card-luxury p-6 max-w-4xl mx-auto flex items-start gap-3 bg-[#101018] text-xs text-[#a8a7b3]">
           <ShieldAlert className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
           <p>
-            <strong>Pricing Policy & Integrity:</strong> Government fees in Bahrain (Sijilat CR registration fees, chamber of commerce dues, LMRA work permit levies, and municipality charges) vary depending on selected activity codes, number of foreign partners, and commercial office size. All fee proposals are itemized in writing following initial consultation.
+            <strong>Pricing Policy &amp; Official Fee Verification:</strong> Bahrain government fees (Sijilat CR fees, Chamber dues, LMRA levies, and municipality charges) vary by activity and headcount — <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong>. Consultancy fee brackets: [OWNER TO PROVIDE: Published Fee Ranges or Written Custom Proposal After Scoping].
           </p>
         </div>
       </div>

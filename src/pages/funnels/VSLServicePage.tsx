@@ -71,14 +71,14 @@ export function VSLServicePage() {
               <div className="flex items-center justify-center sm:justify-start gap-2">
                 <span className="font-heading font-bold text-xl text-[#f5f1e8]">Ghazi Wazir</span>
                 <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#1c2e20] text-[#4ade80] font-bold border border-[#4ade80]/40">
-                  Verified Host
+                  Founder &amp; CEO
                 </span>
               </div>
               <p className="text-xs text-[#e8c872] font-semibold">
                 CEO &middot; Bab Al-Khaleej & Back for Brand LLC
               </p>
               <p className="text-xs text-[#a8a7b3] leading-relaxed">
-                &ldquo;In this presentation, I outline the exact requirements, operational timelines, and statutory safeguards for {svc.name}.&rdquo;
+                &ldquo;In this presentation, I outline the workflow, documentation scope, and official ministry steps for {svc.name}. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA) for Bahrain regulatory requirements.&rdquo;
               </p>
               <div className="pt-2 text-[11px] text-[#ffa24d] font-semibold flex items-center justify-center sm:justify-start gap-1">
                 <Sparkles className="w-3.5 h-3.5" />

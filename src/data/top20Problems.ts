@@ -31,7 +31,7 @@ export const TOP_20_PROBLEMS: TopProblemItem[] = [
     question: 'Do I need a local Bahraini 51% sponsor to open a company in Bahrain?',
     problemSummary: 'Founders mistakenly give away 51% equity to silent sponsors out of fear of Gulf ownership restrictions.',
     solution:
-      'No. Under Bahrain Commercial Companies Law, foreign founders can legally hold 100% equity across the majority of commercial, consulting, trading, and technology activities via Sijilat.',
+      'Subject to official ISIC activity eligibility, foreign founders may hold up to 100% equity across many commercial, consulting, trading, and technology activities via Sijilat without a local sponsor. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keywords: ['100% foreign ownership Bahrain', 'local sponsor', 'Sijilat CR', 'WLL', 'SPC'],
     internalLink: {
       label: 'Explore 100% Ownership CR Registration',
@@ -67,7 +67,7 @@ export const TOP_20_PROBLEMS: TopProblemItem[] = [
     question: 'Should I register a W.L.L., S.P.C., or Foreign Branch in Bahrain?',
     problemSummary: 'Choosing the wrong corporate legal structure limits future shareholder onboarding or triggers extra parent-company attestation.',
     solution:
-      'Single founders benefit from streamlined Single Person Company (S.P.C.) or W.L.L. structures (unified under modern Bahrain W.L.L. rules), while established overseas firms use Foreign Branches without paid-up local capital.',
+      'Single founders commonly evaluate W.L.L. (With Limited Liability) structures, while established overseas firms may evaluate a Foreign Branch. Eligibility, capital declarations, and governance rules vary by activity — VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keywords: ['WLL vs SPC Bahrain', 'Foreign Branch Bahrain', 'company structure', 'legal form'],
     internalLink: {
       label: 'Compare Formation Structures & Packages',
@@ -135,7 +135,7 @@ export const TOP_20_PROBLEMS: TopProblemItem[] = [
     question: 'Who qualifies for the 10-Year Bahrain Golden Residency Visa?',
     problemSummary: 'Conflicting online claims confuse Golden Residency criteria for property owners, executives, and retirees.',
     solution:
-      'We audit your residency, property deed value, salary threshold, or executive qualification against official NPRA Golden Residency guidelines before filing.',
+      'We review your residency period, property deed value, salary, or executive credentials against official NPRA Golden Residency guidelines before submission. Final issuance is strictly at official authority discretion — VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     keywords: ['Bahrain Golden Visa', '10 year residency Bahrain', 'NPRA Golden Visa'],
     internalLink: {
       label: 'Book Investor & Golden Visa Scoping',
@@ -203,7 +203,7 @@ export const TOP_20_PROBLEMS: TopProblemItem[] = [
     question: 'Do Bahrain companies pay 0% corporate and personal income tax?',
     problemSummary: 'Founders overlook VAT thresholds or bilateral compliance rules when assuming zero filing obligations.',
     solution:
-      'Bahrain levies 0% personal income tax and 0% corporate income tax on standard non-oil commercial activities (with 10% VAT applicable once revenue passes statutory thresholds).',
+      'Standard commercial profits and personal income in Bahrain are not generally subject to personal income tax, while 10% VAT and specific corporate rules apply above statutory thresholds and regulated sectors (such as oil/gas or multinational minimum tax regimes). VERIFY against official source (Sijilat, MOIC, NPRA, LMRA, and NBR).',
     keywords: ['0% tax Bahrain', 'Bahrain corporate tax', 'Bahrain VAT NBR', 'tax free GCC'],
     internalLink: {
       label: 'Request Company Structuring Call',

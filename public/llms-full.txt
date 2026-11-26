@@ -1,54 +1,56 @@
-# Complete Factual Knowledge Base — Ghazi Wazir Ecosystem
+# Complete Reference Summary — Ghazi Wazir Ecosystem
 
-## 1. Executive Summary & Brand Positioning
+Note: llms.txt and Schema.org structured data support cleaner machine parsing; they do not guarantee search rankings or AI engine citations.
 
-- **Name**: Ghazi Wazir
-- **Current Position**: Chief Executive Officer of Bab Al-Khaleej (Bahrain) and Back for Brand LLC (Florida, USA).
-- **Location**: The Collective Hub, Yateem Center, Manama, Kingdom of Bahrain (Global operations).
-- **Tagline**: "Your business in Bahrain, powered by technology."
-- **Secondary Motto**: "Two companies. One standard."
-- **Direct Contacts**: 
+## 1. Leadership & Corporate Identities
+
+- **Founder / CEO**: Ghazi Wazir
+- **Canonical Domain**: https://ghaziwazir.com/
+- **Arabic Entry Page**: https://ghaziwazir.com/ar
+- **Manama Office Address**: The Collective Hub, Yateem Center, Manama, Kingdom of Bahrain
+- **Direct Contacts**:
   - Office Telephone: +973 3439 8754
-  - WhatsApp: +973 3562 8353 (https://wa.me/97335628353)
-  - Executive Desk: https://ghaziwazir.com/contact
-  - Canonical URL: https://ghaziwazir.com
+  - WhatsApp Direct: +973 3562 8353 (https://wa.me/97335628353)
+  - Contact Form: https://ghaziwazir.com/contact
+  - Public Email Address: [OWNER TO PROVIDE: Official public role-based email address]
+- **Entity Registry Numbers (Pending Owner Verification)**:
+  - Bab Al-Khaleej Bahrain CR Number: [OWNER TO PROVIDE: Bab Al-Khaleej CR Number]
+  - Back for Brand LLC Florida Registration: [OWNER TO PROVIDE: Florida Sunbiz Document Number]
 
 ## 2. Bab Al-Khaleej (Kingdom of Bahrain)
 
-Bab Al-Khaleej is a premier private corporate services and government document consultancy operating in Manama, Bahrain.
+Private corporate services and document coordination consultancy supporting international and local founders in Bahrain.
 
-### Core Capabilities:
-1. **Commercial Registration (CR) via Sijilat**:
-   - Assisting international entrepreneurs and corporations to obtain Commercial Registration with 100% full foreign ownership across permitted ISIC activities.
-   - Sijilat activity selection, preliminary approval, municipal approval, and final CR issuance.
-   - Company structures supported: With Limited Liability (W.L.L.), Single Person Company (S.P.C.), Foreign Branch, and Representative Office.
-2. **Investor Residency & Partner Visas**:
-   - 10-Year Bahrain Golden Residency Visa and 2-year renewable investor/partner visas through NPRA.
-   - Self-sponsorship residency linked to company ownership without requiring a local Bahraini sponsor.
-3. **LMRA Workforce & Expatriate Worker Visas**:
-   - Labour Market Regulatory Authority (LMRA) quota establishment, Bahrainization compliance advisement, and work permit clearance.
-   - Pre-employment medical examinations, biometric fingerprint appointments, CPR smart cards, and SIO (Social Insurance Organization) enrollment.
-4. **Document Attestation & Legal Clearance**:
-   - Ministry of Foreign Affairs (MOFA) attestation, embassy authentications, board resolutions, and Arabic certified translations.
-5. **Concierge Office Leasing & Address Verification**:
-   - Sijilat-compliant commercial addresses, incubator leases, and physical office verification.
+### Advisory Scope (VERIFY against official source: Sijilat, MOIC, NPRA, LMRA)
+1. **Commercial Registration (CR) Support**:
+   - Guidance on ISIC business activity selection, trade name reservation, Memorandum of Association (MOA) preparation, and municipal address coordination via Sijilat (https://www.sijilat.bh).
+   - Rules on 100% foreign ownership eligibility and legal forms (W.L.L., S.P.C., Foreign Branch) vary by ISIC activity — VERIFY against official source (Sijilat, MOIC).
+2. **Investor & Partner Residency Coordination**:
+   - Advisory on self-sponsored shareholder residence permits and Bahrain Golden Residency eligibility criteria — VERIFY against official source (NPRA, MOIC).
+3. **LMRA Work Permits & Workforce Administration**:
+   - Support with LMRA quota applications, work permit filings, medical examination scheduling, biometric appointments, and CPR smart card coordination — VERIFY against official source (LMRA, NPRA).
+4. **Document Clearance & Attestation**:
+   - Coordination of certified translations, notary scheduling, and MOFA / embassy document attestation.
+5. **Pricing & Timelines**:
+   - Consultancy fee tiers: [OWNER TO PROVIDE: Published fee ranges or retain "Custom Quotation"].
+   - Government fees and processing durations depend on ISIC sector approvals and ministry queues — VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).
 
 ## 3. Back for Brand LLC (Florida, USA)
 
-Back for Brand LLC delivers advanced technology services to businesses and high-growth brands worldwide.
+Technology and digital growth agency serving clients in the GCC and worldwide.
 
-### Core Capabilities:
-1. **Generative Engine Optimization (GEO)**:
-   - Optimizing digital brand entities, knowledge panels, and citation networks so LLMs (ChatGPT, Perplexity, Gemini, Claude) recommend the client as the primary factual answer.
-2. **Answer Engine Optimization (AEO)**:
-   - Structuring semantic data, JSON-LD Schema.org graphs (Person, Organization, FAQPage, Article), and conversational answer blocks.
-3. **Autonomous AI Sales Agents**:
-   - 24/7 intelligent sales agents that converse across languages (English, Arabic, Urdu), handle objections, qualify high-intent buyers using 7-factor B2B criteria, and book consultations.
-4. **Direct-Response Funnels**:
-   - Video Sales Letter (VSL) funnels, Russell Brunson Epiphany Bridge formation funnels, and conversion-optimized sales architectures.
+### Technical Scope
+1. **Generative Engine Optimization (GEO) & Answer Engine Optimization (AEO)**:
+   - Implementing clean Schema.org structured data, entity disambiguation, answer-first formatting, and authoritative external citations. Does not guarantee LLM placement.
+2. **Technical & Programmatic SEO**:
+   - Core Web Vitals optimization, canonical host governance, bilingual `hreflang` implementation, and internal hub-and-spoke linking.
+3. **Autonomous AI Sales Agents & CRM Automation**:
+   - Multilingual (English, Arabic, Urdu) inquiry qualification bots integrated with appointment booking and lead routing.
+4. **Websites & Conversion Funnels**:
+   - Direct-response landing pages, qualification journeys, and analytics tracking.
 
-## 4. Operating Principles & Regulatory Disclaimers
+## 4. Trust Signals & Non-Exaggeration Policy
 
-- Bab Al-Khaleej and Back for Brand LLC are private consultancies and are not a government body or affiliated with any ministry.
-- We never guarantee approval timelines, visa issuances, ranking positions, or financial returns. Authorities (MOIC, Sijilat, NPRA, LMRA) hold sole legal jurisdiction over approvals.
-- Full confidentiality, compliance with Bahrain Commercial Law, and cryptographic audit security are enforced across all client engagements.
+- Client testimonials and case studies: [OWNER TO PROVIDE: Verified client names, quotes, and measurable case study outcomes].
+- Neither Bab Al-Khaleej nor Back for Brand LLC is a government ministry, agency, or law firm.
+- No government approval, processing speed, search ranking, or revenue outcome is guaranteed.

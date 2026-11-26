@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { api } from '../../services/api';
-import { Printer, CheckSquare, Square, ArrowRight, ShieldAlert, Sparkles } from 'lucide-react';
+import { Printer, CheckSquare, Square, ShieldAlert } from 'lucide-react';
 import { FunnelSalesAgent } from '../../components/FunnelSalesAgent';
 
 interface StepData {
@@ -106,12 +107,24 @@ export function FormationBlueprintPage() {
   return (
     <>
       <SEOHead
-        title="The 7-Step Bahrain Company Formation Blueprint | Ghazi Wazir"
-        description="Interactive printable 7-step checklist from concept to a company ready for revenue in the Kingdom of Bahrain."
-        noindex={true}
+        title="7-Step Bahrain Setup Blueprint Checklist | Ghazi Wazir"
+        description="Follow our 7-step Bahrain company formation checklist from ISIC selection and Sijilat CR to banking & visas. Start your checklist now."
+        canonical="https://ghaziwazir.com/formation/blueprint"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Formation', item: '/formation' },
+          { name: '7-Step Blueprint', item: '/formation/blueprint' },
+        ]}
       />
 
       <div className="py-12 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Formation', to: '/formation' },
+            { label: '7-Step Blueprint' },
+          ]}
+        />
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#2a2a38]">
           <div>
@@ -182,7 +195,7 @@ export function FormationBlueprintPage() {
         <div className="card-luxury p-6 flex items-start gap-3 text-xs text-[#a8a7b3] bg-[#101018]">
           <ShieldAlert className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
           <p>
-            General business roadmap only; not statutory legal counsel. Ministry licensing fees, municipal lease requirements, and LMRA workforce levies depend on your verified business activities. Always confirm specifics with our consultancy before financial deployment.
+            General business roadmap only; not legal counsel. Ministry fees, office requirements, 100% foreign ownership eligibility, and LMRA levies vary by activity — <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong> before financial deployment.
           </p>
         </div>
 

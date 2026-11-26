@@ -883,9 +883,63 @@ app.get('/robots.txt', (req, res) => {
   res.sendFile(path.resolve(process.cwd(), 'public', 'robots.txt'));
 });
 
+const SITEMAP_ROUTES: Array<{
+  path: string;
+  lastmod: string;
+  changefreq: string;
+  priority: string;
+  bilingual?: boolean;
+}> = [
+  { path: '/', lastmod: '2026-11-25', changefreq: 'weekly', priority: '1.0', bilingual: true },
+  { path: '/ar', lastmod: '2026-11-25', changefreq: 'weekly', priority: '0.95', bilingual: true },
+  { path: '/companies', lastmod: '2026-11-22', changefreq: 'monthly', priority: '0.9' },
+  { path: '/start', lastmod: '2026-11-22', changefreq: 'weekly', priority: '0.9' },
+  { path: '/about', lastmod: '2026-11-22', changefreq: 'monthly', priority: '0.85' },
+  { path: '/contact', lastmod: '2026-11-24', changefreq: 'monthly', priority: '0.85' },
+  { path: '/book', lastmod: '2026-11-24', changefreq: 'weekly', priority: '0.9' },
+  { path: '/packages', lastmod: '2026-11-20', changefreq: 'weekly', priority: '0.85' },
+  { path: '/blog', lastmod: '2026-11-25', changefreq: 'weekly', priority: '0.85' },
+  { path: '/blog/register-company-bahrain', lastmod: '2026-11-20', changefreq: 'monthly', priority: '0.75' },
+  { path: '/blog/investor-vs-worker-visa', lastmod: '2026-11-18', changefreq: 'monthly', priority: '0.75' },
+  { path: '/blog/business-setup-checklist', lastmod: '2026-11-16', changefreq: 'monthly', priority: '0.75' },
+  { path: '/blog/what-is-geo-and-aeo', lastmod: '2026-11-14', changefreq: 'monthly', priority: '0.75' },
+  { path: '/blog/seo-vs-geo-vs-aeo', lastmod: '2026-11-12', changefreq: 'monthly', priority: '0.75' },
+  { path: '/blog/ai-agents-for-small-business', lastmod: '2026-11-10', changefreq: 'monthly', priority: '0.75' },
+  { path: '/services/business-registration', lastmod: '2026-11-25', changefreq: 'monthly', priority: '0.85' },
+  { path: '/services/investor-visa', lastmod: '2026-11-25', changefreq: 'monthly', priority: '0.85' },
+  { path: '/services/worker-visa', lastmod: '2026-11-24', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/document-consultancy', lastmod: '2026-11-24', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/application-tracking', lastmod: '2026-11-22', changefreq: 'monthly', priority: '0.75' },
+  { path: '/services/ongoing-support', lastmod: '2026-11-22', changefreq: 'monthly', priority: '0.75' },
+  { path: '/services/geo-aeo', lastmod: '2026-11-25', changefreq: 'monthly', priority: '0.85' },
+  { path: '/services/seo', lastmod: '2026-11-24', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/ai-agents', lastmod: '2026-11-24', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/automation', lastmod: '2026-11-21', changefreq: 'monthly', priority: '0.75' },
+  { path: '/services/digital-marketing', lastmod: '2026-11-21', changefreq: 'monthly', priority: '0.75' },
+  { path: '/services/websites-funnels', lastmod: '2026-11-21', changefreq: 'monthly', priority: '0.8' },
+  { path: '/formation', lastmod: '2026-11-23', changefreq: 'weekly', priority: '0.8' },
+  { path: '/formation/blueprint', lastmod: '2026-11-23', changefreq: 'monthly', priority: '0.75' },
+  { path: '/formation/offer', lastmod: '2026-11-23', changefreq: 'monthly', priority: '0.75' },
+  { path: '/funnels', lastmod: '2026-11-23', changefreq: 'monthly', priority: '0.75' },
+  { path: '/privacy-policy', lastmod: '2026-11-05', changefreq: 'yearly', priority: '0.3' },
+  { path: '/terms-of-service', lastmod: '2026-11-05', changefreq: 'yearly', priority: '0.3' },
+  { path: '/disclaimer', lastmod: '2026-11-05', changefreq: 'yearly', priority: '0.3' },
+  { path: '/cookie-policy', lastmod: '2026-11-05', changefreq: 'yearly', priority: '0.3' },
+];
+
 app.get('/sitemap.xml', (req, res) => {
+  const host = 'https://ghaziwazir.com';
+  const urlsXml = SITEMAP_ROUTES.map(route => {
+    const alternateXml = route.bilingual
+      ? `\n    <xhtml:link rel="alternate" hreflang="en" href="${host}/" />\n    <xhtml:link rel="alternate" hreflang="ar" href="${host}/ar" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${host}/" />`
+      : '';
+    return `  <url>\n    <loc>${host}${route.path}</loc>${alternateXml}\n    <lastmod>${route.lastmod}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority}</priority>\n  </url>`;
+  }).join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urlsXml}\n</urlset>\n`;
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.sendFile(path.resolve(process.cwd(), 'public', 'sitemap.xml'));
+  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+  res.send(xml);
 });
 
 // DNS, SPF & DMARC Deliverability Status

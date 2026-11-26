@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { SERVICES_CATALOG } from '../ServiceDetailPage';
-import { Play, ArrowRight, Video, Sparkles } from 'lucide-react';
+import { Play, ArrowRight, Video } from 'lucide-react';
 
 export function FunnelsIndexPage() {
   const serviceList = Object.values(SERVICES_CATALOG);
@@ -9,12 +10,22 @@ export function FunnelsIndexPage() {
   return (
     <>
       <SEOHead
-        title="12 Video Sales Letter (VSL) Funnels | Ghazi Wazir"
-        description="Catalog of our 12 direct-response VSL funnels covering Bahrain business setup and global AI marketing."
-        noindex={true}
+        title="Bahrain Setup & AI Growth Video Briefings | Ghazi Wazir"
+        description="Explore 12 focused video briefings covering Bahrain company setup, investor visas, GEO, AEO, and AI sales agents. Watch a briefing today."
+        canonical="https://ghaziwazir.com/funnels"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Video Briefings', item: '/funnels' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: '12 Video Briefings' },
+          ]}
+        />
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">Direct-Response Hub</div>
           <h1 className="font-heading font-black text-4xl sm:text-5xl text-[#f5f1e8]">

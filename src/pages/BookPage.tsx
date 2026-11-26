@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { BookingWidget } from '../components/BookingWidget';
 import { api } from '../services/api';
-import { Calendar, ShieldCheck, Clock, Phone, Mail } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 export function BookPage() {
   useEffect(() => {
@@ -11,12 +12,22 @@ export function BookPage() {
   return (
     <>
       <SEOHead
-        title="Book a Free Strategic Consultation — Ghazi Wazir"
-        description="Schedule a 1-on-1 private consultation with Ghazi Wazir regarding Bahrain business registration (CR), investor visas, or GEO/AEO technology."
+        title="Book a Consultation: Bahrain & GEO | Ghazi Wazir"
+        description="Schedule a private 1-on-1 strategy session with Ghazi Wazir for Bahrain CR setup, investor visas, or GEO & AI automation. Reserve your slot."
         canonical="https://ghaziwazir.com/book"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Book Consultation', item: '/book' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Book a Consultation' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">1-on-1 Consultation</div>

@@ -174,9 +174,9 @@ export function PlatformLaunchGuide({ onNavigateModule }: PlatformLaunchGuidePro
                     { type: 'CNAME', host: 'www', val: 'cname.vercel-dns.com', desc: 'WWW Alias' },
                     { type: 'TXT', host: '@', val: 'v=spf1 include:_spf.google.com include:resend.com ~all', desc: 'SPF Email Authenticity' },
                     { type: 'TXT', host: '_dmarc', val: 'v=DMARC1; p=quarantine; rua=mailto:dmarc@ghaziwazir.com; pct=100', desc: 'DMARC Email Protection' },
-                    { type: 'TXT', host: '@', val: 'facebook-domain-verification=fb_domain_verify_ghaziwazir_2026', desc: 'Meta Ads Domain Ownership' },
-                    { type: 'TXT', host: '@', val: 'google-site-verification=gw_gsc_2026_verified', desc: 'Google Search Console Verification' },
-                    { type: 'TXT', host: '@', val: 'tiktok-developers-site-verification=tt_domain_verify_ghaziwazir_2026', desc: 'TikTok Ads Domain Clearance' }
+                    { type: 'TXT', host: '@', val: 'facebook-domain-verification=[OWNER TO PROVIDE: Meta domain token]', desc: 'Meta Ads Domain Ownership' },
+                    { type: 'TXT', host: '@', val: 'google-site-verification=[OWNER TO PROVIDE: GSC token]', desc: 'Google Search Console Verification' },
+                    { type: 'TXT', host: '@', val: 'tiktok-developers-site-verification=[OWNER TO PROVIDE: TikTok token]', desc: 'TikTok Ads Domain Clearance' }
                   ].map((rec, i) => (
                     <tr key={i} className="hover:bg-[#090d16]">
                       <td className="p-3 font-bold text-[#38bdf8]">{rec.type}</td>

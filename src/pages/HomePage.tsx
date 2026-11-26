@@ -61,8 +61,11 @@ export function HomePage() {
   return (
     <>
       <SEOHead
-        title="Ghazi Wazir — CEO, Bab Al-Khaleej & Back for Brand LLC | Bahrain Setup & Technology"
-        description="CEO of Bab Al-Khaleej (Bahrain business registration, investor visas, document tracking) and Back for Brand LLC (SEO, GEO, AEO, AI agents, funnels). Two companies. One standard."
+        title="Bahrain Company Formation, Visas & GEO | Ghazi Wazir"
+        description="Set up your 100% foreign-owned Bahrain company and investor visas with Bab Al-Khaleej, or scale with Back for Brand GEO & AI. Book a consultation."
+        canonical="https://ghaziwazir.com/"
+        alternateEn="https://ghaziwazir.com/"
+        alternateAr="https://ghaziwazir.com/ar"
         schema={homeSchema}
       />
 
@@ -81,21 +84,28 @@ export function HomePage() {
                 <AnimatedHeadlines />
 
                 {/* Primary Actions */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <Link
                     to="/book"
-                    className="btn-gold min-h-[48px] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider text-[#0b0905] flex items-center justify-center gap-2 shadow-2xl whitespace-nowrap"
+                    className="btn-gold min-h-[48px] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-wider text-[#0b0905] flex items-center justify-center gap-2 shadow-2xl whitespace-nowrap"
                   >
                     <Calendar className="w-4 h-4 text-[#0b0905]" />
-                    <span>Book a Free Consultation</span>
+                    <span>Book a Consultation</span>
                   </Link>
 
                   <Link
-                    to="/formation"
-                    className="min-h-[48px] px-7 py-4 rounded-full border border-[#e8c872]/50 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#181822] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872] whitespace-nowrap"
+                    to="/start"
+                    className="min-h-[48px] px-6 py-4 rounded-full border border-[#e8c872]/50 text-xs font-bold uppercase tracking-wider text-[#e8c872] hover:bg-[#181822] flex items-center justify-center gap-2 transition-all hover:border-[#e8c872] whitespace-nowrap"
                   >
-                    <span>Bahrain Formation Blueprint</span>
+                    <span>Start Here Hub</span>
                     <ArrowRight className="w-4 h-4" />
+                  </Link>
+
+                  <Link
+                    to="/ar"
+                    className="min-h-[48px] px-5 py-4 rounded-full border border-[#262633] text-xs font-semibold text-[#f7f4ec] hover:border-[#e8c872]/50 flex items-center justify-center transition-all whitespace-nowrap"
+                  >
+                    <span>النسخة العربية</span>
                   </Link>
                 </div>
 
@@ -181,16 +191,35 @@ export function HomePage() {
         </section>
 
 
-        {/* "Two Companies. One Standard" Section */}
-        <section className="py-20 bg-[#0a0a0f]">
+        {/* Answer-First Hub Router & Dual Executive Structure */}
+        <section className="py-16 sm:py-20 bg-[#0a0a0f]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-              <div className="tag inline-block">The Dual Executive Advantage</div>
+            <div className="card-luxury p-6 sm:p-8 mb-14 border-l-4 border-l-[#e8c872] space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
+                  Answer-First Executive Summary
+                </span>
+                <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
+                  <Link to="/companies" className="text-[#e8c872] hover:underline">Companies Overview &rarr;</Link>
+                  <Link to="/start" className="text-[#f7f4ec] hover:text-[#e8c872]">Choose Your Path &rarr;</Link>
+                  <Link to="/blog" className="text-[#f7f4ec] hover:text-[#e8c872]">Read All 6 Guides &rarr;</Link>
+                </div>
+              </div>
+              <p className="text-sm sm:text-base text-[#f7f4ec] leading-relaxed">
+                <strong>What does Ghazi Wazir do?</strong> Based at The Collective Hub in Yateem Center, Manama, Bahrain (+973 3439 8754), Ghazi Wazir serves as CEO of two distinct organizations: <strong>Bab Al-Khaleej</strong> (a Bahrain business setup and document clearance consultancy) and <strong>Back for Brand LLC</strong> (a Florida-registered digital marketing, GEO/AEO, and AI automation agency).
+              </p>
+              <p className="text-xs text-[#a39f96] leading-relaxed">
+                <strong>Compliance Notice:</strong> Neither consultancy is a Bahrain government body or law firm. Any summary of Bahrain commercial law, 100% foreign ownership eligibility, fees, or visa timelines must be verified directly — <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong>.
+              </p>
+            </div>
+
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+              <div className="tag inline-block">Two Specialized Spokes · One Standard</div>
               <h2 className="font-heading font-black text-3xl sm:text-4xl text-[#f5f1e8]">
-                Two Specialized Companies. <span className="text-gold-gradient">One CEO Standard.</span>
+                Bab Al-Khaleej (Bahrain) &amp; <span className="text-gold-gradient">Back for Brand LLC (Global)</span>
               </h2>
               <p className="text-sm sm:text-base text-[#a8a7b3]">
-                Most business registration consultants know zero technology. Most digital agencies know nothing about Bahrain government clearance. Ghazi Wazir directs both under one rigorous operating standard.
+                Start with on-ground corporate registration and residency coordination in Manama, or work directly with our US agency on search visibility and AI lead capture.
               </p>
             </div>
 
@@ -641,29 +670,29 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* Strategic Guides Preview */}
+        {/* Strategic Guides Preview (All 6 Articles Linked) */}
         <section className="py-20 bg-[#101018] border-t border-[#2a2a38]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div>
                 <div className="tag inline-block mb-2">Knowledge Base</div>
                 <h2 className="font-heading font-black text-3xl text-[#f5f1e8]">
-                  In-Depth Strategic Guides
+                  In-Depth Strategic Guides (6 Articles)
                 </h2>
               </div>
               <Link to="/blog" className="text-xs font-bold text-[#e8c872] hover:underline">
-                View All Guides &rarr;
+                View All 6 Guides on /blog &rarr;
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Link to="/blog/register-company-bahrain" className="card-luxury p-6 block group">
                 <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Bahrain Formation</span>
                 <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
-                  How to Register a Company in Bahrain: The Complete Founder's Guide
+                  How to Register a Company in Bahrain: Complete Founder Guide
                 </h3>
                 <p className="text-xs text-[#a8a7b3] leading-relaxed">
-                  Understand 100% foreign ownership criteria, commercial lease requirements, and Sijilat approvals.
+                  Review ownership eligibility, commercial lease rules, and Sijilat filing workflows. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).
                 </p>
                 <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
                   <span>Read Guide</span>
@@ -672,12 +701,26 @@ export function HomePage() {
               </Link>
 
               <Link to="/blog/investor-vs-worker-visa" className="card-luxury p-6 block group">
-                <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Residency & Visas</span>
+                <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Residency &amp; Visas</span>
                 <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
-                  Investor Visa vs Worker Visa in Bahrain: Rights, Costs, and Rules
+                  Investor Visa vs Worker Visa in Bahrain: Rights &amp; Rules
                 </h3>
                 <p className="text-xs text-[#a8a7b3] leading-relaxed">
-                  Comparing self-sponsorship partner residency against employee work permits under LMRA.
+                  Compare shareholder residency applications with LMRA employee permits and statutory quota rules.
+                </p>
+                <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+
+              <Link to="/blog/business-setup-checklist" className="card-luxury p-6 block group">
+                <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Documentation</span>
+                <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
+                  Bahrain Business Setup Documents Checklist
+                </h3>
+                <p className="text-xs text-[#a8a7b3] leading-relaxed">
+                  Passport standards, proof of address, MOA preparation, and foreign parent attestation steps.
                 </p>
                 <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
                   <span>Read Guide</span>
@@ -688,16 +731,86 @@ export function HomePage() {
               <Link to="/blog/what-is-geo-and-aeo" className="card-luxury p-6 block group">
                 <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Generative AI</span>
                 <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
-                  What is GEO & AEO? The Evolution from Google Ranks to AI Answers
+                  What is GEO &amp; AEO? From Search Ranks to AI Answers
                 </h3>
                 <p className="text-xs text-[#a8a7b3] leading-relaxed">
-                  How to structure entity data so modern Large Language Models cite your company as the authoritative answer.
+                  How structured entity data, Schema.org markup, and clear factual prose help AI answer engines understand your brand.
                 </p>
                 <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
                   <span>Read Guide</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
+
+              <Link to="/blog/seo-vs-geo-vs-aeo" className="card-luxury p-6 block group">
+                <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">Search Strategy</span>
+                <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
+                  SEO vs GEO vs AEO: Strategic Growth Comparison
+                </h3>
+                <p className="text-xs text-[#a8a7b3] leading-relaxed">
+                  Comparing traditional search rankings, direct answer snippets, and conversational AI retrieval models.
+                </p>
+                <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+
+              <Link to="/blog/ai-agents-for-small-business" className="card-luxury p-6 block group">
+                <span className="text-[11px] font-bold text-[#e8c872] uppercase tracking-wider block mb-2">AI &amp; Automation</span>
+                <h3 className="font-heading font-bold text-lg text-[#f5f1e8] group-hover:text-[#e8c872] transition-colors mb-2">
+                  Autonomous AI Agents for Small Business: Guardrails &amp; ROI
+                </h3>
+                <p className="text-xs text-[#a8a7b3] leading-relaxed">
+                  Designing 24/7 sales agents grounded in approved knowledge bases with strict human escalation.
+                </p>
+                <div className="mt-4 text-xs font-semibold text-[#e8c872] flex items-center gap-1">
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Corporate Verification, Licensing & Fee Transparency */}
+        <section className="py-14 bg-[#08080b] border-t border-[#262633]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="card-luxury p-6 sm:p-8 space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#262633] pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
+                    Entity Verification &amp; Fee Transparency
+                  </span>
+                  <h2 className="font-heading font-bold text-2xl text-[#f7f4ec] mt-1">
+                    Registered Offices, Pending Credentials &amp; Statutory Disclaimers
+                  </h2>
+                </div>
+                <Link to="/contact" className="btn-gold px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#0b0905] whitespace-nowrap self-start">
+                  Request Written Scope
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-[#a39f96]">
+                <div className="p-4 rounded-xl bg-[#111117] border border-[#262633] space-y-2">
+                  <h3 className="font-bold text-[#f7f4ec] text-sm">Bab Al-Khaleej (Bahrain)</h3>
+                  <p>Office: The Collective Hub, Yateem Center, Manama, Bahrain</p>
+                  <p>Phone: +973 3439 8754 &middot; WhatsApp: +973 3562 8353</p>
+                  <p className="text-[#e8c872]">CR Number: [OWNER TO PROVIDE: Bab Al-Khaleej CR Number]</p>
+                </div>
+                <div className="p-4 rounded-xl bg-[#111117] border border-[#262633] space-y-2">
+                  <h3 className="font-bold text-[#f7f4ec] text-sm">Back for Brand LLC (USA)</h3>
+                  <p>Jurisdiction: State of Florida, United States</p>
+                  <p>Role-Based Email: [OWNER TO PROVIDE: Official Public Email]</p>
+                  <p className="text-[#e8c872]">Registration: [OWNER TO PROVIDE: Florida Sunbiz Registration Number]</p>
+                </div>
+                <div className="p-4 rounded-xl bg-[#111117] border border-[#262633] space-y-2">
+                  <h3 className="font-bold text-[#f7f4ec] text-sm">Pricing, Case Studies &amp; Statutory Rules</h3>
+                  <p>Standard Fees: [OWNER TO PROVIDE: Published Fee Ranges or Custom Written Proposal]</p>
+                  <p>Client Proof: [OWNER TO PROVIDE: Verified Case Studies / Client Testimonials]</p>
+                  <p className="text-[#e8c872]">VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -843,14 +956,26 @@ export function HomePage() {
                 </h3>
                 <ul className="space-y-2.5 text-xs text-[#a39f96]">
                   <li>
+                    <Link to="/start" className="hover:text-[#e8c872] transition-colors flex items-center justify-between font-semibold text-[#f7f4ec]">
+                      <span>Start Here Hub (/start)</span>
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/companies" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
-                      <span>Two Companies. One Standard Portfolio</span>
+                      <span>Two Companies Overview (/companies)</span>
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/blog" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
+                      <span>All 6 Strategic Guides (/blog)</span>
                       <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
                   <li>
                     <Link to="/about" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
-                      <span>Ghazi Wazir Executive Biography &amp; Track Record</span>
+                      <span>Ghazi Wazir Executive Biography</span>
                       <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
@@ -869,6 +994,12 @@ export function HomePage() {
                   <li>
                     <Link to="/contact" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
                       <span>Direct Executive Contact Channels</span>
+                      <ChevronRight className="w-3 h-3 text-[#e8c872]" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/ar" className="hover:text-[#e8c872] transition-colors flex items-center justify-between">
+                      <span>النسخة العربية (Arabic Hub /ar)</span>
                       <ChevronRight className="w-3 h-3 text-[#e8c872]" />
                     </Link>
                   </li>
@@ -1012,16 +1143,16 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* 20 Verified Social Profiles Section */}
+        {/* Social Channels Section */}
         <section className="py-20 bg-[#0a0a0f] border-t border-[#2a2a38]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
               <div className="tag inline-block">Executive Social Presence</div>
               <h2 className="font-heading font-black text-3xl text-[#f5f1e8]">
-                Connect Across 20 Brand Channels
+                Connect Across Official Brand Channels
               </h2>
               <p className="text-sm text-[#a8a7b3]">
-                Official verified profiles managed directly from the CEO Command Center.
+                Public social profiles and directory links — please confirm verified account handles directly via our Manama office if in doubt.
               </p>
             </div>
 

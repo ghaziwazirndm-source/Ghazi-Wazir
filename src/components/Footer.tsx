@@ -137,15 +137,45 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Knowledge & Funnels */}
+          {/* Knowledge, Navigation & Legal */}
           <div className="space-y-3">
             <h2 className="text-xs font-bold uppercase tracking-wider text-[#e8c872]">
-              Resources & Legal
+              Navigation &amp; Legal
             </h2>
             <ul className="space-y-2 text-xs">
               <li>
+                <Link to="/start" className="hover:text-[#f5f1e8] transition-colors">
+                  Start Here Hub
+                </Link>
+              </li>
+              <li>
+                <Link to="/companies" className="hover:text-[#f5f1e8] transition-colors">
+                  Two Companies Overview
+                </Link>
+              </li>
+              <li>
+                <Link to="/book" className="hover:text-[#f5f1e8] transition-colors text-[#e8c872] font-semibold">
+                  Book Consultation
+                </Link>
+              </li>
+              <li>
                 <Link to="/blog" className="hover:text-[#f5f1e8] transition-colors">
-                  Strategic Guides & Articles
+                  Strategic Guides &amp; Articles
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="hover:text-[#f5f1e8] transition-colors">
+                  About Ghazi Wazir
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-[#f5f1e8] transition-colors">
+                  Contact Executive Office
+                </Link>
+              </li>
+              <li>
+                <Link to="/ar" className="hover:text-[#e8c872] transition-colors">
+                  النسخة العربية (Arabic)
                 </Link>
               </li>
               <li>
@@ -192,11 +222,11 @@ export function Footer() {
           <div className="flex items-start gap-2 max-w-4xl">
             <ShieldAlert className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
             <p>
-              <strong>Legal Notice &amp; Authority Disclosure:</strong> We are a private management and technology consultancy, not a government ministry, authority, or law firm. All business registrations, Commercial Registration (CR) approvals, investor visas, and worker residence permits are subject to the independent statutory determination and approval of the Ministry of Industry and Commerce (MOIC), the Labour Market Regulatory Authority (LMRA), and the Nationality, Passports and Residence Affairs (NPRA) of the Kingdom of Bahrain. We never guarantee approvals, timelines, search engine ranks, or commercial revenues.
+              <strong>Legal Notice &amp; Official Source Verification:</strong> We are a private management and technology consultancy, not a government ministry, authority, or law firm. Any summary of Bahraini commercial law, government fees, visa eligibility, or timelines must be verified against official sources (Sijilat, MOIC, NPRA, LMRA). We never guarantee approvals, official timelines, search rankings, or commercial revenues.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px]">
-            <h3 className="font-bold uppercase tracking-wider text-[#e8c872]">Verified Official Portals:</h3>
+            <h3 className="font-bold uppercase tracking-wider text-[#e8c872]">Official Bahrain Authorities:</h3>
             <a href="https://www.sijilat.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">Sijilat Bahrain</a>
             <a href="https://www.moic.gov.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">MOIC Bahrain</a>
             <a href="https://www.lmra.gov.bh" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8c872] underline">LMRA Portal</a>

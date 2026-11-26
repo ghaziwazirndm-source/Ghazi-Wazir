@@ -1958,19 +1958,19 @@ export function AdminConsole() {
                         <tr className="hover:bg-[#090d16]">
                           <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
                           <td className="p-2.5 text-[#f8fafc]">@</td>
-                          <td className="p-2.5 text-[#f8fafc] select-all">facebook-domain-verification=fb_domain_verify_ghaziwazir_2026</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">facebook-domain-verification=[OWNER TO PROVIDE: Meta domain token]</td>
                           <td className="p-2.5 text-[#94a3b8] font-sans">Meta Ads Manager Domain Verification</td>
                         </tr>
                         <tr className="hover:bg-[#090d16]">
                           <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
                           <td className="p-2.5 text-[#f8fafc]">@</td>
-                          <td className="p-2.5 text-[#f8fafc] select-all">google-site-verification=gw_gsc_2026_verified</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">google-site-verification=[OWNER TO PROVIDE: GSC token]</td>
                           <td className="p-2.5 text-[#94a3b8] font-sans">Google Search Console Domain Ownership</td>
                         </tr>
                         <tr className="hover:bg-[#090d16]">
                           <td className="p-2.5 font-bold text-[#38bdf8]">TXT</td>
                           <td className="p-2.5 text-[#f8fafc]">@</td>
-                          <td className="p-2.5 text-[#f8fafc] select-all">tiktok-developers-site-verification=tt_domain_verify_ghaziwazir_2026</td>
+                          <td className="p-2.5 text-[#f8fafc] select-all">tiktok-developers-site-verification=[OWNER TO PROVIDE: TikTok token]</td>
                           <td className="p-2.5 text-[#94a3b8] font-sans">TikTok Ads Manager Domain Clearance</td>
                         </tr>
                       </tbody>

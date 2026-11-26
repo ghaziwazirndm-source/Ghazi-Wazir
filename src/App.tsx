@@ -26,6 +26,7 @@ import { adTracker } from './services/adTracking';
 import { HomePage } from './pages/HomePage';
 
 // Lazy-loaded secondary routes (drastically improves Time to Interactive & bundle size)
+const ArabicHomePage = lazy(() => import('./pages/ArabicHomePage').then(m => ({ default: m.ArabicHomePage })));
 const CompaniesPage = lazy(() => import('./pages/CompaniesPage').then(m => ({ default: m.CompaniesPage })));
 const StartPage = lazy(() => import('./pages/StartPage').then(m => ({ default: m.StartPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
@@ -99,6 +100,7 @@ function AppContent() {
           <Routes>
             {/* Public Core Routes */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/ar" element={<ArabicHomePage />} />
             <Route path="/companies" element={<CompaniesPage />} />
             <Route path="/start" element={<StartPage />} />
             <Route path="/about" element={<AboutPage />} />

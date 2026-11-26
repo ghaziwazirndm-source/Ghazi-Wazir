@@ -82,7 +82,7 @@ export function FormationBridgePage() {
             <div className="space-y-2 pb-6 border-b border-[#2a2a38]">
               <h3 className="font-heading font-bold text-lg text-[#e8c872]">1. The Decision</h3>
               <p className="text-[#a8a7b3] text-xs sm:text-sm">
-                You decide it is time to establish your own company in the Arabian Gulf. Bahrain represents the ideal jurisdiction: zero corporate tax for most sectors, 100% foreign ownership eligibility, and lower operating costs than Dubai or Riyadh.
+                You decide it is time to establish your own company in the Arabian Gulf. Bahrain offers 100% foreign ownership eligibility across permitted ISIC activities and competitive operating costs (VERIFY against official source (Sijilat, MOIC, NPRA, LMRA) for sector rules, tax obligations, and current fee schedules).
               </p>
             </div>
 

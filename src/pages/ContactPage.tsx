@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { api } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useABTheme } from '../context/ABThemeContext';
@@ -63,12 +64,22 @@ export function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Ghazi Wazir — WhatsApp, Office & Executive Inquiry | Bab Al-Khaleej & Back for Brand"
-        description="Direct corporate contact desk for Ghazi Wazir at The Collective Hub, Yateem Center, Manama (+973 3439 8754 / WhatsApp +973 3562 8353). Offices in Bahrain and USA."
+        title="Contact Ghazi Wazir | Manama Office & WhatsApp"
+        description="Contact Ghazi Wazir at The Collective Hub, Yateem Center, Manama (+973 3439 8754 / WhatsApp +973 3562 8353). Send an inquiry today."
         canonical="https://ghaziwazir.com/contact"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Contact', item: '/contact' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Contact Executive Office' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">Direct Executive Communication</div>

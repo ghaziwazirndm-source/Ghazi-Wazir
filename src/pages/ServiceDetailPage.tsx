@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ProtectedEmailButton } from '../components/ProtectedEmailButton';
 import { BookingWidget } from '../components/BookingWidget';
 import {
@@ -30,6 +31,8 @@ export interface ServiceFAQ {
 export interface ServiceData {
   id: string;
   name: string;
+  seoTitle: string;
+  seoDescription: string;
   company: 'Bab Al-Khaleej (Bahrain)' | 'Back for Brand LLC (USA)';
   headline: string;
   description: string;
@@ -45,10 +48,12 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'business-registration': {
     id: 'business-registration',
     name: 'Business Registration (CR) in Bahrain',
+    seoTitle: 'Bahrain Company Registration (CR) Services | Ghazi Wazir',
+    seoDescription: 'Set up a 100% foreign-owned Bahrain Commercial Registration (CR) via Sijilat with Bab Al-Khaleej. Book a consultation for scope & filing.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: '100% Foreign Ownership Commercial Registration in the Kingdom of Bahrain',
-    description: 'Establish your company in Bahrain with complete equity ownership. Bab Al-Khaleej handles your Sijilat filings, activity code selection, legal documentation, and commercial lease verification without bureaucratic delays.',
-    aeoDefinition: 'Bahrain Commercial Registration (CR) is an official corporate license issued by the Ministry of Industry and Commerce (MOIC) through the Sijilat portal, granting foreign and local founders the legal right to operate a registered business entity with up to 100% foreign equity ownership.',
+    description: 'Establish your company in Bahrain with Bab Al-Khaleej handling Sijilat filings, activity code selection, legal documentation, and commercial lease coordination. VERIFY eligibility against official source (Sijilat, MOIC, NPRA, LMRA).',
+    aeoDefinition: 'Bahrain Commercial Registration (CR) is an official corporate license issued by the Ministry of Industry and Commerce (MOIC) through Sijilat, granting eligible foreign and local founders the right to operate a registered business with up to 100% foreign equity where permitted (VERIFY against official source: Sijilat, MOIC, NPRA, LMRA).',
     authority: 'Ministry of Industry and Commerce (MOIC) & Sijilat Portal (Bahrain)',
     statutoryBasis: 'Bahrain Commercial Companies Law (Legislative Decree No. 21 of 2001 & subsequent amendments)',
     deliverables: [
@@ -61,15 +66,15 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
     faqs: [
       {
         q: 'Can a foreign national own 100% of a company in Bahrain?',
-        a: 'Yes. In the Kingdom of Bahrain, foreign nationals are eligible for 100% full foreign ownership across a vast range of commercial, trading, technology, consulting, and industrial business activities through an SPC or W.L.L. structure without requiring a local Bahraini partner.',
+        a: 'Many commercial, trading, technology, and consulting activities allow 100% foreign equity ownership through an S.P.C. or W.L.L. structure subject to MOIC/Sijilat ISIC rules. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
       {
         q: 'What is the difference between a CR without license and a CR with license in Bahrain?',
-        a: 'A CR without license (preliminary approval) confirms your corporate name and structure while you secure office lease agreements and municipality clearances. Once physical inspection and sector approvals conclude, it converts into a fully active CR with license allowing commercial invoicing.',
+        a: 'A CR without license represents preliminary company registration while office lease agreements and municipal/sector clearances proceed. Once verified, it converts into an active CR with license. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
       {
         q: 'How long does company registration typically take through Sijilat?',
-        a: 'Standard commercial registrations without regulated external approvals typically complete within 5 to 10 business days, subject to timely document submission and municipal verification. We maintain continuous queue monitoring to eliminate delays.',
+        a: 'Indicative timelines vary (often around 5 to 10 business days for standard unregulated activities), depending entirely on document readiness, external ministry approvals, and Sijilat queue review. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
     ],
     related: [
@@ -81,10 +86,12 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'investor-visa': {
     id: 'investor-visa',
     name: 'Investor & Partner Visa',
+    seoTitle: 'Bahrain Investor & Partner Visa Advisory | Ghazi Wazir',
+    seoDescription: 'Coordinate self-sponsored Bahrain Investor Visas, medical checks & CPR IDs with Bab Al-Khaleej. Book a private consultation today.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: 'Self-Sponsorship Residency Permits for Corporate Shareholders in Bahrain',
-    description: 'Secure renewable residence permits tied directly to your commercial equity. Investor visas grant legal residency, family sponsorship rights, and CPR smart card identity in Bahrain.',
-    aeoDefinition: 'An Investor Visa in Bahrain is a self-sponsored corporate residency permit granted to documented shareholders of an active Commercial Registration (CR), conferring legal resident status, Bahrain Central Population Registry (CPR) smart card rights, and family sponsorship eligibility without needing an employer sponsor.',
+    description: 'Coordinate renewable investor residency permits linked to commercial equity, plus family sponsorship filing and CPR smart card scheduling. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
+    aeoDefinition: 'An Investor Visa in Bahrain is a self-sponsored residency permit issued to eligible shareholders of an active Commercial Registration (CR) by NPRA. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     authority: 'Nationality, Passports & Residence Affairs (NPRA) & MOIC (Bahrain)',
     statutoryBasis: 'Bahrain Immigration and Residence Laws for Foreign Investors',
     deliverables: [
@@ -97,15 +104,15 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
     faqs: [
       {
         q: 'How long is an investor visa valid in Bahrain?',
-        a: 'Investor residency permits are typically issued for 1 to 2 years and are fully renewable indefinitely as long as the underlying Commercial Registration (CR) remains active and compliant with annual filings.',
+        a: 'Standard investor residency permits are typically issued for 1 to 2 years on a renewable basis while the CR stays active and compliant. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
       {
         q: 'Can an investor visa holder sponsor their spouse and children?',
-        a: 'Yes. As a registered investor holding a Bahrain CPR smart card, you have statutory legal rights to sponsor your spouse and dependent children for family residency permits.',
+        a: 'Eligible resident investors holding a Bahrain CPR smart card may apply to sponsor spouses and dependent children subject to NPRA criteria. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
       {
         q: 'Does an investor visa require a local Bahraini sponsor?',
-        a: 'No. The investor visa is a self-sponsorship instrument anchored directly in your documented commercial equity share in your registered Bahrain company.',
+        a: 'No external employer sponsor is required when qualifying directly through your own Commercial Registration equity. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
       },
     ],
     related: [
@@ -117,9 +124,11 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'worker-visa': {
     id: 'worker-visa',
     name: 'Worker Visas & LMRA Quota Clearance',
+    seoTitle: 'Bahrain Worker Visas & LMRA Quotas | Ghazi Wazir',
+    seoDescription: 'Manage Bahrain LMRA work permits, employee quota planning, and residency clearances with Bab Al-Khaleej. Schedule a consultation.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: 'Employee Work Permits and Residency Under Labour Market Regulatory Authority (LMRA)',
-    description: 'Scale your team in Bahrain with structured workforce permits. We calculate quota allocations, draft compliant employment agreements, and ensure zero payroll disruptions.',
+    description: 'Prepare employee work permit applications, LMRA quota requests, and biometric residency scheduling for your Bahrain entity. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     aeoDefinition: 'A Worker Visa in Bahrain is a statutory employment authorization issued by the Labour Market Regulatory Authority (LMRA), granting a foreign professional the legal authorization to reside and work for an authorized corporate employer holding an approved labor quota.',
     authority: 'Labour Market Regulatory Authority (LMRA), Kingdom of Bahrain',
     statutoryBasis: 'Bahrain Labour Law for the Private Sector (Law No. 36 of 2012)',
@@ -153,9 +162,11 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'document-consultancy': {
     id: 'document-consultancy',
     name: 'Document Consultancy & Attestation',
+    seoTitle: 'Bahrain Document Clearance & Attestation | Ghazi Wazir',
+    seoDescription: 'Coordinate embassy attestation, MOFA legalization, Arabic legal translation, and POA drafting in Bahrain. Book a consultation.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: 'Cross-Border Corporate Document Legalization and Ministry Attestation',
-    description: 'Ensure foreign parent company resolutions, powers of attorney, and legal packets pass MOIC and MOFA scrutiny on the first submission without rejection.',
+    description: 'Ensure foreign parent company resolutions, powers of attorney, and legal packets are prepared properly before MOIC and MOFA review. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     aeoDefinition: 'Corporate document attestation in Bahrain is the formal legal authentication chain—encompassing notary certification, home-country foreign ministry verification, Bahrain Embassy attestation, and Bahrain Ministry of Foreign Affairs (MOFA) clearance—required for foreign corporate documents to possess binding legal validity in Bahrain.',
     authority: 'Ministry of Foreign Affairs (MOFA) & MOIC (Bahrain)',
     statutoryBasis: 'Bahrain Diplomatic Legalization Protocols & Hague Apostille Convention',
@@ -189,9 +200,11 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'application-tracking': {
     id: 'application-tracking',
     name: 'Application Tracking & Ministry Resolution',
+    seoTitle: 'Bahrain Sijilat & LMRA Application Tracking | Ghazi Wazir',
+    seoDescription: 'Monitor pending Sijilat CR, LMRA, and NPRA applications in Bahrain with proactive objection follow-up. Book a consultation.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: 'Active Queue Monitoring and Rapid Resolution of Bureaucratic Queries',
-    description: 'Avoid stalled applications. Our team tracks your filings daily across MOIC, LMRA, NPRA, and municipality systems, resolving objections immediately.',
+    description: 'Avoid stalled applications. Our team monitors filings across MOIC, LMRA, NPRA, and municipality systems and responds promptly to portal queries. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     aeoDefinition: 'Corporate application tracking in Bahrain is the active administrative oversight and daily queue monitoring of commercial registry, licensing, and visa petitions across governmental systems (Sijilat, LMRA EMS, NPRA) to identify and rectify bureaucratic objections before statutory deadlines expire.',
     authority: 'Integrated Bahrain Governmental Portals (MOIC, LMRA, NPRA, Municipalities)',
     statutoryBasis: 'Bahrain Electronic Transactions and Government Filing Standards',
@@ -225,9 +238,11 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'ongoing-support': {
     id: 'ongoing-support',
     name: 'Ongoing Corporate Support & Secretarial',
+    seoTitle: 'Bahrain CR Renewals & Corporate Support | Ghazi Wazir',
+    seoDescription: 'Keep your Bahrain Commercial Registration compliant with annual CR renewals, UBO filings, and MOA updates. Book a consultation.',
     company: 'Bab Al-Khaleej (Bahrain)',
     headline: 'Annual Commercial Registration Renewals, Municipality Compliance & Board Filings',
-    description: 'Maintain corporate good standing in the Kingdom of Bahrain. We handle annual Sijilat renewals, activity amendments, branch openings, and statutory compliance reminders.',
+    description: 'Maintain corporate good standing in the Kingdom of Bahrain with annual Sijilat renewals, activity amendments, and compliance reminders. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
     aeoDefinition: 'Ongoing corporate secretarial support in Bahrain represents the annual administrative compliance governance—including CR license renewals, Ultimate Beneficial Owner (UBO) filings, municipal renewals, and Memorandum amendments—required to maintain active corporate good standing in the Kingdom of Bahrain.',
     authority: 'Ministry of Industry and Commerce (MOIC) & Municipal Councils (Bahrain)',
     statutoryBasis: 'Commercial Companies Law Compliance & Anti-Money Laundering Regulations',
@@ -261,10 +276,12 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'geo-aeo': {
     id: 'geo-aeo',
     name: 'GEO & AEO (Generative & Answer Engine Optimization)',
+    seoTitle: 'GEO & Answer Engine Optimization Agency | Ghazi Wazir',
+    seoDescription: 'Structure schema knowledge graphs & answer-first copy for AI search via Back for Brand LLC. Book an architecture strategy call.',
     company: 'Back for Brand LLC (USA)',
-    headline: 'Pioneering Visibility and Citation Dominance in ChatGPT, Perplexity, and Google Gemini',
-    description: 'Transform your brand from traditional web rankings into the trusted factual answer delivered by modern Large Language Models when corporate clients research your category.',
-    aeoDefinition: 'Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are the disciplines of structuring entity knowledge graphs, technical microdata, and authoritative factual consensus so that modern Large Language Models (ChatGPT, Perplexity, Google Gemini) cite and recommend your brand as the definitive direct answer.',
+    headline: 'Structured Entity Visibility for AI Search & Answer Engines',
+    description: 'Transform your web presence with Schema.org graphs, technical entity clarity, and answer-first prose built for ChatGPT, Perplexity, and Google AI Overviews. Schema and llms.txt improve machine readability without guaranteeing citations.',
+    aeoDefinition: 'Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are the disciplines of structuring entity knowledge graphs, technical microdata, and authoritative factual consensus so AI retrieval engines can accurately interpret and cite your business.',
     authority: 'Back for Brand LLC (Florida, USA) & Semantic Search Standards',
     statutoryBasis: 'W3C Semantic Web Standards, Schema.org Specifications & Retrieval-Augmented Generation (RAG) Architecture',
     deliverables: [
@@ -277,15 +294,15 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
     faqs: [
       {
         q: 'How does GEO differ from traditional SEO?',
-        a: 'While traditional SEO optimizes URLs to rank in 10 blue links on search results pages, Generative Engine Optimization (GEO) optimizes knowledge graphs and entity consensus so that generative AI engines synthesize and recommend your company directly in AI answer boxes.',
+        a: 'While traditional SEO optimizes URLs to rank in search results pages, Generative Engine Optimization (GEO) focuses on entity clarity, structured knowledge graphs, and corroborating evidence that retrieval-augmented AI systems evaluate.',
       },
       {
         q: 'What is Answer Engine Optimization (AEO)?',
-        a: 'AEO focuses on engineering clear, direct, and structured answers (via Schema.org FAQPage, definition blocks, and structured lists) that voice assistants and AI search engines (like Perplexity and Gemini) extract verbatim to answer user inquiries.',
+        a: 'AEO focuses on engineering clear, direct, and structured answers (via Schema.org FAQPage, definition blocks, and structured lists) that voice assistants and AI search interfaces extract cleanly.',
       },
       {
-        q: 'How do Large Language Models decide which brands to cite?',
-        a: 'LLMs calculate consensus probability across authoritative internet sources, digital knowledge graphs (Wikidata, Google Knowledge Graph), verified entity schemas, and factual density across trusted business registries.',
+        q: 'Does adding llms.txt or JSON-LD guarantee AI citations?',
+        a: 'No. Neither llms.txt nor Schema.org guarantees AI citations or search rankings. They remove ambiguity and improve crawlability alongside real off-site reputation and helpful content.',
       },
     ],
     related: [
@@ -297,6 +314,8 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'seo': {
     id: 'seo',
     name: 'Search Engine Optimization (SEO)',
+    seoTitle: 'Technical & Programmatic SEO Agency | Ghazi Wazir',
+    seoDescription: 'Improve crawlability, Core Web Vitals, canonicals, and topical authority with Back for Brand LLC. Schedule a technical SEO audit.',
     company: 'Back for Brand LLC (USA)',
     headline: 'Enterprise Technical Architecture, Topical Authority Maps, and Organic Traffic',
     description: 'Build compounding search engine visibility. Back for Brand LLC engineers clean, high-speed technical foundations and programmatic content clusters that capture high-intent buyers.',
@@ -333,6 +352,8 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'ai-agents': {
     id: 'ai-agents',
     name: 'Autonomous AI Sales Agents',
+    seoTitle: 'Autonomous AI Sales Agents for Business | Ghazi Wazir',
+    seoDescription: 'Deploy 24/7 multilingual AI sales agents grounded in your approved knowledge base with Back for Brand LLC. Book an engineering demo.',
     company: 'Back for Brand LLC (USA)',
     headline: '24/7 AI-Powered Sales Representatives Trained Strictly on Approved Corporate Knowledge',
     description: 'Deploy conversational AI agents that capture incoming leads, calculate scores, and book meetings into your calendar with strict prompt injection defenses and zero hallucinations.',
@@ -369,6 +390,8 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'automation': {
     id: 'automation',
     name: 'Workflow & CRM Automation',
+    seoTitle: 'CRM & Workflow Automation Systems | Ghazi Wazir',
+    seoDescription: 'Connect WhatsApp, forms, lead scoring, and calendar scheduling into a unified CRM workflow with Back for Brand LLC. Book a call.',
     company: 'Back for Brand LLC (USA)',
     headline: 'Unified Inboxes, Automated Follow-Ups, and Pipeline Routing',
     description: 'Eliminate manual data entry and missed inquiries. We automate the handoff between your website forms, WhatsApp messages, lead scoring algorithms, and team member tasks.',
@@ -405,6 +428,8 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'digital-marketing': {
     id: 'digital-marketing',
     name: 'Digital Performance Marketing',
+    seoTitle: 'B2B Performance Marketing & Paid Funnels | Ghazi Wazir',
+    seoDescription: 'Build accountable B2B acquisition campaigns, conversion tracking, and direct-response funnels with Back for Brand LLC. Book a call.',
     company: 'Back for Brand LLC (USA)',
     headline: 'High-ROI B2B Client Acquisition Campaigns and Direct-Response Architecture',
     description: 'Stop burning capital on unmeasured advertising. We craft direct-response positioning, targeted buyer personas, and high-conversion landing page flows tailored for high-ticket clients.',
@@ -441,6 +466,8 @@ export const SERVICES_CATALOG: Record<string, ServiceData> = {
   'websites-funnels': {
     id: 'websites-funnels',
     name: 'Websites & High-Converting Funnels',
+    seoTitle: 'Websites & VSL Sales Funnels Agency | Ghazi Wazir',
+    seoDescription: 'Custom React websites, VSL sales funnels, and automated consultation scheduling built by Back for Brand LLC. Schedule a session.',
     company: 'Back for Brand LLC (USA)',
     headline: 'Direct-Response Sales Funnels, Russell Brunson Frameworks & Modern Web Apps',
     description: 'Elevate your online presence with custom-engineered web applications, video sales letter (VSL) landing pages, and interactive calendar booking widgets built on modern React and TypeScript.',
@@ -484,7 +511,6 @@ export function ServiceDetailPage() {
     return <Navigate to="/packages" replace />;
   }
 
-  // Multi-entity JSON-LD schema for SEO, GEO, and AEO
   const compositeSchema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -493,11 +519,11 @@ export function ServiceDetailPage() {
         '@id': `https://ghaziwazir.com/services/${service.id}#service`,
         name: service.name,
         serviceType: service.name,
-        description: service.description,
+        description: service.seoDescription,
         provider: {
-          '@type': 'Organization',
-          name: service.company.includes('Bab Al-Khaleej') ? 'Bab Al-Khaleej' : 'Back for Brand LLC',
-          url: 'https://ghaziwazir.com/companies'
+          '@id': service.company.includes('Bab Al-Khaleej')
+            ? 'https://ghaziwazir.com/#babal-khaleej'
+            : 'https://ghaziwazir.com/#backforbrand',
         },
         areaServed: service.company.includes('Bab Al-Khaleej') ? 'Bahrain' : 'Worldwide',
         hasOfferCatalog: {
@@ -524,29 +550,6 @@ export function ServiceDetailPage() {
             text: faq.a,
           },
         }))
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: 'https://ghaziwazir.com/'
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Services',
-            item: 'https://ghaziwazir.com/packages'
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: service.name,
-            item: `https://ghaziwazir.com/services/${service.id}`
-          }
-        ]
       }
     ]
   };
@@ -554,21 +557,25 @@ export function ServiceDetailPage() {
   return (
     <>
       <SEOHead
-        title={`${service.name} — Ghazi Wazir | ${service.company}`}
-        description={`${service.name}: ${service.description}`}
+        title={service.seoTitle}
+        description={service.seoDescription}
         canonical={`https://ghaziwazir.com/services/${service.id}`}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Services', item: '/packages' },
+          { name: service.name, item: `/services/${service.id}` },
+        ]}
         schema={compositeSchema}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#a8a7b3]">
-          <Link to="/" className="hover:text-[#f5f1e8] transition-colors">Home</Link>
-          <span>/</span>
-          <Link to="/packages" className="hover:text-[#f5f1e8] transition-colors">Services</Link>
-          <span>/</span>
-          <span className="text-[#e8c872]">{service.name}</span>
-        </nav>
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Services & Packages', to: '/packages' },
+            { label: service.name },
+          ]}
+        />
 
         {/* Hero Section */}
         <header className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -709,7 +716,7 @@ export function ServiceDetailPage() {
         <div className="card-luxury p-6 flex items-start gap-3 text-xs text-[#a8a7b3] bg-[#101018]">
           <ShieldAlert className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
           <p>
-            <strong>Regulatory Notice:</strong> We are a private management and technology consultancy, not a government ministry or law firm. All business registrations, investor visas, and worker residence permits remain subject to the independent statutory determination of the relevant Bahraini government ministries. We never promise guaranteed approvals or artificial timelines.
+            <strong>Regulatory Notice &amp; Official Source Verification:</strong> We are a private management and technology consultancy, not a government ministry, authority, or law firm. Any statement regarding Bahraini laws, fees, ownership rules, or timelines must be verified against official sources — <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong>. Neither consultancy guarantees approvals, rankings, or AI citations.
           </p>
         </div>
 

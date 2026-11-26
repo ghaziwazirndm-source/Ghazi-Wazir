@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../../components/SEOHead';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { LeadModal } from '../../components/LeadModal';
 import { api } from '../../services/api';
-import { CheckCircle2, XCircle, ArrowRight, ShieldCheck, Calendar, Phone, Sparkles, HelpCircle } from 'lucide-react';
+import { CheckCircle2, XCircle, Calendar, HelpCircle } from 'lucide-react';
 
 export function FormationOfferPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -22,11 +23,23 @@ export function FormationOfferPage() {
     <>
       <SEOHead
         title="Done-With-You Bahrain Setup Offer | Ghazi Wazir"
-        description="Let Bab Al-Khaleej handle your company formation, CR approvals, and investor visas step by step."
-        noindex={true}
+        description="Have Bab Al-Khaleej handle your Bahrain CR filing, MOA drafting, and investor visa coordination step by step. Request a tailored quote today."
+        canonical="https://ghaziwazir.com/formation/offer"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Formation', item: '/formation' },
+          { name: 'Done-With-You Offer', item: '/formation/offer' },
+        ]}
       />
 
-      <div className="py-12 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Formation', to: '/formation' },
+            { label: 'Done-With-You Offer' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">The Done-With-You Offer</div>
@@ -240,7 +253,7 @@ export function FormationOfferPage() {
             </div>
             <div className="p-4 bg-[#101018] rounded-xl border border-[#2a2a38] space-y-1">
               <strong className="text-[#f5f1e8] block">How long does the entire process take?</strong>
-              <p className="text-[#a8a7b3]">Standard commercial registration without license takes approximately 3 to 7 business days, while commercial licensing with physical municipal address verification takes an additional 1 to 2 weeks depending on ministerial activity clearances.</p>
+              <p className="text-[#a8a7b3]">Indicative timelines vary (commonly 3 to 7 business days for preliminary registration without license and 1 to 2+ weeks for municipal and sector approvals depending on activity). Always VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).</p>
             </div>
           </div>
         </div>

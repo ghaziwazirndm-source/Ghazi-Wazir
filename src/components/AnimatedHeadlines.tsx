@@ -1,60 +1,46 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Building2, ShieldCheck, Globe, Bot } from 'lucide-react';
+import { Building2, ShieldCheck, Globe, Bot, Sparkles } from 'lucide-react';
 
-interface HeadlineItem {
+interface FocusPillar {
   id: string;
   badge: string;
   icon: typeof Sparkles;
-  lead: string;
-  highlight: string;
+  title: string;
   description: string;
 }
 
-const HEADLINES: HeadlineItem[] = [
+const FOCUS_PILLARS: FocusPillar[] = [
   {
-    id: 'h1-bahrain-tech',
-    badge: 'Dual Corporate Leadership · Manama & Florida',
-    icon: Sparkles,
-    lead: 'Your business in Bahrain, ',
-    highlight: 'powered by technology.',
-    description:
-      'Two companies under one standard: corporate formation with Bab Al-Khaleej at Yateem Center in Manama, and global digital growth with Back for Brand LLC in Florida.',
-  },
-  {
-    id: 'h2-foreign-ownership',
-    badge: '100% Foreign Equity Ownership · Sijilat CR',
+    id: 'pillar-sijilat',
+    badge: 'Bab Al-Khaleej · Manama, Bahrain',
     icon: Building2,
-    lead: 'Incorporate in Bahrain with ',
-    highlight: 'full foreign ownership.',
+    title: 'Sijilat Commercial Registration & 100% Foreign Ownership Guidance',
     description:
-      'Direct Sijilat Commercial Registration (CR), activity classification, and corporate banking introduction without requiring a local sponsor.',
+      'From The Collective Hub at Yateem Center in Manama, we prepare MOIC activity selection, MOA drafting, and municipality address coordination. VERIFY against official source (Sijilat, MOIC, NPRA, LMRA).',
   },
   {
-    id: 'h3-investor-visas',
-    badge: 'Self-Sponsored Residency & Mobility',
+    id: 'pillar-visas',
+    badge: 'Bahrain Residency & Mobility',
     icon: ShieldCheck,
-    lead: 'Fast-track investor visas & ',
-    highlight: 'CPR residency permits.',
+    title: 'NPRA Investor Visas, Golden Residency Review & LMRA Quotas',
     description:
-      'Renewable self-sponsorship residency, family permits, and LMRA workforce quotas handled with verified document clearance.',
+      'Structured filing support for shareholder self-sponsorship visas, dependent permits, and LMRA employee quotas. Final eligibility and timelines remain subject to official Bahraini authority review.',
   },
   {
-    id: 'h4-geo-aeo',
-    badge: 'Generative & Answer Engine Optimization',
+    id: 'pillar-geo',
+    badge: 'Back for Brand LLC · Florida, USA',
     icon: Globe,
-    lead: 'Generative Engine Optimization that ',
-    highlight: 'cites your brand in AI search.',
+    title: 'Technical SEO, Answer Engine (AEO) & Generative Search Architecture',
     description:
-      'Structure entity graphs and semantic data so Perplexity, ChatGPT, and Google Gemini recommend your enterprise directly.',
+      'Built for businesses seeking clean Schema.org entity graphs, answer-first copy, and technical visibility across Google Search, Perplexity, ChatGPT, and Gemini.',
   },
   {
-    id: 'h5-autonomous-agents',
-    badge: '24/7 Executive Revenue Automation',
+    id: 'pillar-agents',
+    badge: '24/7 Revenue Systems',
     icon: Bot,
-    lead: 'Autonomous AI sales agents that ',
-    highlight: 'qualify leads & close deals.',
+    title: 'Multilingual AI Sales Agents & Conversion Funnels',
     description:
-      'Trilingual voice and text agents in Urdu, Arabic & English that guide prospects, generate requirement briefs, and book discovery calls.',
+      'Grounded conversational qualification in English, Arabic, and Urdu connected to real appointment calendars and tamper-evident CRM routing.',
   },
 ];
 
@@ -63,54 +49,72 @@ export function AnimatedHeadlines() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % HEADLINES.length);
-    }, 5500);
+      setCurrentIndex(prev => (prev + 1) % FOCUS_PILLARS.length);
+    }, 6500);
     return () => clearInterval(timer);
   }, []);
 
-  const current = HEADLINES[currentIndex];
+  const current = FOCUS_PILLARS[currentIndex];
   const IconComponent = current.icon;
 
   return (
-    <div className="space-y-4 min-h-[175px] sm:min-h-[205px] flex flex-col justify-start">
-      {/* Quiet Editorial Eyebrow + Indicator */}
-      <div className="flex flex-wrap items-center gap-3 pb-2 border-b border-[#e8c872]/20">
+    <div className="space-y-5 flex flex-col justify-start">
+      {/* Quiet Editorial Eyebrow */}
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[#e8c872]/20">
         <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#e8c872]">
-          <IconComponent className="w-3.5 h-3.5 text-[#e8c872]" />
-          <span>{current.badge}</span>
+          <Sparkles className="w-3.5 h-3.5 text-[#e8c872]" />
+          <span>Ghazi Wazir · Manama, Bahrain &amp; Florida, USA</span>
         </div>
 
-        <div className="flex items-center gap-1 ml-auto">
-          {HEADLINES.map((h, i) => (
-            <button
-              key={h.id}
-              type="button"
-              onClick={() => setCurrentIndex(i)}
-              className="min-h-[28px] px-1 flex items-center justify-center rounded-full transition-all duration-300"
-              aria-label={`Switch to headline ${i + 1}: ${h.badge}`}
-            >
-              <span
-                className={`block h-1.5 rounded-full transition-all duration-300 ${
-                  i === currentIndex
-                    ? 'w-7 bg-[#e8c872]'
-                    : 'w-2 bg-[#262633] hover:bg-[#e8c872]/50'
-                }`}
-              />
-            </button>
-          ))}
-        </div>
+        <span className="text-[11px] font-medium text-[#a39f96]">
+          Bab Al-Khaleej &amp; Back for Brand LLC
+        </span>
       </div>
 
-      {/* Luxury Editorial Headline Heading */}
-      <div key={current.id} className="space-y-3.5 transition-opacity duration-300">
-        <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-[3.75rem] text-[#f7f4ec] leading-[1.08] tracking-tight">
-          {current.lead}{' '}
-          <span className="text-gold-gradient">
-            {current.highlight}
-          </span>
+      {/* Single Stable Semantic H1 for Search & Answer Engines */}
+      <div className="space-y-3.5">
+        <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-[3.5rem] text-[#f7f4ec] leading-[1.08] tracking-tight">
+          Bahrain Company Formation &amp; Investor Visas{' '}
+          <span className="text-gold-gradient">— Powered by AI Growth Systems.</span>
         </h1>
 
-        <p className="text-sm sm:text-base lg:text-[17px] text-[#a39f96] leading-relaxed max-w-2xl">
+        <p className="text-sm sm:text-base lg:text-[17px] text-[#d6d1c7] leading-relaxed max-w-2xl">
+          Foreign founders launch compliantly in Manama through <strong className="text-[#f7f4ec]">Bab Al-Khaleej</strong> (Sijilat CR, NPRA residency, LMRA permits, attestation), then scale globally with <strong className="text-[#f7f4ec]">Back for Brand LLC</strong> (GEO, AEO, AI agents &amp; funnels).
+        </p>
+      </div>
+
+      {/* Interactive Focus Spotlight (Sub-heading Pillar Switcher without mutating H1) */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-[#111118] border border-[#262633] space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[#e8c872]">
+            <IconComponent className="w-3.5 h-3.5 text-[#e8c872]" />
+            <span>{current.badge}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            {FOCUS_PILLARS.map((pillar, i) => (
+              <button
+                key={pillar.id}
+                type="button"
+                onClick={() => setCurrentIndex(i)}
+                className="min-h-[28px] px-1 flex items-center justify-center rounded-full transition-all"
+                aria-label={`View executive pillar ${i + 1}: ${pillar.badge}`}
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-all duration-300 ${
+                    i === currentIndex
+                      ? 'w-6 bg-[#e8c872]'
+                      : 'w-2 bg-[#262633] hover:bg-[#e8c872]/50'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <p className="text-sm font-semibold text-[#f7f4ec]">
+          {current.title}
+        </p>
+        <p className="text-xs text-[#a39f96] leading-relaxed">
           {current.description}
         </p>
       </div>

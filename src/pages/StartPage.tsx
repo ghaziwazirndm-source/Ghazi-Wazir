@@ -1,17 +1,28 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
-import { Building2, TrendingUp, HelpCircle, ArrowRight, Play, Sparkles } from 'lucide-react';
+import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Building2, TrendingUp, HelpCircle, ArrowRight, Sparkles } from 'lucide-react';
 
 export function StartPage() {
   return (
     <>
       <SEOHead
-        title="Start Here — Choose Your Strategic Path | Ghazi Wazir"
-        description="I lead two companies that help you start in Bahrain and grow online. Tell me what you need, and choose your path."
+        title="Start Here: Bahrain Setup or AI Growth | Ghazi Wazir"
+        description="Choose your path with Ghazi Wazir: open a Bahrain company via Bab Al-Khaleej or scale with Back for Brand GEO & AI. Book a call today."
         canonical="https://ghaziwazir.com/start"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Start Here', item: '/start' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-12 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Start Here' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">Personal Brand Hub</div>

@@ -1,17 +1,28 @@
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
-import { Building2, Globe, ShieldCheck, Cpu, ArrowRight, CheckCircle2, Calendar } from 'lucide-react';
+import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Building2, Globe, ArrowRight, CheckCircle2, Calendar, ShieldAlert } from 'lucide-react';
 
 export function CompaniesPage() {
   return (
     <>
       <SEOHead
-        title="Two Companies. One Standard — Bab Al-Khaleej & Back for Brand LLC | Ghazi Wazir"
-        description="Learn how Ghazi Wazir leads Bab Al-Khaleej (Bahrain corporate formation, visas, document clearing) and Back for Brand LLC (USA technology, GEO, AEO, AI agents)."
+        title="Bab Al-Khaleej & Back for Brand LLC | Ghazi Wazir"
+        description="Meet Bab Al-Khaleej (Bahrain business registration & visas) and Back for Brand LLC (Florida GEO, AEO & AI agents). Book a consultation today."
         canonical="https://ghaziwazir.com/companies"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Companies', item: '/companies' },
+        ]}
       />
 
-      <div className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+      <div className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Two Companies Overview' },
+          ]}
+        />
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="tag inline-block">The Executive Ecosystem</div>
@@ -81,11 +92,11 @@ export function CompaniesPage() {
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Specialized in Foreign Direct Investment (FDI) structuring.</span>
+                <span>Bahrain CR Number: [OWNER TO PROVIDE: Bab Al-Khaleej CR Number].</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Private corporate consultancy ensuring full regulatory compliance.</span>
+                <span>Private consultancy — VERIFY statutory rules, fees &amp; timelines against official source (Sijilat, MOIC, NPRA, LMRA).</span>
               </li>
             </ul>
           </div>
@@ -145,18 +156,26 @@ export function CompaniesPage() {
             <ul className="space-y-3 text-xs text-[#a8a7b3]">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Incorporated in the State of Florida, serving clients globally.</span>
+                <span>Incorporated in the State of Florida, USA. Registration: [OWNER TO PROVIDE: Florida Sunbiz Number].</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Architects of modern Generative AI visibility and LLM indexing.</span>
+                <span>Structured entity graphs, technical SEO, AEO, and autonomous AI agent architecture.</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#e8c872] flex-none mt-0.5" />
-                <span>Zero fake metrics; built on audited server-side logic and real ROI.</span>
+                <span>Verified Case Studies: [OWNER TO PROVIDE: Back for Brand LLC Case Studies / Client References].</span>
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Statutory Notice */}
+        <div className="card-luxury p-6 flex items-start gap-3 text-xs text-[#a8a7b3] bg-[#101018]">
+          <ShieldAlert className="w-5 h-5 text-[#e8c872] flex-none mt-0.5" />
+          <p>
+            <strong>Regulatory Disclosure:</strong> Bab Al-Khaleej and Back for Brand LLC are private consultancies and not government authorities or law firms. Always <strong>VERIFY against official source (Sijilat, MOIC, NPRA, LMRA)</strong> for statutory requirements and timelines.
+          </p>
         </div>
 
         {/* Unified CTA */}
